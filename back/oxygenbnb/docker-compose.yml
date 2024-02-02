@@ -1,0 +1,33 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: nestapp
+    image: nestimg
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - DB_TYPE=${DB_TYPE}
+      - PG_HOST=${PG_HOST} #doit matcher avec le container_name de la db
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_DB=${PG_DB}
+      - PG_PORT=${PG_PORT}
+    depends_on:
+      - db
+  
+  db:
+    container_name: db
+    image: postgres:16
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=${PG_USER} #doit matcher avec PG_USER
+      - POSTGRES_PASSWORD=${PG_PASSWORD} #doit matcher avec PG_PASSWORD
+      - POSTGRES_DB=${PG_DB} #doit matcher avec PG_DB
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata: {}
