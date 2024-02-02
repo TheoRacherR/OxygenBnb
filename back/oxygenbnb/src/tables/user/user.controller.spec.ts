@@ -10,7 +10,7 @@ describe('UserController', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [UserController],
-      providers: [{provide: UserService, useClass: UserServiceMock}],
+      providers: [{ provide: UserService, useClass: UserServiceMock }],
     }).compile();
 
     controller = module.get<UserController>(UserController);
@@ -20,37 +20,43 @@ describe('UserController', () => {
     expect(controller).toBeDefined();
   });
 
-  describe("findAll", () => {
-    it("should retrun an array of user", () => {
-      expect(controller.findAll()).resolves.toEqual(userMock)
-    })
-  })
+  describe('findAll', () => {
+    it('should return an array of user', () => {
+      expect(controller.findAll()).resolves.toEqual(userMock);
+    });
+  });
 
-  describe("findOneById", () => {
-    it("should retrun one user", () => {
+  describe('findOneById', () => {
+    it('should return one user', () => {
       const id = 1;
-      const u = userMock.find(u => u.id === id)
-      expect(controller.findOneById(1)).resolves.toEqual(u)
-    })
-  })
+      const u = userMock.find((u) => u.id === id);
+      expect(controller.findOneById(1)).resolves.toEqual(u);
+    });
+  });
 
-  describe("create", () => {
-    it("should return { message: `User created` }", () => {
-      expect(controller.create(userMock[0])).resolves.toEqual({ message: `User created` })
-    })
-  })
+  describe('create', () => {
+    it('should return { message: `User created` }', () => {
+      expect(controller.create(userMock[0])).resolves.toEqual({
+        message: `User created`,
+      });
+    });
+  });
 
-  describe("update", () => {
-    it("should return { message: `User 1 updated` }", () => {
+  describe('update', () => {
+    it('should return { message: `User 1 updated` }', () => {
       const id = 1;
-      expect(controller.update(id, userMock[0])).resolves.toEqual({ message: `User ${id} updated` })
-    })
-  })
+      expect(controller.update(id, userMock[0])).resolves.toEqual({
+        message: `User ${id} updated`,
+      });
+    });
+  });
 
-  describe("delete", () => {
-    it("should return { message: `User 1 deleted` }", () => {
+  describe('delete', () => {
+    it('should return { message: `User 1 deleted` }', () => {
       const id = 1;
-      expect(controller.delete(id)).resolves.toEqual({ message: `User ${id} deleted` })
-    })
-  })
+      expect(controller.delete(id)).resolves.toEqual({
+        message: `User ${id} deleted`,
+      });
+    });
+  });
 });

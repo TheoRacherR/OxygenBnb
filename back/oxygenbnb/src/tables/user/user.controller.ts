@@ -8,10 +8,6 @@ import { User } from './entities/user.entity';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post()
-  async create(@Body() createUserDto: CreateUserDto): Promise<{ message: string }> {
-    return await this.userService.create(createUserDto);
-  }
 
   @Get()
   async findAll(): Promise<User[]> {
@@ -26,6 +22,10 @@ export class UserController {
     else throw new HttpException("User not found", HttpStatus.NOT_FOUND);
   }
 
+  @Post()
+  async create(@Body() createUserDto: CreateUserDto): Promise<{ message: string }> {
+    return await this.userService.create(createUserDto);
+  }
 
   @Patch(":id")
   async update(

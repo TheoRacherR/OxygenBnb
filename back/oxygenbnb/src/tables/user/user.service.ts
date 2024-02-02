@@ -51,10 +51,10 @@ export class UserService {
     return { message: `User ${id} updated` };
   }
 
-  async updateRole(id: number, role: userRole): Promise<User> {
-    await this.userRepository.update(id, { role });
-    return await this.userRepository.findOne({ where: { id } });
-  }
+  // async updateRole(id: number, role: userRole): Promise<User> {
+  //   await this.userRepository.update(id, { role });
+  //   return await this.userRepository.findOne({ where: { id } });
+  // }
 
   async delete(id: number): Promise<{ message: string }> {
     await this.userRepository.delete(id);
