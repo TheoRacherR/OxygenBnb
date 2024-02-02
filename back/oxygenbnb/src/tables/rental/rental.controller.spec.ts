@@ -24,26 +24,24 @@ describe('RentalController', () => {
   describe('findOne', () => {
     it('should return one rental', () => {
       const id = 1;
-      const r = rentalMock.find((r) => r.id === id);
-      expect(controller.findOne(1)).resolves.toEqual(r);
+      const rentalFound = rentalMock.find((rental) => rental.id === id);
+      expect(controller.findOne(1)).resolves.toEqual(rentalFound);
     });
   });
 
   describe('findAllByUserId', () => {
     it('should return all rental of the user 1', () => {
       const user_id = 1;
-      const r = rentalMock.find((r) => r.owner.id === user_id);
-      expect(controller.findAllByUserId(1)).resolves.toEqual(r);
+      const rentalsFound = rentalMock.find((rental) => rental.owner.id === user_id);
+      expect(controller.findAllByUserId(1)).resolves.toEqual(rentalsFound);
     });
   });
 
-  // err
   describe('findAllByType', () => {
     it('should return all rental with the type "house"', () => {
       const type = rentalType.HOUSE;
-      // const type = rentalType.HOUSE;
-      const r = rentalMock.find((r) => r.type === type);
-      expect(controller.findAllByType(type)).resolves.toEqual(r);
+      const rentalsFound = rentalMock.find((rental) => rental.type === type);
+      expect(controller.findAllByType(type)).resolves.toEqual(rentalsFound);
     });
   });
 

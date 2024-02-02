@@ -29,8 +29,8 @@ describe('UserController', () => {
   describe('findOneById', () => {
     it('should return one user', () => {
       const id = 1;
-      const u = userMock.find((u) => u.id === id);
-      expect(controller.findOneById(1)).resolves.toEqual(u);
+      const userFound = userMock.find((user) => user.id === id);
+      expect(controller.findOneById(1)).resolves.toEqual(userFound);
     });
   });
 

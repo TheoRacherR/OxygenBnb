@@ -24,7 +24,7 @@ describe('RentalDateController', () => {
   describe('findAllByRentalId', () => {
     it('should return all rental of the user 1', () => {
       const rental_id = 1;
-      const rentalDateFound = rentalDateMock.find((rd) => rd.rental.id === rental_id);
+      const rentalDateFound = rentalDateMock.find((rentalDate) => rentalDate.rental.id === rental_id);
       expect(controller.findAllByRentalId(1)).resolves.toEqual(rentalDateFound);
     });
   });
@@ -32,7 +32,7 @@ describe('RentalDateController', () => {
   describe('findAllByType', () => {
     it('should return all rental with the type "house"', () => {
       const type = rentalDateType.BLOCKED;
-      const rentalDateFound = rentalDateMock.find((rd) => rd.type === type);
+      const rentalDateFound = rentalDateMock.find((rentalDate) => rentalDate.type === type);
       expect(controller.findAllByType(type)).resolves.toEqual(rentalDateFound);
     });
   });
@@ -40,14 +40,14 @@ describe('RentalDateController', () => {
   describe('findOneById', () => {
     it('should return one rental', () => {
       const id = 1;
-      const rentalDateFound = rentalDateMock.find((rd) => rd.id === id);
+      const rentalDateFound = rentalDateMock.find((rentalDate) => rentalDate.id === id);
       expect(controller.findOneById(1)).resolves.toEqual(rentalDateFound);
     });
   });
 
   describe('create', () => {
     it('should return {message: "RentalDate created"}', () => {
-      expect(controller.create(rentalDateMockCreate[0])).resolves.toEqual({
+      expect(controller.create(rentalDateMockCreate[0])).resolves.toEqual({ //todo: change
         message: `RentalDate created`,
       });
     });
@@ -56,7 +56,7 @@ describe('RentalDateController', () => {
   describe('update', () => {
     it('should return { message: `RentalDate 1 updated`}', () => {
       const id = 1;
-      expect(controller.update(id, rentalDateMockUpdate[0])).resolves.toEqual({
+      expect(controller.update(id, rentalDateMockUpdate)).resolves.toEqual({
         message: `RentalDate ${id} updated`,
       });
     });

@@ -4,8 +4,8 @@ import { User, userRole } from '../../user/entities/user.entity';
 export const reservationMock = [
   {
     id: 1,
-    start_date: Date,
-    end_date: Date,
+    start_date: new Date(),
+    end_date: new Date(),
     canceled: false,
     rental: {
       id: 1,
@@ -22,22 +22,22 @@ export const reservationMock = [
       password: 'string',
       firstname: 'string',
       lastname: 'string',
-      created_at: Date,
-      updated_at: Date,
+      created_at: new Date(),
+      updated_at: new Date(),
       role: userRole.USER,
     },
   },
 ];
 
 export const reservationMockCreate = {
-  start_date: Date,
-  end_date: Date,
+  start_date: new Date(),
+  end_date: new Date(),
   rental: Rental,
   client: User,
 };
 
 export const reservationMockUpdate = {
-  start_date: Date,
-  end_date: Date,
+  start_date: new Date(),
+  end_date: new Date(),
   canceled: false,
 };

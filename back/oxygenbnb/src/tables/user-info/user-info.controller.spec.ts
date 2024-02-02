@@ -23,8 +23,8 @@ describe('UserInfoController', () => {
   describe("findOneByUserId", () => {
   it("should return one user", () => {
       const id = 1;
-      const ui = userInfoMockList.find(ui => ui.user.id === id)
-      expect(controller.findOneByUserId(1)).resolves.toEqual(ui)
+      const userInfoFound = userInfoMockList.find(userInfo => userInfo.user.id === id)
+      expect(controller.findOneByUserId(1)).resolves.toEqual(userInfoFound)
     })
   });
 

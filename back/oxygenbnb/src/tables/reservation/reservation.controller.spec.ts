@@ -23,8 +23,8 @@ describe('ReservationController', () => {
   describe('findOneById', () => {
     it('should return one reservation', () => {
       const id = 1;
-      const resa = reservationMock.find((r) => r.id === id);
-      expect(controller.findOneById(1)).resolves.toEqual(resa);
+      const reservationFound = reservationMock.find((reservation) => reservation.id === id);
+      expect(controller.findOneById(1)).resolves.toEqual(reservationFound);
     });
   });
 
