@@ -30,12 +30,12 @@ export class ReservationController {
   }
 
   @Post()
-  async create(@Body() reservation: CreateReservationDto): Promise<Reservation> {
+  async create(@Body() reservation: CreateReservationDto): Promise<{ message: string }> {
     return await this.reservationService.create(reservation);
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() reservationUpdated: UpdateReservationDto): Promise<Reservation> {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() reservationUpdated: UpdateReservationDto): Promise<{ message: string }> {
     const reservation = await this.reservationService.findOneById(id);
     if(!reservation) throw new HttpException(`Reservation ${id} not found`, HttpStatus.NOT_FOUND)
     else return await this.reservationService.update(id, reservationUpdated);

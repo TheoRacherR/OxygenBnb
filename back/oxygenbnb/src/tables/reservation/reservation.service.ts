@@ -36,18 +36,14 @@ export class ReservationService {
     });
   }
 
-  async create(reservation: CreateReservationDto): Promise<Reservation> {
+  async create(reservation: CreateReservationDto): Promise<{ message: string }> {
     const newReservation = this.reservationRepository.create(reservation);
-    return await this.reservationRepository.save(newReservation);
+    return { message: `Reservation created` };
   }
 
-  async update(id: number, reservation: UpdateReservationDto): Promise<Reservation> {
+  async update(id: number, reservation: UpdateReservationDto): Promise<{ message: string }> {
     await this.reservationRepository.update(id, reservation);
-    return await this.reservationRepository.findOne({
-      where: {
-        id,
-      }
-    });
+    return { message: `Reservation ${id} updated` };
   }
 
   async delete(id: number): Promise<{ message: string }> {
