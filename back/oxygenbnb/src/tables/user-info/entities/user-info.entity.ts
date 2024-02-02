@@ -2,7 +2,6 @@ import { User } from '../../user/entities/user.entity';
 import {
   Entity,
   Column,
-  PrimaryGeneratedColumn,
   OneToOne,
   JoinColumn,
 } from 'typeorm';
@@ -15,8 +14,6 @@ export enum gender {
 
 @Entity()
 export class UserInfo {
-  @PrimaryGeneratedColumn()
-  id: number;
 
   @Column({
     type: 'enum',

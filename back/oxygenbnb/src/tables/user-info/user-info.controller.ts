@@ -15,7 +15,10 @@ export class UserInfoController {
   }
 
   @Patch('user/:user_id')
-  async update(@Param('user_id', ParseIntPipe) user_id: number, @Body() userInfo: UpdateUserInfoDto): Promise<UserInfo> {
+  async update(
+    @Param('user_id', ParseIntPipe) user_id: number,
+    @Body() userInfo: UpdateUserInfoDto
+  ): Promise<{ message: string }> {
     const userInfoToUpdate = await this.userInfoService.findOneByUserId( user_id );
     if (!userInfoToUpdate) throw new HttpException(`User info not found for user ${user_id}`, HttpStatus.NOT_FOUND);
     else return await this.userInfoService.update(user_id, userInfo);

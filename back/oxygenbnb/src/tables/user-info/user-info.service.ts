@@ -19,13 +19,10 @@ export class UserInfoService {
     });
   }
 
-  async update(user_id: number, userInfo: UpdateUserInfoDto): Promise<UserInfo> {
+  async update(user_id: number, userInfo: UpdateUserInfoDto): Promise<{ message: string }> {
     const userInfoToUpdate = await this.userInfoRepository.findOne({ where: { user: { id: user_id } } })
-    await this.userInfoRepository.update(userInfoToUpdate.id, userInfo);
-    // TODO: await this.userInfoRepository.update({user: { id : user_id } }, userInfo);
-    return await this.userInfoRepository.findOne({
-      where: { user: { id: user_id } }
-    });
+    await this.userInfoRepository.update(userInfoToUpdate.user.id, userInfo);
+    return { message: `UserInfo of user ${user_id} updated` }
   }
 
 }
