@@ -29,19 +29,19 @@ export class RentalDateController {
   }
 
   @Post()
-  async create(@Body() rentalDate: CreateRentalDateDto): Promise<RentalDate> {
+  async create(@Body() rentalDate: CreateRentalDateDto): Promise<{ message: string }> {
     return await this.rentalDateService.create(rentalDate);
   }
 
   @Patch(':id')
-  async update(@Param('id', ParseIntPipe) id: number, @Body() rentalDate: UpdateRentalDateDto) {
+  async update(@Param('id', ParseIntPipe) id: number, @Body() rentalDate: UpdateRentalDateDto): Promise<{ message: string }> {
     const rentalDateFoundById = await this.rentalDateService.findOneById(id);
     if(!rentalDateFoundById) throw new HttpException(`No Rental date ${id} where found`, HttpStatus.NOT_FOUND);
     else return await this.rentalDateService.update(id, rentalDate);
   }
 
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number) {
+  async delete(@Param('id', ParseIntPipe) id: number) {
     const rentalDateFoundById = await this.rentalDateService.findOneById(id);
     if(!rentalDateFoundById) throw new HttpException(`No Rental date ${id} where found`, HttpStatus.NOT_FOUND);
     else return await this.rentalDateService.delete(id);

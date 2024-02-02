@@ -36,22 +36,18 @@ export class RentalDateService {
     });
   }
 
-  async create(rentalDate: CreateRentalDateDto): Promise<RentalDate> {
+  async create(rentalDate: CreateRentalDateDto): Promise<{ message: string}> {
     const newRentalDate = this.rentalDateRepository.create(rentalDate);
-    return await this.rentalDateRepository.save(newRentalDate);
+    return { message: "RentalDate created"};
   }
 
-  async update(id: number, rentalDate: UpdateRentalDateDto): Promise<RentalDate> {
+  async update(id: number, rentalDate: UpdateRentalDateDto): Promise<{ message: string}> {
     await this.rentalDateRepository.update(id, rentalDate);
-    return await this.rentalDateRepository.findOne({
-      where: {
-        id,
-      },
-    });
+    return { message: `RentalDate ${id} updated` }
   }
 
   async delete(id: number): Promise<{ message: string}> {
     await this.rentalDateRepository.delete(id);
-    return { message: `RentalDate #${id} deleted` };
+    return { message: `RentalDate ${id} deleted` };
   }
 }
