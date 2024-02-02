@@ -36,18 +36,14 @@ export class RentalService {
     });
   }
 
-  async create(rental: CreateRentalDto): Promise<Rental> {
+  async create(rental: CreateRentalDto): Promise<{ message: string}> {
     const newRental = this.rentalRepository.create(rental);
-    return await this.rentalRepository.save(newRental);
+    return { message: `Rental created` }
   }
 
-  async update(id: number, rental: UpdateRentalDto): Promise<Rental> {
+  async update(id: number, rental: UpdateRentalDto): Promise<{ message: string}> {
     await this.rentalRepository.update(id, rental);
-    return await this.rentalRepository.findOne({
-      where: {
-        id,
-      },
-    });
+    return { message: `Rental ${id} updated` }
   }
 
   async delete(id: number): Promise<{ message: string}> {
