@@ -23,8 +23,8 @@ docker compose up --build
 ```
 
 
-### Migrations
-## Inside "nestapp-oxygen" container 
+## Migrations
+##### Inside "nestapp-oxygen" container 
 ```
 npm run typeorm:create-migration
 ```
