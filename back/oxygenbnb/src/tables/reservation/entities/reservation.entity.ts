@@ -1,7 +1,8 @@
 import { Rental } from '../../rental/entities/rental.entity';
 import { User } from '../../user/entities/user.entity';
-import { Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
+@Entity()
 export class Reservation {
   @PrimaryGeneratedColumn()
   id: number;

@@ -3,6 +3,7 @@ import { Reservation } from '../../reservation/entities/reservation.entity';
 import { User } from '../../user/entities/user.entity';
 import {
   Column,
+  Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
@@ -24,6 +25,7 @@ export enum rentalType {
   EXOTIC = 'Exotic',
 }
 
+@Entity()
 export class Rental {
   @PrimaryGeneratedColumn()
   id: number;

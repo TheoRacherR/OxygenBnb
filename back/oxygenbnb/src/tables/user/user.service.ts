@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { UserInfo } from '../user-info/entities/user-info.entity';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { User, userRole } from './entities/user.entity';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -26,27 +25,35 @@ export class UserService {
     });
   }
 
+  async findOneByEmail(email: string): Promise<User>{
+    return await this.userRepository.findOne({
+      where: {
+        email,
+      }
+    })
+  }
+
   async create(user: CreateUserDto): Promise<{ message: string }> {
-    const salt = await bcrypt.genSalt();
-    const hashedPassword = await bcrypt.hash(user.password, salt);
+    // const salt = await bcrypt.genSalt();
+    // const hashedPassword = await bcrypt.hash(user.password, salt);
     const newUserInfo = new UserInfo();
     this.userRepository.create({
       ...user,
-      password: hashedPassword,
+      // password: hashedPassword,
       info: newUserInfo,
     });
     return { message: `User created` };
   }
 
   async update(id: number, user: UpdateUserDto): Promise<{ message: string }> {
-    let newHashedPassword = user.password;
+    // let newHashedPassword = user.password;
     if (user.password) {
-      const newSalt = await bcrypt.genSalt();
-      newHashedPassword = await bcrypt.hash(user.password, newSalt);
+      // const newSalt = await bcrypt.genSalt();
+      // newHashedPassword = await bcrypt.hash(user.password, newSalt);
     }
     await this.userRepository.update(id, {
       ...user,
-      password: newHashedPassword,
+      // password: newHashedPassword,
     });
     return { message: `User ${id} updated` };
   }

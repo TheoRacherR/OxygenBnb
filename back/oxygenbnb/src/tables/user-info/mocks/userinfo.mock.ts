@@ -15,7 +15,7 @@ export const userInfoMockList = [
 
 export const userInfoMockToUpdate =
 {
-  gender: "man",
+  gender: "man", //to change
   birth_date: "Date",
   description: 'string',
 };

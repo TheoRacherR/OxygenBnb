@@ -21,3 +21,18 @@ PG_PORT=
 ```
 docker compose up --build
 ```
+
+
+### Migrations
+## Inside "nestapp-oxygen" container 
+```
+npm run typeorm:create-migration
+```
+or
+```
+npm run typeorm:run-migration
+```
+or
+```
+npm run typeorm:revert-migration
+```

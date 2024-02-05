@@ -6,8 +6,6 @@ import { userMock } from './mocks/user.mock';
 import { NotFoundException } from '@nestjs/common';
 import { getRepositoryToken } from '@nestjs/typeorm';
 
-// TODO
-
 describe('UserService', () => {
   let service: UserService;
 
