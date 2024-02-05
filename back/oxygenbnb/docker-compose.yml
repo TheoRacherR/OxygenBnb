@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   app:
-    container_name: nestapp
+    container_name: nestapp-oxygen
     image: nestimg
     build: .
     ports:
@@ -18,7 +18,7 @@ services:
       - db
   
   db:
-    container_name: db
+    container_name: db-oxygen
     image: postgres:16
     ports:
       - 5432:5432

@@ -22,6 +22,13 @@ export class UserController {
     else throw new HttpException("User not found", HttpStatus.NOT_FOUND);
   }
 
+  // @Get("email/:email")
+  // async findOneByEmail(@Param("email") email: string): Promise<User> {
+  //   const user = await this.userService.findOneByEmail(email);
+  //   if (user) return user;
+  //   else throw new HttpException("User not found", HttpStatus.NOT_FOUND);
+  // }
+
   @Post()
   async create(@Body() createUserDto: CreateUserDto): Promise<{ message: string }> {
     return await this.userService.create(createUserDto);
