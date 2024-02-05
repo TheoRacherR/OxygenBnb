@@ -130,3 +130,4 @@ dist
 .pnp.*
 
 migrations/
+.DS_STORE
