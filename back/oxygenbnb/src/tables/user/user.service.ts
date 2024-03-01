@@ -2,15 +2,19 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserInfo } from '../user-info/entities/user-info.entity';
-import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { RegisterDto } from '../auth/dto/register-auth.dto';
+import * as bcrypt from "bcrypt";
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>
+    private userRepository: Repository<User>,
+
+    @InjectRepository(UserInfo)
+    private userInfoRepository: Repository<UserInfo>
   ) {}
 
   async findAll(): Promise<User[]> {
@@ -18,53 +22,42 @@ export class UserService {
   }
 
   async findOneById(id: number): Promise<User> {
-    return await this.userRepository.findOne({
-      where: {
-        id,
-      },
-    });
-  }
+    return await this.userRepository.findOne({ where: {id} })}
 
   async findOneByEmail(email: string): Promise<User>{
-    return await this.userRepository.findOne({
-      where: {
-        email,
-      }
-    })
-  }
+    return await this.userRepository.findOne({ where: {email} })}
 
-  async create(user: CreateUserDto): Promise<{ message: string }> {
-    // const salt = await bcrypt.genSalt();
-    // const hashedPassword = await bcrypt.hash(user.password, salt);
+  async create(userInfo: RegisterDto): Promise<{ message: string}> {
     const newUserInfo = new UserInfo();
-    this.userRepository.create({
-      ...user,
-      // password: hashedPassword,
-      info: newUserInfo,
-    });
+    const salt = await bcrypt.genSalt();
+    const passwordHashed = await bcrypt.hash(userInfo.password, salt);
+    const newUser = await this.userRepository.save({
+      ...userInfo,
+      password: passwordHashed
+    })
+    await this.userInfoRepository.insert({
+      ...newUserInfo,
+      user: newUser
+    })
     return { message: `User created` };
   }
 
   async update(id: number, user: UpdateUserDto): Promise<{ message: string }> {
-    // let newHashedPassword = user.password;
+    let newHashedPassword = user.password;
     if (user.password) {
-      // const newSalt = await bcrypt.genSalt();
-      // newHashedPassword = await bcrypt.hash(user.password, newSalt);
+      const newSalt = await bcrypt.genSalt();
+      newHashedPassword = await bcrypt.hash(user.password, newSalt);
     }
     await this.userRepository.update(id, {
       ...user,
-      // password: newHashedPassword,
+      password: newHashedPassword,
     });
     return { message: `User ${id} updated` };
   }
-
-  // async updateRole(id: number, role: userRole): Promise<User> {
-  //   await this.userRepository.update(id, { role });
-  //   return await this.userRepository.findOne({ where: { id } });
-  // }
 
   async delete(id: number): Promise<{ message: string }> {
     await this.userRepository.delete(id);
     return { message: `User ${id} deleted` };
   }
+
 }

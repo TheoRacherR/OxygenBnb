@@ -1,20 +1,22 @@
-import { Rental } from "../../rental/entities/rental.entity";
-import { Reservation } from "../../reservation/entities/reservation.entity";
-import { UserInfo } from "../../user-info/entities/user-info.entity";
+import { Rental } from '../../rental/entities/rental.entity';
+import { Reservation } from '../../reservation/entities/reservation.entity';
+import { UserInfo } from '../../user-info/entities/user-info.entity';
+import * as bcrypt from 'bcrypt';
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
-} from "typeorm";
+  UpdateDateColumn,
+} from 'typeorm';
 
 export enum userRole {
-  USER = "user",
-  RENTER = "renter",
-  ADMIN = "admin",
+  USER = 'user',
+  RENTER = 'renter',
+  ADMIN = 'admin',
 }
 
 @Entity()
@@ -41,7 +43,7 @@ export class User {
   updated_at: Date;
 
   @Column({
-    type: "enum",
+    type: 'enum',
     enum: userRole,
     default: userRole.USER,
   })

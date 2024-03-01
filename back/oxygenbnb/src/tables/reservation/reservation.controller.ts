@@ -24,7 +24,7 @@ export class ReservationController {
 
   @Get('rental/:rental_id')
   async findByRentalId(@Param('rental_id', ParseIntPipe) rental_id: number ): Promise<Reservation[]> {
-    const reservationOfThisClient = await this.reservationService.findByClientId(rental_id);
+    const reservationOfThisClient = await this.reservationService.findByRentalId(rental_id);
     if(reservationOfThisClient) return reservationOfThisClient;
     else throw new HttpException(`No Reservation where found of the rental ${rental_id}`, HttpStatus.NOT_FOUND);
   }

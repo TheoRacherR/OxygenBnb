@@ -1,6 +1,8 @@
-import { currency, rentalType } from "../entities/rental.entity"
+import { CreateRentalDto } from "../dto/create-rental.dto"
+import { UpdateRentalDto } from "../dto/update-rental.dto"
+import { Rental, currency, rentalType } from "../entities/rental.entity"
 
-export const rentalMock = [
+export const rentalMock = [ //Rental
   {
     id: 1,
     default_price: 0,
@@ -18,7 +20,7 @@ export const rentalMock = [
   }
 ]
 
-export const rentalMockCreate = {
+export const rentalMockCreate = { //CreateRentalDto
   default_price: 1,
   default_currency: currency.EUR,
   type: rentalType.HOUSE,
@@ -32,7 +34,7 @@ export const rentalMockCreate = {
   },
 }
 
-export const rentalMockUpdate = {
+export const rentalMockUpdate: UpdateRentalDto = {
   default_price: 1,
   default_currency: currency.EUR,
   type: rentalType.HOUSE,

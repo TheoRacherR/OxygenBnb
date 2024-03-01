@@ -4,6 +4,7 @@ import { RentalDateService } from './rental-date.service';
 import { rentalDateMock, rentalDateMockCreate, rentalDateMockUpdate } from './mocks/rental-date.mock';
 import { rentalDateType } from './entities/rental-date.entity';
 import { RentalDateServiceMock } from './mocks/Rental-date.service.mock';
+import { HttpException, HttpStatus } from '@nestjs/common';
 
 describe('RentalDateController', () => {
   let controller: RentalDateController;
@@ -26,6 +27,11 @@ describe('RentalDateController', () => {
       const rental_id = 1;
       const rentalDateFound = rentalDateMock.find((rentalDate) => rentalDate.rental.id === rental_id);
       expect(controller.findAllByRentalId(1)).resolves.toEqual(rentalDateFound);
+    });
+
+    const rental_id_not_found = 0;
+    it(`should return an error : { No Rental date for rental_id ${rental_id_not_found} where found }`, () => {
+      expect(controller.findAllByRentalId(rental_id_not_found)).rejects.toThrow(new HttpException(`No Rental date for rental_id ${rental_id_not_found} where found`, HttpStatus.NOT_FOUND));
     });
   });
 
@@ -60,6 +66,11 @@ describe('RentalDateController', () => {
         message: `RentalDate ${id} updated`,
       });
     });
+
+    const id_not_found = 0;
+    it(`should return an error : { No Rental date for rental_id ${id_not_found} where found }`, () => {
+      expect(controller.update(id_not_found, rentalDateMockUpdate)).rejects.toThrow(new HttpException(`No Rental date ${id_not_found} where found`, HttpStatus.NOT_FOUND));
+    });
   });
 
   describe('delete', () => {
@@ -70,4 +81,9 @@ describe('RentalDateController', () => {
       });
     });
   });
+
+  const id_not_found = 0;
+    it(`should return an error : { No Rental date for rental_id ${id_not_found} where found }`, () => {
+      expect(controller.delete(id_not_found)).rejects.toThrow(new HttpException(`No Rental date ${id_not_found} where found`, HttpStatus.NOT_FOUND));
+    });
 });

@@ -6,6 +6,7 @@ import { RentalModule } from './tables/rental/rental.module';
 import { RentalDateModule } from './tables/rental-date/rental-date.module';
 import { ReservationModule } from './tables/reservation/reservation.module';
 import { DatabaseModule } from './database/database.module';
+import { AuthModule } from './tables/auth/auth.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { DatabaseModule } from './database/database.module';
     UserInfoModule,
     RentalModule,
     RentalDateModule,
-    ReservationModule
+    ReservationModule,
+    AuthModule
   ],
   controllers: [],
   providers: [],
