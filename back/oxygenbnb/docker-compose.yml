@@ -6,7 +6,7 @@ services:
     image: nestimg
     build: .
     ports:
-      - 3000:3000
+      - ${NEST_PORT}:${NEST_PORT}
     environment:
       - DB_TYPE=${DB_TYPE}
       - PG_HOST=${PG_HOST} #doit matcher avec le container_name de la db
@@ -21,7 +21,7 @@ services:
     container_name: db-oxygen
     image: postgres:16
     ports:
-      - 5432:5432
+      - ${PG_PORT}:${PG_PORT}
     environment:
       - POSTGRES_USER=${PG_USER} #doit matcher avec PG_USER
       - POSTGRES_PASSWORD=${PG_PASSWORD} #doit matcher avec PG_PASSWORD

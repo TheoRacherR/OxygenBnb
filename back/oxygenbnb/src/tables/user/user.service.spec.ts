@@ -15,7 +15,6 @@ describe('UserService', () => {
     }).compile();
 
     service = await module.get(UserService);
-    // service = module.get<UserService>(UserService);
   });
 
   afterEach(() => jest.clearAllMocks());
@@ -30,7 +29,6 @@ describe('UserService', () => {
       const fa = await service.findAll();
       expect(fa).toEqual(findAll);
       expect(fa).toHaveBeenCalledTimes(1);
-      // expect(service.findAll()).resolves.toEqual(userMock)
     })
   })
 
@@ -45,12 +43,6 @@ describe('UserService', () => {
       jest.spyOn(UserDbMock.user, 'findOneById').mockResolvedValue(undefined)
       expect(() => service.findOneById(id)).rejects.toBeInstanceOf(NotFoundException)
       expect(() => service.findOneById(id)).rejects.toEqual(new NotFoundException('Not Found'))
-    })
-  })
-
-  describe('create', () => {
-    it('should return { message: `User created` }', () => {
-      expect(service.create(userMock[0])).resolves.toEqual({ message: `User created` })
     })
   })
 
