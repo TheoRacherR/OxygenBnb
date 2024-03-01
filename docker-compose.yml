@@ -1,10 +1,12 @@
 version: '3.9'
 
 services:
-  app:
+  nestapp:
     container_name: nestapp-oxygen
     image: nestimg
-    build: .
+    build:
+      context: ./back/oxygenbnb
+      dockerfile: Dockerfile
     ports:
       - ${NEST_PORT}:${NEST_PORT}
     environment:
@@ -14,8 +16,13 @@ services:
       - PG_PASSWORD=${PG_PASSWORD}
       - PG_DB=${PG_DB}
       - PG_PORT=${PG_PORT}
+      - NODE_ENV_DEV=${NODE_ENV_DEV}
+
     depends_on:
       - db
+    networks:
+      - front
+      - back
   
   db:
     container_name: db-oxygen
@@ -28,6 +35,14 @@ services:
       - POSTGRES_DB=${PG_DB} #doit matcher avec PG_DB
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - back
 
 volumes:
   pgdata: {}
+
+networks:
+  front:
+    driver: bridge
+  back:
+    driver: bridge
