@@ -8,6 +8,20 @@ Copy of AirBnb
 git clone git@github.com:TheoRacherR/OxygenBnb.git
 ```
 
+### 1.1 Install all of the node modules
+```
+cd back/oxygenbnb
+```
+```
+cd npm install
+```
+```
+cd ../../front/oxygenbnb
+```
+```
+cd npm install
+```
+
 ### 2. Create a .env file with those variables (that you have to fill)
 ```
 DB_TYPE=
