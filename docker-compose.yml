@@ -1,6 +1,20 @@
 version: '3.9'
 
 services:
+  app:
+    container_name: reactapp-oxygen
+    build: 
+      context: ./front/oxygenbnb
+      dockerfile: Dockerfile
+    volumes:
+      - pgdata:/app
+    ports:
+      - 3000:3000
+    environment:
+      - CHOKIDAR_USEPOLLING=${NODE_ENV_DEV}
+    networks:
+        - front
+  
   nestapp:
     container_name: nestapp-oxygen
     image: nestimg
