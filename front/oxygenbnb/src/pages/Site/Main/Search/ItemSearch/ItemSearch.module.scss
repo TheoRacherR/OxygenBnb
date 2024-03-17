@@ -1,0 +1,38 @@
+.container {
+  --size: 300px;
+
+  width: var(--size);
+  
+  padding: 1rem;
+  .beds {
+    padding: 10px 0;
+
+  }
+
+  .image {
+    object-fit: cover;
+    // padding: 0 10%;
+    width: 100%;
+    height: var(--size);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: blue;
+    .listOfImg{
+      border: 0;
+      img {
+        // border-radius: 30px;
+        // width: 300px;
+        // height: 300px;
+      }
+    }
+  }
+  @media (max-width: 1310px){
+    --sizeReducted: 250px;
+    width: var(--sizeReducted);
+    .image {
+      height: var(--sizeReducted);
+    }
+  }
+}

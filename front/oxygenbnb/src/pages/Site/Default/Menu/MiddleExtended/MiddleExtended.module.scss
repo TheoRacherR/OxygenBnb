@@ -1,0 +1,33 @@
+.middle_extended {
+  --heigt_middle: 38px;
+  --padding_x_middle: 8px;
+  --padding_y_middle: 12px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  // height: 100vh;
+  width: 100vw;
+  position: absolute;
+
+  .block, .block_onclick {
+    width: calc(100vw - (2 * var(--padding_y_middle)));
+    padding: var(--padding_x_middle) var(--padding_y_middle);
+  }
+
+  .block{
+    // position: absolute;
+    background-color: white;
+    color: black;
+    top: calc((2 * var(--padding_x_middle)) + var(--heigt_middle));
+    left: 0;
+    .main_item{
+      width: 66%;
+      margin: 10px auto;
+    }
+  }
+  .block_onclick {
+    // position: absolute;
+    background-color: rgba(0, 0, 0, 0.256);
+    height: 90vh;
+  }
+
+}
