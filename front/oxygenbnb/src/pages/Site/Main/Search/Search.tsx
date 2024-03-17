@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 
 const data = [
   {
+    id: 1,
     coordonates: {
       address: {
         country : "France",
@@ -30,6 +31,7 @@ const data = [
     owner: "Franck B."
   },
   {
+    id: 2,
     coordonates: {
       address: {
         country : "France",
@@ -49,6 +51,7 @@ const data = [
     owner: "Lucy L."
   },
   {
+    id: 3,
     coordonates: {
       address : {
         country : "France",
@@ -68,6 +71,7 @@ const data = [
     owner: 'Léo L.'
   },
   {
+    id: 4,
     coordonates: {
       address : {
         country : "France",
