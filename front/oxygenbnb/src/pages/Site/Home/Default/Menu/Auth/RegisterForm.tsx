@@ -101,7 +101,7 @@ const RegisterForm = ({handleSwitchForm}) => {
         </Stack>
         <Button variant="contained" sx={{margin: "10px 0", width: "100%"}} onClick={handleRegister} disabled={valuesRegister.mail.length === 0 || valuesRegister.password.length === 0 || valuesRegister.confirmPassword.length === 0 ? true : false}>Submit</Button>
       </div>
-      <div>Already have an account ? <span style={{ color: "#C96217", cursor: "pointer"}} onClick={() => handleSwitchForm(0)}>Click here</span></div>
+      <div>Already have an account ? <span style={{ color: "#ed6c0280", cursor: "pointer"}} onClick={() => handleSwitchForm(0)}>Click here</span></div>
     </div>
   )
 }

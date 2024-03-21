@@ -57,7 +57,7 @@ const Home = () => {
         <Menu/>
         <div className={styles.container}>
           <div className={styles.wrapper}>
-            <div className={styles.catch_phrase}>Where do you want to travel this <span style={{color:"#C96217"}}>summer</span> ?</div>
+            <div className={styles.catch_phrase}>Where do you want to travel this <span style={{color:"#ed6c0280"}}>summer</span> ?</div>
               
             <FormControl sx={{ mt: 2,width: '100%' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-search" id="input-search"></InputLabel>

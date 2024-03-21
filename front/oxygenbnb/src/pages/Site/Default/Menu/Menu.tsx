@@ -11,15 +11,19 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
-import EscalatorWarningRoundedIcon from '@mui/icons-material/EscalatorWarningRounded';
 import SearchLocalisation from "./SearchLocalisation";
 import logo from "../../../../assets/Logo OxBNB Menu ow Honr.png"
 import { Link } from "react-router-dom";
 import { SearchContext } from "../../../../utils/Context/SearchContext";
 
 const MenuComponent = () => {
-  const { citySelected, setCitySelected, setNumberOfNightSelected } = useContext(SearchContext)
-  const [valuesSearch, setValuesSearch] = useState<any>({where: {}, when_start: "", when_end: "", who: {adult: 0, children: 0}})
+  const { 
+    citySelected, setCitySelected, 
+    setNumberOfNightSelected, 
+    numberOfPeopleSelected, setNumberOfPeopleSelected, 
+    nightSelected, setNightSelected
+  } = useContext(SearchContext);
+
   const [anchorElements, setAnchorElements] = useState<{where: null | HTMLElement, when: null | HTMLElement, who: null | HTMLElement}>({where: null,  when: null, who: null});
   const handleOpenWhere = (event: MouseEvent<HTMLButtonElement>) => {
     setAnchorElements(prev => ({...prev, where: event.currentTarget}));
@@ -34,38 +38,45 @@ const MenuComponent = () => {
     setAnchorElements({where: null, when: null, who: null});
   };
 
-  useEffect(() => {
-    setValuesSearch(prev => ({...prev, where: citySelected}))
-  },[])
 
   useEffect(() => {
-    if(valuesSearch.when_start){
-      if(valuesSearch.when_end){
-        const diffTime = Math.abs(new Date(valuesSearch.when_end).valueOf() - new Date(valuesSearch.when_start).valueOf());
-        console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
+    if(nightSelected.start){
+      if(nightSelected.end){
+        const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
+        // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
         setNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
       }
     }
-  }, [valuesSearch.when_start, valuesSearch.when_end])
+  }, [nightSelected.start, nightSelected.end])
 
-  const selectNewCity = (item) => {
-    setValuesSearch(prev => ({...prev, where: item}))
-    setCitySelected(item)
-  }
+
+  // const handleChangeDates = (type, date) => {
+  //   if(type === "start") setNightSelected(prev => ({...prev, start: date.toString()}))
+  //   else {
+  //     let dateEnd = date;
+  //     if(nightSelected.start === date.toString()) dateEnd = date.add(1, 'day')
+  //     setNightSelected(prev => ({...prev, end: dateEnd.toString()}))
+  //   }
+  // }
 
   const handleChangeDates = (type, date) => {
-    if(type === "start") setValuesSearch(prev => ({...prev, when_start: date.toString()}))
+    if(type === "start"){
+      if((date > dayjs(nightSelected.end) || (nightSelected.end === date.toString()))) 
+        setNightSelected({start: date.toString(), end: date.add(1, 'day').toString()})
+      else 
+        setNightSelected(prev => ({...prev, start: date.toString()}))
+      
+    }
     else {
       let dateEnd = date;
-      if(valuesSearch.when_start === date.toString()) dateEnd = date.add(1, 'day')
-      setValuesSearch(prev => ({...prev, when_end: dateEnd.toString()}))
+      if(nightSelected.start === date.toString()) dateEnd = date.add(1, 'day')
+      setNightSelected(prev => ({...prev, end: dateEnd.toString()}))
     }
-
   }
 
-  const submit = () => {
-    console.log("submit")
-  }
+  // const submit = () => {
+  //   console.log("submit")
+  // }
 
   return (
     <>
@@ -81,7 +92,7 @@ const MenuComponent = () => {
 
           <div className={styles.where}>
             <Button onClick={handleOpenWhere}>
-              Where {Object.keys(valuesSearch.where).length === 0 ? "?" : `: ${valuesSearch.where?.address.city || valuesSearch.where?.address.town || valuesSearch.where?.address.village || valuesSearch.where?.address.state}`}
+              Where {Object.keys(citySelected).length === 0 ? "?" : `: ${citySelected?.address.city || citySelected?.address.town || citySelected?.address.village || citySelected?.address.state}`}
             </Button>
           </div>
           <Menu
@@ -94,14 +105,14 @@ const MenuComponent = () => {
               'aria-labelledby': 'basic-button',
             }}
           > 
-            <SearchLocalisation handleClose={handleClose} handleReturnCitySelected={(item) => selectNewCity(item)}/>
+            <SearchLocalisation handleClose={handleClose} handleReturnCitySelected={(item) => setCitySelected(item)}/>
           </Menu>
 
 
           <div className={styles.when_start}>
             <Button onClick={handleOpenWhen}>
-              From : {valuesSearch.when_start.length === 0 ? "" : dayjs(valuesSearch.when_start).format('MMM DD')} 
-              / To : {valuesSearch.when_end.length === 0 ? "" : dayjs(valuesSearch.when_end).format('MMM DD')}
+              From : {nightSelected.start.length === 0 ? "" : dayjs(nightSelected.start).format('MMM DD')} 
+              / To : {nightSelected.end.length === 0 ? "" : dayjs(nightSelected.end).format('MMM DD')}
             </Button>
           </div>
           <Menu
@@ -116,28 +127,23 @@ const MenuComponent = () => {
             <MenuItem>
               <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='fr'>
                 <DatePicker
-                  value={valuesSearch.when_start === "" ? null : dayjs(valuesSearch.when_start)}
+                  value={nightSelected.start === "" ? null : dayjs(nightSelected.start)}
                   format="DD/MM/YYYY"
                   sx={{width: '100%'}}
-                  label="Date de départ"
-                  // ampm={false}
+                  label="Date d'arrivée"
                   minDate={dayjs(new Date())}
-                  maxDate={dayjs(valuesSearch.when_end)}
-                  // onChange={value => setValuesSearch(prev => ({...prev, when_start: value.toString()}))}
                   onChange={value => handleChangeDates("start", value)}
                 />
               </LocalizationProvider>
               {
-                valuesSearch.when_start ?
+                nightSelected.start ?
                   <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='fr'>
                     <DatePicker
-                      value={valuesSearch.when_end === "" ? null : dayjs(valuesSearch.when_end)}
+                      value={nightSelected.end === "" ? null : dayjs(nightSelected.end)}
                       format="DD/MM/YYYY"
                       sx={{width: '100%'}}
-                      label="Date de d'arrivée"
-                      // ampm={false}
-                      minDate={dayjs(valuesSearch.when_start) > dayjs(new Date()) ? dayjs(valuesSearch.when_start) : dayjs(new Date())}
-                      // onChange={value => setValuesSearch(prev => ({...prev, when_end: value.toString()}))}
+                      label="Date de départ"
+                      minDate={dayjs(nightSelected.start) > dayjs(new Date()) ? dayjs(nightSelected.start).add(1, 'day') : dayjs(new Date()).add(1, 'day')}
                       onChange={value => handleChangeDates("end", value)}
                     />
                   </LocalizationProvider>
@@ -150,7 +156,7 @@ const MenuComponent = () => {
 
           <div className={styles.who}>
             <Button onClick={handleOpenWho}>
-               Who : {valuesSearch.who.adult} {valuesSearch.who.adult === 0 ? "people" : "peoples"} {/*<EscalatorWarningRoundedIcon sx={{margin: "0 3px"}}/> {valuesSearch.who.children} */}
+               Who : {numberOfPeopleSelected.adult} {numberOfPeopleSelected.adult > 1 ? "peoples" : "people"} {/*<EscalatorWarningRoundedIcon sx={{margin: "0 3px"}}/> {numberOfPeopleSelected.children} */}
             </Button>
           </div>
           <Menu
@@ -166,25 +172,25 @@ const MenuComponent = () => {
             <MenuItem>
               How many adults :
             </MenuItem>
-            <Button onClick={() => setValuesSearch(prev => ({...prev, who: {adult: prev.who.adult-1, children: prev.who.children}}))} disabled={valuesSearch.who.adult <= 0}><RemoveRoundedIcon sx={{color: "#C96217"}}/></Button>
-            <Button disabled>{valuesSearch.who.adult}</Button>
-            <Button onClick={() => setValuesSearch(prev => ({...prev, who: {adult: prev.who.adult+1, children: prev.who.children}}))}><AddRoundedIcon sx={{color: "#C96217"}}/></Button>
+            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, adult: prev.adult-1}))} disabled={numberOfPeopleSelected.adult === 1}><RemoveRoundedIcon sx={{color: numberOfPeopleSelected.adult === 1 ? "grey" : "#ed6c0280" }}/></Button>
+            <Button disabled>{numberOfPeopleSelected.adult}</Button>
+            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, adult: prev.adult+1}))}><AddRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
 
             {/* <MenuItem>
               How many children :
             </MenuItem>
-            <Button onClick={() => setValuesSearch(prev => ({...prev, who: {adult: prev.who.adult, children: prev.who.children-1}}))} disabled={valuesSearch.who.children <= 0}><RemoveRoundedIcon sx={{color: "#C96217"}}/></Button>
-            <Button disabled>{valuesSearch.who.children}</Button>
-            <Button onClick={() => setValuesSearch(prev => ({...prev, who: {adult: prev.who.adult, children: prev.who.children+1}}))}><AddRoundedIcon sx={{color: "#C96217"}}/></Button> */}
+            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children-1}))} disabled={numberOfPeopleSelected.children <= 0}><RemoveRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
+            <Button disabled>{numberOfPeopleSelected.children}</Button>
+            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children+1}))}><AddRoundedIcon sx={{color: "#ed6c0280"}}/></Button> */}
           </Menu>
 
-          <Button
+          {/* <Button
             onClick={submit}
-            sx={{backgroundColor: "#C96217", borderRadius: "0 10px 10px 0"}}
-            disabled={valuesSearch.when_start === "" || valuesSearch.when_end === "" || valuesSearch.who.adult === 0} //where 
+            sx={{backgroundColor: "#ed6c0280", borderRadius: "0 10px 10px 0"}}
+            disabled={nightSelected.start === "" || nightSelected.end === "" || numberOfPeopleSelected.adult === 0} //where 
           >
             Search
-          </Button>
+          </Button> */}
 
         </div>
 
