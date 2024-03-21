@@ -43,7 +43,7 @@ const MenuComponent = () => {
     if(nightSelected.start){
       if(nightSelected.end){
         const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
-        console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
+        // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
         setNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
       }
     }
@@ -172,21 +172,21 @@ const MenuComponent = () => {
             <MenuItem>
               How many adults :
             </MenuItem>
-            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, adult: prev.adult-1}))} disabled={numberOfPeopleSelected.adult === 1}><RemoveRoundedIcon sx={{color: numberOfPeopleSelected.adult === 1 ? "grey" : "#C96217" }}/></Button>
+            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, adult: prev.adult-1}))} disabled={numberOfPeopleSelected.adult === 1}><RemoveRoundedIcon sx={{color: numberOfPeopleSelected.adult === 1 ? "grey" : "#ed6c0280" }}/></Button>
             <Button disabled>{numberOfPeopleSelected.adult}</Button>
-            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, adult: prev.adult+1}))}><AddRoundedIcon sx={{color: "#C96217"}}/></Button>
+            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, adult: prev.adult+1}))}><AddRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
 
             {/* <MenuItem>
               How many children :
             </MenuItem>
-            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children-1}))} disabled={numberOfPeopleSelected.children <= 0}><RemoveRoundedIcon sx={{color: "#C96217"}}/></Button>
+            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children-1}))} disabled={numberOfPeopleSelected.children <= 0}><RemoveRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
             <Button disabled>{numberOfPeopleSelected.children}</Button>
-            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children+1}))}><AddRoundedIcon sx={{color: "#C96217"}}/></Button> */}
+            <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children+1}))}><AddRoundedIcon sx={{color: "#ed6c0280"}}/></Button> */}
           </Menu>
 
           {/* <Button
             onClick={submit}
-            sx={{backgroundColor: "#C96217", borderRadius: "0 10px 10px 0"}}
+            sx={{backgroundColor: "#ed6c0280", borderRadius: "0 10px 10px 0"}}
             disabled={nightSelected.start === "" || nightSelected.end === "" || numberOfPeopleSelected.adult === 0} //where 
           >
             Search
