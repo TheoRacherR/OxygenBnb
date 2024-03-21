@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import styles from './Room.module.scss'
 import { Button, Menu, MenuItem } from '@mui/material';
-import { MouseEvent, useContext, useState } from 'react';
+import { MouseEvent, useContext, useEffect, useState } from 'react';
 import { SearchContext } from '../../../../utils/Context/SearchContext';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
@@ -12,6 +12,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 const Room = () => {
   const { id } = useParams();
+  const thisPrice = 35;
+  const fees = 13;
+  const numberMaxOfPeople = 4;
+
   const { 
     numberOfPeopleSelected, setNumberOfPeopleSelected,
     numberOfNightSelected,
@@ -19,8 +23,9 @@ const Room = () => {
 
   } = useContext(SearchContext)
   const [anchor, setAnchor] = useState<{date_start: null | HTMLElement, date_end: null | HTMLElement, people: null | HTMLElement}>({date_start: null, date_end: null, people: null})
+  const [calcPrices, setCalcPrices] = useState<{totalPriceXPeople: number, total: number}>({totalPriceXPeople: thisPrice * numberOfNightSelected, total: thisPrice * numberOfNightSelected + fees})
+  const [errorMaxPeople, setErrorMaxPeople] = useState(false);
 
-  const thisPrice = 35;
   const handleChangeDates = (type, date) => {
     if(type === "start"){
       if((date > dayjs(nightSelected.end) || (nightSelected.end === date.toString()))) 
@@ -36,6 +41,15 @@ const Room = () => {
     }
   }
 
+  useEffect(() => {
+  setCalcPrices({totalPriceXPeople: thisPrice * numberOfNightSelected, total: thisPrice * numberOfNightSelected + fees})
+  }, [thisPrice, numberOfNightSelected, fees])
+
+  useEffect(() => {
+    if((numberOfPeopleSelected.adult /*+ numberOfPeopleSelected.children*/) > numberMaxOfPeople) setErrorMaxPeople(true) 
+    else setErrorMaxPeople(false)
+  }, [numberOfPeopleSelected])
+
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -45,7 +59,14 @@ const Room = () => {
           
           <div className={styles.left}>
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720" alt="" />
-            <div className={styles.description}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nulla impedit harum est neque minima quaerat eos dolore deserunt natus tempora omnis inventore illum totam modi, quisquam praesentium, veniam perspiciatis.</div>
+            <div className={styles.description}>
+              <p>
+                A room for {numberMaxOfPeople} people{numberMaxOfPeople > 1 ? "s" : ""}
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nulla impedit harum est neque minima quaerat eos dolore deserunt natus tempora omnis inventore illum totam modi, quisquam praesentium, veniam perspiciatis.
+              </p>
+            </div>
           </div>
 
           <div className={styles.right}>
@@ -152,8 +173,14 @@ const Room = () => {
               </div>
 
               <div className={styles.submit_button}>
-                <Button variant='contained' color='warning' sx={{width: "100%", margin: "20px 0"}}>Reserve</Button>
+                <Button variant='contained' color='warning' sx={{width: "100%", margin: "20px 0"}} disabled={errorMaxPeople}>Reserve</Button>
               </div>
+              {
+                errorMaxPeople ?
+                  <p style={{color: "red"}}>This reservation is for {numberMaxOfPeople} people{numberMaxOfPeople > 1 ? "s" : ""} max, please select an othor room</p>
+                :
+                  <></>
+              }
             </div>
   
             <div className={styles.sector_bot}>
@@ -161,17 +188,17 @@ const Room = () => {
                 <div className={styles.listing}>
                   <div className={styles.litem}>
                     <div className={styles.linfos}>{thisPrice} € x {numberOfNightSelected} nuits</div>
-                    <div className={styles.lnumber}>{thisPrice * numberOfNightSelected} €</div>
+                    <div className={styles.lnumber}>{calcPrices.totalPriceXPeople} €</div>
                   </div>
                   <div className={styles.litem}>
                     <div className={styles.linfos}>Frais d'OxygenBNB</div>
-                    <div className={styles.lnumber}>13 €</div>
+                    <div className={styles.lnumber}>{fees} €</div>
                   </div>
                 </div>
                 <div className={styles.total}>
                   <div className={styles.titem}>
-                    <div className={styles.tinfos}>Frais d'OxygenBNB</div>
-                    <div className={styles.tnumber}>{(thisPrice * numberOfNightSelected) + 13} €</div>
+                    <div className={styles.tinfos}>Prix total</div>
+                    <div className={styles.tnumber}>{calcPrices.total} €</div>
                   </div>
                 </div>
               </div>
