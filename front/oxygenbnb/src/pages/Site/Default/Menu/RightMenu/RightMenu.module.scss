@@ -1,0 +1,18 @@
+.container {
+    .right_container {
+      display: flex;
+      justify-content: space-between;
+
+    }
+    width: 60px;
+    border: 1px solid black;
+    border-radius: 25px;
+    padding: 5px;
+    margin: auto 0;
+    cursor: pointer;
+    box-shadow: 0.2s cubic-bezier(0.2,0,0,1)
+}
+
+.container:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}

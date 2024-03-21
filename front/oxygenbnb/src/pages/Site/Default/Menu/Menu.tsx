@@ -1,6 +1,4 @@
 import styles from "./Menu.module.scss";
-import MenuRoundedIcon from '@mui/icons-material/MenuRounded';
-import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import { useState, MouseEvent, useContext, useEffect } from "react";
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
@@ -15,6 +13,9 @@ import SearchLocalisation from "./SearchLocalisation";
 import logo from "../../../../assets/Logo OxBNB Menu ow Honr.png"
 import { Link } from "react-router-dom";
 import { SearchContext } from "../../../../utils/Context/SearchContext";
+import RightMenu from "./RightMenu/RightMenu";
+
+
 
 const MenuComponent = () => {
   const { 
@@ -194,10 +195,7 @@ const MenuComponent = () => {
 
         </div>
 
-        <div className={styles.right}>
-          <MenuRoundedIcon/>
-          <AccountCircleRoundedIcon/>
-        </div>
+        <RightMenu/>
       </menu>
       {/* {
         middleExtended ?
