@@ -9,6 +9,7 @@ const LoginForm = ({handleSwitchForm}) => {
   const handleLogin = () => {
     console.log(valuesLogin);
   }
+  const [error, setError] = useState<{credentials: boolean}>({credentials: false})
 
   return (
     <div>
@@ -33,6 +34,12 @@ const LoginForm = ({handleSwitchForm}) => {
         </Stack>
         <Button variant="contained" sx={{margin: "10px 0", width: "100%"}} onClick={handleLogin} disabled={valuesLogin.mail.length === 0 || valuesLogin.password.length === 0}>Log in</Button>
       </div>
+      {
+        error.credentials ?
+          <div style={{color: "red"}}>Wrong credentials</div>
+        :
+          <></>
+      }
       <div>Don't have an account ? <span style={{ color: "#ed6c0280", cursor: "pointer"}} onClick={() => handleSwitchForm(1)}>Click here</span></div>
     </div>
   )

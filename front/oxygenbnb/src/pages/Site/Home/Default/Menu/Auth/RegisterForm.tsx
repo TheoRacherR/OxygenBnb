@@ -10,6 +10,8 @@ import Key from '@mui/icons-material/Key';
 
 const RegisterForm = ({handleSwitchForm}) => {
   const [valuesRegister, setValuesRegister] = useState<{mail: string, password: string, confirmPassword: string}>({mail: "", password: "", confirmPassword: ""})
+  const [error, setError] = useState<{passwordCooherence: boolean, emailAlreadyUsed: boolean}>({passwordCooherence: false, emailAlreadyUsed: false})
+  
   const minLength: number = 12;
   const handleRegister = () => {
     console.log(valuesRegister);
@@ -32,6 +34,12 @@ const RegisterForm = ({handleSwitchForm}) => {
             value={valuesRegister.mail}
             onChange={e => setValuesRegister(prev => ({...prev, mail: e.target.value}))}
           />
+          {
+            error.emailAlreadyUsed ?
+              <div style={{color: "red"}}>This mail is already used, fill an other one or log in</div> 
+            :
+              <></>
+          } 
         </Stack>
         <Stack
           spacing={0.5}
@@ -98,6 +106,12 @@ const RegisterForm = ({handleSwitchForm}) => {
             {valuesRegister.confirmPassword.length >= 6 && valuesRegister.confirmPassword.length < 10 && 'Strong'}
             {valuesRegister.confirmPassword.length >= 10 && 'Very strong'}
           </Typography>
+          {
+            error.passwordCooherence ?
+              <div style={{color: "red"}}>Must match the previous entry</div> 
+            :
+              <></>
+          } 
         </Stack>
         <Button variant="contained" sx={{margin: "10px 0", width: "100%"}} onClick={handleRegister} disabled={valuesRegister.mail.length === 0 || valuesRegister.password.length === 0 || valuesRegister.confirmPassword.length === 0 ? true : false}>Submit</Button>
       </div>

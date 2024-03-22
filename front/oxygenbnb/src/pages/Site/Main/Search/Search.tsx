@@ -99,7 +99,8 @@ const ResetCenterView = ({selectPosition}): any => {
 
   useEffect(() => {
     if (selectPosition) {
-      map.fitBounds(selectPosition?.boundingbox || [["48.8155755", "2.2241220"],["48.9021560", "2.4697602"]]),
+      if(selectPosition?.boundingbox) map.fitBounds([[selectPosition?.boundingbox[0], selectPosition?.boundingbox[2]], [selectPosition?.boundingbox[1], selectPosition?.boundingbox[3]]])
+      else map.fitBounds([[48.8155755, 2.2241220],[48.9021560, 2.4697602]]),
       map.setView(
         L.latLng(selectPosition?.lat || 48.8588897, selectPosition?.lon || 2.3200410217200766),
         map.getZoom(),
@@ -134,11 +135,6 @@ const Search = () => {
   useEffect(() => {
     setPoisitionToView(citySelected);
   }, [citySelected])
-
-  // useEffect(() => {
-  //   console.log(mapBounds._northEast.lat)
-  // }, [mapBounds])
-
 
 
   return (

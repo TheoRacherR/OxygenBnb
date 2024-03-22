@@ -5,6 +5,7 @@ import AboutUs from "./AboutUs/AboutUs"
 import styles from "./Main.module.scss"
 import Search from "./Search/Search"
 import Room from "./Room/Room"
+import Auth from "../../Auth/Auth"
 
 const Main = () => {
   return (
@@ -15,6 +16,7 @@ const Main = () => {
             <Route path="/search" element={<Search/>}/>
             <Route path="/room/:id" element={<Room/>}/>
             <Route path="/about-us" element={<AboutUs/>}/>
+            <Route path="/login" element={<Auth/>}/>
 
           </Routes>
         </div>
