@@ -1,5 +1,6 @@
 import { MenuItem, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
+import { useTranslation } from "react-i18next";
 
 const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
 
@@ -7,6 +8,7 @@ const SearchLocalisation = ({handleClose, handleReturnCitySelected}) => {
   const [listOfLocalisations, setListOfLocalisations] = useState([])
   const [query, setQuery] = useState("")
   const [searchedBoolean, setSearchedBoolean] = useState(false)
+  const { t } = useTranslation(['site_default']);
 
   const handleSelectCity = (item) => {
     handleReturnCitySelected(item);
@@ -41,7 +43,7 @@ const SearchLocalisation = ({handleClose, handleReturnCitySelected}) => {
           searchedBoolean ?
           listOfLocalisations.length === 0 ?
             <MenuItem disabled>
-              No result found
+              {t("site_default:default.menu.middle_extended.search_localisation_tsx.not_found")}
             </MenuItem>
             :
               listOfLocalisations.map((item, index) => (

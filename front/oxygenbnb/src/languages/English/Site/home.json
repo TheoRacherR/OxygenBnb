@@ -1,0 +1,45 @@
+{
+  "home": {
+    "home_tsx": {
+      "container": {
+        "wrapper": {
+          "catch_phrase": {
+            "0": "Where do you want to travel this",
+            "1": "summer"
+          }
+        }
+      }
+    },
+    "default": {
+      "menu_tsx": {
+        "container": {
+          "menu_display_off_container": {
+            "logo": {
+              "alt_img": "Logo of OxygenBNB"
+            }
+          }
+        }
+      },
+      "footer_tsx": {
+        "wrapper": {
+          "end_logo": "OxygenBNB, Inc",
+          "band_zero": {
+            "zero": "Twitter",
+            "one": "Instagram",
+            "two": "Facebook"
+          },
+          "band_one": {
+            "zero": "Terms and conditions",
+            "one": "Site map",
+            "two": "Privacy"
+          },
+          "band_two": {
+            "zero": "About us?",
+            "one": "Contact us",
+            "two": "Site operation"
+          }
+        }
+      }
+    }
+  }
+}
