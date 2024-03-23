@@ -37,6 +37,7 @@ const MenuComponent = () => {
     const language = value;
     console.log(language)
     i18n.changeLanguage(language); //change the language
+    localStorage.setItem('lng', language)
   }
 
   return (

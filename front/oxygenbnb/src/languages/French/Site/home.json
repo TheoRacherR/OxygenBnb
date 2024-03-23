@@ -11,6 +11,42 @@
       }
     },
     "default": {
+      "menu": {
+        "auth": {
+          "register_form_tsx": {
+            "mail": {
+              "placeholder": "Renseigner un mail",
+              "error": "Ce mail est déjà utilisé, renseignez en un autre ou connectez-vous"
+            },
+            "password": {
+              "placeholder": "Renseigner un mot de passe",
+              "confirm_placeholder": "Confirmer le mot de passe",
+              "length": {
+                "very_weak": "Très faible",
+                "weak": "Faible",
+                "strong": "Fort",
+                "very_strong": "Très fort"
+              },
+              "error": "Doit correspondre avec le mot de passe"
+            },
+            "button_submit": "Créer",
+            "have_account": "Vous avez déjà un compte",
+            "click": "Cliquez ici"
+          },
+          "login_form_tsx": {
+            "mail": {
+              "placeholder": "Renseigner votre mail"
+            },
+            "password": {
+              "placeholder": "Renseigner votre mot de passe"
+            },
+            "error": "Erreur du mail ou du mot de passe",
+            "button_login": "Connexion",
+            "have_account": "Vous n'avez pas de compte",
+            "click": "Cliquez ici"
+          }
+        }
+      },
       "menu_tsx": {
         "container": {
           "menu_display_off_container": {

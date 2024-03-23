@@ -6,9 +6,11 @@ import Input from '@mui/joy/Input';
 import LinearProgress from '@mui/joy/LinearProgress';
 import Typography from '@mui/joy/Typography';
 import Key from '@mui/icons-material/Key';
+import { useTranslation } from 'react-i18next';
 
 
 const RegisterForm = ({handleSwitchForm}) => {
+  const { t } = useTranslation(['site_home'])
   const [valuesRegister, setValuesRegister] = useState<{mail: string, password: string, confirmPassword: string}>({mail: "", password: "", confirmPassword: ""})
   const [error, setError] = useState<{passwordCooherence: boolean, emailAlreadyUsed: boolean}>({passwordCooherence: false, emailAlreadyUsed: false})
   
@@ -29,14 +31,14 @@ const RegisterForm = ({handleSwitchForm}) => {
         >
           <Input
             type="mail"
-            placeholder="Type your mail"
+            placeholder={t("site_home:home.default.menu.auth.register_form_tsx.mail.placeholder")}
             startDecorator={<EmailRoundedIcon/>}
             value={valuesRegister.mail}
             onChange={e => setValuesRegister(prev => ({...prev, mail: e.target.value}))}
           />
           {
             error.emailAlreadyUsed ?
-              <div style={{color: "red"}}>This mail is already used, fill an other one or log in</div> 
+              <div style={{color: "red"}}>{t("site_home:home.default.menu.auth.register_form_tsx.mail.error")}</div> 
             :
               <></>
           } 
@@ -50,7 +52,7 @@ const RegisterForm = ({handleSwitchForm}) => {
         >
           <Input
             type="password"
-            placeholder="Type a password"
+            placeholder={t("site_home:home.default.menu.auth.register_form_tsx.password.placeholder")}
             startDecorator={<Key />}
             value={valuesRegister.password}
             onChange={e => setValuesRegister(prev => ({...prev, password: e.target.value}))}
@@ -68,10 +70,10 @@ const RegisterForm = ({handleSwitchForm}) => {
             level="body-xs"
             sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
           >
-            {valuesRegister.password.length < 3 && 'Very weak'}
-            {valuesRegister.password.length >= 3 && valuesRegister.password.length < 6 && 'Weak'}
-            {valuesRegister.password.length >= 6 && valuesRegister.password.length < 10 && 'Strong'}
-            {valuesRegister.password.length >= 10 && 'Very strong'}
+            {valuesRegister.password.length < 3 && t("site_home:home.default.menu.auth.register_form_tsx.password.length.very_weak")}
+            {valuesRegister.password.length >= 3 && valuesRegister.password.length < 6 && t("site_home:home.default.menu.auth.register_form_tsx.password.length.weak")}
+            {valuesRegister.password.length >= 6 && valuesRegister.password.length < 10 && t("site_home:home.default.menu.auth.register_form_tsx.password.length.strong")}
+            {valuesRegister.password.length >= 10 && t("site_home:home.default.menu.auth.register_form_tsx.password.length.very_strong")}
           </Typography>
         </Stack>
         <Stack
@@ -83,7 +85,7 @@ const RegisterForm = ({handleSwitchForm}) => {
         >
           <Input
             type="password"
-            placeholder="Confirm your password"
+            placeholder={t("site_home:home.default.menu.auth.register_form_tsx.password.confirm_placeholder")}
             startDecorator={<Key />}
             value={valuesRegister.confirmPassword}
             onChange={(e) => setValuesRegister(prev => ({...prev, confirmPassword: e.target.value}))}
@@ -101,21 +103,21 @@ const RegisterForm = ({handleSwitchForm}) => {
             level="body-xs"
             sx={{ alignSelf: 'flex-end', color: 'hsl(var(--hue) 80% 30%)' }}
           >
-            {valuesRegister.confirmPassword.length < 3 && 'Very weak'}
-            {valuesRegister.confirmPassword.length >= 3 && valuesRegister.confirmPassword.length < 6 && 'Weak'}
-            {valuesRegister.confirmPassword.length >= 6 && valuesRegister.confirmPassword.length < 10 && 'Strong'}
-            {valuesRegister.confirmPassword.length >= 10 && 'Very strong'}
+            {valuesRegister.password.length < 3 && t("site_home:home.default.menu.auth.register_form_tsx.password.length.very_weak")}
+            {valuesRegister.password.length >= 3 && valuesRegister.password.length < 6 && t("site_home:home.default.menu.auth.register_form_tsx.password.length.weak")}
+            {valuesRegister.password.length >= 6 && valuesRegister.password.length < 10 && t("site_home:home.default.menu.auth.register_form_tsx.password.length.strong")}
+            {valuesRegister.password.length >= 10 && t("site_home:home.default.menu.auth.register_form_tsx.password.length.very_strong")}
           </Typography>
           {
             error.passwordCooherence ?
-              <div style={{color: "red"}}>Must match the previous entry</div> 
+              <div style={{color: "red"}}>{t('site_home:home.default.menu.auth.register_form_tsx.password.error')}</div> 
             :
               <></>
           } 
         </Stack>
-        <Button variant="contained" sx={{margin: "10px 0", width: "100%"}} onClick={handleRegister} disabled={valuesRegister.mail.length === 0 || valuesRegister.password.length === 0 || valuesRegister.confirmPassword.length === 0 ? true : false}>Submit</Button>
+        <Button variant="contained" sx={{margin: "10px 0", width: "100%"}} onClick={handleRegister} disabled={valuesRegister.mail.length === 0 || valuesRegister.password.length === 0 || valuesRegister.confirmPassword.length === 0 ? true : false}>{t("site_home:home.default.menu.auth.register_form_tsx.button_submit")}</Button>
       </div>
-      <div>Already have an account ? <span style={{ color: "#ed6c0280", cursor: "pointer"}} onClick={() => handleSwitchForm(0)}>Click here</span></div>
+      <div>{t("site_home:home.default.menu.auth.register_form_tsx.have_account")} ? <span style={{ color: "#ed6c0280", cursor: "pointer"}} onClick={() => handleSwitchForm(0)}>{t("site_home:home.default.menu.auth.register_form_tsx.click")}</span></div>
     </div>
   )
 }
