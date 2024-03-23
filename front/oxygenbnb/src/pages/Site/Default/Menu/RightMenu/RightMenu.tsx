@@ -55,7 +55,8 @@ const RightMenu = () => {
             aria-haspopup="true"
             onClick={handleClickLang}
           >
-            <LanguageRoundedIcon sx={{color:"white"}}/>
+            {/* <LanguageRoundedIcon sx={{color:"white"}}/> */}
+            {localStorage.getItem('lng') === "en" ? "🇬🇧": "🇫🇷 "}
           </IconButton>
           <Menu
             id="long-menu"
