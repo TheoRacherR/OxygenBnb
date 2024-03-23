@@ -25,6 +25,8 @@ menu.container {
     .account_logo{
       cursor: pointer;
       margin-left: auto;
+      display: flex;
+      gap: 10px;
     }
   }
 }

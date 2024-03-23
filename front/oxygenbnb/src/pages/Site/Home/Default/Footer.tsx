@@ -1,27 +1,29 @@
 import { Link } from 'react-router-dom';
 import styles from './Footer.module.scss'
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const { t } = useTranslation(['site_home'])
   const date = new Date();
   const links1: {name: string; path: string}[] = 
   [
-    {name: "Twitter", path: "twitter.com"},
-    {name: "Instagram", path: "instagram.com"},
-    {name: "Facebook", path: "facebook.com"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_zero.zero"), path: "twitter.com"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_zero.one"), path: "instagram.com"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_zero.two"), path: "facebook.com"},
   ]
 
   const links2: {name: string; path: string}[] = 
   [
-    {name: "Conditions générales", path: "/terms"},
-    {name: "Plan du site", path: "/sitemap"},
-    {name: "Confidentialité", path: "/privacy_policy"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_one.zero"), path: "/terms"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_one.one"), path: "/sitemap"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_one.two"), path: "/privacy_policy"},
   ]
 
   const links3: {name: string; path: string}[] = 
   [
-    {name: "Qui sommes nous ?", path: "/about-us"},
-    {name: "Nous contacter", path: "/contact-us"},
-    {name: "Fonctionnement du site", path: "/how-to-use"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_two.zero"), path: "/about-us"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_two.one"), path: "/contact-us"},
+    {name: t("site_home:home.default.footer_tsx.wrapper.band_two.two"), path: "/how-to-use"},
   ]
 
   return (

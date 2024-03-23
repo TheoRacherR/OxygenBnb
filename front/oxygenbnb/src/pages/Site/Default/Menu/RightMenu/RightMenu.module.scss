@@ -1,4 +1,9 @@
 .container {
+  display: flex;
+  .left_button{
+  
+  }
+  .right_button {
     .right_container {
       display: flex;
       justify-content: space-between;
@@ -11,6 +16,7 @@
     margin: auto 0;
     cursor: pointer;
     box-shadow: 0.2s cubic-bezier(0.2,0,0,1)
+  }
 }
 
 .container:hover {

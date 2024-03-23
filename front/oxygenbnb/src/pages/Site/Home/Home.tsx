@@ -13,9 +13,11 @@ import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { endQuery, NOMINATIM_BASE_URL } from "../../../utils/utils";
 import { SearchContext } from "./../../../utils/Context/SearchContext";
-// import { SearchContext } from "../../../App";
+
+import { useTranslation } from "react-i18next";
 
 const Home = () => {
+  const { t } = useTranslation(['site_home']);
   const { setCitySelected } = useContext(SearchContext);
   const [listOfLocalisations, setListOfLocalisations] = useState([])
   const [query, setQuery] = useState("")
@@ -57,7 +59,7 @@ const Home = () => {
         <Menu/>
         <div className={styles.container}>
           <div className={styles.wrapper}>
-            <div className={styles.catch_phrase}>Where do you want to travel this <span style={{color:"#ed6c0280"}}>summer</span> ?</div>
+            <div className={styles.catch_phrase}>{t("site_home:home.home_tsx.container.wrapper.catch_phrase.0")} <span style={{color:"#ed6c0280"}}>{t("site_home:home.home_tsx.container.wrapper.catch_phrase.1")}</span> ?</div>
               
             <FormControl sx={{ mt: 2,width: '100%' }} variant="outlined">
               <InputLabel htmlFor="outlined-adornment-search" id="input-search"></InputLabel>
