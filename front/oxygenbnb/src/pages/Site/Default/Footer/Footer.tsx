@@ -9,9 +9,9 @@ const Footer = () => {
   const date = new Date();
   const links1: {name: string; path: string}[] = 
   [
-    {name: t("site_default:default.footer_tsx.wrapper.band_zero.zero"), path: "twitter.com"},
-    {name: t("site_default:default.footer_tsx.wrapper.band_zero.one"), path: "instagram.com"},
-    {name: t("site_default:default.footer_tsx.wrapper.band_zero.two"), path: "facebook.com"},
+    {name: t("site_default:default.footer_tsx.wrapper.band_zero.zero"), path: "https://twitter.com"},
+    {name: t("site_default:default.footer_tsx.wrapper.band_zero.one"), path: "https://instagram.com"},
+    {name: t("site_default:default.footer_tsx.wrapper.band_zero.two"), path: "https://facebook.com"},
   ]
 
   const links2: {name: string; path: string}[] = 
