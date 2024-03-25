@@ -1,0 +1,16 @@
+{
+  "renter": {
+    "dashbaord": {},
+    "messages": {
+      "messages_tsx": {
+        "title": "Messages",
+        "search": "Search"
+      },
+      "history_messages_tsx": {
+
+      }
+    },
+    "locations": {},
+    "settings": {}
+  }
+}

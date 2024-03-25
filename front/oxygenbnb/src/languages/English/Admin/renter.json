@@ -1,0 +1,45 @@
+{
+  "renter": {
+    "dashbaord": {},
+    "messages": {
+      "messages_tsx": {
+        "title": "Messages",
+        "search": "Search"
+      },
+      "history_messages_tsx": {
+        "year": "{{time}} year{{plural}} ago",
+        "month": "{{time}} month{{plural}} ago",
+        "week": "{{time}} week{{plural}} ago",
+        "day": "{{time}} day{{plural}} ago",
+        "hour": "{{time}} hour{{plural}} ago",
+        "minute": "{{time}} minute{{plural}} ago",
+        "second": "{{time}} second{{plural}} ago",
+
+
+        "last_year": "{{year}} year ago",
+        "last_years": "{{year}} years ago",
+
+        "last_month": "{{month}} month ago",
+        "last_months": "{{month}} months ago",
+
+        "last_week": "{{week}} week ago",
+        "last_weeks": "{{week}} weeks ago",
+
+        "last_day": "{{day}} day ago",
+        "last_days": "{{day}} days ago",
+
+        "last_hour": "{{hour}} hour ago",
+        "last_hours": "{{hour}} hours ago",
+
+        "last_minute": "{{minute}} minute ago",
+        "last_minutes": "{{minute}} minutes ago",
+
+        "last_second": "{{second}} second ago",
+        "last_seconds": "{{second}} seconds ago"
+        
+      }
+    },
+    "locations": {},
+    "settings": {}
+  }
+}
