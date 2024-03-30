@@ -22,13 +22,7 @@
   
       .right_info {
         font-size: small;
-        .status {
-          width: var(--size-status);
-          height: var(--size-status);
-          border-radius: var(--size-status);
-          background-color: green;
-          margin: 0 0 5px auto;
-        }
+        
       }
     }
     .summary_message {

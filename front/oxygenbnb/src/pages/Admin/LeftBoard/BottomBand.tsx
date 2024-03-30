@@ -3,7 +3,6 @@ import ListItemButton from "@mui/joy/ListItemButton";
 import { Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
-import Chip from "@mui/joy/Chip";
 import Avatar from "@mui/joy/Avatar";
 import styles from "./BottomBand.module.scss";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
@@ -54,7 +53,7 @@ const BottomBand = () => {
           <div className={styles.itop}>mail@gmail.com</div>
           <div className={styles.ibot}>Théo R.</div>
         </div>
-        <LogoutRoundedIcon sx={{fontSize: 30, cursor: "pointer" }}/>
+        <LogoutRoundedIcon sx={{ fontSize: 20, cursor: "pointer", margin: "auto 0" }} />
       </div>
     </>
   );

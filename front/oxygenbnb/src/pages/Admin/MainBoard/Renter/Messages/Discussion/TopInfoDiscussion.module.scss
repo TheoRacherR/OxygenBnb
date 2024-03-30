@@ -1,0 +1,35 @@
+.top_container_info {
+  height: 48px;
+  width: calc(100% - 32px);
+  padding: 16px;
+  background-color: #000000;
+  color: #ffffff;
+  flex: inherit;
+  display: flex;
+  justify-content: space-between;
+
+  .left_info{
+    display: flex;
+
+    .name {
+      margin: auto 10px;
+      font-size: large;
+    }
+
+    .status {
+      border-radius: 5px;
+      border: 1px solid rgb(255, 255, 255);
+      height: fit-content;
+      padding: 5px;
+      margin: auto 0;
+      font-size: smaller;
+      display: flex;
+      gap: 5px;
+    }
+    
+    
+  }
+  .right_info {
+    margin: auto 0;
+  }
+}

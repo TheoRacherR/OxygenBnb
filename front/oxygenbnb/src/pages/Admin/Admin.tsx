@@ -16,7 +16,6 @@ const theme = extendTheme({ cssVarPrefix: 'demo' });
 const Admin = () => {
   // const { t } = useTranslation(['site_default']);
   const location = useLocation();
-
   return (
     <CssVarsProvider
       defaultMode="dark"
@@ -37,15 +36,15 @@ const Admin = () => {
         </div>
 
         <div className={styles.main_board}>
-        <Routes>
-          <Route path="/" element={<HomeAdmin/>}/>
-          <Route path="/renter/dashboard" element={<DashboardRenter/>}/>
-          <Route path="/renter/locations" element={<Locations/>}/>
-          <Route path="/renter/messages" element={<Messages/>}/>
-          <Route path="/renter/settings" element={<Settings/>}/>
-          
-          <Route path="/*" element={<HomeAdmin/>}/>
-        </Routes>
+          <Routes>
+            <Route path="/" element={<HomeAdmin/>}/>
+            <Route path="/renter/dashboard" element={<DashboardRenter/>}/>
+            <Route path="/renter/locations" element={<Locations/>}/>
+            <Route path="/renter/messages" element={<Messages/>}/>
+            <Route path="/renter/settings" element={<Settings/>}/>
+            
+            <Route path="/*" element={<HomeAdmin/>}/>
+          </Routes>
         </div>
         
       </div>

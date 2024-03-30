@@ -1,26 +1,18 @@
 import logo from "../../../assets/Logo OxBnb sans texte.png";
-import Accordion from "@mui/joy/Accordion";
-import AccordionDetails from "@mui/joy/AccordionDetails";
-import AccordionGroup from "@mui/joy/AccordionGroup";
-import AccordionSummary from "@mui/joy/AccordionSummary";
-
-
 import styles from "./TopBand.module.scss";
-
 import List from "@mui/joy/List";
 import ListItem from "@mui/joy/ListItem";
 import ListItemButton from "@mui/joy/ListItemButton";
 import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import { useTranslation } from "react-i18next";
-
 import Chip from "@mui/joy/Chip";
 import { Link } from "react-router-dom";
 
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
+
 
 
 const TopBand = ({ location }) => {
@@ -113,7 +105,7 @@ const TopBand = ({ location }) => {
                   </ListItemDecorator>
                   {t("admin_default:admin.top_band_tsx.listing_item.messages")}
                 </div>
-                <Chip sx={{ backgroundColor: "#0b6bcb" }}>3</Chip>
+                {/* <Chip sx={{ backgroundColor: "#0b6bcb" }}>3</Chip> */}
               </ListItemButton>
             </ListItem>
           </Link>
