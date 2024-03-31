@@ -30,7 +30,7 @@ const Messages = () => {
         <HistoryMessages />
       </div>
 
-      {discussionSelected ? <Discussion /> : <>No message</>}
+      {discussionSelected ? <Discussion /> : <>{t("admin_renter:renter.messages.messages_tsx.no_message")}</>}
     </div>
   );
 };

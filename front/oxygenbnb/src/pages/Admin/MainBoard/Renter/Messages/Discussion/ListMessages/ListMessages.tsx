@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./ListMessages.module.scss";
 import dayjs from "dayjs";
+import { useTranslation } from "react-i18next";
 
 const ListMessages = ({ listOfMessages }) => {
-  const formatDate = "DD/MM/YYYY"
+  const { t }  = useTranslation(["admin_renter"])
+  const formatDate = t("admin_renter:renter.messages.discussion.list_messages.list_messages_tsx.format")
   const messageEl = useRef(null);
-  // const listOfMessagesGrouped = listOfMessages.group(({ date }) => dayjs(date).format('MM/YYYY'))
   const listOfMessagesGrouped = listOfMessages.map((m) =>
     dayjs(m.date).format(formatDate)
   );
   const listOfDates = [...new Set(listOfMessagesGrouped)];
-  // console.log(listOfDates);
 
   useEffect(() => {
     document.getElementById("anchor")?.scrollIntoView();
@@ -27,9 +27,9 @@ const ListMessages = ({ listOfMessages }) => {
           <div className={styles.title_month_year}>
             {
               dateItem === dayjs(new Date()).format(formatDate) 
-              ? "Today" 
+              ? t("admin_renter:renter.messages.discussion.list_messages.list_messages_tsx.today")
               : dateItem === dayjs(new Date().setDate(new Date().getDate()-1)).format(formatDate) 
-                ? "Yesterday" 
+                ? t("admin_renter:renter.messages.discussion.list_messages.list_messages_tsx.yesterday") 
                 : dateItem
             }
           </div>
@@ -49,7 +49,7 @@ const ListMessages = ({ listOfMessages }) => {
                       : styles.time_not_this_user
                   }
                 >
-                  {dayjs(item.date).format("DD/MM/YYYY hh:mm")}
+                  {dayjs(item.date).format(`${t("admin_renter:renter.messages.discussion.list_messages.list_messages_tsx.format")} hh:mm`)}
                 </div>
                 <div
                   className={

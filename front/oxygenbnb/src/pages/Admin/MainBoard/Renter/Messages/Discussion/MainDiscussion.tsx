@@ -1,6 +1,6 @@
 import styles from "./MainDiscussion.module.scss";
 import ListMessages from "./ListMessages/ListMessages";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FormMessage from "./FormMessage/FormMessage";
 
 const data_messages = [
@@ -127,11 +127,5 @@ const MainDiscussion = () => {
     </div>
   );
 };
-
-// const Temp = () => {
-//   document.getElementById("anchor")?.scrollIntoView();
-//   console.log("moove");
-//   return <></>;
-// };
 
 export default MainDiscussion;

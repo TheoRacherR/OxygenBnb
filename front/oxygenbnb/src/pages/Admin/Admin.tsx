@@ -7,7 +7,7 @@ import BottomBand from "./LeftBoard/BottomBand";
 import { Route, Routes, useLocation } from "react-router-dom";
 import HomeAdmin from "./HomeAdmin";
 import Messages from "./MainBoard/Renter/Messages/Messages";
-import DashboardRenter from "./MainBoard/Renter/DashboardRenter";
+import DashboardRenter from "./MainBoard/Renter/Dashboard/DashboardRenter";
 import Locations from "./MainBoard/Renter/Locations";
 import Settings from "./MainBoard/Renter/Settings";
 

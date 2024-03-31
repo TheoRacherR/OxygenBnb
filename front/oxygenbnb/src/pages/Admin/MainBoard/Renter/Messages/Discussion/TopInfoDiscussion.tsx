@@ -4,8 +4,10 @@ import StatusComponent from "../StatusComponent";
 import { useContext } from "react";
 import { MessageContext } from "../../../../../../utils/Context/MessageContext";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const TopInfoDiscussion = () => {
+  const { t }  = useTranslation(["admin_renter"])
   const { discussionSelected } = useContext(MessageContext);
   return (
     <div className={styles.top_container_info}>
@@ -21,12 +23,12 @@ const TopInfoDiscussion = () => {
           {discussionSelected.online ? (
             <>
               <StatusComponent color={"green"} />
-              <span>Online</span>
+              <span>{t("admin_renter:renter.messages.discussion.top_info_discussion_tsx.online")}</span>
             </>
           ) : (
             <>
               <StatusComponent color={"grey"} />
-              <span>Offline</span>
+              <span>{t("admin_renter:renter.messages.discussion.top_info_discussion_tsx.offline")}</span>
             </>
           )}
         </div>
@@ -38,7 +40,8 @@ const TopInfoDiscussion = () => {
             color="neutral"
             sx={{ borderRadius: "5px" }}
           >
-            For location n°{discussionSelected.location?.id || 0}
+            {t("admin_renter:renter.messages.discussion.top_info_discussion_tsx.location_information")}
+            {discussionSelected.location?.id || 0}
           </Button>
         </Link>
       </div>

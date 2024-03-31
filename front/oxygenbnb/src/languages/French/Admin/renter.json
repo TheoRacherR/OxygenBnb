@@ -4,10 +4,37 @@
     "messages": {
       "messages_tsx": {
         "title": "Messages",
-        "search": "Search"
+        "search": "Recherche",
+        "no_message": "Aucun message"
       },
       "history_messages_tsx": {
-
+        "year": "{{time}} an{{plural}}",
+        "month": "{{time}} moi{{plural}}",
+        "week": "{{time}} semaine{{plural}}",
+        "day": "{{time}} jour{{plural}}",
+        "hour": "{{time}} heure{{plural}}",
+        "minute": "{{time}} minute{{plural}}",
+        "second": "{{time}} seconde{{plural}}"
+      },
+      "discussion": {
+        "top_info_discussion_tsx": {
+          "online": "En ligne",
+          "offline": "Hors ligne",
+          "location_information": "Pour la location n°"
+        },
+        "form_message": {
+          "form_message_tsx": {
+            "placeholder": "Ecrire ici...",
+            "button_send": "Envoyer"
+          }
+        },
+        "list_messages": {
+          "list_messages_tsx": {
+            "format": "DD/MM/YYYY",
+            "today": "Aujourd'hui",
+            "yesterday": "Hier"
+          }
+        }
       }
     },
     "locations": {},
