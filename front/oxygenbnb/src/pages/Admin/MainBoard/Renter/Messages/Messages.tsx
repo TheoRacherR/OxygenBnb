@@ -5,10 +5,7 @@ import HistoryMessages from "./HistoryMessages";
 import { useTranslation } from "react-i18next";
 import Discussion from "./Discussion/Discussion";
 import { useContext } from "react";
-import {
-  MessageContext,
-  MessageContextProvider,
-} from "../../../../../utils/Context/MessageContext";
+import { MessageContext } from "../../../../../utils/Context/MessageContext";
 
 const Messages = () => {
   const { t } = useTranslation(["admin_renter"]);
@@ -23,26 +20,20 @@ const Messages = () => {
         <div className={styles.search}>
           <Input
             placeholder={t("admin_renter:renter.messages.messages_tsx.search")}
-            endDecorator={<SearchRoundedIcon />}
+            endDecorator={<SearchRoundedIcon fontSize="small" />}
             sx={{ width: "100%", borderRadius: "6px" }}
           />
         </div>
         <HistoryMessages />
       </div>
 
-      {discussionSelected ? <Discussion /> : <>{t("admin_renter:renter.messages.messages_tsx.no_message")}</>}
+      {discussionSelected ? (
+        <Discussion />
+      ) : (
+        <>{t("admin_renter:renter.messages.messages_tsx.no_message")}</>
+      )}
     </div>
   );
 };
 
-const MessageContainer = () => {
-  return (
-    <>
-      <MessageContextProvider>
-        <Messages />
-      </MessageContextProvider>
-    </>
-  );
-};
-
-export default MessageContainer;
+export default Messages;

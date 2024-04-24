@@ -9,56 +9,76 @@ import { useTranslation } from "react-i18next";
 import { MessageContext } from "../../../../../utils/Context/MessageContext";
 import StatusComponent from "./StatusComponent";
 
-const data = [
+const data: {
+    discussion_id: number,
+    user_id: number,
+    firstname: string,
+    lastname: string,
+    online: boolean,
+    last_message: {
+      seen: boolean,
+      message: string,
+      user_id: number,
+      date: Date,
+    },
+    location_id: number
+  
+  }[] = [
   {
-    id: 1,
+    discussion_id: 1,
+    user_id: 3,
     firstname: "Théo",
     lastname: "RACHER RAULIN",
     online: true,
-    last_message_seen: true,
-    message: "Bonjour, pourriez-vous m'indiquer l'adresse du plombier ?",
-    date_last_message: new Date("2024-03-25 22:25:00"),
-    location: {
-      id: 2
-    }
+    last_message: {
+      seen: true,
+      message: "Bonjour, pourriez-vous m'indiquer l'adresse du plombier ?",
+      user_id: 3,
+      date: new Date("2024-03-25 22:25:00"),
+    },
+    location_id: 2
   },
   {
-    id: 2,
+    discussion_id: 2,
+    user_id: 5,
     firstname: "Franck",
     lastname: "GILBERT",
     online: true,
-    last_message_seen: false,
-    message:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quaerat impedit rerum, natus deleniti suscipit. Hic maxime tempora debitis?",
-    date_last_message: new Date("2024-03-25 22:50:00"),
-    location: {
-      id: 1
-    }
+    last_message: {
+      seen: false,
+      message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quaerat impedit rerum, natus deleniti suscipit. Hic maxime tempora debitis?",
+      user_id: 5,
+      date: new Date("2024-03-25 22:50:00"),
+    },
+    location_id: 1
   },
   {
-    id: 3,
+    discussion_id: 3,
+    user_id: 1,
     firstname: "Léa",
     lastname: "DUSSANT",
     online: false,
-    last_message_seen: false,
-    message:
-      " Maxime tempore consequatur nesciunt voluptas id ab ratione sequi. Fugit, fuga.",
-    date_last_message: new Date("2024-03-22 00:00:00"),
-    location: {
-      id: 9
-    }
+    last_message: {
+      seen: false,
+      message: " Maxime tempore consequatur nesciunt voluptas id ab ratione sequi. Fugit, fuga.",
+      user_id: 3,
+      date: new Date("2024-03-22 00:00:00")
+    },
+    location_id: 9
   },
   {
-    id: 4,
+    discussion_id: 4,
+    user_id: 9,
     firstname: "Emmanuel",
     lastname: "FLOP",
     online: true,
-    last_message_seen: true,
-    message: "Salut",
-    date_last_message: new Date("2024-03-25 20:00:00"),
-    location: {
-      id: 2
-    }
+    last_message: {
+      seen: true,
+      message: "Salut",
+      user_id: 5,
+      date: new Date("2024-03-25 20:00:00")
+    },
+    location_id: 2
   },
 ];
 
@@ -87,8 +107,7 @@ const returnDateDiffAgo = (date): [number, string, string] => {
 const HistoryMessages = () => {
   const { t } = useTranslation(["admin_renter"]);
 
-  const { discussionSelected, setDiscussionSelected } =
-    useContext(MessageContext);
+  const { discussionSelected, setDiscussionSelected } = useContext(MessageContext);
 
   useEffect(() => {
     if (!discussionSelected) {
@@ -97,7 +116,7 @@ const HistoryMessages = () => {
         setDiscussionSelected(
           data.sort(
             (a, b) =>
-              b.date_last_message.getTime() - a.date_last_message.getTime()
+              b.last_message.date.getTime() - a.last_message.date.getTime()
           )[0]
         );
       } else {
@@ -122,7 +141,7 @@ const HistoryMessages = () => {
         {data
           .sort(
             (a, b) =>
-              b.date_last_message.getTime() - a.date_last_message.getTime()
+              b.last_message.date.getTime() - a.last_message.date.getTime()
           )
           .map((item, index) => (
             <ListItem key={index} sx={{ borderBottom: "1px solid #9fa6ad29" }}>
@@ -161,80 +180,80 @@ const HistoryMessages = () => {
                     <div className={styles.right_info}>
                       {/* {t("admin_renter:renter.messages.messages_tsx.title")} */}
                       <div>
-                        {returnDateDiffAgo(item.date_last_message)[2] === "year"
+                        {returnDateDiffAgo(item.last_message.date)[2] === "year"
                           ? t(
                               `admin_renter:renter.messages.history_messages_tsx.year`,
                               {
                                 time: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[0],
                                 plural: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[1],
                               }
                             )
-                          : returnDateDiffAgo(item.date_last_message)[2] ===
+                          : returnDateDiffAgo(item.last_message.date)[2] ===
                             "month"
                           ? t(
                               `admin_renter:renter.messages.history_messages_tsx.month`,
                               {
                                 time: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[0],
                                 plural: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[1],
                               }
                             )
-                          : returnDateDiffAgo(item.date_last_message)[2] ===
+                          : returnDateDiffAgo(item.last_message.date)[2] ===
                             "week"
                           ? t(
                               `admin_renter:renter.messages.history_messages_tsx.week`,
                               {
                                 time: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[0],
                                 plural: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[1],
                               }
                             )
-                          : returnDateDiffAgo(item.date_last_message)[2] ===
+                          : returnDateDiffAgo(item.last_message.date)[2] ===
                             "day"
                           ? t(
                               `admin_renter:renter.messages.history_messages_tsx.day`,
                               {
                                 time: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[0],
                                 plural: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[1],
                               }
                             )
-                          : returnDateDiffAgo(item.date_last_message)[2] ===
+                          : returnDateDiffAgo(item.last_message.date)[2] ===
                             "hour"
                           ? t(
                               `admin_renter:renter.messages.history_messages_tsx.hour`,
                               {
                                 time: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[0],
                                 plural: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[1],
                               }
                             )
-                          : returnDateDiffAgo(item.date_last_message)[2] ==
+                          : returnDateDiffAgo(item.last_message.date)[2] ==
                             "minute"
                           ? t(
                               `admin_renter:renter.messages.history_messages_tsx.minute`,
                               {
                                 time: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[0],
                                 plural: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[1],
                               }
                             )
@@ -242,19 +261,19 @@ const HistoryMessages = () => {
                               `admin_renter:renter.messages.history_messages_tsx.second`,
                               {
                                 time: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[0],
                                 plural: returnDateDiffAgo(
-                                  item.date_last_message
+                                  item.last_message.date
                                 )[1],
                               }
                             )}
                       </div>
                     </div>
                   </div>
-                  <div className={styles.summary_message} style={{fontWeight: item.last_message_seen ? "bold" : "normal"}}>
-                    {item.message.substring(0, 30)}
-                    {item.message.length > 30 ? "..." : ""}
+                  <div className={styles.summary_message} style={{fontWeight: item.last_message.seen ? "bold" : "normal"}}>
+                    {item.last_message.message.substring(0, 30)}
+                    {item.last_message.message.length > 30 ? "..." : ""}
                   </div>
                 </div>
               </ListItemButton>

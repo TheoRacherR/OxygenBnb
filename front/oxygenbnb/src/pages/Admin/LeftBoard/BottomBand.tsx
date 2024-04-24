@@ -37,7 +37,7 @@ const BottomBand = () => {
               }
             >
               <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                <SettingsRoundedIcon />
+                <SettingsRoundedIcon fontSize="small" />
               </ListItemDecorator>
               {t("admin_default:admin.bottom_band_tsx.settings")}
             </ListItemButton>
@@ -53,7 +53,9 @@ const BottomBand = () => {
           <div className={styles.itop}>mail@gmail.com</div>
           <div className={styles.ibot}>Théo R.</div>
         </div>
-        <LogoutRoundedIcon sx={{ fontSize: 20, cursor: "pointer", margin: "auto 0" }} />
+        <LogoutRoundedIcon
+          sx={{ fontSize: 20, cursor: "pointer", margin: "auto 0" }}
+        />
       </div>
     </>
   );

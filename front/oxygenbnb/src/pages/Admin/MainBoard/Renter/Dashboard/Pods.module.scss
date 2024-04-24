@@ -1,0 +1,18 @@
+.container {
+  background-color: grey;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  width: 200px;
+  overflow-wrap: break-word;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+
+  h1.h1{
+    margin: auto;
+  }
+  p.p {
+    margin: auto 0 0 0;
+  }
+}

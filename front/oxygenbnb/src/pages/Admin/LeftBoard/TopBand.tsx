@@ -46,7 +46,7 @@ const TopBand = ({ location }) => {
                 }
               >
                 <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                  <HomeRoundedIcon />
+                  <HomeRoundedIcon fontSize="small"/>
                 </ListItemDecorator>
                 {t("admin_default:admin.top_band_tsx.listing_item.home")}
               </ListItemButton>
@@ -57,12 +57,11 @@ const TopBand = ({ location }) => {
               <ListItemButton
                 sx={{ borderRadius: "5px" }}
                 selected={
-                  location.pathname === "/admin/renter/dashboard" ||
-                  location.pathname === "/admin/renter/dashboard/"
+                  location.pathname.startsWith("/admin/renter/dashboard")
                 }
               >
                 <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                  <DashboardRoundedIcon />
+                  <DashboardRoundedIcon fontSize="small"/>
                 </ListItemDecorator>
                 {t("admin_default:admin.top_band_tsx.listing_item.dashboard")}
               </ListItemButton>
@@ -74,12 +73,11 @@ const TopBand = ({ location }) => {
               <ListItemButton
                 sx={{ borderRadius: "5px" }}
                 selected={
-                  location.pathname === "/admin/renter/locations" ||
-                  location.pathname === "/admin/renter/locations/"
+                  location.pathname.startsWith("/admin/renter/location")
                 }
               >
                 <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                  <AssignmentRoundedIcon />
+                  <AssignmentRoundedIcon fontSize="small"/>
                 </ListItemDecorator>
                 {t("admin_default:admin.top_band_tsx.listing_item.locations")}
               </ListItemButton>
@@ -94,14 +92,11 @@ const TopBand = ({ location }) => {
                   display: "flex",
                   justifyContent: "space-between",
                 }}
-                selected={
-                  location.pathname === "/admin/renter/messages" ||
-                  location.pathname === "/admin/renter/messages/"
-                }
+                selected={location.pathname.startsWith("/admin/renter/messages")}
               >
                 <div>
                   <ListItemDecorator>
-                    <ForumRoundedIcon />
+                    <ForumRoundedIcon fontSize="small"/>
                   </ListItemDecorator>
                   {t("admin_default:admin.top_band_tsx.listing_item.messages")}
                 </div>

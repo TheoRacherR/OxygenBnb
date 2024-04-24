@@ -9,7 +9,7 @@
       },
       "history_messages_tsx": {
         "year": "{{time}} an{{plural}}",
-        "month": "{{time}} moi{{plural}}",
+        "month": "{{time}} mois",
         "week": "{{time}} semaine{{plural}}",
         "day": "{{time}} jour{{plural}}",
         "hour": "{{time}} heure{{plural}}",

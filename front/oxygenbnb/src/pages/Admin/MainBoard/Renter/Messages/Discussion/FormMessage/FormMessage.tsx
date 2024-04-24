@@ -31,7 +31,7 @@ const FormMessage = ({ handleSendMessage }) => {
           endDecorator={
             <Button
               sx={{ borderRadius: "6px"}}
-              endDecorator={<SendRoundedIcon />}
+              endDecorator={<SendRoundedIcon fontSize="small"/>}
               size="sm"
               onClick={handlePreSendMessage}
             >
