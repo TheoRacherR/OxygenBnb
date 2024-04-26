@@ -1,0 +1,22 @@
+.container {
+  height: 100vh;
+  display: flex;
+
+  .left_band {
+    min-width: 200px;
+    height: calc(100% - 2*16px);
+    padding: 16px;
+    background-color: rgb(11, 13, 14);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #9fa6ad29;
+  }
+  .main_board {
+    flex: auto;
+    height: 100%;
+    background-color: lightgreen;
+    width: fit-content;
+  }
+}

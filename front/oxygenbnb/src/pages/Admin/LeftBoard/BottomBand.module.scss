@@ -1,0 +1,16 @@
+a{
+  text-decoration: none;
+}
+
+.avatar_container {
+  display: flex;
+  justify-content: space-between;
+  .infos {
+    .itop {
+      font-size: x-small;
+    }
+    .ibot {
+      font-size: small;
+    }
+  }
+}

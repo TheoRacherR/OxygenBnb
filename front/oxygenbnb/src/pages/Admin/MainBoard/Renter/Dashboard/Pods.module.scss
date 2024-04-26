@@ -1,0 +1,20 @@
+.container {
+  background-color: #0A0E0F;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  width: 200px;
+  overflow-wrap: break-word;
+  border-color: grey;
+  color: white;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: space-between;
+
+  h1.h1{
+    margin: auto;
+  }
+  p.p {
+    margin: auto 0 0 0;
+  }
+}
