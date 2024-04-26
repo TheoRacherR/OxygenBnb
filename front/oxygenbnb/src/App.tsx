@@ -1,23 +1,23 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
-
 import Site from './pages/Site/Site'
-import Dashboard from './pages/Admin/Admin'
+import { SearchContextProvider } from './utils/Context/SearchContext'
 
 
 const App = () => {
 
   return (
     <>
-      <Router>
-        <Routes>
+      <SearchContextProvider>
+        <Router>
+          <Routes>
 
-          <Route path='/*' element={<Site/>}/>
-          <Route path='/admin/*' element={<Dashboard/>}/>
+            <Route path='/*' element={<Site/>}/>
 
-        </Routes>
+          </Routes>
 
-      </Router>
+        </Router>
+      </SearchContextProvider>
     </>
   )
 }

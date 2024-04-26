@@ -1,10 +1,7 @@
 import i18next from "i18next";
 
 //Import English files
-import English_Admin_default from "../languages/English/Admin/default.json";
-import English_Admin_renter from "../languages/English/Admin/renter.json";
-import English_Admin_admin from "../languages/English/Admin/admin.json";
-
+import English_Admin from "../languages/English/Admin/translation.json";
 import English_Auth from "../languages/English/Auth/translation.json";
 import English_Errors from "../languages/English/Errors/translation.json";
 
@@ -17,10 +14,7 @@ declare module 'i18next' {
   interface CustomTypeOptions {
     defaultNS: 'en';
     resources: {
-      admin_default: typeof English_Admin_default,
-      admin_renter: typeof English_Admin_renter,
-      admin_admin: typeof English_Admin_admin,
-
+      admin: typeof English_Admin,
       auth: typeof English_Auth,
       errors: typeof English_Errors,
 
