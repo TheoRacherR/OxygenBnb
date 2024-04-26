@@ -36,13 +36,16 @@ const TopBand = ({ location }) => {
             rowGap: "8px",
           }}
         >
-          <Link to="">
+          <Link to="renter">
             <ListItem>
               <ListItemButton
-                sx={{ borderRadius: "5px" }}
+                sx={{ 
+                  borderRadius: "5px",
+                  color: location.pathname === "/admin/renter" || location.pathname === "/admin/renter/§=" ? "#0A0E0F" : "white"
+                }}
                 selected={
-                  location.pathname === "/admin" ||
-                  location.pathname === "/admin/"
+                  location.pathname === "/admin/renter" ||
+                  location.pathname === "/admin/renter"
                 }
               >
                 <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
@@ -52,26 +55,14 @@ const TopBand = ({ location }) => {
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link to="renter/dashboard">
-            <ListItem>
-              <ListItemButton
-                sx={{ borderRadius: "5px" }}
-                selected={
-                  location.pathname.startsWith("/admin/renter/dashboard")
-                }
-              >
-                <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                  <DashboardRoundedIcon fontSize="small"/>
-                </ListItemDecorator>
-                {t("admin_default:admin.top_band_tsx.listing_item.dashboard")}
-              </ListItemButton>
-            </ListItem>
-          </Link>
 
           <Link to="renter/locations">
             <ListItem>
               <ListItemButton
-                sx={{ borderRadius: "5px" }}
+                sx={{ 
+                  borderRadius: "5px",
+                  color: location.pathname.startsWith("/admin/renter/location") ? "#0A0E0F" : "white"
+                }}
                 selected={
                   location.pathname.startsWith("/admin/renter/location")
                 }
@@ -89,17 +80,18 @@ const TopBand = ({ location }) => {
               <ListItemButton
                 sx={{
                   borderRadius: "5px",
-                  display: "flex",
-                  justifyContent: "space-between",
+                  color: location.pathname.startsWith("/admin/renter/messages") ? "#0A0E0F" : "white",
+                  // display: "flex",
+                  // justifyContent: "space-between",
                 }}
                 selected={location.pathname.startsWith("/admin/renter/messages")}
               >
-                <div>
-                  <ListItemDecorator>
+                {/* <div> */}
+                  <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
                     <ForumRoundedIcon fontSize="small"/>
                   </ListItemDecorator>
                   {t("admin_default:admin.top_band_tsx.listing_item.messages")}
-                </div>
+                {/* </div> */}
                 {/* <Chip sx={{ backgroundColor: "#0b6bcb" }}>3</Chip> */}
               </ListItemButton>
             </ListItem>

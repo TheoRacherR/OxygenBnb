@@ -150,6 +150,7 @@ const HistoryMessages = () => {
                   borderRadius: "5px",
                   p: "12px 16px",
                   width: "calc(100% - 32px)",
+                  color: JSON.stringify(item) === JSON.stringify(discussionSelected) ? "#0A0E0F" : "white",
                 }}
                 selected={JSON.stringify(item) === JSON.stringify(discussionSelected)}
                 onClick={() => setDiscussionSelected(item)}
@@ -157,7 +158,7 @@ const HistoryMessages = () => {
                 <div className={styles.container_info}>
                   <div className={styles.top_informations}>
                     <div className={styles.left_info}>
-                      <Avatar>
+                      <Avatar sx={{ borderColor: "black"}}>
                         {item.firstname.substring(0, 1).toUpperCase()}
                       </Avatar>
                       {item.online ? (

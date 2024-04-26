@@ -28,13 +28,11 @@ const BottomBand = () => {
             <ListItemButton
               sx={{
                 borderRadius: "5px",
+                color: location.pathname.startsWith("/admin/renter/settings") ? "#0A0E0F" : "white"
                 // display: "flex",
                 // justifyContent: "space-between",
               }}
-              selected={
-                location.pathname === "/admin/renter/settings" ||
-                location.pathname === "/admin/renter/settings/"
-              }
+              selected={location.pathname.startsWith("/admin/renter/settings")}
             >
               <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
                 <SettingsRoundedIcon fontSize="small" />
@@ -45,7 +43,7 @@ const BottomBand = () => {
         </Link>
       </List>
 
-      <Divider sx={{ my: 3 }} />
+      <Divider sx={{ my: 1 }} />
 
       <div className={styles.avatar_container}>
         <Avatar />

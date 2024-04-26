@@ -46,7 +46,7 @@ const TopInfoDiscussion = () => {
           <Button
             variant="outlined"
             color="neutral"
-            sx={{ borderRadius: "5px" }}
+            sx={{ borderRadius: "5px", color: "grey" }}
           >
             {t(
               "admin_renter:renter.messages.discussion.top_info_discussion_tsx.location_information"

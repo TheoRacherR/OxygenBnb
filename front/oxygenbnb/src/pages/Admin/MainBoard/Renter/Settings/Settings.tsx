@@ -1,6 +1,5 @@
 import { useState } from "react";
-import TabPanel from "@mui/joy/TabPanel";
-import styles from "./Informations.module.scss";
+import styles from "./Settings.module.scss";
 import Input from "@mui/joy/Input";
 import Button from "@mui/joy/Button";
 
@@ -21,7 +20,7 @@ const enumCurrency = [
   "₩ (south-korean won)",
 ];
 
-const Informations = ({ value }) => {
+const Settings = () => {
   const { t } = useTranslation(["admin_renter"]);
   const [locationInformations, setLocationInformations] = useState({
     id: 1,
@@ -45,17 +44,18 @@ const Informations = ({ value }) => {
   };
 
   return (
-    <TabPanel value={value}>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+
         <div className={styles.title}>
-          {t("admin_renter:renter.locations.location.informations_tsx.title")} {locationInformations.active ? "" : `[${t("admin_renter:renter.locations.location.informations_tsx.not_active")}]`}
+          {t("admin_renter:renter.settings.title")}
         </div>
         <div className={styles.list_container}>
           <div className={styles.item}>
             <Input
               variant="outlined"
               value={locationInformations.id}
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.id")}</label>}
+              startDecorator={<label>ID</label>}
               disabled
             />
           </div>
@@ -69,7 +69,7 @@ const Informations = ({ value }) => {
                   title: e.target.value,
                 }))
               }
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.title")}</label>}
+              startDecorator={<label>Title</label>}
             />
           </div>
           <div className={styles.item}>
@@ -86,7 +86,7 @@ const Informations = ({ value }) => {
                   price: parseInt(e.target.value),
                 }))
               }
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.price")}</label>}
+              startDecorator={<label>Price per night</label>}
               endDecorator={
                 <Select
                   value={locationInformations.default_currency}
@@ -111,7 +111,7 @@ const Informations = ({ value }) => {
                   type: e.target.value,
                 }))
               }
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.type")}</label>}
+              startDecorator={<label>Type</label>}
             />
           </div>
           <div className={styles.item}>
@@ -126,7 +126,7 @@ const Informations = ({ value }) => {
                   }))
                 }
               >
-                {t("admin_renter:renter.locations.location.informations_tsx.list.desactivate")}
+                Desactivate
               </Button>
             ) : (
               <Button
@@ -139,7 +139,7 @@ const Informations = ({ value }) => {
                   }))
                 }
               >
-                {t("admin_renter:renter.locations.location.informations_tsx.list.activate")}
+                Activate
               </Button>
             )}
           </div>
@@ -147,15 +147,18 @@ const Informations = ({ value }) => {
             <Input
               variant="outlined"
               disabled
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.validated")}</label>}
+              startDecorator={<label>Validated</label>}
               endDecorator={
-                locationInformations.isValid ? 
+                locationInformations.isValid ? (
                   <CheckCircleOutlineRoundedIcon color="success" />
-                : 
+                ) : (
                   <HighlightOffRoundedIcon sx={{ color: red[500] }} />
+                )
               }
             />
           </div>
+
+
           <div className={styles.item}>
             <Input
               variant="outlined"
@@ -167,7 +170,7 @@ const Informations = ({ value }) => {
                   owner: e.target.value,
                 }))
               }
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.owner")}</label>}
+              startDecorator={<label>Owner</label>}
             />
           </div>
 
@@ -176,23 +179,14 @@ const Informations = ({ value }) => {
             style={{ display: "flex", flexDirection: "row-reverse" }}
           >
             <Button sx={{ borderRadius: "6px" }} color="success">
-            {t("admin_renter:renter.locations.location.informations_tsx.list.save")}
+              {t("admin_renter:renter.settings.save")}
             </Button>
           </div>
         </div>
+
       </div>
-    </TabPanel>
+    </div>
   );
 };
 
-export default Informations;
-
-/*
-  id: number;
-  c default_price: number; / default_currency: currency;
-  c type: rentalType;
-  c localisation_infos: string;
-  isValid: boolean;
-  owner: User;
-  c active: boolean
-*/
+export default Settings;

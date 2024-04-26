@@ -15,7 +15,7 @@ const DashboardRenter = () => {
       <div className={styles.menu}>
         <TopLevelPanel
           title="Dashboard"
-          currentPageTitle={"Dashboard"}
+          currentPageTitle={""}
           pathValues={[]}
         />
       </div>

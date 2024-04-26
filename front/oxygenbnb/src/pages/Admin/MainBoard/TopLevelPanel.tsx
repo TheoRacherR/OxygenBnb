@@ -5,14 +5,17 @@ import Breadcrumbs from "@mui/joy/Breadcrumbs";
 import Typography from "@mui/joy/Typography";
 import { Link } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import { pink } from '@mui/material/colors';
 
 const TopLevelPanel = ({ title, pathValues, currentPageTitle }) => {
   return (
     <div className={styles.container}>
-      <Breadcrumbs separator={<KeyboardArrowRight />} aria-label="breadcrumbs">
+      <Breadcrumbs
+        separator={<KeyboardArrowRight />}
+        aria-label="breadcrumbs"
+        sx={{ color: "white" }}
+      >
         <Link to="/admin">
-          <HomeRoundedIcon sx={{ margin: "auto 0", color: "white" }}/>
+          <HomeRoundedIcon sx={{ margin: "auto 0", color: "white" }} />
         </Link>
         {pathValues.map((item, index) => (
           <Link
@@ -23,7 +26,11 @@ const TopLevelPanel = ({ title, pathValues, currentPageTitle }) => {
             {item.name}
           </Link>
         ))}
-        <Typography>{currentPageTitle}</Typography>
+        {currentPageTitle == "" ? (
+          ""
+        ) : (
+          <Typography>{currentPageTitle}</Typography>
+        )}
       </Breadcrumbs>
       <h1 className={styles.title}>{title}</h1>
     </div>

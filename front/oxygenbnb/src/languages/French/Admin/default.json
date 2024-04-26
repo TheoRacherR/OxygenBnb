@@ -8,7 +8,6 @@
       },
       "listing_item": {
         "home": "Accueil",
-        "dashboard": "Dashboard",
         "locations": "Locations",
         "messages": "Messages"
       }

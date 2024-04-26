@@ -1,6 +1,11 @@
 {
   "renter": {
-    "dashbaord": {},
+    "dashboard": {
+      "dashboard_tsx": {
+        "title": "Dashboard",
+        "list": []
+      }
+    },
     "messages": {
       "messages_tsx": {
         "title": "Messages",
@@ -37,7 +42,60 @@
         }
       }
     },
-    "locations": {},
-    "settings": {}
+    "locations": {
+      "table_component_tsx": {
+        "thead": {
+          "id": "ID",
+          "title": "Title",
+          "price": "Price",
+          "validated": "Validated"
+        }
+      },
+      "locations_tsx": {
+        "title": "My Locations",
+        "currentPageTitle": "Locations"
+      },
+      "location": {
+        "location_tsx": {
+          "toplevelpanel": {
+            "title": "My Location n°",
+            "currentPageTitle": "Location n°"
+          },
+          "tab_list": {
+            "informations": "Informations",
+            "request": "Requests"
+          }
+        },
+        "informations_tsx": {
+          "title": "Informations",
+          "not_active": "Not active",
+          "list": {
+            "id": "ID",
+            "title": "Title",
+            "price": "Price per night",
+            "type": "Type",
+            "activate": "Activate",
+            "desactivate": "Desactivate",
+            "validated": "Validated",
+            "owner": "Owner",
+            "save": "Save"
+          }
+        },
+        "manage_tsx": {},
+        "requests_tsx": {
+          "thead": {
+            "name": "Name",
+            "last_message": "Last message",
+            "user": "User"
+          },
+          "you": "You"
+        }
+      }
+    },
+    "settings": {
+      "title": "Title",
+      
+      "save": "Save"
+    }
   }
 }

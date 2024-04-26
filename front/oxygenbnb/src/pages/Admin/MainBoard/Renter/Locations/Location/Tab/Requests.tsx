@@ -7,6 +7,8 @@ import TabPanel from "@mui/joy/TabPanel";
 import { useContext, useState } from "react";
 import { MessageContext } from "../../../../../../../utils/Context/MessageContext";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
+import { useTranslation } from "react-i18next";
+
 
 const data: {
   location_name: string;
@@ -74,6 +76,7 @@ const data: {
 const Requests = ({ value }) => {
   const { setDiscussionSelected } = useContext(MessageContext);
   const [redirectionGotoMessage, setRedirectionGotoMessage] = useState(false);
+  const { t } = useTranslation(["admin_renter"]);
 
   const handleGoToMessages = (item) => {
     console.log(item);
@@ -83,6 +86,7 @@ const Requests = ({ value }) => {
   };
 
   return (
+
     <>
       {redirectionGotoMessage ? (
         <Navigate to={"/admin/renter/messages"} />
@@ -99,17 +103,19 @@ const Requests = ({ value }) => {
               maxWidth: "100%",
               overflow: "auto",
               maxHeight: "100%",
+              backgroundColor: "#0A0E0F",
+              borderColor: "grey",
             }}
           >
-            <Table sx={{ borderRadius: 20 }}>
+            <Table sx={{ borderRadius: 20, color: "#fff" }}>
               <thead>
                 <tr>
-                  <th style={{ fontWeight: "bold" }}>Name</th>
-                  <th style={{ width: "60%", fontWeight: "bold" }}>
-                    Last message
+                  <th style={{ fontWeight: "bold", color: "#fff" }}>{t("admin_renter:renter.locations.location.requests_tsx.thead.name")}</th>
+                  <th style={{ width: "60%", fontWeight: "bold", color: "#fff" }}>
+                  {t("admin_renter:renter.locations.location.requests_tsx.thead.last_message")}
                   </th>
-                  <th style={{ fontWeight: "bold" }}>User</th>
-                  <th style={{ fontWeight: "bold" }}></th>
+                  <th style={{ fontWeight: "bold", color: "#fff" }}>{t("admin_renter:renter.locations.location.requests_tsx.thead.user")}</th>
+                  <th style={{ fontWeight: "bold", color: "#fff" }}></th>
                 </tr>
               </thead>
               <tbody>
@@ -126,7 +132,7 @@ const Requests = ({ value }) => {
                       {item.discussion.info.last_message.user_id ===
                       item.discussion.info.user_id
                         ? ""
-                        : "You: "}{" "}
+                        : `${t("admin_renter:renter.locations.location.requests_tsx.you")}: `}{" "}
                       {item.discussion.info.last_message.message}
                     </td>
                     <td>

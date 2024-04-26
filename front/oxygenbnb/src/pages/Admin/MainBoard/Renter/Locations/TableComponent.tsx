@@ -3,8 +3,14 @@ import Table from "@mui/joy/Table";
 import { Sheet, Button, ButtonGroup } from "@mui/joy";
 import { Link } from "react-router-dom";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
+import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
+import { red } from "@mui/material/colors";
+import { useTranslation } from "react-i18next";
 
 const TableComponent = ({ data }) => {
+  const { t } = useTranslation(["admin_renter"]);
+
   return (
     <Sheet
       variant="outlined"
@@ -14,30 +20,36 @@ const TableComponent = ({ data }) => {
         maxWidth: "100%",
         overflow: "auto",
         maxHeight: "100%",
+        backgroundColor: "#0A0E0F",
+        borderColor: "grey",
       }}
     >
-      <Table sx={{ borderRadius: 20 }}>
+      <Table sx={{ borderRadius: 20, color: "#fff" }}>
         <thead>
           <tr>
-            <th style={{ width: "30%" }}>Name</th>
-            <th>Country</th>
-            <th>Fat&nbsp;(g)</th>
-            <th>Carbs&nbsp;(g)</th>
-            <th>Protein&nbsp;(g)</th>
+            <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.id")}</th>
+            <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.title")}</th>
+            <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.price")}</th>
+            <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.validated")}</th>
+            {/* id, title, prix, type, validé */}
           </tr>
         </thead>
         <tbody>
           {data.map((item, index) => (
             <tr key={index}>
-              <td>{item.name}</td>
-              <td>{item.calories}</td>
-              <td>{item.fat}</td>
-              <td>{item.carbs}</td>
+              <td>{item.id}</td>
+              <td>{item.title}</td>
+              <td>{item.price}</td>
+              <td>{
+                item.validated ? 
+                  <CheckCircleOutlineRoundedIcon color="success" />
+                : 
+                  <HighlightOffRoundedIcon sx={{ color: red[500] }} />}</td>
               <td>
                 <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
-                  <Link to="/admin/renter/location/1">
+                  <Link to={`/admin/renter/location/${item.id}`}>
                     <Button color="primary">
-                      <ArrowForwardIosRoundedIcon fontSize="small"/>
+                      <ArrowForwardIosRoundedIcon fontSize="small" />
                     </Button>
                   </Link>
                 </ButtonGroup>
