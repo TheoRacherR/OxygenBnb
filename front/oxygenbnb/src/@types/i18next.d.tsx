@@ -1,0 +1,28 @@
+import i18next from "i18next";
+
+//Import English files
+import English_Admin from "../languages/English/Admin/translation.json";
+import English_Auth from "../languages/English/Auth/translation.json";
+import English_Errors from "../languages/English/Errors/translation.json";
+
+import English_Site_home from "../languages/English/Site/home.json";
+import English_Site_main from "../languages/English/Site/main.json";
+import English_Site_default from "../languages/English/Site/default.json";
+
+
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    defaultNS: 'en';
+    resources: {
+      admin: typeof English_Admin,
+      auth: typeof English_Auth,
+      errors: typeof English_Errors,
+
+      site_home: typeof English_Site_home,
+      site_default: typeof English_Site_default,
+      site_main: typeof English_Site_main,
+    },
+  }
+}
+
+export default i18next;

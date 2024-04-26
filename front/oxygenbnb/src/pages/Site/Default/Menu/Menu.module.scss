@@ -1,0 +1,25 @@
+menu.container {
+  background-color: #232323;
+  color: white;
+  --heigt_menu: 38px;
+  --padding_x_menu: 8px;
+  --padding_y_menu: 12px;
+
+  width: calc(100vw - (2 * var(--padding_y_menu)));
+  // height: var(--heigt_menu);
+  line-height: 32px;
+  padding: var(--padding_x_menu) var(--padding_y_menu);
+  margin: 0;
+  text-align: center;
+
+  display: flex;
+  justify-content: space-between;
+
+  .left{
+    height: 38px;
+    img {
+      height: 38px;
+    }
+  }
+
+}

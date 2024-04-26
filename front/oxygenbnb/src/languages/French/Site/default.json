@@ -1,0 +1,74 @@
+{
+  "default": {
+    "footer_tsx": {
+      "wrapper": {
+        "end_logo": "OxygenBNB, Entreprise",
+        "band_zero": {
+          "zero": "Twitter",
+          "one": "Instagram",
+          "two": "Facebook"
+        },
+        "band_one": {
+          "zero": "Conditions générales",
+          "one": "Plan du site",
+          "two": "Confidentialité"
+        },
+        "band_two": {
+          "zero": "Qui sommes nous ?",
+          "one": "Nous contacter",
+          "two": "Fonctionnement du site"
+        }
+      }
+    },
+    "menu": {
+      "menu_tsx": {
+        "container": {
+          "left": {
+            "alt_img": "Logo"
+          }
+        }
+      },
+      "middle_extended": {
+        "middle_extended_tsx": {
+          "where": {
+            "title": "Où"
+          },
+          "when_start": {
+            "from": "Du",
+            "to": "aux",
+            "format": "DD MMMM"
+          },
+          "when_start_menu": {
+            "lang": "fr",
+            "format": "DD/MM/YYYY",
+            "start_input": {
+              "label": "date d'arrivée"
+            },
+            "end_input": {
+              "label": "date de départ"
+            }
+          },
+          "who": {
+            "title": "Qui",
+            "people1": "personne"
+          },
+          "who_menu": {
+            "title1": "Combien de personne"
+          }
+        },
+        "search_localisation_tsx": {
+          "not_found": "Aucun résultat trouvé"
+        }
+      },
+      "right_menu": {
+        "right_menu_tsx": {
+          "profil": "Compte",
+          "settings": "Paramètres",
+          "language": "Langues",
+          "login": "Se connecter",
+          "logout": "Se déconnecter"
+        }
+      }
+    }
+  }
+}

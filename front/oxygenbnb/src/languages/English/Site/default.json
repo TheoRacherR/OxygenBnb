@@ -1,0 +1,74 @@
+{
+  "default": {
+    "footer_tsx": {
+      "wrapper": {
+        "end_logo": "OxygenBNB, Inc",
+        "band_zero": {
+          "zero": "Twitter",
+          "one": "Instagram",
+          "two": "Facebook"
+        },
+        "band_one": {
+          "zero": "Terms and conditions",
+          "one": "Site map",
+          "two": "Privacy"
+        },
+        "band_two": {
+          "zero": "About us?",
+          "one": "Contact us",
+          "two": "Site operation"
+        }
+      }
+    },
+    "menu": {
+      "menu_tsx": {
+        "container": {
+          "left": {
+            "alt_img": "Logo"
+          }
+        }
+      },
+      "middle_extended": {
+        "middle_extended_tsx": {
+          "where": {
+            "title": "Where"
+          },
+          "when_start": {
+            "from": "From",
+            "to": "To",
+            "format": "MMM DD"
+          },
+          "when_start_menu": {
+            "lang": "fr",
+            "format": "MM/DD/YYYY",
+            "start_input": {
+              "label": "arriving date"
+            },
+            "end_input": {
+              "label": "departure date"
+            }
+          },
+          "who": {
+            "title": "Who",
+            "people1": "people"
+          },
+          "who_menu": {
+            "title1": "How many adults"
+          }
+        },
+        "search_localisation_tsx": {
+          "not_found": "No result found"
+        }
+      },
+      "right_menu": {
+        "right_menu_tsx": {
+          "profil": "Profile",
+          "settings": "Settings",
+          "language": "Languages",
+          "login": "Login",
+          "logout": "Logout"
+        }
+      }
+    }
+  }
+}
