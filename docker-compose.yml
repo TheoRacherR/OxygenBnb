@@ -14,9 +14,6 @@ services:
       - CHOKIDAR_USEPOLLING=${NODE_ENV_DEV}
     networks:
         - front
-    restart: always
-    stdin_open: true
-    tty: true
   
   nestapp:
     container_name: nestapp-oxygen
@@ -34,7 +31,6 @@ services:
       - PG_DB=${PG_DB}
       - PG_PORT=${PG_PORT}
       - NODE_ENV_DEV=${NODE_ENV_DEV}
-    restart: always
 
     depends_on:
       - db
