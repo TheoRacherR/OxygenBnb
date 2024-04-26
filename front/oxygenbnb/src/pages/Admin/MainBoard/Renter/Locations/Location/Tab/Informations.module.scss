@@ -1,0 +1,47 @@
+.container {
+  width: 500px;
+  margin: 0 auto;
+  border: 1px solid #32383e;
+  border-radius: 10px;
+  background-color: #0A0E0F;
+  
+  .title {
+    padding: 20px;
+    font-size: large;
+    font-weight: bold;
+    color: white;
+  }
+
+  .list_container {
+    padding: 20px;
+    border-top: 1px solid #32383e;
+
+    .item {
+      padding: 15px 0;
+
+
+      > div {
+        border-radius: 5px;
+      }
+
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+    }
+
+    .item:first-child {
+      padding-top: 0;
+    }
+    .item:last-child {
+      padding-bottom: 0;
+    }
+
+  }
+}

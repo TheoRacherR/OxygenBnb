@@ -1,0 +1,21 @@
+.container {
+  --size-chart: 300px;
+  background-color: grey;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  min-width: 200px;
+  overflow-wrap: break-word;
+
+  .chart {
+    width: var(--size-chart);
+    height: var(--size-chart);
+    background-color: blue;
+    margin: auto;
+    border-radius: calc(var(--size-chart) /2);
+
+    .content {
+
+    }
+  }
+}
