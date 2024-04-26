@@ -27,7 +27,7 @@ const MenuComponent = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  
+
   const lang = [
     {name: "🇬🇧 English", param: "en"},
     {name: "🇫🇷 Français", param: "fr"},
@@ -65,8 +65,7 @@ const MenuComponent = () => {
                 aria-haspopup="true"
                 onClick={handleClickLang}
               >
-                {/* <LanguageRoundedIcon sx={{color: "black"}}/> */}
-                {localStorage.getItem('lng') === "en" ? "🇬🇧": "🇫🇷 "}
+                <LanguageRoundedIcon sx={{color: "black"}}/>
               </IconButton>
               <Menu
                 id="long-menu"
