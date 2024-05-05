@@ -12,6 +12,7 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
 import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
+import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
 
 
 
@@ -36,6 +37,7 @@ const TopBand = ({ location }) => {
             rowGap: "8px",
           }}
         >
+          {/* Renter */}
           <Link to="renter">
             <ListItem>
               <ListItemButton
@@ -93,6 +95,40 @@ const TopBand = ({ location }) => {
                   {t("admin_default:admin.top_band_tsx.listing_item.messages")}
                 {/* </div> */}
                 {/* <Chip sx={{ backgroundColor: "#0b6bcb" }}>3</Chip> */}
+              </ListItemButton>
+            </ListItem>
+          </Link>
+
+          {/* ADMIN */}
+          <Link to="users/list">
+            <ListItem>
+              <ListItemButton
+                sx={{
+                  borderRadius: "5px",
+                  color: location.pathname.startsWith("/admin/user") ? "#0A0E0F" : "white",
+                }}
+                selected={location.pathname.startsWith("/admin/user")}
+              >
+                  <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
+                    <PeopleAltRoundedIcon fontSize="small"/>
+                  </ListItemDecorator>
+                  {t("admin_default:admin.top_band_tsx.listing_item.users")}
+              </ListItemButton>
+            </ListItem>
+          </Link>
+          <Link to="locations/list">
+            <ListItem>
+              <ListItemButton
+                sx={{
+                  borderRadius: "5px",
+                  color: location.pathname.startsWith("/admin/location") ? "#0A0E0F" : "white",
+                }}
+                selected={location.pathname.startsWith("/admin/location")}
+              >
+                  <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
+                    <AssignmentRoundedIcon fontSize="small"/>
+                  </ListItemDecorator>
+                  {t("admin_default:admin.top_band_tsx.listing_item.locations")}
               </ListItemButton>
             </ListItem>
           </Link>

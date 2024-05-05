@@ -1,0 +1,21 @@
+.container {
+  height: calc(100% - 40px);
+  padding: 20px;
+  background-color: black;
+  overflow-y: auto;
+
+  .inside_container {
+    width: 800px;
+    margin: 0 auto;
+    > div {
+      margin-bottom: 20px;
+    }
+    
+    > div:last-child{
+      margin-bottom: 0;
+    }
+  }
+
+
+  
+}

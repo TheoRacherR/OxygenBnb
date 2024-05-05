@@ -8,8 +8,13 @@ import Messages from "./MainBoard/Renter/Messages/Messages";
 import DashboardRenter from "./MainBoard/Renter/Dashboard/DashboardRenter";
 import Locations from "./MainBoard/Renter/Locations/Locations";
 import Settings from "./MainBoard/Renter/Settings/Settings";
-import Location from "./MainBoard/Renter/Locations/Location/Location";
+import LocationRenter from "./MainBoard/Renter/Locations/Location/Location";
 import { MessageContextProvider } from "../../utils/Context/MessageContext";
+import UserList from "./MainBoard/Admin/Users/UserList";
+import LocationList from "./MainBoard/Admin/Locations/LocationList";
+import User from "./MainBoard/Admin/Users/User";
+import ReservationPage from "./MainBoard/Admin/Users/Reservation/ReservationPage";
+import LocationAdmin from "./MainBoard/Admin/Locations/LocationPage"
 
 const theme = extendTheme({ cssVarPrefix: "demo" });
 
@@ -37,12 +42,21 @@ const Admin = () => {
       <div className={styles.main_board}>
         <MessageContextProvider>
           <Routes>
+            {/* Renter */}
             <Route path="/renter" element={<DashboardRenter />} />
             <Route path="/renter/locations" element={<Locations />} />
-            <Route path="/renter/location/:id" element={<Location />} />
+            <Route path="/renter/location/:id" element={<LocationRenter />} />
             <Route path="/renter/messages" element={<Messages />} />
             <Route path="/renter/settings" element={<Settings />} />
             <Route path="/renter/*" element={<DashboardRenter />} />
+
+            {/* Admin */}
+            <Route path="/users/list" element={<UserList />} />
+            <Route path="/user/:id" element={<User />} />
+
+            <Route path="/locations/list" element={<LocationList />} />
+            <Route path="/location/:id" element={<LocationAdmin />} />
+            <Route path="/location/:location_id/reservation/:reservation_id" element={<ReservationPage />} />
           </Routes>
         </MessageContextProvider>
       </div>
