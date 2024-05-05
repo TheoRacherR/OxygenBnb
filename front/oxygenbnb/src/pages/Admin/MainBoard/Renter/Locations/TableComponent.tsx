@@ -24,40 +24,44 @@ const TableComponent = ({ data }) => {
         borderColor: "grey",
       }}
     >
-      <Table sx={{ borderRadius: 20, color: "#fff" }}>
-        <thead>
-          <tr>
-            <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.id")}</th>
-            <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.title")}</th>
-            <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.price")}</th>
-            <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.validated")}</th>
-            {/* id, title, prix, type, validé */}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item, index) => (
-            <tr key={index}>
-              <td>{item.id}</td>
-              <td>{item.title}</td>
-              <td>{item.price}</td>
-              <td>{
-                item.validated ? 
-                  <CheckCircleOutlineRoundedIcon color="success" />
-                : 
-                  <HighlightOffRoundedIcon sx={{ color: red[500] }} />}</td>
-              <td>
-                <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
-                  <Link to={`/admin/renter/location/${item.id}`}>
-                    <Button color="primary">
-                      <ArrowForwardIosRoundedIcon fontSize="small" />
-                    </Button>
-                  </Link>
-                </ButtonGroup>
-              </td>
+      {data.length === 0 ? 
+        <div style={{color: "white"}}>{t("admin_renter:renter.locations.table_component_tsx.no_location")}</div>
+      : 
+        <Table sx={{ borderRadius: 20, color: "#fff" }}>
+          <thead>
+            <tr>
+              <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.id")}</th>
+              <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.title")}</th>
+              <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.price")}</th>
+              <th style={{ color: "#fff" }}>{t("admin_renter:renter.locations.table_component_tsx.thead.validated")}</th>
+              {/* id, title, prix, type, validé */}
             </tr>
-          ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody>
+            {data.map((item, index) => (
+              <tr key={index}>
+                <td>{item.id}</td>
+                <td>{item.title}</td>
+                <td>{item.price}</td>
+                <td>{
+                  item.validated ? 
+                    <CheckCircleOutlineRoundedIcon color="success" />
+                  : 
+                    <HighlightOffRoundedIcon sx={{ color: red[500] }} />}</td>
+                <td>
+                  <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
+                    <Link to={`/admin/renter/location/${item.id}`}>
+                      <Button color="primary">
+                        <ArrowForwardIosRoundedIcon fontSize="small" />
+                      </Button>
+                    </Link>
+                  </ButtonGroup>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      }
     </Sheet>
   );
 };
