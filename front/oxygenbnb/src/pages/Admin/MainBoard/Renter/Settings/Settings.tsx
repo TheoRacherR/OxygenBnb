@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styles from "./Settings.module.scss";
 import Input from "@mui/joy/Input";
-import Button from "@mui/joy/Button";
 
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
@@ -9,7 +8,7 @@ import { red } from "@mui/material/colors";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import { useTranslation } from "react-i18next";
-
+import { Button, ButtonGroup } from "@mui/joy";
 
 const enumCurrency = [
   "€ (euro)",
@@ -20,8 +19,15 @@ const enumCurrency = [
   "₩ (south-korean won)",
 ];
 
+const lang = [
+  { name: "🇬🇧 English", param: "en" },
+  { name: "🇫🇷 Français", param: "fr" },
+];
+
+// TODO : set settings
+
 const Settings = () => {
-  const { t } = useTranslation(["admin_renter"]);
+  const { t, i18n } = useTranslation(["admin_renter"]);
   const [locationInformations, setLocationInformations] = useState({
     id: 1,
     title: "",
@@ -32,6 +38,15 @@ const Settings = () => {
     owner: "Théo RACHER RAULIN",
     active: true,
   });
+
+  const onClickLanguageChange = (item) => {
+    if (item.param) {
+      const language = item.param;
+      console.log(language);
+      i18n.changeLanguage(language); //change the language
+      localStorage.setItem("lng", language);
+    }
+  };
 
   const handleChangeCurrency = (
     event: React.SyntheticEvent | null,
@@ -46,7 +61,6 @@ const Settings = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-
         <div className={styles.title}>
           {t("admin_renter:renter.settings.title")}
         </div>
@@ -55,7 +69,7 @@ const Settings = () => {
             <Input
               variant="outlined"
               value={locationInformations.id}
-              startDecorator={<label>ID</label>}
+              startDecorator={<label>{t("admin_renter:renter.settings.title")}</label>}
               disabled
             />
           </div>
@@ -158,7 +172,6 @@ const Settings = () => {
             />
           </div>
 
-
           <div className={styles.item}>
             <Input
               variant="outlined"
@@ -174,6 +187,34 @@ const Settings = () => {
             />
           </div>
 
+          <div className={styles.item}>
+            {/* <Select
+              // value={lang.filter((item) => item.param === localStorage.getItem("lng"))[0].name}
+              value={lang.filter((item) => item.param === lng)[0].name}
+              onChange={onClickLanguageChange}
+            >
+              {lang.map((item, index) => (
+                <Option key={index} value={item.param}>
+                  {item.name}
+                </Option>
+              ))}
+            </Select> */}
+            <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
+              {
+                lang.map((item, index) => (
+                  <Button
+                    color="neutral"
+                    variant={localStorage.getItem("lng") === item.param ? "soft" : "solid"}
+                    key={index}
+                    onClick={() => onClickLanguageChange(item)}
+                  >
+                    {item.name}
+                  </Button>
+                ))
+              }
+            </ButtonGroup>
+          </div>
+
           <div
             className={styles.item}
             style={{ display: "flex", flexDirection: "row-reverse" }}
@@ -183,7 +224,6 @@ const Settings = () => {
             </Button>
           </div>
         </div>
-
       </div>
     </div>
   );

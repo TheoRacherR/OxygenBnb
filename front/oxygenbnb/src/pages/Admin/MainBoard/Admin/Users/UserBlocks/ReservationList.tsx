@@ -1,21 +1,16 @@
-import React from "react";
 import styles from "./Styles.module.scss";
-import Input from "@mui/joy/Input";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import InputComponent from "./InputComponent";
-import { red } from "@mui/material/colors";
 import CheckBoxRoundedIcon from "@mui/icons-material/CheckBoxRounded";
 
 import Table from "@mui/joy/Table";
 import { Sheet, Button, ButtonGroup } from "@mui/joy";
 import { Link } from "react-router-dom";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
-import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import { useTranslation } from "react-i18next";
+import dayjs from "dayjs";
 
 const dataTemp: {
   reservation_id: number;
@@ -61,7 +56,7 @@ const dataTemp: {
   },
 ];
 
-const ReservationList = ({ id }) => {
+const ReservationList = ({ user_id, location_id }) => {
   const { t } = useTranslation(["admin_admin"]);
 
   return (
@@ -78,7 +73,13 @@ const ReservationList = ({ id }) => {
         }}
       >
         <CheckBoxRoundedIcon />
-        &nbsp;Reservations for user {id}
+        &nbsp;
+        {
+          user_id == 0 ?
+            `${t("admin_admin:users.user_blocks.reservation_list_tsx.reservation_location")} ${location_id}`
+          :
+            `${t("admin_admin:users.user_blocks.reservation_list_tsx.reservation_user")} ${user_id}`
+        }
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -100,36 +101,42 @@ const ReservationList = ({ id }) => {
               borderColor: "grey",
             }}
           >
-            <Table sx={{ borderRadius: 20, color: "#fff" }}>
-              <thead>
-                <tr>
-                  <th>Reservation ID</th>
-                  <th>Location name</th>
-                  <th>Date start</th>
-                  <th>Date end</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {dataTemp.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.reservation_id}</td>
-                    <td>{item.location_name}</td>
-                    <td>{item.start_date.toLocaleString()}</td>
-                    <td>{item.end_date.toLocaleString()}</td>
-                    <td>
-                      <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
-                        <Link to={`/admin/location/${item.location_id}/reservation/${item.reservation_id}`}>
-                          <Button color="primary">
-                            <ArrowForwardIosRoundedIcon fontSize="small" />
-                          </Button>
-                        </Link>
-                      </ButtonGroup>
-                    </td>
+            {dataTemp.length === 0 ? 
+              <div style={{color: "white"}}>{t("admin_admin:users.user_blocks.reservation_list_tsx.no_reservation")}</div>
+            : 
+              <Table sx={{ borderRadius: 20, color: "#fff" }}>
+                <thead>
+                  <tr>
+                    <th>{t("admin_admin:users.user_blocks.reservation_list_tsx.table.id")}</th>
+                    <th>{t("admin_admin:users.user_blocks.reservation_list_tsx.table.location_name")}</th>
+                    <th>{t("admin_admin:users.user_blocks.reservation_list_tsx.table.start_date")}</th>
+                    <th>{t("admin_admin:users.user_blocks.reservation_list_tsx.table.end_date")}</th>
+                    <th></th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {dataTemp.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.reservation_id}</td>
+                      <td>{item.location_name}</td>
+                      <td>{dayjs(item.start_date).format("DD/MM/YYYY")}</td>
+                      <td>{dayjs(item.end_date).format("DD/MM/YYYY")}</td>
+                      <td>
+                        <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
+                          <Link
+                            to={`/admin/location/${location_id === 0 ? item.location_id : location_id}/reservation/${item.reservation_id}`}
+                          >
+                            <Button color="primary">
+                              <ArrowForwardIosRoundedIcon fontSize="small" />
+                            </Button>
+                          </Link>
+                        </ButtonGroup>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            }
           </Sheet>
         </div>
       </AccordionDetails>

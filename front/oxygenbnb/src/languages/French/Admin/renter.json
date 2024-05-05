@@ -44,6 +44,7 @@
     },
     "locations": {
       "table_component_tsx": {
+        "no_location": "Aucune location disponible",
         "thead": {
           "id": "ID",
           "title": "Nom",
@@ -83,6 +84,7 @@
         },
         "manage_tsx": {},
         "requests_tsx": {
+          "no_location": "Aucune location disponible",
           "thead": {
             "name": "Nom",
             "last_message": "Dernier message",

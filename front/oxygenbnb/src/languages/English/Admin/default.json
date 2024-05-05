@@ -9,7 +9,9 @@
       "listing_item": {
         "home": "Home",
         "locations": "Locations",
-        "messages": "Messages"
+        "messages": "Messages",
+
+        "users": "Users"
       }
     },
     "bottom_band_tsx": {

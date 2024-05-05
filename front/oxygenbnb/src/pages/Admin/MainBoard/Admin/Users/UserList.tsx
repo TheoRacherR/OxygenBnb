@@ -62,10 +62,8 @@ const UserList = () => {
   return (
     <div className={styles.container}>
       <TopLevelPanel
-        // title={t("admin_admin:users.user_list_tsx.title")}
-        // currentPageTitle={t("admin_admin:users.user_list_tsx.currentPageTitle")}
-        title="All Users"
-        currentPageTitle="Users"
+        title={t("admin_admin:users.user_list_tsx.title")}
+        currentPageTitle={t("admin_admin:users.user_list_tsx.currentPageTitle")}
         pathValues={[]}
       />
       <div className={styles.main_list}>
@@ -81,42 +79,42 @@ const UserList = () => {
             borderColor: "grey",
           }}
         >
-          <Table sx={{ borderRadius: 20, color: "#fff" }}>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Role</th>
-                <th>Creation date</th>
-                {/* <th>{t("admin_admin:users.user_list_tsx.table.id")}</th>
-                <th>{t("admin_admin:users.user_list_tsx.table.name")}</th>
-                <th>{t("admin_admin:users.user_list_tsx.table.role")}</th>
-                <th>{t("admin_admin:users.user_list_tsx.table.creation_date")}</th>*/}
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {userData.map((item, index) => (
-                <tr key={index}>
-                  <td>{item.id}</td>
-                  <td>
-                    {item.first_name} {item.last_name}
-                  </td>
-                  <td>{item.role}</td>
-                  <td>{item.created_at.toLocaleDateString()}</td>
-                  <td>
-                    <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
-                      <Link to={`/admin/user/${item.id}`}>
-                        <Button color="primary">
-                          <ArrowForwardIosRoundedIcon fontSize="small" />
-                        </Button>
-                      </Link>
-                    </ButtonGroup>
-                  </td>
+          {userData.length === 0 ? 
+            <div style={{color: "white"}}>{t("admin_admin:users.user_list_tsx.no_user")}</div>
+          : 
+            <Table sx={{ borderRadius: 20, color: "#fff" }}>
+              <thead>
+                <tr>
+                  <th>{t("admin_admin:users.user_list_tsx.table.id")}</th>
+                  <th>{t("admin_admin:users.user_list_tsx.table.name")}</th>
+                  <th>{t("admin_admin:users.user_list_tsx.table.role")}</th>
+                  <th>{t("admin_admin:users.user_list_tsx.table.creation_date")}</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
+              </thead>
+              <tbody>
+                {userData.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.id}</td>
+                    <td>
+                      {item.first_name} {item.last_name}
+                    </td>
+                    <td>{item.role}</td>
+                    <td>{item.created_at.toLocaleDateString()}</td>
+                    <td>
+                      <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
+                        <Link to={`/admin/user/${item.id}`}>
+                          <Button color="primary">
+                            <ArrowForwardIosRoundedIcon fontSize="small" />
+                          </Button>
+                        </Link>
+                      </ButtonGroup>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          }
         </Sheet>
       </div>
     </div>

@@ -107,63 +107,67 @@ const Requests = ({ value }) => {
               borderColor: "grey",
             }}
           >
-            <Table sx={{ borderRadius: 20, color: "#fff" }}>
-              <thead>
-                <tr>
-                  <th style={{ fontWeight: "bold", color: "#fff" }}>{t("admin_renter:renter.locations.location.requests_tsx.thead.name")}</th>
-                  <th style={{ width: "60%", fontWeight: "bold", color: "#fff" }}>
-                  {t("admin_renter:renter.locations.location.requests_tsx.thead.last_message")}
-                  </th>
-                  <th style={{ fontWeight: "bold", color: "#fff" }}>{t("admin_renter:renter.locations.location.requests_tsx.thead.user")}</th>
-                  <th style={{ fontWeight: "bold", color: "#fff" }}></th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.location_name}</td>
-                    <td
-                      style={{
-                        fontWeight: item.discussion.info.last_message.seen
-                          ? "bold"
-                          : "normal",
-                      }}
-                    >
-                      {item.discussion.info.last_message.user_id ===
-                      item.discussion.info.user_id
-                        ? ""
-                        : `${t("admin_renter:renter.locations.location.requests_tsx.you")}: `}{" "}
-                      {item.discussion.info.last_message.message}
-                    </td>
-                    <td>
-                      {item.discussion.info.firstname}{" "}
-                      {item.discussion.info.lastname.substring(0, 1)}.
-                    </td>
-                    <td>
-                      <ButtonGroup
-                        sx={{ borderRadius: 6 }}
-                        variant="solid"
-                        color="warning"
-                      >
-                        {/* <Link to="/admin/renter/messages"> */}
-                        <Button
-                          color="primary"
-                          onClick={() =>
-                            handleGoToMessages(item.discussion.info)
-                          }
-                        >
-                          <ArrowForwardIosRoundedIcon fontSize="small"/>
-                        </Button>
-                        <Button color="danger">
-                          <DeleteForeverRoundedIcon fontSize="small"/>
-                        </Button>
-                        {/* </Link> */}
-                      </ButtonGroup>
-                    </td>
+            {data.length === 0 ? 
+              <div style={{color: "white"}}>{t("admin_renter:renter.locations.location.requests_tsx.no_request")}</div>
+            : 
+              <Table sx={{ borderRadius: 20, color: "#fff" }}>
+                <thead>
+                  <tr>
+                    <th style={{ fontWeight: "bold", color: "#fff" }}>{t("admin_renter:renter.locations.location.requests_tsx.thead.name")}</th>
+                    <th style={{ width: "60%", fontWeight: "bold", color: "#fff" }}>
+                    {t("admin_renter:renter.locations.location.requests_tsx.thead.last_message")}
+                    </th>
+                    <th style={{ fontWeight: "bold", color: "#fff" }}>{t("admin_renter:renter.locations.location.requests_tsx.thead.user")}</th>
+                    <th style={{ fontWeight: "bold", color: "#fff" }}></th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
+                </thead>
+                <tbody>
+                  {data.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.location_name}</td>
+                      <td
+                        style={{
+                          fontWeight: item.discussion.info.last_message.seen
+                            ? "bold"
+                            : "normal",
+                        }}
+                      >
+                        {item.discussion.info.last_message.user_id ===
+                        item.discussion.info.user_id
+                          ? ""
+                          : `${t("admin_renter:renter.locations.location.requests_tsx.you")}: `}{" "}
+                        {item.discussion.info.last_message.message}
+                      </td>
+                      <td>
+                        {item.discussion.info.firstname}{" "}
+                        {item.discussion.info.lastname.substring(0, 1)}.
+                      </td>
+                      <td>
+                        <ButtonGroup
+                          sx={{ borderRadius: 6 }}
+                          variant="solid"
+                          color="warning"
+                        >
+                          {/* <Link to="/admin/renter/messages"> */}
+                          <Button
+                            color="primary"
+                            onClick={() =>
+                              handleGoToMessages(item.discussion.info)
+                            }
+                          >
+                            <ArrowForwardIosRoundedIcon fontSize="small"/>
+                          </Button>
+                          <Button color="danger">
+                            <DeleteForeverRoundedIcon fontSize="small"/>
+                          </Button>
+                          {/* </Link> */}
+                        </ButtonGroup>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            }
           </Sheet>
         </div>
       </TabPanel>

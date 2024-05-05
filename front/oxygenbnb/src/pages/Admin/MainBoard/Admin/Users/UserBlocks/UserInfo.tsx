@@ -1,15 +1,13 @@
-import React from "react";
 import styles from "./Styles.module.scss";
-import Input from "@mui/joy/Input";
 import Avatar from "@mui/joy/Avatar";
-import InputComponent from "./InputComponent";
+import InputComponent from "../../InputComponent";
 
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
+import { useTranslation } from "react-i18next";
 
 const userData = {
   frist_name: "Théo",
@@ -20,7 +18,9 @@ const userData = {
   upated_at: "13-05-2024",
 };
 
-const UserInfo = ({id}) => {
+const UserInfo = ({ id }) => {
+  const { t } = useTranslation(['admin_admin']);
+
   return (
     <Accordion defaultExpanded sx={{ backgroundColor: "#0A0E0F" }}>
       <AccordionSummary
@@ -35,7 +35,7 @@ const UserInfo = ({id}) => {
         }}
       >
         <PersonRoundedIcon />
-        &nbsp;Infos
+        &nbsp;{t("admin_admin:users.user_blocks.user_info_tsx.summary")}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -48,41 +48,45 @@ const UserInfo = ({id}) => {
           <div className={styles.item}>
             <Avatar />
             <InputComponent
-              label="Firstname"
+              label={t("admin_admin:users.user_blocks.user_info_tsx.list.firstname")}
               value={userData.frist_name}
               disabled={true}
             />
             <InputComponent
-              label="Lastname"
+              label={t("admin_admin:users.user_blocks.user_info_tsx.list.lastname")}
               value={userData.last_name}
               disabled={true}
             />
           </div>
 
           <div className={styles.item}>
-            <InputComponent label="ID" value={id} disabled={true} />
+            <InputComponent label={t("admin_admin:users.user_blocks.user_info_tsx.list.id")} value={id} disabled={true} />
           </div>
 
           <div className={styles.item}>
             <InputComponent
-              label="Email"
+              label={t("admin_admin:users.user_blocks.user_info_tsx.list.email")}
               value={userData.email}
               disabled={true}
             />
           </div>
 
           <div className={styles.item}>
-            <InputComponent label="role" value={userData.role} disabled={true} />
+            <InputComponent
+              label={t("admin_admin:users.user_blocks.user_info_tsx.list.role")}
+              value={userData.role}
+              disabled={true}
+            />
           </div>
 
           <div className={styles.item}>
             <InputComponent
-              label="Created At"
+              label={t("admin_admin:users.user_blocks.user_info_tsx.list.created_at")}
               value={userData.created_at}
               disabled={true}
             />
             <InputComponent
-              label="Upated At"
+              label={t("admin_admin:users.user_blocks.user_info_tsx.list.updated_at")}
               value={userData.upated_at}
               disabled={true}
             />
@@ -90,38 +94,6 @@ const UserInfo = ({id}) => {
         </div>
       </AccordionDetails>
     </Accordion>
-    // <div className={styles.wrapper}>
-    // <div className={styles.title}>Infos</div>
-    // <div className={styles.list_container}>
-    //   <div className={styles.item}>
-    //     <Avatar />
-    //     <InputComponent label="Firstname" value="Théo" disabled={true} />
-    //     <InputComponent label="Lastname" value="RACHER RAULIN" disabled={true} />
-    //     {/* <div className={styles.name}>
-    //       <div className={styles.first_name}>Théo</div>
-    //       <div className={styles.last_name}>RACHER RAULIN</div>
-    //     </div> */}
-    //   </div>
-
-    //   <div className={styles.item}>
-    //     <InputComponent label="ID" value="1" disabled={true} />
-    //   </div>
-
-    //   <div className={styles.item}>
-    //     <InputComponent label="Email" value="theo@gmail.com" disabled={true} />
-    //   </div>
-
-    //   <div className={styles.item}>
-    //     <InputComponent label="role" value="User" disabled={true} />
-    //   </div>
-
-    //   <div className={styles.item}>
-    //     <InputComponent label="Created At" value="10-08-2022" disabled={true} />
-    //     <InputComponent label="Upated At" value="13-05-2024" disabled={true} />
-    //   </div>
-
-    // </div>
-    // </div>
   );
 };
 
