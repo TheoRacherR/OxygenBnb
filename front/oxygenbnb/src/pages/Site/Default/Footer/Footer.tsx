@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 
 const Footer = () => {
   const { t } = useTranslation(['site_default']);
-
-  console.log(t("errors:403"))
+  
   const date = new Date();
   const links1: {name: string; path: string}[] = 
   [
