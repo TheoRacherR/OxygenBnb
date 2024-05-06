@@ -8,6 +8,7 @@ import ItemSearch from "./ItemSearch/ItemSearch";
 import { Button, Pagination } from "@mui/material";
 import { ComponentOnMove } from "./ComponentOnMove";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const data = [
   {
@@ -113,6 +114,7 @@ const ResetCenterView = ({selectPosition}): any => {
 }
 
 const Search = () => {
+  const { t }  = useTranslation(["site_main"])
   const { citySelected, numberOfNightSelected } = useContext(SearchContext);
   const [positionToView, setPoisitionToView] = useState();
   const [mapBounds, setMapBounds] = useState({
@@ -161,17 +163,6 @@ const Search = () => {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {/* <Marker position={[citySelected?.lat || 48.8588897, citySelected?.lon || 2.3200410217200766]}>
-          <Popup>
-            {citySelected.address ?
-              <>`${citySelected.address.city || citySelected.address.town || citySelected.address.village || citySelected.address.state || citySelected.address.island}`
-              `${citySelected.address.postcode ? ` (${citySelected.address.postcode})` :  ''}`
-              `, ${citySelected.address.country === "États-Unis d'Amérique" ? "USA" : citySelected.address.country}`</>
-            :
-            "Paris, France"
-            }
-          </Popup>
-        </Marker> */}
         {
             data
             .filter(e => (
@@ -194,10 +185,10 @@ const Search = () => {
                           {item.coordonates.address?.postcode ? ` (${item.coordonates.address?.postcode})` :  ''}
                           , {item.coordonates.address?.country === "États-Unis d'Amérique" ? "USA" : item.coordonates.address?.country}
                         </div>
-                        <h3>{item.pricePerNight}e/night</h3>
+                        <h3>{item.pricePerNight}{t("site_main:main.room.room_tsx.euro")}/{t("site_main:main.search.search_tsx.popup.default_paris")}</h3>
                         </>
                       :
-                      "Paris, France"
+                      t("site_main:main.search.search_tsx.popup.default_paris")
                       }
                   </Link>
                 </Popup>

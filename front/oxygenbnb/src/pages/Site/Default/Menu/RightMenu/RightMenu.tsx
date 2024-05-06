@@ -102,14 +102,9 @@ const RightMenu = () => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          <Link to="profil"  style={{color: "black", textDecoration: "none"}}>
+          <Link to="user"  style={{color: "black", textDecoration: "none"}}>
             <MenuItem onClick={handleClose}><PersonOutlineRoundedIcon sx={{marginRight: "15px"}}/>
                 {t("site_default:default.menu.right_menu.right_menu_tsx.profil")}
-            </MenuItem>
-          </Link>
-          <Link to="settings" style={{color: "black", textDecoration: "none"}}>
-            <MenuItem onClick={handleClose}><SettingsRoundedIcon sx={{marginRight: "15px"}}/>
-              {t("site_default:default.menu.right_menu.right_menu_tsx.settings")}
             </MenuItem>
           </Link>
           <Divider sx={{ my: 0.5 }} />
