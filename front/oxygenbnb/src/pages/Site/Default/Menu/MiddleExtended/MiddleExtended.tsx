@@ -72,7 +72,7 @@ const MiddleExtended = () => {
 
       <div className={styles.where}>
         <Button onClick={handleOpenWhere}>
-          {t("site_default:default.menu.middle_extended.middle_extended_tsx.where.title")} {Object.keys(citySelected).length === 0 ? "?" : `: ${citySelected?.address.city || citySelected?.address.town || citySelected?.address.village || citySelected?.address.state}`}
+          {t("site_default:default.menu.middle_extended.middle_extended_tsx.where.title")} {Object.keys(citySelected).length === 0 ? "?" : `: ${citySelected?.address?.city || citySelected?.address?.town || citySelected?.address?.village || citySelected?.address?.state}`}
         </Button>
       </div>
       <Menu
