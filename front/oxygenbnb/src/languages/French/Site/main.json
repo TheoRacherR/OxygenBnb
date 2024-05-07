@@ -37,7 +37,8 @@
               "email": "Email",
               "role": "Rôle",
               "created_at": "Créé le",
-              "updated_at": "Mise à jour le"
+              "updated_at": "Mise à jour le",
+              "save": "Sauvegarder"
             }
           }
         },
