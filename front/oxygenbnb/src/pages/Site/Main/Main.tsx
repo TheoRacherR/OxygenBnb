@@ -7,7 +7,7 @@ import Search from "./Search/Search"
 import Room from "./Room/Room"
 import Auth from "../../Auth/Auth"
 import Profil from "./Profil/Profil"
-import Settings from "./Settings/Settings"
+import AddLocation from "./Renter/AddLocation"
 
 const Main = () => {
   return (
@@ -20,7 +20,7 @@ const Main = () => {
             <Route path="/about-us" element={<AboutUs/>}/>
             <Route path="/login" element={<Auth/>}/>
             <Route path="/user/*" element={<Profil/>}/>
-
+            <Route path="/renter/add-location" element={<AddLocation/>}/>
           </Routes>
         </div>
       <Footer/>
