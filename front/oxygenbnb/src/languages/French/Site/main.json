@@ -97,6 +97,27 @@
           "price_per_night": "nuit"
         }
       }
+    },
+    "renter": {
+      "add_location": {
+        "form_tsx": {
+          "title": "Ajoutez une nouvelle location",
+          "name": "Nom",
+          "description": "Description",
+          "price": "Prix par nuit",
+          "room": "Chambre",
+          "bed": "Lit",
+          "person": "Personne",
+          "activated": "Activé",
+          "desactivated": "Desactivé",
+          "save": "Sauvegarder",
+          "preview": "Prévision"
+        },
+        "preview_tsx": {
+          "save": "Sauvegarder",
+          "edit": "Modifier"
+        }
+      }
     }
   }
 }
