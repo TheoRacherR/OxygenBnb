@@ -11,9 +11,10 @@ import { FormAddLocationContext } from "../../../../../utils/Context/FormAddLoca
 import { Button, ButtonGroup } from "@mui/joy";
 
 const Preview = () => {
+  const { t } = useTranslation(["site_main"])
   const fees = 13;
 
-  const { setState, locationInformations, setLocationInformations } =
+  const { setState, locationInformations } =
     useContext(FormAddLocationContext);
 
   const [numberOfPeopleSelected, setNumberOfPeopleSelected] = useState(1);
@@ -76,10 +77,10 @@ const Preview = () => {
           <div>
             <ButtonGroup>
               <Button variant="solid" color="success">
-                Save
+                {t("site_main:main.renter.add_location.preview_tsx.save")}
               </Button>
               <Button variant="solid" color="warning" onClick={() => setState("Form")}>
-                Edit
+                {t("site_main:main.renter.add_location.preview_tsx.edit")}
               </Button>
             </ButtonGroup>
           </div>
@@ -92,7 +93,9 @@ const Preview = () => {
             />
             <div className={styles.description}>
               <p>
-                A location for {locationInformations.nb_person} people
+                {t(`site_main:main.room.room_tsx.a_room_for`, {
+                  numberMaxOfPeople: numberMaxOfPeople,
+                })}
                 {locationInformations.nb_person > 1 ? "s" : ""}
               </p>
               <p>{locationInformations.description}</p>
@@ -106,7 +109,7 @@ const Preview = () => {
                   {locationInformations.price}{" "}
                   {locationInformations.default_currency.substring(0, 1)}
                 </span>
-                /night
+                /{t('site_main:main.room.room_tsx.night')}
               </div>
 
               <div className={styles.dates} id="dates">
@@ -121,7 +124,7 @@ const Preview = () => {
                       })
                     }
                   >
-                    <div className={styles.ltop}>start_date</div>
+                    <div className={styles.ltop}>{t('site_main:main.room.room_tsx.start_date')}</div>
                     <div className={styles.lbottom}>
                       {dayjs(nightSelected.start).format("MMMM DD, YYYY")}
                     </div>
@@ -138,7 +141,7 @@ const Preview = () => {
                       })
                     }
                   >
-                    <div className={styles.rtop}>end_date</div>
+                    <div className={styles.rtop}>{t('site_main:main.room.room_tsx.end_date')}</div>
                     <div className={styles.rbottom}>
                       {dayjs(nightSelected.end).format("MMMM DD, YYYY")}
                     </div>
@@ -171,7 +174,7 @@ const Preview = () => {
                           }
                           format="DD/MM/YYYY"
                           sx={{ width: "100%" }}
-                          label={"start_date"}
+                          label={t('site_main:main.room.room_tsx.start_date')}
                           minDate={dayjs(new Date())}
                           onChange={(value) =>
                             handleChangeDates("start", value)
@@ -208,7 +211,7 @@ const Preview = () => {
                           }
                           format="DD/MM/YYYY"
                           sx={{ width: "100%" }}
-                          label={"end_date"}
+                          label={t('site_main:main.room.room_tsx.end_date')}
                           minDate={
                             dayjs(nightSelected.start) > dayjs(new Date())
                               ? dayjs(nightSelected.start).add(1, "day")
@@ -231,9 +234,9 @@ const Preview = () => {
                       })
                     }
                   >
-                    <div className={styles.ctop}>People</div>
+                    <div className={styles.ctop}>{t('site_main:main.room.room_tsx.nb_people')}</div>
                     <div className={styles.cbottom}>
-                      {numberOfPeopleSelected} Adult
+                      {numberOfPeopleSelected} {t('site_main:main.room.room_tsx.adult')}
                       {numberOfPeopleSelected > 1 ? "s" : ""}
                     </div>
                   </div>
@@ -251,7 +254,7 @@ const Preview = () => {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem>adult :</MenuItem>
+                    <MenuItem>{t('site_main:main.room.room_tsx.how_many_adult')}{" "}:</MenuItem>
                     <Button
                       onClick={() =>
                         setNumberOfPeopleSelected(
@@ -283,14 +286,12 @@ const Preview = () => {
                   sx={{ width: "100%", margin: "20px 0" }}
                   disabled={errorMaxPeople}
                 >
-                  Submit
+                  {t('site_main:main.room.room_tsx.people_submit')}
                 </Button>
               </div>
               {errorMaxPeople ? (
                 <p style={{ color: "red" }}>
-                  This reservation is for {locationInformations.nb_person}{" "}
-                  people{locationInformations.nb_person > 1 ? "s" : ""} max,
-                  please select an othor location
+                  {t(`site_main:main.room.room_tsx.max_people`, {numberMaxOfPeople: locationInformations.nb_person, people: locationInformations.nb_person > 1 ? "s" : ""})}
                 </p>
               ) : (
                 <></>
@@ -303,7 +304,7 @@ const Preview = () => {
                   <div className={styles.litem}>
                     <div className={styles.linfos}>
                       {locationInformations.price} {locationInformations.default_currency} x{" "}
-                      {numberOfNightSelected} nights
+                      {numberOfNightSelected} {t('site_main:main.room.room_tsx.night')}s
                     </div>
                     <div className={styles.lnumber}>
                       {calcPrices.totalPriceXPeople}{" "}
@@ -311,7 +312,7 @@ const Preview = () => {
                     </div>
                   </div>
                   <div className={styles.litem}>
-                    <div className={styles.linfos}>OxygenBNB's fees"</div>
+                    <div className={styles.linfos}>{t('site_main:main.room.room_tsx.fees')}</div>
                     <div className={styles.lnumber}>
                       {fees} {locationInformations.default_currency}
                     </div>
@@ -319,7 +320,7 @@ const Preview = () => {
                 </div>
                 <div className={styles.total}>
                   <div className={styles.titem}>
-                    <div className={styles.tinfos}>Total price</div>
+                    <div className={styles.tinfos}>{t('site_main:main.room.room_tsx.total')}</div>
                     <div className={styles.tnumber}>
                       {calcPrices.total} {locationInformations.default_currency}
                     </div>

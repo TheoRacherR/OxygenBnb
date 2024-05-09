@@ -79,7 +79,6 @@
         "linfos_night": "€ x {{numberOfNightSelected}} nights",
         "fees": "OxygenBNB's fees",
         "total": "Total price"
-
       }
     },
     "search": {
@@ -95,6 +94,27 @@
         "popup": {
           "default_paris": "Paris, France",
           "price_per_night": "night"
+        }
+      }
+    },
+    "renter": {
+      "add_location": {
+        "form_tsx": {
+          "title": "Add a new location",
+          "name": "Name",
+          "description": "Description",
+          "price": "Price per night",
+          "room": "Room",
+          "bed": "Bed",
+          "person": "Person",
+          "activated": "Activated",
+          "desactivated": "Desactivated",
+          "save": "Save",
+          "preview": "Preview"
+        },
+        "preview_tsx": {
+          "save": "Save",
+          "edit": "Edit"
         }
       }
     }
