@@ -17,7 +17,7 @@ WORKDIR /front/oxygenbnb
 
 COPY --from=DEV_IMAGE /front/oxygenbnb/dist/ /front/oxygenbnb/dist/
 
-EXPOSE 3001
+EXPOSE 3000
 
 COPY package.json .
 
