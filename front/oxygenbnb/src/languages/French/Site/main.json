@@ -1,0 +1,123 @@
+{
+  "main": {
+    "profil": {
+      "users": {
+        "user_blocks": {
+          "location_list_tsx": {
+            "summary": "Mes Locations",
+            "no_location": "Aucune location disponible",
+            "list": {
+              "id": "ID",
+              "title": "Titre",
+              "price": "Prix par nuit",
+              "type": "Type",
+              "valid": "Validé",
+              "owner": "Propriétaire",
+              "active": "Actif",
+              "true": "Oui",
+              "false": "Non"
+            }
+          },
+          "reservation_list_tsx": {
+            "summary": "Mes Réservations",
+            "no_reservation": "Aucune réservation disponible",
+            "table": {
+              "id": "ID de la Réservation",
+              "location_name": "Nom de la location",
+              "start_date": "Date de départ",
+              "end_date": "Date de fin"
+            }
+          },
+          "user_info_tsx": {
+            "summary": "Mes Informations",
+            "list": {
+              "firstname": "Prénom",
+              "lastname": "Nom de famille",
+              "id": "ID",
+              "email": "Email",
+              "role": "Rôle",
+              "created_at": "Créé le",
+              "updated_at": "Mise à jour le",
+              "save": "Sauvegarder"
+            }
+          }
+        },
+        "reservation": {
+          "discussion_tsx": {
+            "summary":  "Discussion pour la location"
+          },
+          "reservation_infos_tsx": {
+            "summary": "Informations",
+            "list": {
+              "id": "ID",
+              "nb_night": "Nombre de nuits",
+              "reservation_date": "Date de réservation",
+              "from": "Entre",
+              "to": "Et",
+              "total_price": "Prix total",
+              "nb_person": "Nombre de personnes"
+            }
+          }
+        }
+      }
+    },
+    "room": {
+      "room_tsx": {
+        "room": "Location",
+        "a_room_for": "Une location pour {{numberMaxOfPeople}} personnes",
+        "euro": "€",
+        "night": "nuit",
+        "start_date": "Date de départ",
+        "end_date": "Date de fin",
+        "nb_people": "Nombre de personnes",
+        "adult": "Adults",
+        "children": "Enfants",
+        "how_many_adult": "Combien d'adults",
+        "how_many_children": "Combien d'enfants",
+        "people_submit": "Réserver",
+        "max_people": "Cette réservation est pour {{numberMaxOfPeople}} personnes{{people}} max, sélectionnez une autre location",
+        "linfos_night": "€ x {{numberOfNightSelected}} nuits",
+        "fees": "Frais d'OxygenBNB",
+        "total": "Prix total"
+
+      }
+    },
+    "search": {
+      "item_search": {
+        "item_search_tsx": {
+          "bed": "lits",
+          "by": "Par",
+          "night": "nuit",
+          "total": "pour un total de"
+        }
+      },
+      "search_tsx": {
+        "popup": {
+          "default_paris": "Paris, France",
+          "price_per_night": "nuit"
+        }
+      }
+    },
+    "renter": {
+      "add_location": {
+        "form_tsx": {
+          "title": "Ajoutez une nouvelle location",
+          "name": "Nom",
+          "description": "Description",
+          "price": "Prix par nuit",
+          "room": "Chambre",
+          "bed": "Lit",
+          "person": "Personne",
+          "activated": "Activé",
+          "desactivated": "Desactivé",
+          "save": "Sauvegarder",
+          "preview": "Prévision"
+        },
+        "preview_tsx": {
+          "save": "Sauvegarder",
+          "edit": "Modifier"
+        }
+      }
+    }
+  }
+}

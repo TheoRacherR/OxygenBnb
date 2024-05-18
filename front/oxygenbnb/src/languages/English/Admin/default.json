@@ -1,0 +1,21 @@
+{
+  "admin": {
+    "home": {},
+    "top_band_tsx": {
+      "title": "Dashboard",
+      "img_logo": {
+        "alt_img": "Logo"
+      },
+      "listing_item": {
+        "home": "Home",
+        "locations": "Locations",
+        "messages": "Messages",
+
+        "users": "Users"
+      }
+    },
+    "bottom_band_tsx": {
+      "settings": "Settings"
+    }
+  }
+}

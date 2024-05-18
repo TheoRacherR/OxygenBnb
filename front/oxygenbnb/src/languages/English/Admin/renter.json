@@ -1,0 +1,103 @@
+{
+  "renter": {
+    "dashboard": {
+      "dashboard_tsx": {
+        "title": "Dashboard",
+        "list": []
+      }
+    },
+    "messages": {
+      "messages_tsx": {
+        "title": "Messages",
+        "search": "Search",
+        "no_message": "No message"
+      },
+      "history_messages_tsx": {
+        "year": "{{time}} year{{plural}} ago",
+        "month": "{{time}} month{{plural}} ago",
+        "week": "{{time}} week{{plural}} ago",
+        "day": "{{time}} day{{plural}} ago",
+        "hour": "{{time}} hour{{plural}} ago",
+        "minute": "{{time}} minute{{plural}} ago",
+        "second": "{{time}} second{{plural}} ago"
+      },
+      "discussion": {
+        "top_info_discussion_tsx": {
+          "online": "Online",
+          "offline": "Offline",
+          "location_information": "For location n°"
+        },
+        "form_message": {
+          "form_message_tsx": {
+            "placeholder": "Type here...",
+            "button_send": "Send"
+          }
+        },
+        "list_messages": {
+          "list_messages_tsx": {
+            "format": "MM/DD/YYYY",
+            "today": "Today",
+            "yesterday": "Yesterday"
+          }
+        }
+      }
+    },
+    "locations": {
+      "table_component_tsx": {
+        "no_location": "No location available",
+        "thead": {
+          "id": "ID",
+          "title": "Title",
+          "price": "Price",
+          "validated": "Validated"
+        }
+      },
+      "locations_tsx": {
+        "title": "My Locations",
+        "currentPageTitle": "Locations"
+      },
+      "location": {
+        "location_tsx": {
+          "toplevelpanel": {
+            "title": "My Location n°",
+            "currentPageTitle": "Location n°"
+          },
+          "tab_list": {
+            "informations": "Informations",
+            "request": "Requests"
+          }
+        },
+        "informations_tsx": {
+          "title": "Informations",
+          "not_active": "Not active",
+          "list": {
+            "id": "ID",
+            "title": "Title",
+            "price": "Price per night",
+            "type": "Type",
+            "activate": "Activate",
+            "desactivate": "Desactivate",
+            "validated": "Validated",
+            "owner": "Owner",
+            "save": "Save"
+          }
+        },
+        "manage_tsx": {},
+        "requests_tsx": {
+          "no_location": "No location available",
+          "thead": {
+            "name": "Name",
+            "last_message": "Last message",
+            "user": "User"
+          },
+          "you": "You"
+        }
+      }
+    },
+    "settings": {
+      "title": "Title",
+      
+      "save": "Save"
+    }
+  }
+}
