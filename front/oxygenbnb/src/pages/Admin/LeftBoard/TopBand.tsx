@@ -38,16 +38,16 @@ const TopBand = ({ location }) => {
           }}
         >
           {/* Renter */}
-          <Link to="renter">
+          <Link to="">
             <ListItem>
               <ListItemButton
                 sx={{ 
                   borderRadius: "5px",
-                  color: location.pathname === "/admin/renter" || location.pathname === "/admin/renter/§=" ? "#0A0E0F" : "white"
+                  color: location.pathname === "/admin" || location.pathname === "/admin/§=" ? "#0A0E0F" : "white"
                 }}
                 selected={
-                  location.pathname === "/admin/renter" ||
-                  location.pathname === "/admin/renter"
+                  location.pathname === "/admin" ||
+                  location.pathname === "/admin"
                 }
               >
                 <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>

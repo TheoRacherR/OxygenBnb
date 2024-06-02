@@ -15,6 +15,7 @@ import LocationList from "./MainBoard/Admin/Locations/LocationList";
 import User from "./MainBoard/Admin/Users/User";
 import ReservationPage from "./MainBoard/Admin/Users/Reservation/ReservationPage";
 import LocationAdmin from "./MainBoard/Admin/Locations/LocationPage"
+import NotFound from "./Errors/404";
 
 const theme = extendTheme({ cssVarPrefix: "demo" });
 
@@ -42,9 +43,9 @@ const Admin = () => {
       <div className={styles.main_board}>
         <MessageContextProvider>
           <Routes>
-            {/* Renter */}
             <Route path="/" element={<DashboardRenter />} />
-            <Route path="/renter" element={<DashboardRenter />} />
+
+            {/* Renter */}
             <Route path="/renter/locations" element={<Locations />} />
             <Route path="/renter/location/:id" element={<LocationRenter />} />
             <Route path="/renter/messages" element={<Messages />} />
@@ -58,6 +59,8 @@ const Admin = () => {
             <Route path="/locations/list" element={<LocationList />} />
             <Route path="/location/:id" element={<LocationAdmin />} />
             <Route path="/location/:location_id/reservation/:reservation_id" element={<ReservationPage />} />
+
+            <Route path="/*" element={<NotFound />} />
           </Routes>
         </MessageContextProvider>
       </div>
