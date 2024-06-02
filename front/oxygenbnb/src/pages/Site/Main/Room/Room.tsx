@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from "./Room.module.scss";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { MouseEvent, useContext, useEffect, useState } from "react";
@@ -9,6 +9,7 @@ import dayjs from "dayjs";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useTranslation } from "react-i18next";
+import "dayjs/locale/fr";
 
 const Room = () => {
   const { t } = useTranslation(["site_main"]);
@@ -23,6 +24,7 @@ const Room = () => {
     numberOfNightSelected,
     nightSelected,
     setNightSelected,
+    setNumberOfNightSelected
   } = useContext(SearchContext);
   const [anchor, setAnchor] = useState<{
     date_start: null | HTMLElement;
@@ -55,6 +57,18 @@ const Room = () => {
       setNightSelected((prev) => ({ ...prev, end: dateEnd.toString() }));
     }
   };
+
+  useEffect(() => {
+    if(nightSelected.start){
+      if(nightSelected.end){
+        const date_diff = dayjs(nightSelected.end).diff(dayjs(nightSelected.start), "day")
+        setNumberOfNightSelected(date_diff)
+        // const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
+        // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
+        // setNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
+      }
+    }
+  }, [nightSelected.start, nightSelected.end])
 
   useEffect(() => {
     setCalcPrices({
@@ -120,7 +134,7 @@ const Room = () => {
                   >
                     <div className={styles.ltop}>{t('site_main:main.room.room_tsx.start_date')}</div>
                     <div className={styles.lbottom}>
-                      {dayjs(nightSelected.start).format("MMMM DD, YYYY")}
+                      {dayjs(nightSelected.start).locale(t("site_main:main.room.room_tsx.format")).format(t("site_main:main.room.room_tsx.date_format"))}
                     </div>
                   </div>
 
@@ -137,7 +151,7 @@ const Room = () => {
                   >
                     <div className={styles.rtop}>{t('site_main:main.room.room_tsx.end_date')}</div>
                     <div className={styles.rbottom}>
-                      {dayjs(nightSelected.end).format("MMMM DD, YYYY")}
+                      {dayjs(nightSelected.end).locale(t("site_main:main.room.room_tsx.format")).format(t("site_main:main.room.room_tsx.date_format"))}
                     </div>
                   </div>
 
@@ -166,7 +180,7 @@ const Room = () => {
                               ? null
                               : dayjs(nightSelected.start)
                           }
-                          format="DD/MM/YYYY"
+                          format={t('site_main:main.room.room_tsx.date_picker_format')}
                           sx={{ width: "100%" }}
                           label={t('site_main:main.room.room_tsx.start_date')}
                           minDate={dayjs(new Date())}
@@ -203,7 +217,7 @@ const Room = () => {
                               ? null
                               : dayjs(nightSelected.end)
                           }
-                          format="DD/MM/YYYY"
+                          format={t('site_main:main.room.room_tsx.date_picker_format')}
                           sx={{ width: "100%" }}
                           label={t('site_main:main.room.room_tsx.end_date')}
                           minDate={
@@ -283,14 +297,16 @@ const Room = () => {
               </div>
 
               <div className={styles.submit_button}>
-                <Button
-                  variant="contained"
-                  color="warning"
-                  sx={{ width: "100%", margin: "20px 0" }}
-                  disabled={errorMaxPeople}
-                >
-                  {t('site_main:main.room.room_tsx.people_submit')}
-                </Button>
+                <Link to="reservation">
+                  <Button
+                    variant="contained"
+                    color="warning"
+                    sx={{ width: "100%", margin: "20px 0" }}
+                    disabled={errorMaxPeople}
+                  >
+                    {t('site_main:main.room.room_tsx.people_submit')}
+                  </Button>
+                </Link>
               </div>
               {errorMaxPeople ? (
                 <p style={{ color: "red" }}>

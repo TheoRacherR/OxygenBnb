@@ -1,0 +1,103 @@
+.container_dates {
+  color: #000;
+  width: 400px;
+  margin: 30px 0;
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+
+    .left {
+      p {
+        font-weight: bold;
+      }
+    }
+
+    .right {
+      font-weight: bold;
+      text-decoration: underline;
+    }
+  }
+}
+
+.container_payments {
+  color: #000;
+  width: 400px;
+  margin: 30px 0;
+
+  .choice {
+    display: flex;
+    flex-direction: column;
+
+    .item:first-child{
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+
+    }
+
+    .item:last-child{
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border-bottom: 1px solid black;
+
+    }
+    .item {
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+      border-top: 1px solid black;
+      padding: 20px;
+
+      display: flex;
+      justify-content: space-between;
+      cursor: pointer;
+
+    }
+
+    #item_selected {
+      background-color: #7f7f7f19;
+    }
+  }
+}
+
+.container_total_price {
+  // si fullscreen
+  position: sticky;
+  top: 30px;
+  // fin de si fullscreen
+
+  color: #000;
+  width: 400px;
+  margin: 30px 0;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid #6f6f6f34;
+  display: flex;
+  flex-direction: column;
+
+  .title {
+    margin-bottom: 20px;
+  }
+
+  .price_details {
+    .line {
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .line:first-child {
+      margin-top: 0;
+    }
+  }
+
+  .total {
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+  }
+}
+
+.container_login {
+  color: #000;
+  width: 400px;
+  margin: 30px 0;
+}

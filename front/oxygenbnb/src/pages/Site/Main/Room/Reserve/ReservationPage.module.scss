@@ -1,0 +1,19 @@
+.container {
+  width: 100vw;
+  min-height: 100vh;
+
+  .wrapper {
+    width: 1000px;
+    margin: 0 auto;
+    // background-color: red;
+
+    .placements {
+      display: flex;
+  
+      .right {
+        margin-left: 90px;
+      }
+
+    }
+  }
+}

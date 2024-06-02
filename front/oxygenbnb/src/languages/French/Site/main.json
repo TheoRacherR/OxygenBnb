@@ -44,7 +44,7 @@
         },
         "reservation": {
           "discussion_tsx": {
-            "summary":  "Discussion pour la location"
+            "summary": "Discussion pour la location"
           },
           "reservation_infos_tsx": {
             "summary": "Informations",
@@ -70,16 +70,54 @@
         "start_date": "Date de départ",
         "end_date": "Date de fin",
         "nb_people": "Nombre de personnes",
-        "adult": "Adults",
-        "children": "Enfants",
-        "how_many_adult": "Combien d'adults",
+        "adult": "Adulte",
+        "children": "Enfant",
+        "format": "fr",
+        "date_format": "DD MMMM YYYY",
+        "date_picker_format": "DD/MM/YYYY",
+        "how_many_adult": "Combien d'adulte(s)",
         "how_many_children": "Combien d'enfants",
         "people_submit": "Réserver",
         "max_people": "Cette réservation est pour {{numberMaxOfPeople}} personnes{{people}} max, sélectionnez une autre location",
         "linfos_night": "€ x {{numberOfNightSelected}} nuits",
         "fees": "Frais d'OxygenBNB",
         "total": "Prix total"
-
+      },
+      "reserve": {
+        "reservation_page_tsx": {
+          "title": "Réservation"
+        },
+        "blocks": {
+          "dates_tsx": {
+            "title": "Sommaire",
+            "edit": "Modifier",
+            "dates": "Dates",
+            "from": "Du",
+            "format": "en",
+            "dates_format_start": "DD MMM",
+            "to": "au",
+            "dates_format_end": "DD MMM YYYY",
+            "people": "Personnes",
+            "adult": "adulte",
+            "children": "enfant"
+          },
+          "login_tsx": {
+            "title": "Connectez-vous ou Inscrivez-vous",
+            "button": "Lien vers la connexion"
+          },
+          "payments_tsx": {
+            "title": "Paiements"
+          },
+          "total_price_tsx": {
+            "cleaning_fees": "Frais de nettoyages",
+            "service_fees": "Fais de service d'Oxygen",
+            "taxes": "Taxes",
+            "title": "Détails des prix",
+            "night": "nuit",
+            "total": "Total",
+            "submit": "Envoyer"
+          }
+        }
       }
     },
     "search": {

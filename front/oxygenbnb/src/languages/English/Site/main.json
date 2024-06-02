@@ -72,6 +72,9 @@
         "nb_people": "Number of people",
         "adult": "Adult",
         "children": "Children",
+        "format": "en",
+        "date_format": "MMMM DD, YYYY",
+        "date_picker_format": "DD/MM/YYYY",
         "how_many_adult": "How many adults",
         "how_many_children": "How many children",
         "people_submit": "Reserve",
@@ -79,6 +82,42 @@
         "linfos_night": "€ x {{numberOfNightSelected}} nights",
         "fees": "OxygenBNB's fees",
         "total": "Total price"
+      },
+      "reserve": {
+        "reservation_page_tsx": {
+          "title": "Reservation"
+        },
+        "blocks": {
+          "dates_tsx": {
+            "title": "Summary",
+            "edit": "Edit",
+            "dates": "Dates",
+            "from": "From",
+            "format": "en",
+            "dates_format_start": "DD MMM",
+            "to": "to",
+            "dates_format_end": "DD MMM YYYY",
+            "people": "Peoples",
+            "adult": "adult",
+            "children": "children"
+          },
+          "login_tsx": {
+            "title": "Log in or sign up",
+            "button": "Access to login form"
+          },
+          "payments_tsx": {
+            "title": "Payments"
+          },
+          "total_price_tsx": {
+            "cleaning_fees": "Cleaning fee",
+            "service_fees": "Oxygen service fee",
+            "taxes": "Taxes",
+            "title": "Price details",
+            "night": "night",
+            "total": "Total",
+            "submit": "Submit"
+          }
+        }
       }
     },
     "search": {

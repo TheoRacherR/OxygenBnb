@@ -45,9 +45,11 @@ const MiddleExtended = () => {
   useEffect(() => {
     if(nightSelected.start){
       if(nightSelected.end){
-        const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
+        const date_diff = dayjs(nightSelected.end).diff(dayjs(nightSelected.start), "day")
+        setNumberOfNightSelected(date_diff)
+        // const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
         // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
-        setNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
+        // setNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
       }
     }
   }, [nightSelected.start, nightSelected.end])

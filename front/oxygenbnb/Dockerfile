@@ -1,28 +1,42 @@
-FROM node:16.13.0-alpine AS DEV_IMAGE
+FROM node:18-alpine AS DEV_IMAGE
 
+# set working directory
 WORKDIR /front/oxygenbnb
 
-COPY package.json .
+# add `/app/node_modules/.bin` to $PATH
+ENV PATH /front/oxygenbnb/node_modules/.bin:$PATH
 
-RUN npm i
+# install app dependencies
+COPY package.json ./
 
-COPY . .
+COPY vite.config.ts .
 
+RUN npm install
+
+# add app
+COPY . ./
+
+# start app
+# CMD ["yarn", "start"]
 CMD ["npm", "run", "dev"]
 
 
-FROM node:16.13.0-alpine AS PROD_IMAGE
+FROM node:18-alpine as PROD_IMAGE
 
 WORKDIR /front/oxygenbnb
 
 COPY --from=DEV_IMAGE /front/oxygenbnb/dist/ /front/oxygenbnb/dist/
 
-EXPOSE 3001
-
 COPY package.json .
+
+RUN npm install
 
 COPY vite.config.ts .
 
-RUN npm install typescript
+COPY . .
+
+RUN npm run build
+
+EXPOSE 5173
 
 CMD [ "npm", "run", "preview" ]
