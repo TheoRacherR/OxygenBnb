@@ -43,6 +43,7 @@ const Admin = () => {
         <MessageContextProvider>
           <Routes>
             {/* Renter */}
+            <Route path="/" element={<DashboardRenter />} />
             <Route path="/renter" element={<DashboardRenter />} />
             <Route path="/renter/locations" element={<Locations />} />
             <Route path="/renter/location/:id" element={<LocationRenter />} />
