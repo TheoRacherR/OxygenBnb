@@ -1,6 +1,5 @@
 import React from "react";
 import styles from "./Styles.module.scss";
-import Input from "@mui/joy/Input";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -55,7 +54,7 @@ const dataTemp: {
 ];
 
 const LocationList = ({ id }) => {
-  const { t } = useTranslation(["admin_admin"]);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <Accordion sx={{ backgroundColor: "#0A0E0F" }}>
@@ -71,7 +70,8 @@ const LocationList = ({ id }) => {
         }}
       >
         <AssignmentRoundedIcon />
-        &nbsp;{t("admin_admin:users.user_blocks.location_list_tsx.title")} {id}
+        &nbsp;
+        {t("admin:admin.users.user_blocks.location_list_tsx.title")} {id}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -96,7 +96,7 @@ const LocationList = ({ id }) => {
             {dataTemp.length === 0 ? (
               <div style={{ color: "white" }}>
                 {t(
-                  "admin_admin:users.user_blocks.location_list_tsx.no_location"
+                  "admin:admin.users.user_blocks.location_list_tsx.no_location"
                 )}
               </div>
             ) : (
@@ -105,22 +105,22 @@ const LocationList = ({ id }) => {
                   <tr>
                     <th>
                       {t(
-                        "admin_admin:locations.location_infos.location_infos_tsx.list.id"
+                        "admin:admin.locations.location_infos.location_infos_tsx.list.id"
                       )}
                     </th>
                     <th>
                       {t(
-                        "admin_admin:locations.location_infos.location_infos_tsx.list.title"
+                        "admin:admin.locations.location_infos.location_infos_tsx.list.title"
                       )}
                     </th>
                     <th>
                       {t(
-                        "admin_admin:locations.location_infos.location_infos_tsx.list.price"
+                        "admin:admin.locations.location_infos.location_infos_tsx.list.price"
                       )}
                     </th>
                     <th>
                       {t(
-                        "admin_admin:locations.location_infos.location_infos_tsx.list.valid"
+                        "admin:admin.locations.location_infos.location_infos_tsx.list.valid"
                       )}
                     </th>
                     <th></th>

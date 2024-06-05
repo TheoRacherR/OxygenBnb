@@ -57,7 +57,7 @@ const dataTemp: {
 ];
 
 const ReservationList = () => {
-  const { t } = useTranslation(["site_main"]) 
+  const { t } = useTranslation(["site"]);
   return (
     <Accordion sx={{ backgroundColor: "#f0f0f0" }}>
       <AccordionSummary
@@ -72,7 +72,8 @@ const ReservationList = () => {
         }}
       >
         <CheckBoxRoundedIcon />
-        &nbsp;{t("site_main:main.profil.users.user_blocks.reservation_list_tsx.summary")}
+        &nbsp;
+        {t("site:main.profil.users.user_blocks.reservation_list_tsx.summary")}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -95,15 +96,35 @@ const ReservationList = () => {
             }}
           >
             {dataTemp.length === 0 ? (
-              <div style={{ color: "black" }}>{t("site_main:main.profil.users.user_blocks.reservation_list_tsx.no_reservation")}</div>
+              <div style={{ color: "black" }}>
+                {t(
+                  "site:main.profil.users.user_blocks.reservation_list_tsx.no_reservation"
+                )}
+              </div>
             ) : (
               <Table sx={{ borderRadius: 20, color: "black" }}>
                 <thead>
                   <tr>
-                    <th>{t("site_main:main.profil.users.user_blocks.reservation_list_tsx.table.id")}</th>
-                    <th>{t("site_main:main.profil.users.user_blocks.reservation_list_tsx.table.location_name")}</th>
-                    <th>{t("site_main:main.profil.users.user_blocks.reservation_list_tsx.table.start_date")}</th>
-                    <th>{t("site_main:main.profil.users.user_blocks.reservation_list_tsx.table.end_date")}</th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.reservation_list_tsx.table.id"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.reservation_list_tsx.table.location_name"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.reservation_list_tsx.table.start_date"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.reservation_list_tsx.table.end_date"
+                      )}
+                    </th>
                     <th></th>
                   </tr>
                 </thead>

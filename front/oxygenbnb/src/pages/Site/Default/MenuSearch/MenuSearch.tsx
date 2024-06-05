@@ -1,5 +1,5 @@
 import styles from "./MenuSearch.module.scss";
-import logo from "../../../../assets/Logo OxBNB Menu ow Honr.png"
+import logo from "../../../../assets/Logo OxBNB Menu ow Honr.png";
 import { Link } from "react-router-dom";
 import RightMenuSearch from "./RightMenu/RightMenuSearch";
 
@@ -7,26 +7,24 @@ import { useTranslation } from "react-i18next";
 import MiddleExtended from "./MiddleExtended/MiddleExtended";
 
 const MenuComponent = () => {
-  const { t } = useTranslation(['site_default']);
+  const { t } = useTranslation(["site"]);
 
   return (
     <>
       <menu className={styles.container}>
         <div className={styles.left}>
           <Link to="/">
-            <img 
+            <img
               src={logo}
-              alt={t(
-                "site_default:default.menu.menu_tsx.container.left.alt_img"
-              )} 
+              alt={t("site:default.menu.menu_tsx.container.left.alt_img")}
             />
           </Link>
         </div>
-        <MiddleExtended/>
-        <RightMenuSearch/>
+        <MiddleExtended />
+        <RightMenuSearch />
       </menu>
     </>
   );
 };
 
-export default MenuComponent
+export default MenuComponent;

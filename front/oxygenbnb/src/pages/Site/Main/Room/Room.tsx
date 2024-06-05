@@ -12,7 +12,7 @@ import { useTranslation } from "react-i18next";
 import "dayjs/locale/fr";
 
 const Room = () => {
-  const { t } = useTranslation(["site_main"]);
+  const { t } = useTranslation(["site"]);
   const { id } = useParams();
   const thisPrice = 35;
   const fees = 13;
@@ -24,7 +24,7 @@ const Room = () => {
     numberOfNightSelected,
     nightSelected,
     setNightSelected,
-    setNumberOfNightSelected
+    setNumberOfNightSelected,
   } = useContext(SearchContext);
   const [anchor, setAnchor] = useState<{
     date_start: null | HTMLElement;
@@ -59,16 +59,19 @@ const Room = () => {
   };
 
   useEffect(() => {
-    if(nightSelected.start){
-      if(nightSelected.end){
-        const date_diff = dayjs(nightSelected.end).diff(dayjs(nightSelected.start), "day")
-        setNumberOfNightSelected(date_diff)
+    if (nightSelected.start) {
+      if (nightSelected.end) {
+        const date_diff = dayjs(nightSelected.end).diff(
+          dayjs(nightSelected.start),
+          "day"
+        );
+        setNumberOfNightSelected(date_diff);
         // const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
         // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
         // setNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
       }
     }
-  }, [nightSelected.start, nightSelected.end])
+  }, [nightSelected.start, nightSelected.end]);
 
   useEffect(() => {
     setCalcPrices({
@@ -90,7 +93,7 @@ const Room = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         <h1>
-          {t("site_main:main.room.room_tsx.room")} {id}
+          {t("site:main.room.room_tsx.room")} {id}
         </h1>
         <div className={styles.box}>
           <div className={styles.left}>
@@ -100,7 +103,7 @@ const Room = () => {
             />
             <div className={styles.description}>
               <p>
-                {t(`site_main:main.room.room_tsx.a_room_for`, {
+                {t(`site:main.room.room_tsx.a_room_for`, {
                   numberMaxOfPeople: numberMaxOfPeople,
                 })}
                 {numberMaxOfPeople > 1 ? "s" : ""}
@@ -117,7 +120,10 @@ const Room = () => {
           <div className={styles.right}>
             <div className={styles.sector_top}>
               <div className={styles.price}>
-                <span style={{ fontSize: 30 }}>{thisPrice} {t('site_main:main.room.room_tsx.euro')}</span>/{t('site_main:main.room.room_tsx.night')}
+                <span style={{ fontSize: 30 }}>
+                  {thisPrice} {t("site:main.room.room_tsx.euro")}
+                </span>
+                /{t("site:main.room.room_tsx.night")}
               </div>
 
               <div className={styles.dates} id="dates">
@@ -132,9 +138,13 @@ const Room = () => {
                       })
                     }
                   >
-                    <div className={styles.ltop}>{t('site_main:main.room.room_tsx.start_date')}</div>
+                    <div className={styles.ltop}>
+                      {t("site:main.room.room_tsx.start_date")}
+                    </div>
                     <div className={styles.lbottom}>
-                      {dayjs(nightSelected.start).locale(t("site_main:main.room.room_tsx.format")).format(t("site_main:main.room.room_tsx.date_format"))}
+                      {dayjs(nightSelected.start)
+                        .locale(t("site:main.room.room_tsx.format"))
+                        .format(t("site:main.room.room_tsx.date_format"))}
                     </div>
                   </div>
 
@@ -149,9 +159,13 @@ const Room = () => {
                       })
                     }
                   >
-                    <div className={styles.rtop}>{t('site_main:main.room.room_tsx.end_date')}</div>
+                    <div className={styles.rtop}>
+                      {t("site:main.room.room_tsx.end_date")}
+                    </div>
                     <div className={styles.rbottom}>
-                      {dayjs(nightSelected.end).locale(t("site_main:main.room.room_tsx.format")).format(t("site_main:main.room.room_tsx.date_format"))}
+                      {dayjs(nightSelected.end)
+                        .locale(t("site:main.room.room_tsx.format"))
+                        .format(t("site:main.room.room_tsx.date_format"))}
                     </div>
                   </div>
 
@@ -180,9 +194,11 @@ const Room = () => {
                               ? null
                               : dayjs(nightSelected.start)
                           }
-                          format={t('site_main:main.room.room_tsx.date_picker_format')}
+                          format={t(
+                            "site:main.room.room_tsx.date_picker_format"
+                          )}
                           sx={{ width: "100%" }}
-                          label={t('site_main:main.room.room_tsx.start_date')}
+                          label={t("site:main.room.room_tsx.start_date")}
                           minDate={dayjs(new Date())}
                           onChange={(value) =>
                             handleChangeDates("start", value)
@@ -217,9 +233,11 @@ const Room = () => {
                               ? null
                               : dayjs(nightSelected.end)
                           }
-                          format={t('site_main:main.room.room_tsx.date_picker_format')}
+                          format={t(
+                            "site:main.room.room_tsx.date_picker_format"
+                          )}
                           sx={{ width: "100%" }}
-                          label={t('site_main:main.room.room_tsx.end_date')}
+                          label={t("site:main.room.room_tsx.end_date")}
                           minDate={
                             dayjs(nightSelected.start) > dayjs(new Date())
                               ? dayjs(nightSelected.start).add(1, "day")
@@ -242,9 +260,12 @@ const Room = () => {
                       })
                     }
                   >
-                    <div className={styles.ctop}>{t('site_main:main.room.room_tsx.nb_people')}</div>
+                    <div className={styles.ctop}>
+                      {t("site:main.room.room_tsx.nb_people")}
+                    </div>
                     <div className={styles.cbottom}>
-                      {numberOfPeopleSelected.adult} {t('site_main:main.room.room_tsx.adult')}
+                      {numberOfPeopleSelected.adult}{" "}
+                      {t("site:main.room.room_tsx.adult")}
                       {numberOfPeopleSelected.adult > 1 ? "s" : ""}
                     </div>
                   </div>
@@ -262,7 +283,9 @@ const Room = () => {
                       "aria-labelledby": "basic-button",
                     }}
                   >
-                    <MenuItem>{t('site_main:main.room.room_tsx.how_many_adult')}{" "}:</MenuItem>
+                    <MenuItem>
+                      {t("site:main.room.room_tsx.how_many_adult")} :
+                    </MenuItem>
                     <Button
                       onClick={() =>
                         setNumberOfPeopleSelected((prev) => ({
@@ -287,7 +310,7 @@ const Room = () => {
                     </Button>
 
                     {/* <MenuItem>
-                      {t('site_main:main.room.room_tsx.how_many_children')}{" "}:
+                      {t('site:main.room.room_tsx.how_many_children')}{" "}:
                     </MenuItem>
                     <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children-1}))} disabled={numberOfPeopleSelected.children <= 0}><RemoveRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
                     <Button disabled>{numberOfPeopleSelected.children}</Button>
@@ -304,13 +327,16 @@ const Room = () => {
                     sx={{ width: "100%", margin: "20px 0" }}
                     disabled={errorMaxPeople}
                   >
-                    {t('site_main:main.room.room_tsx.people_submit')}
+                    {t("site:main.room.room_tsx.people_submit")}
                   </Button>
                 </Link>
               </div>
               {errorMaxPeople ? (
                 <p style={{ color: "red" }}>
-                  {t(`site_main:main.room.room_tsx.max_people`, {numberMaxOfPeople: numberMaxOfPeople, people: numberMaxOfPeople > 1 ? "s" : ""})}
+                  {t(`site:main.room.room_tsx.max_people`, {
+                    numberMaxOfPeople: numberMaxOfPeople,
+                    people: numberMaxOfPeople > 1 ? "s" : "",
+                  })}
                 </p>
               ) : (
                 <></>
@@ -322,21 +348,32 @@ const Room = () => {
                 <div className={styles.listing}>
                   <div className={styles.litem}>
                     <div className={styles.linfos}>
-                      {thisPrice} {t('site_main:main.room.room_tsx.euro')} x {numberOfNightSelected} {t('site_main:main.room.room_tsx.night')}s
+                      {thisPrice} {t("site:main.room.room_tsx.euro")} x{" "}
+                      {numberOfNightSelected}{" "}
+                      {t("site:main.room.room_tsx.night")}s
                     </div>
                     <div className={styles.lnumber}>
-                      {calcPrices.totalPriceXPeople} {t('site_main:main.room.room_tsx.euro')}
+                      {calcPrices.totalPriceXPeople}{" "}
+                      {t("site:main.room.room_tsx.euro")}
                     </div>
                   </div>
                   <div className={styles.litem}>
-                    <div className={styles.linfos}>{t('site_main:main.room.room_tsx.fees')}</div>
-                    <div className={styles.lnumber}>{fees} {t('site_main:main.room.room_tsx.euro')}</div>
+                    <div className={styles.linfos}>
+                      {t("site:main.room.room_tsx.fees")}
+                    </div>
+                    <div className={styles.lnumber}>
+                      {fees} {t("site:main.room.room_tsx.euro")}
+                    </div>
                   </div>
                 </div>
                 <div className={styles.total}>
                   <div className={styles.titem}>
-                    <div className={styles.tinfos}>{t('site_main:main.room.room_tsx.total')}</div>
-                    <div className={styles.tnumber}>{calcPrices.total} {t('site_main:main.room.room_tsx.euro')}</div>
+                    <div className={styles.tinfos}>
+                      {t("site:main.room.room_tsx.total")}
+                    </div>
+                    <div className={styles.tnumber}>
+                      {calcPrices.total} {t("site:main.room.room_tsx.euro")}
+                    </div>
                   </div>
                 </div>
               </div>

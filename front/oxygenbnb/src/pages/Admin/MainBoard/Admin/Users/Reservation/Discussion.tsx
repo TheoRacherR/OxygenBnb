@@ -42,7 +42,7 @@ const discussionData = {
 };
 
 const Discussion = ({ location_id, discussion_id }) => {
-  const { t } = useTranslation(["admin_admin"]);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <Accordion sx={{ backgroundColor: "#0A0E0F" }}>
@@ -60,10 +60,10 @@ const Discussion = ({ location_id, discussion_id }) => {
         <PersonRoundedIcon />
         &nbsp;
         {t(
-          "admin_admin:users.reservation.discussion_tsx.summary.discussions"
+          "admin:admin.users.reservation.discussion_tsx.summary.discussions"
         )}{" "}
         {discussion_id}{" "}
-        {t("admin_admin:users.reservation.discussion_tsx.summary.about_loc")}{" "}
+        {t("admin:admin.users.reservation.discussion_tsx.summary.about_loc")}{" "}
         {location_id}
       </AccordionSummary>
       <AccordionDetails
@@ -77,7 +77,11 @@ const Discussion = ({ location_id, discussion_id }) => {
           {discussionData.discussion
             .sort((a, b) => a.date.getTime() - b.date.getTime())
             .map((item, index) => (
-              <div className={styles.item} key={index} style={{ fontSize: "small" }}>
+              <div
+                className={styles.item}
+                key={index}
+                style={{ fontSize: "small" }}
+              >
                 <span style={{ color: "grey" }}>
                   {item.date.toLocaleString()}
                 </span>{" "}

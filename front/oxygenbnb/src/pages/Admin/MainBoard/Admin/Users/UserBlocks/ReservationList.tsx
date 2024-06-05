@@ -57,7 +57,7 @@ const dataTemp: {
 ];
 
 const ReservationList = ({ user_id, location_id }) => {
-  const { t } = useTranslation(["admin_admin"]);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <Accordion sx={{ backgroundColor: "#0A0E0F" }}>
@@ -74,12 +74,13 @@ const ReservationList = ({ user_id, location_id }) => {
       >
         <CheckBoxRoundedIcon />
         &nbsp;
-        {
-          user_id == 0 ?
-            `${t("admin_admin:users.user_blocks.reservation_list_tsx.reservation_location")} ${location_id}`
-          :
-            `${t("admin_admin:users.user_blocks.reservation_list_tsx.reservation_user")} ${user_id}`
-        }
+        {user_id == 0
+          ? `${t(
+              "admin:admin.users.user_blocks.reservation_list_tsx.reservation_location"
+            )} ${location_id}`
+          : `${t(
+              "admin:admin.users.user_blocks.reservation_list_tsx.reservation_user"
+            )} ${user_id}`}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -101,16 +102,36 @@ const ReservationList = ({ user_id, location_id }) => {
               borderColor: "grey",
             }}
           >
-            {dataTemp.length === 0 ? 
-              <div style={{color: "white"}}>{t("admin_admin:users.user_blocks.reservation_list_tsx.no_reservation")}</div>
-            : 
+            {dataTemp.length === 0 ? (
+              <div style={{ color: "white" }}>
+                {t(
+                  "admin:admin.users.user_blocks.reservation_list_tsx.no_reservation"
+                )}
+              </div>
+            ) : (
               <Table sx={{ borderRadius: 20, color: "#fff" }}>
                 <thead>
                   <tr>
-                    <th>{t("admin_admin:users.user_blocks.reservation_list_tsx.table.id")}</th>
-                    <th>{t("admin_admin:users.user_blocks.reservation_list_tsx.table.location_name")}</th>
-                    <th>{t("admin_admin:users.user_blocks.reservation_list_tsx.table.start_date")}</th>
-                    <th>{t("admin_admin:users.user_blocks.reservation_list_tsx.table.end_date")}</th>
+                    <th>
+                      {t(
+                        "admin:admin.users.user_blocks.reservation_list_tsx.table.id"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "admin:admin.users.user_blocks.reservation_list_tsx.table.location_name"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "admin:admin.users.user_blocks.reservation_list_tsx.table.start_date"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "admin:admin.users.user_blocks.reservation_list_tsx.table.end_date"
+                      )}
+                    </th>
                     <th></th>
                   </tr>
                 </thead>
@@ -124,7 +145,9 @@ const ReservationList = ({ user_id, location_id }) => {
                       <td>
                         <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
                           <Link
-                            to={`/admin/location/${location_id === 0 ? item.location_id : location_id}/reservation/${item.reservation_id}`}
+                            to={`/admin/location/${
+                              location_id === 0 ? item.location_id : location_id
+                            }/reservation/${item.reservation_id}`}
                           >
                             <Button color="primary">
                               <ArrowForwardIosRoundedIcon fontSize="small" />
@@ -136,7 +159,7 @@ const ReservationList = ({ user_id, location_id }) => {
                   ))}
                 </tbody>
               </Table>
-            }
+            )}
           </Sheet>
         </div>
       </AccordionDetails>

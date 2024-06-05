@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const RightMenu = () => {
-  const { t, i18n } = useTranslation(["site_default"]);
+  const { t, i18n } = useTranslation(["site"]);
   const [anchorEl, setAnchorEl] = useState({ lang: null, settings: null });
   const handleClickSettings = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl({ lang: null, settings: event.currentTarget });
@@ -105,20 +105,20 @@ const RightMenu = () => {
           <Link to="user" style={{ color: "black", textDecoration: "none" }}>
             <MenuItem onClick={handleClose}>
               <PersonOutlineRoundedIcon sx={{ marginRight: "15px" }} />
-              {t("site_default:default.menu.right_menu.right_menu_tsx.profil")}
+              {t("site:default.menu.right_menu.right_menu_tsx.profil")}
             </MenuItem>
           </Link>
           <Divider sx={{ my: 0.5 }} />
           <Link to="login" style={{ color: "black", textDecoration: "none" }}>
             <MenuItem onClick={handleClose}>
               <LoginRoundedIcon sx={{ marginRight: "15px" }} color="success" />
-              {t("site_default:default.menu.right_menu.right_menu_tsx.login")}
+              {t("site:default.menu.right_menu.right_menu_tsx.login")}
             </MenuItem>
           </Link>
           <Link to="logout" style={{ color: "black", textDecoration: "none" }}>
             <MenuItem onClick={handleClose}>
               <LogoutRoundedIcon sx={{ marginRight: "15px" }} color="error" />
-              {t("site_default:default.menu.right_menu.right_menu_tsx.logout")}
+              {t("site:default.menu.right_menu.right_menu_tsx.logout")}
             </MenuItem>
           </Link>
         </Menu>

@@ -8,26 +8,28 @@ import TopLevelPanel from "../../TopLevelPanel";
 
 const User = () => {
   const { id } = useParams();
-  const { t } = useTranslation(['admin_admin']);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <div className={styles.container}>
       <TopLevelPanel
-        title={`${t("admin_admin:users.user_tsx.title")}${id}`}
-        currentPageTitle={`${t("admin_admin:users.user_tsx.currentPageTitle")} ${id}`}
+        title={`${t("admin:admin.users.user_tsx.title")}${id}`}
+        currentPageTitle={`${t(
+          "admin:admin.users.user_tsx.currentPageTitle"
+        )} ${id}`}
         pathValues={[
           {
-            name: t('admin_admin:users.user_list_tsx.currentPageTitle'),
-            path: "/admin/users/list"
+            name: t("admin:admin.users.user_list_tsx.currentPageTitle"),
+            path: "/admin/users/list",
           },
         ]}
       />
-        <div className={styles.main_list}>
-          <UserInfo id={id}/>
-          <LocationList id={id}/>
-          <ReservationList user_id={id} location_id={0}/>
-        </div>
+      <div className={styles.main_list}>
+        <UserInfo id={id} />
+        <LocationList id={id} />
+        <ReservationList user_id={id} location_id={0} />
       </div>
+    </div>
   );
 };
 

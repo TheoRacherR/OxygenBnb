@@ -28,7 +28,7 @@ const locationData = {
 };
 
 const LocationInfos = ({ location_id }) => {
-  const { t } = useTranslation(["admin_admin"]);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <Accordion defaultExpanded sx={{ backgroundColor: "#0A0E0F" }}>
@@ -45,7 +45,7 @@ const LocationInfos = ({ location_id }) => {
       >
         <AssignmentRoundedIcon />
         &nbsp;
-        {t("admin_admin:locations.location_infos.location_infos_tsx.summary")}
+        {t("admin:admin.locations.location_infos.location_infos_tsx.summary")}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -58,7 +58,7 @@ const LocationInfos = ({ location_id }) => {
           <div className={styles.item}>
             <InputComponent
               label={t(
-                "admin_admin:locations.location_infos.location_infos_tsx.list.id"
+                "admin:admin.locations.location_infos.location_infos_tsx.list.id"
               )}
               value={location_id}
               disabled={true}
@@ -68,7 +68,7 @@ const LocationInfos = ({ location_id }) => {
           <div className={styles.item}>
             <InputComponent
               label={t(
-                "admin_admin:locations.location_infos.location_infos_tsx.list.title"
+                "admin:admin.locations.location_infos.location_infos_tsx.list.title"
               )}
               value={locationData.title}
               disabled={true}
@@ -78,7 +78,7 @@ const LocationInfos = ({ location_id }) => {
           <div className={styles.item}>
             <InputComponent
               label={t(
-                "admin_admin:locations.location_infos.location_infos_tsx.list.price"
+                "admin:admin.locations.location_infos.location_infos_tsx.list.price"
               )}
               value={`${
                 locationData.price
@@ -90,7 +90,7 @@ const LocationInfos = ({ location_id }) => {
           <div className={styles.item}>
             <InputComponent
               label={t(
-                "admin_admin:locations.location_infos.location_infos_tsx.list.type"
+                "admin:admin.locations.location_infos.location_infos_tsx.list.type"
               )}
               value={locationData.type}
               disabled={true}
@@ -100,13 +100,16 @@ const LocationInfos = ({ location_id }) => {
           <div className={styles.item}>
             <InputComponent
               label={t(
-                "admin_admin:locations.location_infos.location_infos_tsx.list.valid"
+                "admin:admin.locations.location_infos.location_infos_tsx.list.valid"
               )}
               value={
-                locationData.isValid ? 
-                  t("admin_admin:locations.location_infos.location_infos_tsx.list.true")
-                : 
-                  t("admin_admin:locations.location_infos.location_infos_tsx.list.false")
+                locationData.isValid
+                  ? t(
+                      "admin:admin.locations.location_infos.location_infos_tsx.list.true"
+                    )
+                  : t(
+                      "admin:admin.locations.location_infos.location_infos_tsx.list.false"
+                    )
               }
               disabled={true}
             />
@@ -115,7 +118,7 @@ const LocationInfos = ({ location_id }) => {
           <div className={styles.item}>
             <InputComponent
               label={t(
-                "admin_admin:locations.location_infos.location_infos_tsx.list.owner"
+                "admin:admin.locations.location_infos.location_infos_tsx.list.owner"
               )}
               value={locationData.owner}
               disabled={true}
@@ -125,7 +128,7 @@ const LocationInfos = ({ location_id }) => {
           <div className={styles.item}>
             <InputComponent
               label={t(
-                "admin_admin:locations.location_infos.location_infos_tsx.list.active"
+                "admin:admin.locations.location_infos.location_infos_tsx.list.active"
               )}
               value={locationData.active ? "true" : "false"}
               disabled={true}

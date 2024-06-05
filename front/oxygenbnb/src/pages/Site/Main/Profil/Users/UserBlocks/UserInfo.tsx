@@ -22,10 +22,10 @@ const userData = {
 };
 
 const UserInfo = () => {
-  const { t } = useTranslation(["site_main"])
+  const { t } = useTranslation(["site"]);
   useEffect(() => {
-    window.scroll(0, 0) 
-  },[])
+    window.scroll(0, 0);
+  }, []);
 
   return (
     <Accordion defaultExpanded sx={{ backgroundColor: "#f0f0f0" }}>
@@ -41,7 +41,7 @@ const UserInfo = () => {
         }}
       >
         <PersonRoundedIcon />
-        &nbsp;{t("site_main:main.profil.users.user_blocks.user_info_tsx.summary")}
+        &nbsp;{t("site:main.profil.users.user_blocks.user_info_tsx.summary")}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -54,24 +54,36 @@ const UserInfo = () => {
           <div className={styles.item}>
             <Avatar />
             <InputComponent
-              label={t("site_main:main.profil.users.user_blocks.user_info_tsx.list.firstname")}
+              label={t(
+                "site:main.profil.users.user_blocks.user_info_tsx.list.firstname"
+              )}
               value={userData.frist_name}
               disabled={false}
             />
             <InputComponent
-              label={t("site_main:main.profil.users.user_blocks.user_info_tsx.list.lastname")}
+              label={t(
+                "site:main.profil.users.user_blocks.user_info_tsx.list.lastname"
+              )}
               value={userData.last_name}
               disabled={false}
             />
           </div>
 
           <div className={styles.item}>
-            <InputComponent label={t("site_main:main.profil.users.user_blocks.user_info_tsx.list.id")} value={userData.id} disabled={true} />
+            <InputComponent
+              label={t(
+                "site:main.profil.users.user_blocks.user_info_tsx.list.id"
+              )}
+              value={userData.id}
+              disabled={true}
+            />
           </div>
 
           <div className={styles.item}>
             <InputComponent
-              label={t("site_main:main.profil.users.user_blocks.user_info_tsx.list.email")}
+              label={t(
+                "site:main.profil.users.user_blocks.user_info_tsx.list.email"
+              )}
               value={userData.email}
               disabled={false}
             />
@@ -79,7 +91,9 @@ const UserInfo = () => {
 
           <div className={styles.item}>
             <InputComponent
-              label={t("site_main:main.profil.users.user_blocks.user_info_tsx.list.role")}
+              label={t(
+                "site:main.profil.users.user_blocks.user_info_tsx.list.role"
+              )}
               value={userData.role}
               disabled={true}
             />
@@ -87,12 +101,16 @@ const UserInfo = () => {
 
           <div className={styles.item}>
             <InputComponent
-              label={t("site_main:main.profil.users.user_blocks.user_info_tsx.list.created_at")}
+              label={t(
+                "site:main.profil.users.user_blocks.user_info_tsx.list.created_at"
+              )}
               value={userData.created_at}
               disabled={true}
             />
             <InputComponent
-              label={t("site_main:main.profil.users.user_blocks.user_info_tsx.list.updated_at")}
+              label={t(
+                "site:main.profil.users.user_blocks.user_info_tsx.list.updated_at"
+              )}
               value={userData.upated_at}
               disabled={true}
             />
@@ -102,7 +120,7 @@ const UserInfo = () => {
             style={{ display: "flex", flexDirection: "row-reverse" }}
           >
             <Button sx={{ borderRadius: "6px" }} color="success">
-            {t("site_main:main.profil.users.user_blocks.user_info_tsx.list.save")}
+              {t("site:main.profil.users.user_blocks.user_info_tsx.list.save")}
             </Button>
           </div>
         </div>

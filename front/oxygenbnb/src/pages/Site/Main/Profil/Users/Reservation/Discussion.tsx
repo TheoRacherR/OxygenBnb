@@ -42,7 +42,7 @@ const discussionData = {
 };
 
 const Discussion = ({ location_id, discussion_id }) => {
-  const { t } = useTranslation(["site_main"]);
+  const { t } = useTranslation(["site"]);
 
   return (
     <Accordion sx={{ backgroundColor: "#f0f0f0" }}>
@@ -58,7 +58,10 @@ const Discussion = ({ location_id, discussion_id }) => {
         }}
       >
         <PersonRoundedIcon />
-        &nbsp;{t("site_main:main.profil.users.reservation.discussion_tsx.summary")}{" "}{location_id}
+        &nbsp;{t(
+          "site:main.profil.users.reservation.discussion_tsx.summary"
+        )}{" "}
+        {location_id}
       </AccordionSummary>
       <AccordionDetails
         sx={{

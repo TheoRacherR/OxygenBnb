@@ -19,7 +19,7 @@ const userData = {
 };
 
 const UserInfo = ({ id }) => {
-  const { t } = useTranslation(['admin_admin']);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <Accordion defaultExpanded sx={{ backgroundColor: "#0A0E0F" }}>
@@ -35,7 +35,7 @@ const UserInfo = ({ id }) => {
         }}
       >
         <PersonRoundedIcon />
-        &nbsp;{t("admin_admin:users.user_blocks.user_info_tsx.summary")}
+        &nbsp;{t("admin:admin.users.user_blocks.user_info_tsx.summary")}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -48,24 +48,34 @@ const UserInfo = ({ id }) => {
           <div className={styles.item}>
             <Avatar />
             <InputComponent
-              label={t("admin_admin:users.user_blocks.user_info_tsx.list.firstname")}
+              label={t(
+                "admin:admin.users.user_blocks.user_info_tsx.list.firstname"
+              )}
               value={userData.frist_name}
               disabled={true}
             />
             <InputComponent
-              label={t("admin_admin:users.user_blocks.user_info_tsx.list.lastname")}
+              label={t(
+                "admin:admin.users.user_blocks.user_info_tsx.list.lastname"
+              )}
               value={userData.last_name}
               disabled={true}
             />
           </div>
 
           <div className={styles.item}>
-            <InputComponent label={t("admin_admin:users.user_blocks.user_info_tsx.list.id")} value={id} disabled={true} />
+            <InputComponent
+              label={t("admin:admin.users.user_blocks.user_info_tsx.list.id")}
+              value={id}
+              disabled={true}
+            />
           </div>
 
           <div className={styles.item}>
             <InputComponent
-              label={t("admin_admin:users.user_blocks.user_info_tsx.list.email")}
+              label={t(
+                "admin:admin.users.user_blocks.user_info_tsx.list.email"
+              )}
               value={userData.email}
               disabled={true}
             />
@@ -73,7 +83,7 @@ const UserInfo = ({ id }) => {
 
           <div className={styles.item}>
             <InputComponent
-              label={t("admin_admin:users.user_blocks.user_info_tsx.list.role")}
+              label={t("admin:admin.users.user_blocks.user_info_tsx.list.role")}
               value={userData.role}
               disabled={true}
             />
@@ -81,12 +91,16 @@ const UserInfo = ({ id }) => {
 
           <div className={styles.item}>
             <InputComponent
-              label={t("admin_admin:users.user_blocks.user_info_tsx.list.created_at")}
+              label={t(
+                "admin:admin.users.user_blocks.user_info_tsx.list.created_at"
+              )}
               value={userData.created_at}
               disabled={true}
             />
             <InputComponent
-              label={t("admin_admin:users.user_blocks.user_info_tsx.list.updated_at")}
+              label={t(
+                "admin:admin.users.user_blocks.user_info_tsx.list.updated_at"
+              )}
               value={userData.upated_at}
               disabled={true}
             />

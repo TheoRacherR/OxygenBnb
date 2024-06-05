@@ -9,7 +9,6 @@ import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import InputComponent from "../../InputComponent";
 import { useTranslation } from "react-i18next";
 
-
 const reservationData = {
   id: 2,
   reservation_date: new Date("08-20-2023"),
@@ -22,69 +21,84 @@ const reservationData = {
 };
 
 const ReservationInfos = ({ reservation_id }) => {
-  const { t } = useTranslation(['admin_admin']);
+  const { t } = useTranslation(["admin"]);
   return (
     <Accordion defaultExpanded sx={{ backgroundColor: "#0A0E0F" }}>
       <AccordionSummary
-          expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-          sx={{
-            backgroundColor: "black",
-            color: "white",
-            border: "1px solid #32383e",
-            borderRadius: "10px",
-          }}
-        >
-          <PersonRoundedIcon />
-          &nbsp;{t('admin_admin:users.reservation.reservation_infos_tsx.summary')}
-        </AccordionSummary>
-        <AccordionDetails
-          sx={{
-            backgroundColor: "black",
-            color: "white",
-            border: "1px solid #32383e",
-          }}
-        >
+        expandIcon={<ExpandMoreIcon sx={{ color: "white" }} />}
+        aria-controls="panel1-content"
+        id="panel1-header"
+        sx={{
+          backgroundColor: "black",
+          color: "white",
+          border: "1px solid #32383e",
+          borderRadius: "10px",
+        }}
+      >
+        <PersonRoundedIcon />
+        &nbsp;
+        {t("admin:admin.users.reservation.reservation_infos_tsx.summary")}
+      </AccordionSummary>
+      <AccordionDetails
+        sx={{
+          backgroundColor: "black",
+          color: "white",
+          border: "1px solid #32383e",
+        }}
+      >
         <div className={styles.list_container}>
           <div className={styles.item}>
             <InputComponent
-              label={t('admin_admin:users.reservation.reservation_infos_tsx.list.id')}
+              label={t(
+                "admin:admin.users.reservation.reservation_infos_tsx.list.id"
+              )}
               value={reservation_id}
               disabled={true}
             />
           </div>
           <div className={styles.item}>
             <InputComponent
-              label={t('admin_admin:users.reservation.reservation_infos_tsx.list.nb_night')}
+              label={t(
+                "admin:admin.users.reservation.reservation_infos_tsx.list.nb_night"
+              )}
               value={reservationData.number_of_nights}
               disabled={true}
             />
           </div>
           <div className={styles.item}>
             <InputComponent
-              label={t('admin_admin:users.reservation.reservation_infos_tsx.list.reservation_date')}
-              value={dayjs(reservationData.reservation_date).format("DD/MM/YYYY")}
+              label={t(
+                "admin:admin.users.reservation.reservation_infos_tsx.list.reservation_date"
+              )}
+              value={dayjs(reservationData.reservation_date).format(
+                "DD/MM/YYYY"
+              )}
               disabled={true}
             />
           </div>
           <div className={styles.item}>
             <InputComponent
-              label={t('admin_admin:users.reservation.reservation_infos_tsx.list.from')}
+              label={t(
+                "admin:admin.users.reservation.reservation_infos_tsx.list.from"
+              )}
               value={dayjs(reservationData.start_date).format("DD/MM/YYYY")}
               disabled={true}
             />
           </div>
           <div className={styles.item}>
             <InputComponent
-              label={t('admin_admin:users.reservation.reservation_infos_tsx.list.to')}
+              label={t(
+                "admin:admin.users.reservation.reservation_infos_tsx.list.to"
+              )}
               value={dayjs(reservationData.end_date).format("DD/MM/YYYY")}
               disabled={true}
             />
           </div>
           <div className={styles.item}>
             <InputComponent
-              label={t('admin_admin:users.reservation.reservation_infos_tsx.list.total_price')}
+              label={t(
+                "admin:admin.users.reservation.reservation_infos_tsx.list.total_price"
+              )}
               value={
                 reservationData.price_per_night *
                   reservationData.number_of_nights +
@@ -96,16 +110,16 @@ const ReservationInfos = ({ reservation_id }) => {
           </div>
           <div className={styles.item}>
             <InputComponent
-              label={t('admin_admin:users.reservation.reservation_infos_tsx.list.nb_person')}
+              label={t(
+                "admin:admin.users.reservation.reservation_infos_tsx.list.nb_person"
+              )}
               value={reservationData.number_of_person}
               disabled={true}
             />
           </div>
-
         </div>
-
-        </AccordionDetails>
-      </Accordion>
+      </AccordionDetails>
+    </Accordion>
     // </div>
   );
 };

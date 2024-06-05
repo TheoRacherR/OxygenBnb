@@ -5,7 +5,7 @@ import RightMenu from "../MenuSearch/RightMenu/RightMenu";
 import { useTranslation } from "react-i18next";
 
 const MenuComponent = () => {
-  const { t } = useTranslation(["site_default"]);
+  const { t } = useTranslation(["site"]);
 
   return (
     <>
@@ -14,13 +14,11 @@ const MenuComponent = () => {
           <Link to="/">
             <img
               src={logo}
-              alt={t(
-                "site_default:default.menu.menu_tsx.container.left.alt_img"
-              )}
+              alt={t("site:default.menu.menu_tsx.container.left.alt_img")}
             />
           </Link>
         </div>
-        <RightMenu/>
+        <RightMenu />
       </menu>
     </>
   );

@@ -55,7 +55,7 @@ const dataTemp: {
 ];
 
 const LocationList = () => {
-  const { t } = useTranslation(["site_main"])
+  const { t } = useTranslation(["site"]);
   return (
     <Accordion sx={{ backgroundColor: "#f0f0f0" }}>
       <AccordionSummary
@@ -70,7 +70,8 @@ const LocationList = () => {
         }}
       >
         <AssignmentRoundedIcon />
-        &nbsp;{t('site_main:main.profil.users.user_blocks.location_list_tsx.summary')}
+        &nbsp;
+        {t("site:main.profil.users.user_blocks.location_list_tsx.summary")}
       </AccordionSummary>
       <AccordionDetails
         sx={{
@@ -93,15 +94,35 @@ const LocationList = () => {
             }}
           >
             {dataTemp.length === 0 ? (
-              <div style={{ color: "black" }}>{t("site_main:main.profil.users.user_blocks.location_list_tsx.no_location")}</div>
+              <div style={{ color: "black" }}>
+                {t(
+                  "site:main.profil.users.user_blocks.location_list_tsx.no_location"
+                )}
+              </div>
             ) : (
               <Table sx={{ borderRadius: 20, color: "black" }}>
                 <thead>
                   <tr>
-                    <th>{t("site_main:main.profil.users.user_blocks.location_list_tsx.list.id")}</th>
-                    <th>{t("site_main:main.profil.users.user_blocks.location_list_tsx.list.title")}</th>
-                    <th>{t("site_main:main.profil.users.user_blocks.location_list_tsx.list.price")}</th>
-                    <th>{t("site_main:main.profil.users.user_blocks.location_list_tsx.list.valid")}</th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.location_list_tsx.list.id"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.location_list_tsx.list.title"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.location_list_tsx.list.price"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.location_list_tsx.list.valid"
+                      )}
+                    </th>
                     <th></th>
                   </tr>
                 </thead>

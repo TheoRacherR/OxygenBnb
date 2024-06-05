@@ -14,13 +14,13 @@ import UserList from "./MainBoard/Admin/Users/UserList";
 import LocationList from "./MainBoard/Admin/Locations/LocationList";
 import User from "./MainBoard/Admin/Users/User";
 import ReservationPage from "./MainBoard/Admin/Users/Reservation/ReservationPage";
-import LocationAdmin from "./MainBoard/Admin/Locations/LocationPage"
+import LocationAdmin from "./MainBoard/Admin/Locations/LocationPage";
 import NotFound from "./Errors/404";
 
 const theme = extendTheme({ cssVarPrefix: "demo" });
 
 const Admin = () => {
-  // const { t } = useTranslation(['site_default']);
+  // const { t } = useTranslation(['site']);
   const location = useLocation();
   return (
     //   <CssVarsProvider
@@ -58,7 +58,10 @@ const Admin = () => {
 
             <Route path="/locations/list" element={<LocationList />} />
             <Route path="/location/:id" element={<LocationAdmin />} />
-            <Route path="/location/:location_id/reservation/:reservation_id" element={<ReservationPage />} />
+            <Route
+              path="/location/:location_id/reservation/:reservation_id"
+              element={<ReservationPage />}
+            />
 
             <Route path="/*" element={<NotFound />} />
           </Routes>

@@ -4,8 +4,10 @@ import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
 const ListMessages = ({ listOfMessages }) => {
-  const { t }  = useTranslation(["admin_renter"])
-  const formatDate = t("admin_renter:renter.messages.discussion.list_messages.list_messages_tsx.format")
+  const { t } = useTranslation(["admin"]);
+  const formatDate = t(
+    "admin:renter.messages.discussion.list_messages.list_messages_tsx.format"
+  );
   const messageEl = useRef(null);
   const listOfMessagesGrouped = listOfMessages.map((m) =>
     dayjs(m.date).format(formatDate)
@@ -25,21 +27,28 @@ const ListMessages = ({ listOfMessages }) => {
       {listOfDates.map((dateItem: string, dateIndex: number) => (
         <div key={dateIndex}>
           <div className={styles.title_month_year}>
-            {
-              dateItem === dayjs(new Date()).format(formatDate) 
-              ? t("admin_renter:renter.messages.discussion.list_messages.list_messages_tsx.today")
-              : dateItem === dayjs(new Date().setDate(new Date().getDate()-1)).format(formatDate) 
-                ? t("admin_renter:renter.messages.discussion.list_messages.list_messages_tsx.yesterday") 
-                : dateItem
-            }
+            {dateItem === dayjs(new Date()).format(formatDate)
+              ? t(
+                  "admin:renter.messages.discussion.list_messages.list_messages_tsx.today"
+                )
+              : dateItem ===
+                dayjs(new Date().setDate(new Date().getDate() - 1)).format(
+                  formatDate
+                )
+              ? t(
+                  "admin:renter.messages.discussion.list_messages.list_messages_tsx.yesterday"
+                )
+              : dateItem}
           </div>
 
-          {listOfMessages.map((item, index) => (
-            dateItem === dayjs(item.date).format(formatDate)
-            ? <div
+          {listOfMessages.map((item, index) =>
+            dateItem === dayjs(item.date).format(formatDate) ? (
+              <div
                 key={index}
                 className={styles.message}
-                id={index === listOfMessages.length - 1 ? "anchor" : "not_anchor"}
+                id={
+                  index === listOfMessages.length - 1 ? "anchor" : "not_anchor"
+                }
               >
                 <div
                   key={index}
@@ -49,7 +58,11 @@ const ListMessages = ({ listOfMessages }) => {
                       : styles.time_not_this_user
                   }
                 >
-                  {dayjs(item.date).format(`${t("admin_renter:renter.messages.discussion.list_messages.list_messages_tsx.format")} hh:mm`)}
+                  {dayjs(item.date).format(
+                    `${t(
+                      "admin:renter.messages.discussion.list_messages.list_messages_tsx.format"
+                    )} hh:mm`
+                  )}
                 </div>
                 <div
                   className={
@@ -61,9 +74,10 @@ const ListMessages = ({ listOfMessages }) => {
                   {item.message}
                 </div>
               </div>
-            :
-            <></>
-          ))}
+            ) : (
+              <></>
+            )
+          )}
         </div>
       ))}
     </div>

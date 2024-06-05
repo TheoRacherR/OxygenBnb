@@ -9,7 +9,6 @@ import { MessageContext } from "../../../../../../../utils/Context/MessageContex
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import { useTranslation } from "react-i18next";
 
-
 const data: {
   location_name: string;
   discussion: {
@@ -76,7 +75,7 @@ const data: {
 const Requests = ({ value }) => {
   const { setDiscussionSelected } = useContext(MessageContext);
   const [redirectionGotoMessage, setRedirectionGotoMessage] = useState(false);
-  const { t } = useTranslation(["admin_renter"]);
+  const { t } = useTranslation(["admin"]);
 
   const handleGoToMessages = (item) => {
     console.log(item);
@@ -86,7 +85,6 @@ const Requests = ({ value }) => {
   };
 
   return (
-
     <>
       {redirectionGotoMessage ? (
         <Navigate to={"/admin/renter/messages"} />
@@ -107,17 +105,35 @@ const Requests = ({ value }) => {
               borderColor: "grey",
             }}
           >
-            {data.length === 0 ? 
-              <div style={{color: "white"}}>{t("admin_renter:renter.locations.location.requests_tsx.no_request")}</div>
-            : 
+            {data.length === 0 ? (
+              <div style={{ color: "white" }}>
+                {t("admin:renter.locations.location.requests_tsx.no_request")}
+              </div>
+            ) : (
               <Table sx={{ borderRadius: 20, color: "#fff" }}>
                 <thead>
                   <tr>
-                    <th style={{ fontWeight: "bold", color: "#fff" }}>{t("admin_renter:renter.locations.location.requests_tsx.thead.name")}</th>
-                    <th style={{ width: "60%", fontWeight: "bold", color: "#fff" }}>
-                    {t("admin_renter:renter.locations.location.requests_tsx.thead.last_message")}
+                    <th style={{ fontWeight: "bold", color: "#fff" }}>
+                      {t(
+                        "admin:renter.locations.location.requests_tsx.thead.name"
+                      )}
                     </th>
-                    <th style={{ fontWeight: "bold", color: "#fff" }}>{t("admin_renter:renter.locations.location.requests_tsx.thead.user")}</th>
+                    <th
+                      style={{
+                        width: "60%",
+                        fontWeight: "bold",
+                        color: "#fff",
+                      }}
+                    >
+                      {t(
+                        "admin:renter.locations.location.requests_tsx.thead.last_message"
+                      )}
+                    </th>
+                    <th style={{ fontWeight: "bold", color: "#fff" }}>
+                      {t(
+                        "admin:renter.locations.location.requests_tsx.thead.user"
+                      )}
+                    </th>
                     <th style={{ fontWeight: "bold", color: "#fff" }}></th>
                   </tr>
                 </thead>
@@ -135,7 +151,9 @@ const Requests = ({ value }) => {
                         {item.discussion.info.last_message.user_id ===
                         item.discussion.info.user_id
                           ? ""
-                          : `${t("admin_renter:renter.locations.location.requests_tsx.you")}: `}{" "}
+                          : `${t(
+                              "admin:renter.locations.location.requests_tsx.you"
+                            )}: `}{" "}
                         {item.discussion.info.last_message.message}
                       </td>
                       <td>
@@ -155,10 +173,10 @@ const Requests = ({ value }) => {
                               handleGoToMessages(item.discussion.info)
                             }
                           >
-                            <ArrowForwardIosRoundedIcon fontSize="small"/>
+                            <ArrowForwardIosRoundedIcon fontSize="small" />
                           </Button>
                           <Button color="danger">
-                            <DeleteForeverRoundedIcon fontSize="small"/>
+                            <DeleteForeverRoundedIcon fontSize="small" />
                           </Button>
                           {/* </Link> */}
                         </ButtonGroup>
@@ -167,7 +185,7 @@ const Requests = ({ value }) => {
                   ))}
                 </tbody>
               </Table>
-            }
+            )}
           </Sheet>
         </div>
       </TabPanel>

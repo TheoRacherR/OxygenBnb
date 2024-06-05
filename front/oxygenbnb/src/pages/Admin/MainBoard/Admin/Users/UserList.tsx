@@ -5,6 +5,9 @@ import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRound
 import { useTranslation } from "react-i18next";
 import TopLevelPanel from "../../TopLevelPanel";
 import styles from "./UserList.module.scss";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
 
 const enum userRole {
   USER = "user",
@@ -12,58 +15,53 @@ const enum userRole {
   ADMIN = "admin",
 }
 
-const userData: {
+interface UserFormated {
   id: number;
-  first_name: string;
-  last_name: string;
+  firstname: string;
+  lastname: string;
   role: userRole;
   created_at: Date;
-}[] = [
-  {
-    id: 1,
-    first_name: "Théo",
-    last_name: "RACHER RAULIN",
-    role: userRole.ADMIN,
-    created_at: new Date("10-05-2023"),
-  },
-  {
-    id: 2,
-    first_name: "Franck",
-    last_name: "DUPOND",
-    role: userRole.USER,
-    created_at: new Date("10-12-2023"),
-  },
-  {
-    id: 3,
-    first_name: "Lilia",
-    last_name: "OBS",
-    role: userRole.RENTER,
-    created_at: new Date("31-04-2023"),
-  },
-  {
-    id: 4,
-    first_name: "Laurent",
-    last_name: "ROLLS",
-    role: userRole.RENTER,
-    created_at: new Date("11-05-2022"),
-  },
-  {
-    id: 5,
-    first_name: "Sylvestre",
-    last_name: "ARCHI",
-    role: userRole.USER,
-    created_at: new Date("21-03-2024"),
-  },
-];
+}
+
+interface UserRaw {
+  id: number;
+  email: string;
+  firstname: string;
+  lastname: string;
+  created_at: Date;
+  updated_at: Date;
+  role: userRole;
+}
 
 const UserList = () => {
-  const { t } = useTranslation(["admin_admin"]);
+  const { t } = useTranslation(["admin"]);
+  const [userData, setUserData] = useState<UserRaw[]>([]);
+
+  const fetchUsers = async () => {
+    const usersRaw: { any; data: UserRaw[] } = await axios.get(
+      "http://localhost:3333" + "/user"
+    );
+    console.log(usersRaw.data);
+    // const userFormated: UserFormated[] = usersRaw.data.map((item) => ({
+    //   id: item.id,
+    //   firstname: item.firstname,
+    //   lastname: item.lastname,
+    //   role: item.role,
+    //   created_at: item.created_at
+    // }))
+    // console.log(userFormated);
+    setUserData(usersRaw.data);
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, []);
 
   return (
     <div className={styles.container}>
       <TopLevelPanel
-        title={t("admin_admin:users.user_list_tsx.title")}
-        currentPageTitle={t("admin_admin:users.user_list_tsx.currentPageTitle")}
+        title={t("admin:admin.users.user_list_tsx.title")}
+        currentPageTitle={t("admin:admin.users.user_list_tsx.currentPageTitle")}
         pathValues={[]}
       />
       <div className={styles.main_list}>
@@ -79,16 +77,20 @@ const UserList = () => {
             borderColor: "grey",
           }}
         >
-          {userData.length === 0 ? 
-            <div style={{color: "white"}}>{t("admin_admin:users.user_list_tsx.no_user")}</div>
-          : 
+          {userData.length === 0 ? (
+            <div style={{ color: "white" }}>
+              {t("admin:admin.users.user_list_tsx.no_user")}
+            </div>
+          ) : (
             <Table sx={{ borderRadius: 20, color: "#fff" }}>
               <thead>
                 <tr>
-                  <th>{t("admin_admin:users.user_list_tsx.table.id")}</th>
-                  <th>{t("admin_admin:users.user_list_tsx.table.name")}</th>
-                  <th>{t("admin_admin:users.user_list_tsx.table.role")}</th>
-                  <th>{t("admin_admin:users.user_list_tsx.table.creation_date")}</th>
+                  <th>{t("admin:admin.users.user_list_tsx.table.id")}</th>
+                  <th>{t("admin:admin.users.user_list_tsx.table.name")}</th>
+                  <th>{t("admin:admin.users.user_list_tsx.table.role")}</th>
+                  <th>
+                    {t("admin:admin.users.user_list_tsx.table.creation_date")}
+                  </th>
                   <th></th>
                 </tr>
               </thead>
@@ -97,10 +99,14 @@ const UserList = () => {
                   <tr key={index}>
                     <td>{item.id}</td>
                     <td>
-                      {item.first_name} {item.last_name}
+                      {item.firstname} {item.lastname}
                     </td>
                     <td>{item.role}</td>
-                    <td>{item.created_at.toLocaleDateString()}</td>
+                    <td>
+                      {dayjs(item.created_at).format(
+                        t("admin:admin.users.user_list_tsx.format")
+                      )}
+                    </td>
                     <td>
                       <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
                         <Link to={`/admin/user/${item.id}`}>
@@ -114,7 +120,7 @@ const UserList = () => {
                 ))}
               </tbody>
             </Table>
-          }
+          )}
         </Sheet>
       </div>
     </div>

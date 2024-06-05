@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const TopInfoDiscussion = () => {
-  const { t } = useTranslation(["admin_renter"]);
+  const { t } = useTranslation(["admin"]);
   const { discussionSelected } = useContext(MessageContext);
   return (
     <div className={styles.top_container_info}>
@@ -25,7 +25,7 @@ const TopInfoDiscussion = () => {
               <StatusComponent color={"green"} />
               <span>
                 {t(
-                  "admin_renter:renter.messages.discussion.top_info_discussion_tsx.online"
+                  "admin:renter.messages.discussion.top_info_discussion_tsx.online"
                 )}
               </span>
             </>
@@ -34,7 +34,7 @@ const TopInfoDiscussion = () => {
               <StatusComponent color={"grey"} />
               <span>
                 {t(
-                  "admin_renter:renter.messages.discussion.top_info_discussion_tsx.offline"
+                  "admin:renter.messages.discussion.top_info_discussion_tsx.offline"
                 )}
               </span>
             </>
@@ -49,7 +49,7 @@ const TopInfoDiscussion = () => {
             sx={{ borderRadius: "5px", color: "grey" }}
           >
             {t(
-              "admin_renter:renter.messages.discussion.top_info_discussion_tsx.location_information"
+              "admin:renter.messages.discussion.top_info_discussion_tsx.location_information"
             )}
             {discussionSelected.location_id || 0}
           </Button>

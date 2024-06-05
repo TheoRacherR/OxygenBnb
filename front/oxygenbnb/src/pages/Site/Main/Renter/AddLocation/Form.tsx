@@ -11,13 +11,13 @@ import { FormAddLocationContext } from "../../../../../utils/Context/FormAddLoca
 import { useTranslation } from "react-i18next";
 
 const Form = () => {
-  const { t } = useTranslation(["site_main"]);
+  const { t } = useTranslation(["site"]);
   const {
     setState,
     locationInformations,
     setLocationInformations,
     enumCurrency,
-    locationType
+    locationType,
   } = useContext(FormAddLocationContext);
 
   const handleChangeLocType = (
@@ -31,7 +31,10 @@ const Form = () => {
   };
 
   const handleChangePrice = (event: React.SyntheticEvent | null) => {
-    if (event.target.value === ` ${locationInformations.default_currency.substring(0,1)}`) {
+    if (
+      event.target.value ===
+      ` ${locationInformations.default_currency.substring(0, 1)}`
+    ) {
       setLocationInformations((prev) => ({ ...prev, price: 0 }));
     } else {
       setLocationInformations((prev) => ({
@@ -87,27 +90,41 @@ const Form = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>{t('site_main:main.renter.add_location.form_tsx.title')}</div>
+        <div className={styles.title}>
+          {t("site:main.renter.add_location.form_tsx.title")}
+        </div>
         <div className={styles.list_container}>
           <div className={styles.item}>
             <Input
               variant="outlined"
-              startDecorator={<label>{t('site_main:main.renter.add_location.form_tsx.name')}</label>}
-              onChange={(e) => setLocationInformations((prev) => ({
-                ...prev,
-                title: e.target.value,
-              }))}
+              startDecorator={
+                <label>
+                  {t("site:main.renter.add_location.form_tsx.name")}
+                </label>
+              }
+              onChange={(e) =>
+                setLocationInformations((prev) => ({
+                  ...prev,
+                  title: e.target.value,
+                }))
+              }
             />
           </div>
 
           <div className={styles.item}>
             <Textarea
               variant="outlined"
-              startDecorator={<label>{t('site_main:main.renter.add_location.form_tsx.description')}</label>}
-              onChange={(e) => setLocationInformations((prev) => ({
-                ...prev,
-                description: e.target.value,
-              }))}
+              startDecorator={
+                <label>
+                  {t("site:main.renter.add_location.form_tsx.description")}
+                </label>
+              }
+              onChange={(e) =>
+                setLocationInformations((prev) => ({
+                  ...prev,
+                  description: e.target.value,
+                }))
+              }
             />
           </div>
 
@@ -120,7 +137,11 @@ const Form = () => {
                 locationInformations.default_currency.substring(0, 1)
               }
               onChange={handleChangePrice}
-              startDecorator={<label>{t('site_main:main.renter.add_location.form_tsx.price')}</label>}
+              startDecorator={
+                <label>
+                  {t("site:main.renter.add_location.form_tsx.price")}
+                </label>
+              }
               endDecorator={
                 <Select
                   value={locationInformations.default_currency}
@@ -141,19 +162,29 @@ const Form = () => {
               variant="outlined"
               value={locationInformations.nb_room}
               onChange={handleChangeRoom}
-              startDecorator={<label>{t('site_main:main.renter.add_location.form_tsx.room')}</label>}
+              startDecorator={
+                <label>
+                  {t("site:main.renter.add_location.form_tsx.room")}
+                </label>
+              }
             />
             <Input
               variant="outlined"
               value={locationInformations.nb_bed}
               onChange={handleChangeBed}
-              startDecorator={<label>{t('site_main:main.renter.add_location.form_tsx.bed')}</label>}
+              startDecorator={
+                <label>{t("site:main.renter.add_location.form_tsx.bed")}</label>
+              }
             />
             <Input
               variant="outlined"
               value={locationInformations.nb_person}
               onChange={handleChangePerson}
-              startDecorator={<label>{t('site_main:main.renter.add_location.form_tsx.person')}</label>}
+              startDecorator={
+                <label>
+                  {t("site:main.renter.add_location.form_tsx.person")}
+                </label>
+              }
             />
           </div>
 
@@ -174,7 +205,9 @@ const Form = () => {
               variant="outlined"
               startDecorator={
                 <label>
-                  {locationInformations.active ? t('site_main:main.renter.add_location.form_tsx.activated') : t('site_main:main.renter.add_location.form_tsx.desactivated')}
+                  {locationInformations.active
+                    ? t("site:main.renter.add_location.form_tsx.activated")
+                    : t("site:main.renter.add_location.form_tsx.desactivated")}
                 </label>
               }
               endDecorator={
@@ -197,10 +230,14 @@ const Form = () => {
           >
             <ButtonGroup>
               <Button variant="solid" color="success">
-                {t('site_main:main.renter.add_location.form_tsx.save')}
+                {t("site:main.renter.add_location.form_tsx.save")}
               </Button>
-              <Button variant="solid" color="warning" onClick={() => setState("Preview")}>
-                {t('site_main:main.renter.add_location.form_tsx.preview')}
+              <Button
+                variant="solid"
+                color="warning"
+                onClick={() => setState("Preview")}
+              >
+                {t("site:main.renter.add_location.form_tsx.preview")}
               </Button>
             </ButtonGroup>
           </div>

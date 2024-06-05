@@ -6,23 +6,25 @@ import { useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const LocationPage = () => {
-  const { t } = useTranslation(['admin_admin']);
+  const { t } = useTranslation(["admin"]);
   const { id } = useParams();
   return (
     <div className={styles.container}>
       <TopLevelPanel
-        title={`${t("admin_admin:locations.location_page_tsx.title")} ${id}`}
-        currentPageTitle={`${t("admin_admin:locations.location_page_tsx.currentPageTitle")} ${id}`}
+        title={`${t("admin:admin.locations.location_page_tsx.title")} ${id}`}
+        currentPageTitle={`${t(
+          "admin:admin.locations.location_page_tsx.currentPageTitle"
+        )} ${id}`}
         pathValues={[
           {
-            name: t("admin_admin:locations.location_list_tsx.currentPageTitle"),
+            name: t("admin:admin.locations.location_list_tsx.currentPageTitle"),
             path: "/admin/locations/list",
           },
         ]}
       />
       <div className={styles.main_list}>
         <LocationInfos location_id={id} />
-        <ReservationList user_id={0} location_id={id}/>
+        <ReservationList user_id={0} location_id={id} />
       </div>
     </div>
   );

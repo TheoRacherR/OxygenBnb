@@ -10,20 +10,19 @@ import { MessageContext } from "../../../../../utils/Context/MessageContext";
 import StatusComponent from "./StatusComponent";
 
 const data: {
-    discussion_id: number,
-    user_id: number,
-    firstname: string,
-    lastname: string,
-    online: boolean,
-    last_message: {
-      seen: boolean,
-      message: string,
-      user_id: number,
-      date: Date,
-    },
-    location_id: number
-  
-  }[] = [
+  discussion_id: number;
+  user_id: number;
+  firstname: string;
+  lastname: string;
+  online: boolean;
+  last_message: {
+    seen: boolean;
+    message: string;
+    user_id: number;
+    date: Date;
+  };
+  location_id: number;
+}[] = [
   {
     discussion_id: 1,
     user_id: 3,
@@ -36,7 +35,7 @@ const data: {
       user_id: 3,
       date: new Date("2024-03-25 22:25:00"),
     },
-    location_id: 2
+    location_id: 2,
   },
   {
     discussion_id: 2,
@@ -46,11 +45,12 @@ const data: {
     online: true,
     last_message: {
       seen: false,
-      message: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quaerat impedit rerum, natus deleniti suscipit. Hic maxime tempora debitis?",
+      message:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum quaerat impedit rerum, natus deleniti suscipit. Hic maxime tempora debitis?",
       user_id: 5,
       date: new Date("2024-03-25 22:50:00"),
     },
-    location_id: 1
+    location_id: 1,
   },
   {
     discussion_id: 3,
@@ -60,11 +60,12 @@ const data: {
     online: false,
     last_message: {
       seen: false,
-      message: " Maxime tempore consequatur nesciunt voluptas id ab ratione sequi. Fugit, fuga.",
+      message:
+        " Maxime tempore consequatur nesciunt voluptas id ab ratione sequi. Fugit, fuga.",
       user_id: 3,
-      date: new Date("2024-03-22 00:00:00")
+      date: new Date("2024-03-22 00:00:00"),
     },
-    location_id: 9
+    location_id: 9,
   },
   {
     discussion_id: 4,
@@ -76,9 +77,9 @@ const data: {
       seen: true,
       message: "Salut",
       user_id: 5,
-      date: new Date("2024-03-25 20:00:00")
+      date: new Date("2024-03-25 20:00:00"),
     },
-    location_id: 2
+    location_id: 2,
   },
 ];
 
@@ -105,9 +106,10 @@ const returnDateDiffAgo = (date): [number, string, string] => {
 };
 
 const HistoryMessages = () => {
-  const { t } = useTranslation(["admin_renter"]);
+  const { t } = useTranslation(["admin"]);
 
-  const { discussionSelected, setDiscussionSelected } = useContext(MessageContext);
+  const { discussionSelected, setDiscussionSelected } =
+    useContext(MessageContext);
 
   useEffect(() => {
     if (!discussionSelected) {
@@ -129,7 +131,6 @@ const HistoryMessages = () => {
     }
   });
 
-
   return (
     <div className={styles.history}>
       <List
@@ -150,15 +151,20 @@ const HistoryMessages = () => {
                   borderRadius: "5px",
                   p: "12px 16px",
                   width: "calc(100% - 32px)",
-                  color: JSON.stringify(item) === JSON.stringify(discussionSelected) ? "#0A0E0F" : "white",
+                  color:
+                    JSON.stringify(item) === JSON.stringify(discussionSelected)
+                      ? "#0A0E0F"
+                      : "white",
                 }}
-                selected={JSON.stringify(item) === JSON.stringify(discussionSelected)}
+                selected={
+                  JSON.stringify(item) === JSON.stringify(discussionSelected)
+                }
                 onClick={() => setDiscussionSelected(item)}
               >
                 <div className={styles.container_info}>
                   <div className={styles.top_informations}>
                     <div className={styles.left_info}>
-                      <Avatar sx={{ borderColor: "black"}}>
+                      <Avatar sx={{ borderColor: "black" }}>
                         {item.firstname.substring(0, 1).toUpperCase()}
                       </Avatar>
                       {item.online ? (
@@ -179,11 +185,11 @@ const HistoryMessages = () => {
                       </div>
                     </div>
                     <div className={styles.right_info}>
-                      {/* {t("admin_renter:renter.messages.messages_tsx.title")} */}
+                      {/* {t("admin:renter.messages.messages_tsx.title")} */}
                       <div>
                         {returnDateDiffAgo(item.last_message.date)[2] === "year"
                           ? t(
-                              `admin_renter:renter.messages.history_messages_tsx.year`,
+                              `admin:renter.messages.history_messages_tsx.year`,
                               {
                                 time: returnDateDiffAgo(
                                   item.last_message.date
@@ -196,7 +202,7 @@ const HistoryMessages = () => {
                           : returnDateDiffAgo(item.last_message.date)[2] ===
                             "month"
                           ? t(
-                              `admin_renter:renter.messages.history_messages_tsx.month`,
+                              `admin:renter.messages.history_messages_tsx.month`,
                               {
                                 time: returnDateDiffAgo(
                                   item.last_message.date
@@ -209,7 +215,7 @@ const HistoryMessages = () => {
                           : returnDateDiffAgo(item.last_message.date)[2] ===
                             "week"
                           ? t(
-                              `admin_renter:renter.messages.history_messages_tsx.week`,
+                              `admin:renter.messages.history_messages_tsx.week`,
                               {
                                 time: returnDateDiffAgo(
                                   item.last_message.date
@@ -222,7 +228,7 @@ const HistoryMessages = () => {
                           : returnDateDiffAgo(item.last_message.date)[2] ===
                             "day"
                           ? t(
-                              `admin_renter:renter.messages.history_messages_tsx.day`,
+                              `admin:renter.messages.history_messages_tsx.day`,
                               {
                                 time: returnDateDiffAgo(
                                   item.last_message.date
@@ -235,7 +241,7 @@ const HistoryMessages = () => {
                           : returnDateDiffAgo(item.last_message.date)[2] ===
                             "hour"
                           ? t(
-                              `admin_renter:renter.messages.history_messages_tsx.hour`,
+                              `admin:renter.messages.history_messages_tsx.hour`,
                               {
                                 time: returnDateDiffAgo(
                                   item.last_message.date
@@ -248,7 +254,7 @@ const HistoryMessages = () => {
                           : returnDateDiffAgo(item.last_message.date)[2] ==
                             "minute"
                           ? t(
-                              `admin_renter:renter.messages.history_messages_tsx.minute`,
+                              `admin:renter.messages.history_messages_tsx.minute`,
                               {
                                 time: returnDateDiffAgo(
                                   item.last_message.date
@@ -259,7 +265,7 @@ const HistoryMessages = () => {
                               }
                             )
                           : t(
-                              `admin_renter:renter.messages.history_messages_tsx.second`,
+                              `admin:renter.messages.history_messages_tsx.second`,
                               {
                                 time: returnDateDiffAgo(
                                   item.last_message.date
@@ -272,7 +278,12 @@ const HistoryMessages = () => {
                       </div>
                     </div>
                   </div>
-                  <div className={styles.summary_message} style={{fontWeight: item.last_message.seen ? "bold" : "normal"}}>
+                  <div
+                    className={styles.summary_message}
+                    style={{
+                      fontWeight: item.last_message.seen ? "bold" : "normal",
+                    }}
+                  >
                     {item.last_message.message.substring(0, 30)}
                     {item.last_message.message.length > 30 ? "..." : ""}
                   </div>

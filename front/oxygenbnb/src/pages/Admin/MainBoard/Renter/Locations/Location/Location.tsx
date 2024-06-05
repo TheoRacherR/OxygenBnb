@@ -11,15 +11,26 @@ import { useTranslation } from "react-i18next";
 
 const Location = () => {
   const { id } = useParams();
-  const { t } = useTranslation(["admin_renter"]);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <div className={styles.container}>
       <div className={styles.menu}>
         <TopLevelPanel
-          title={`${t("admin_renter:renter.locations.location.location_tsx.toplevelpanel.title")}${id}`}
-          currentPageTitle={t("admin_renter:renter.locations.location.location_tsx.toplevelpanel.currentPageTitle") + id}
-          pathValues={[{name: t("admin_renter:renter.locations.locations_tsx.currentPageTitle"), path: "/admin/renter/locations"}]}
+          title={`${t(
+            "admin:renter.locations.location.location_tsx.toplevelpanel.title"
+          )}${id}`}
+          currentPageTitle={
+            t(
+              "admin:renter.locations.location.location_tsx.toplevelpanel.currentPageTitle"
+            ) + id
+          }
+          pathValues={[
+            {
+              name: t("admin:renter.locations.locations_tsx.currentPageTitle"),
+              path: "/admin/renter/locations",
+            },
+          ]}
         />
       </div>
       <div className={styles.main_container}>
@@ -28,8 +39,16 @@ const Location = () => {
           sx={{ height: "unset", minHeight: "100%", backgroundColor: "black" }}
         >
           <TabList>
-            <Tab sx={{ color: "grey" }}>{t("admin_renter:renter.locations.location.location_tsx.tab_list.informations")}</Tab>
-            <Tab sx={{ color: "grey" }}>{t("admin_renter:renter.locations.location.location_tsx.tab_list.request")}</Tab>
+            <Tab sx={{ color: "grey" }}>
+              {t(
+                "admin:renter.locations.location.location_tsx.tab_list.informations"
+              )}
+            </Tab>
+            <Tab sx={{ color: "grey" }}>
+              {t(
+                "admin:renter.locations.location.location_tsx.tab_list.request"
+              )}
+            </Tab>
             {/* <Tab>Manage location</Tab> */}
           </TabList>
           <Informations value={0} />

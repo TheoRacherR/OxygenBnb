@@ -48,14 +48,14 @@ const dataTemp: {
 ];
 
 const LocationList = () => {
-  const { t } = useTranslation(["admin_admin"]);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <div className={styles.container}>
       <TopLevelPanel
-        title={t("admin_admin:locations.location_list_tsx.title")}
+        title={t("admin:admin.locations.location_list_tsx.title")}
         currentPageTitle={t(
-          "admin_admin:locations.location_list_tsx.currentPageTitle"
+          "admin:admin.locations.location_list_tsx.currentPageTitle"
         )}
         pathValues={[]}
       />
@@ -74,7 +74,7 @@ const LocationList = () => {
         >
           {dataTemp.length === 0 ? (
             <div style={{ color: "white" }}>
-              {t("admin_admin:locations.location_list_tsx.no_location")}
+              {t("admin:admin.locations.location_list_tsx.no_location")}
             </div>
           ) : (
             <Table sx={{ borderRadius: 20, color: "#fff" }}>
@@ -82,22 +82,22 @@ const LocationList = () => {
                 <tr>
                   <th>
                     {t(
-                      "admin_admin:locations.location_infos.location_infos_tsx.list.id"
+                      "admin:admin.locations.location_infos.location_infos_tsx.list.id"
                     )}
                   </th>
                   <th>
                     {t(
-                      "admin_admin:locations.location_infos.location_infos_tsx.list.title"
+                      "admin:admin.locations.location_infos.location_infos_tsx.list.title"
                     )}
                   </th>
                   <th>
                     {t(
-                      "admin_admin:locations.location_infos.location_infos_tsx.list.price"
+                      "admin:admin.locations.location_infos.location_infos_tsx.list.price"
                     )}
                   </th>
                   <th>
                     {t(
-                      "admin_admin:locations.location_infos.location_infos_tsx.list.valid"
+                      "admin:admin.locations.location_infos.location_infos_tsx.list.valid"
                     )}
                   </th>
                   <th></th>

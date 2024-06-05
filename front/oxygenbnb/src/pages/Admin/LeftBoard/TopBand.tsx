@@ -10,23 +10,21 @@ import { Link } from "react-router-dom";
 
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import AssignmentRoundedIcon from '@mui/icons-material/AssignmentRounded';
-import ForumRoundedIcon from '@mui/icons-material/ForumRounded';
-import PeopleAltRoundedIcon from '@mui/icons-material/PeopleAltRounded';
-
-
+import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
+import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
+import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 
 const TopBand = ({ location }) => {
-  const { t } = useTranslation(["admin_default"]);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <>
       <div className={styles.img_logo}>
         <img
           src={logo}
-          alt={t("admin_default:admin.top_band_tsx.img_logo.alt_img")}
+          alt={t("admin:default.top_band_tsx.img_logo.alt_img")}
         />
-        <p>{t("admin_default:admin.top_band_tsx.title")}</p>
+        <p>{t("admin:default.top_band_tsx.title")}</p>
       </div>
       <div className={styles.listing_item}>
         <List
@@ -41,9 +39,13 @@ const TopBand = ({ location }) => {
           <Link to="">
             <ListItem>
               <ListItemButton
-                sx={{ 
+                sx={{
                   borderRadius: "5px",
-                  color: location.pathname === "/admin" || location.pathname === "/admin/§=" ? "#0A0E0F" : "white"
+                  color:
+                    location.pathname === "/admin" ||
+                    location.pathname === "/admin/§="
+                      ? "#0A0E0F"
+                      : "white",
                 }}
                 selected={
                   location.pathname === "/admin" ||
@@ -51,9 +53,9 @@ const TopBand = ({ location }) => {
                 }
               >
                 <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                  <HomeRoundedIcon fontSize="small"/>
+                  <HomeRoundedIcon fontSize="small" />
                 </ListItemDecorator>
-                {t("admin_default:admin.top_band_tsx.listing_item.home")}
+                {t("admin:default.top_band_tsx.listing_item.home")}
               </ListItemButton>
             </ListItem>
           </Link>
@@ -61,18 +63,20 @@ const TopBand = ({ location }) => {
           <Link to="renter/locations">
             <ListItem>
               <ListItemButton
-                sx={{ 
+                sx={{
                   borderRadius: "5px",
-                  color: location.pathname.startsWith("/admin/renter/location") ? "#0A0E0F" : "white"
+                  color: location.pathname.startsWith("/admin/renter/location")
+                    ? "#0A0E0F"
+                    : "white",
                 }}
-                selected={
-                  location.pathname.startsWith("/admin/renter/location")
-                }
+                selected={location.pathname.startsWith(
+                  "/admin/renter/location"
+                )}
               >
                 <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                  <AssignmentRoundedIcon fontSize="small"/>
+                  <AssignmentRoundedIcon fontSize="small" />
                 </ListItemDecorator>
-                {t("admin_default:admin.top_band_tsx.listing_item.locations")}
+                {t("admin:default.top_band_tsx.listing_item.locations")}
               </ListItemButton>
             </ListItem>
           </Link>
@@ -82,17 +86,21 @@ const TopBand = ({ location }) => {
               <ListItemButton
                 sx={{
                   borderRadius: "5px",
-                  color: location.pathname.startsWith("/admin/renter/messages") ? "#0A0E0F" : "white",
+                  color: location.pathname.startsWith("/admin/renter/messages")
+                    ? "#0A0E0F"
+                    : "white",
                   // display: "flex",
                   // justifyContent: "space-between",
                 }}
-                selected={location.pathname.startsWith("/admin/renter/messages")}
+                selected={location.pathname.startsWith(
+                  "/admin/renter/messages"
+                )}
               >
                 {/* <div> */}
-                  <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                    <ForumRoundedIcon fontSize="small"/>
-                  </ListItemDecorator>
-                  {t("admin_default:admin.top_band_tsx.listing_item.messages")}
+                <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
+                  <ForumRoundedIcon fontSize="small" />
+                </ListItemDecorator>
+                {t("admin:default.top_band_tsx.listing_item.messages")}
                 {/* </div> */}
                 {/* <Chip sx={{ backgroundColor: "#0b6bcb" }}>3</Chip> */}
               </ListItemButton>
@@ -105,14 +113,16 @@ const TopBand = ({ location }) => {
               <ListItemButton
                 sx={{
                   borderRadius: "5px",
-                  color: location.pathname.startsWith("/admin/user") ? "#0A0E0F" : "white",
+                  color: location.pathname.startsWith("/admin/user")
+                    ? "#0A0E0F"
+                    : "white",
                 }}
                 selected={location.pathname.startsWith("/admin/user")}
               >
-                  <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                    <PeopleAltRoundedIcon fontSize="small"/>
-                  </ListItemDecorator>
-                  {t("admin_default:admin.top_band_tsx.listing_item.users")}
+                <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
+                  <PeopleAltRoundedIcon fontSize="small" />
+                </ListItemDecorator>
+                {t("admin:default.top_band_tsx.listing_item.users")}
               </ListItemButton>
             </ListItem>
           </Link>
@@ -121,14 +131,16 @@ const TopBand = ({ location }) => {
               <ListItemButton
                 sx={{
                   borderRadius: "5px",
-                  color: location.pathname.startsWith("/admin/location") ? "#0A0E0F" : "white",
+                  color: location.pathname.startsWith("/admin/location")
+                    ? "#0A0E0F"
+                    : "white",
                 }}
                 selected={location.pathname.startsWith("/admin/location")}
               >
-                  <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
-                    <AssignmentRoundedIcon fontSize="small"/>
-                  </ListItemDecorator>
-                  {t("admin_default:admin.top_band_tsx.listing_item.locations")}
+                <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
+                  <AssignmentRoundedIcon fontSize="small" />
+                </ListItemDecorator>
+                {t("admin:default.top_band_tsx.listing_item.locations")}
               </ListItemButton>
             </ListItem>
           </Link>

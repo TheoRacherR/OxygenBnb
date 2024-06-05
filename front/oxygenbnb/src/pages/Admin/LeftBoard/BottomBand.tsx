@@ -11,7 +11,7 @@ import List from "@mui/joy/List";
 import { useTranslation } from "react-i18next";
 
 const BottomBand = () => {
-  const { t } = useTranslation(["admin_default"]);
+  const { t } = useTranslation(["admin"]);
 
   return (
     <>
@@ -28,7 +28,9 @@ const BottomBand = () => {
             <ListItemButton
               sx={{
                 borderRadius: "5px",
-                color: location.pathname.startsWith("/admin/renter/settings") ? "#0A0E0F" : "white"
+                color: location.pathname.startsWith("/admin/renter/settings")
+                  ? "#0A0E0F"
+                  : "white",
                 // display: "flex",
                 // justifyContent: "space-between",
               }}
@@ -37,7 +39,7 @@ const BottomBand = () => {
               <ListItemDecorator sx={{ mr: 1, minInlineSize: "auto" }}>
                 <SettingsRoundedIcon fontSize="small" />
               </ListItemDecorator>
-              {t("admin_default:admin.bottom_band_tsx.settings")}
+              {t("admin:default.bottom_band_tsx.settings")}
             </ListItemButton>
           </ListItem>
         </Link>

@@ -11,7 +11,7 @@ const Dates = ({
   nightSelected,
   numberOfPeopleSelected,
 }: {
-  url: string,
+  url: string;
   nightSelected: {
     start: string;
     end: string;
@@ -21,7 +21,7 @@ const Dates = ({
     children: number;
   };
 }) => {
-  const { t } = useTranslation(["site_main"]);
+  const { t } = useTranslation(["site"]);
   const [data, setData] = useState<{
     dates: {
       content: {
@@ -62,45 +62,46 @@ const Dates = ({
   }, []);
   return (
     <div className={styles.container_dates}>
-      <h2>{t("site_main:main.room.reserve.blocks.dates_tsx.title")}</h2>
+      <h2>{t("site:main.room.reserve.blocks.dates_tsx.title")}</h2>
       <div className={styles.item}>
         <div className={styles.left}>
-          <p>{t("site_main:main.room.reserve.blocks.dates_tsx.dates")}</p>
+          <p>{t("site:main.room.reserve.blocks.dates_tsx.dates")}</p>
           <div>
-            {t("site_main:main.room.reserve.blocks.dates_tsx.from")}{" "}
+            {t("site:main.room.reserve.blocks.dates_tsx.from")}{" "}
             <span style={{ fontWeight: "bold" }}>
               {dayjs(data.dates.content.start)
                 .locale("fr")
                 .format(
                   t(
-                    "site_main:main.room.reserve.blocks.dates_tsx.dates_format_start"
+                    "site:main.room.reserve.blocks.dates_tsx.dates_format_start"
                   )
                 )}
             </span>{" "}
-            {t("site_main:main.room.reserve.blocks.dates_tsx.to")}{" "}
+            {t("site:main.room.reserve.blocks.dates_tsx.to")}{" "}
             <span style={{ fontWeight: "bold" }}>
               {dayjs(data.dates.content.end)
                 .locale("fr")
                 .format(
-                  t(
-                    "site_main:main.room.reserve.blocks.dates_tsx.dates_format_end"
-                  )
+                  t("site:main.room.reserve.blocks.dates_tsx.dates_format_end")
                 )}
             </span>
           </div>
         </div>
-        <Link to={`/o/${url.substring(0, url.length - 12)}`} style={{ color: "black" }}>
+        <Link
+          to={`/o/${url.substring(0, url.length - 12)}`}
+          style={{ color: "black" }}
+        >
           <div className={styles.right}>
-            {t("site_main:main.room.reserve.blocks.dates_tsx.edit")}
+            {t("site:main.room.reserve.blocks.dates_tsx.edit")}
           </div>
         </Link>
       </div>
       <div className={styles.item}>
         <div className={styles.left}>
-          <p>{t("site_main:main.room.reserve.blocks.dates_tsx.people")}</p>
+          <p>{t("site:main.room.reserve.blocks.dates_tsx.people")}</p>
           <div>
             {data.peoples.content.adult}{" "}
-            {t("site_main:main.room.reserve.blocks.dates_tsx.adult")}
+            {t("site:main.room.reserve.blocks.dates_tsx.adult")}
             {data.peoples.content.adult > 1 ? "s" : ""}{" "}
             {/*data.peoples.content.children*/}
           </div>
@@ -110,7 +111,7 @@ const Dates = ({
           style={{ color: "black" }}
         >
           <div className={styles.right}>
-            {t("site_main:main.room.reserve.blocks.dates_tsx.edit")}
+            {t("site:main.room.reserve.blocks.dates_tsx.edit")}
           </div>
         </Link>
       </div>

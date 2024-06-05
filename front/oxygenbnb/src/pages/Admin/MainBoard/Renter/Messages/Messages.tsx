@@ -8,18 +8,18 @@ import { useContext } from "react";
 import { MessageContext } from "../../../../../utils/Context/MessageContext";
 
 const Messages = () => {
-  const { t } = useTranslation(["admin_renter"]);
+  const { t } = useTranslation(["admin"]);
   const { discussionSelected } = useContext(MessageContext);
 
   return (
     <div className={styles.container}>
       <div className={styles.contact_container}>
         <div className={styles.title}>
-          <h1>{t("admin_renter:renter.messages.messages_tsx.title")}</h1>
+          <h1>{t("admin:renter.messages.messages_tsx.title")}</h1>
         </div>
         <div className={styles.search}>
           <Input
-            placeholder={t("admin_renter:renter.messages.messages_tsx.search")}
+            placeholder={t("admin:renter.messages.messages_tsx.search")}
             endDecorator={<SearchRoundedIcon fontSize="small" />}
             sx={{ width: "100%", borderRadius: "6px" }}
           />
@@ -30,7 +30,7 @@ const Messages = () => {
       {discussionSelected ? (
         <Discussion />
       ) : (
-        <>{t("admin_renter:renter.messages.messages_tsx.no_message")}</>
+        <>{t("admin:renter.messages.messages_tsx.no_message")}</>
       )}
     </div>
   );

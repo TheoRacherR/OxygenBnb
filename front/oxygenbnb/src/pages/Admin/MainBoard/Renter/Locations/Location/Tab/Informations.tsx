@@ -11,7 +11,6 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import { useTranslation } from "react-i18next";
 
-
 const enumCurrency = [
   "€ (euro)",
   "£ (pound)",
@@ -22,7 +21,7 @@ const enumCurrency = [
 ];
 
 const Informations = ({ value }) => {
-  const { t } = useTranslation(["admin_renter"]);
+  const { t } = useTranslation(["admin"]);
   const [locationInformations, setLocationInformations] = useState({
     id: 1,
     title: "",
@@ -48,14 +47,25 @@ const Informations = ({ value }) => {
     <TabPanel value={value}>
       <div className={styles.container}>
         <div className={styles.title}>
-          {t("admin_renter:renter.locations.location.informations_tsx.title")} {locationInformations.active ? "" : `[${t("admin_renter:renter.locations.location.informations_tsx.not_active")}]`}
+          {t("admin:renter.locations.location.informations_tsx.title")}{" "}
+          {locationInformations.active
+            ? ""
+            : `[${t(
+                "admin:renter.locations.location.informations_tsx.not_active"
+              )}]`}
         </div>
         <div className={styles.list_container}>
           <div className={styles.item}>
             <Input
               variant="outlined"
               value={locationInformations.id}
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.id")}</label>}
+              startDecorator={
+                <label>
+                  {t(
+                    "admin:renter.locations.location.informations_tsx.list.id"
+                  )}
+                </label>
+              }
               disabled
             />
           </div>
@@ -69,7 +79,13 @@ const Informations = ({ value }) => {
                   title: e.target.value,
                 }))
               }
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.title")}</label>}
+              startDecorator={
+                <label>
+                  {t(
+                    "admin:renter.locations.location.informations_tsx.list.title"
+                  )}
+                </label>
+              }
             />
           </div>
           <div className={styles.item}>
@@ -86,7 +102,13 @@ const Informations = ({ value }) => {
                   price: parseInt(e.target.value),
                 }))
               }
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.price")}</label>}
+              startDecorator={
+                <label>
+                  {t(
+                    "admin:renter.locations.location.informations_tsx.list.price"
+                  )}
+                </label>
+              }
               endDecorator={
                 <Select
                   value={locationInformations.default_currency}
@@ -111,7 +133,13 @@ const Informations = ({ value }) => {
                   type: e.target.value,
                 }))
               }
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.type")}</label>}
+              startDecorator={
+                <label>
+                  {t(
+                    "admin:renter.locations.location.informations_tsx.list.type"
+                  )}
+                </label>
+              }
             />
           </div>
           <div className={styles.item}>
@@ -126,7 +154,9 @@ const Informations = ({ value }) => {
                   }))
                 }
               >
-                {t("admin_renter:renter.locations.location.informations_tsx.list.desactivate")}
+                {t(
+                  "admin:renter.locations.location.informations_tsx.list.desactivate"
+                )}
               </Button>
             ) : (
               <Button
@@ -139,7 +169,9 @@ const Informations = ({ value }) => {
                   }))
                 }
               >
-                {t("admin_renter:renter.locations.location.informations_tsx.list.activate")}
+                {t(
+                  "admin:renter.locations.location.informations_tsx.list.activate"
+                )}
               </Button>
             )}
           </div>
@@ -147,12 +179,19 @@ const Informations = ({ value }) => {
             <Input
               variant="outlined"
               disabled
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.validated")}</label>}
+              startDecorator={
+                <label>
+                  {t(
+                    "admin:renter.locations.location.informations_tsx.list.validated"
+                  )}
+                </label>
+              }
               endDecorator={
-                locationInformations.isValid ? 
+                locationInformations.isValid ? (
                   <CheckCircleOutlineRoundedIcon color="success" />
-                : 
+                ) : (
                   <HighlightOffRoundedIcon sx={{ color: red[500] }} />
+                )
               }
             />
           </div>
@@ -167,7 +206,13 @@ const Informations = ({ value }) => {
                   owner: e.target.value,
                 }))
               }
-              startDecorator={<label>{t("admin_renter:renter.locations.location.informations_tsx.list.owner")}</label>}
+              startDecorator={
+                <label>
+                  {t(
+                    "admin:renter.locations.location.informations_tsx.list.owner"
+                  )}
+                </label>
+              }
             />
           </div>
 
@@ -176,7 +221,7 @@ const Informations = ({ value }) => {
             style={{ display: "flex", flexDirection: "row-reverse" }}
           >
             <Button sx={{ borderRadius: "6px" }} color="success">
-            {t("admin_renter:renter.locations.location.informations_tsx.list.save")}
+              {t("admin:renter.locations.location.informations_tsx.list.save")}
             </Button>
           </div>
         </div>

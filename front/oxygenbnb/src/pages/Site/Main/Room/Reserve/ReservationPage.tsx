@@ -19,15 +19,16 @@ const room_details = {
 };
 
 const ReservationPage = () => {
-  const { t } = useTranslation(["site_main"]);
-  const { nightSelected, numberOfNightSelected, numberOfPeopleSelected } = useContext(SearchContext);
+  const { t } = useTranslation(["site"]);
+  const { nightSelected, numberOfNightSelected, numberOfPeopleSelected } =
+    useContext(SearchContext);
   const url = useParams()["*"];
-  const idRoom = url.substring(8, url.length - 12)
+  const idRoom = url.substring(8, url.length - 12);
 
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <h1>{t("site_main:main.room.reserve.reservation_page_tsx.title")}</h1>
+        <h1>{t("site:main.room.reserve.reservation_page_tsx.title")}</h1>
         <div className={styles.placements}>
           <div className={styles.left}>
             <Dates

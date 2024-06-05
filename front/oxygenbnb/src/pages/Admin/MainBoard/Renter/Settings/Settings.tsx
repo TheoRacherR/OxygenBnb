@@ -27,7 +27,7 @@ const lang = [
 // TODO : set settings
 
 const Settings = () => {
-  const { t, i18n } = useTranslation(["admin_renter"]);
+  const { t, i18n } = useTranslation(["admin"]);
   const [locationInformations, setLocationInformations] = useState({
     id: 1,
     title: "",
@@ -61,15 +61,13 @@ const Settings = () => {
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
-        <div className={styles.title}>
-          {t("admin_renter:renter.settings.title")}
-        </div>
+        <div className={styles.title}>{t("admin:renter.settings.title")}</div>
         <div className={styles.list_container}>
           <div className={styles.item}>
             <Input
               variant="outlined"
               value={locationInformations.id}
-              startDecorator={<label>{t("admin_renter:renter.settings.title")}</label>}
+              startDecorator={<label>{t("admin:renter.settings.title")}</label>}
               disabled
             />
           </div>
@@ -200,18 +198,20 @@ const Settings = () => {
               ))}
             </Select> */}
             <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
-              {
-                lang.map((item, index) => (
-                  <Button
-                    color="neutral"
-                    variant={localStorage.getItem("lng") === item.param ? "soft" : "solid"}
-                    key={index}
-                    onClick={() => onClickLanguageChange(item)}
-                  >
-                    {item.name}
-                  </Button>
-                ))
-              }
+              {lang.map((item, index) => (
+                <Button
+                  color="neutral"
+                  variant={
+                    localStorage.getItem("lng") === item.param
+                      ? "soft"
+                      : "solid"
+                  }
+                  key={index}
+                  onClick={() => onClickLanguageChange(item)}
+                >
+                  {item.name}
+                </Button>
+              ))}
             </ButtonGroup>
           </div>
 
@@ -220,7 +220,7 @@ const Settings = () => {
             style={{ display: "flex", flexDirection: "row-reverse" }}
           >
             <Button sx={{ borderRadius: "6px" }} color="success">
-              {t("admin_renter:renter.settings.save")}
+              {t("admin:renter.settings.save")}
             </Button>
           </div>
         </div>
