@@ -111,8 +111,8 @@ const ReservationList = ({ user_id, location_id }) => {
                     <tr key={index}>
                       <td>{item.id}</td>
                       <td>{item?.rental?.localisation_infos}</td>
-                      <td>{dayjs(item?.start_date).format("DD/MM/YYYY")}</td>
-                      <td>{dayjs(item?.end_date).format("DD/MM/YYYY")}</td>
+                      <td>{dayjs(item?.start_date).format(t('admin:admin.users.user_list_tsx.format'))}</td>
+                      <td>{dayjs(item?.end_date).format(t('admin:admin.users.user_list_tsx.format'))}</td>
                       <td>
                         <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
                           <Link

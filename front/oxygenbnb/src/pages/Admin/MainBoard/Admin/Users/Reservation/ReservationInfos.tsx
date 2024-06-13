@@ -75,7 +75,7 @@ const ReservationInfos = ({ reservation_id }) => {
                 "admin:admin.users.reservation.reservation_infos_tsx.list.reservation_date"
               )}
               value={dayjs(reservationData?.created_at).format(
-                "DD/MM/YYYY"
+                t('admin:admin.users.user_list_tsx.format')
               )}
               disabled={true}
             />
@@ -85,7 +85,7 @@ const ReservationInfos = ({ reservation_id }) => {
               label={t(
                 "admin:admin.users.reservation.reservation_infos_tsx.list.from"
               )}
-              value={dayjs(reservationData?.start_date).format("DD/MM/YYYY")}
+              value={dayjs(reservationData?.start_date).format(t('admin:admin.users.user_list_tsx.format'))}
               disabled={true}
             />
           </div>
@@ -94,7 +94,7 @@ const ReservationInfos = ({ reservation_id }) => {
               label={t(
                 "admin:admin.users.reservation.reservation_infos_tsx.list.to"
               )}
-              value={dayjs(reservationData?.end_date).format("DD/MM/YYYY")}
+              value={dayjs(reservationData?.end_date).format(t('admin:admin.users.user_list_tsx.format'))}
               disabled={true}
             />
           </div>
