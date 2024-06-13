@@ -1,7 +1,6 @@
 import { Rental, rentalType } from '../../rental/entities/rental.entity';
-import { RentalDate, rentalDateType } from '../entities/rental-date.entity';
+import { rentalDateType } from '../entities/rental-date.entity';
 import { User } from '../../user/entities/user.entity';
-import { Reservation } from '../../reservation/entities/reservation.entity';
 
 export const rentalDateMock = [
   {

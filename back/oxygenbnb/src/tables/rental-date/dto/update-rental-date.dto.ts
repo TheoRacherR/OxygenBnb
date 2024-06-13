@@ -1,18 +1,18 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateRentalDateDto } from './create-rental-date.dto';
 import { rentalDateType } from '../entities/rental-date.entity';
-import { IsDate, IsEnum, IsOptional } from 'class-validator';
+import { IsDateString, IsEnum, IsOptional } from 'class-validator';
 
 export class UpdateRentalDateDto extends PartialType(CreateRentalDateDto) {
   @IsEnum(rentalDateType)
   @IsOptional()
   type?: rentalDateType;
 
-  @IsDate()
+  @IsDateString()
   @IsOptional()
   start_date?: Date;
 
-  @IsDate()
+  @IsDateString()
   @IsOptional()
   end_date?: Date;
 }

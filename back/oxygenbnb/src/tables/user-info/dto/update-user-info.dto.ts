@@ -5,11 +5,11 @@ export class UpdateUserInfoDto {
   @IsEnum(gender)
   @IsOptional()
   gender?: gender;
-  
+
   @IsDate()
   @IsOptional()
   birth_date?: Date;
-  
+
   @IsString()
   @IsOptional()
   desciption?: string;

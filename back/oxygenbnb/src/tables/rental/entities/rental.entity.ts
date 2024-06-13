@@ -55,9 +55,12 @@ export class Rental {
   @Column({ default: false })
   isValid: boolean;
 
+  @Column({ default: false })
+  active: boolean;
+
   // Relations
 
-  @ManyToOne(() => User, (owner) => owner.rent)
+  @ManyToOne(() => User, (owner) => owner.rent, { eager: true })
   @JoinColumn()
   owner: User;
 

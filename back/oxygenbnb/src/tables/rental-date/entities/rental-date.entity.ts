@@ -1,5 +1,11 @@
 import { Rental } from '../../rental/entities/rental.entity';
-import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 export enum rentalDateType {
   BLOCKED = 'blocked',

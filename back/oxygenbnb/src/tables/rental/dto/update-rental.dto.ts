@@ -1,7 +1,13 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateRentalDto } from './create-rental.dto';
 import { currency, rentalType } from '../entities/rental.entity';
-import { IsBoolean, IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class UpdateRentalDto extends PartialType(CreateRentalDto) {
   @IsOptional()
@@ -20,7 +26,11 @@ export class UpdateRentalDto extends PartialType(CreateRentalDto) {
   @IsString()
   localisation_infos?: string;
 
-  @IsOptional()
   @IsBoolean()
+  @IsOptional()
   isValid?: boolean;
+
+  @IsBoolean()
+  @IsOptional()
+  active?: boolean;
 }

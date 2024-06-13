@@ -1,9 +1,9 @@
 export const userMock = [
   {
     id: 1,
-    firstname: "string",
-    lastname: "string",
-    email: "string",
-    password: "string"
-  }
-]
+    firstname: 'Test',
+    lastname: 'tset',
+    email: 'theo@gmail.com',
+    password: 'toor',
+  },
+];

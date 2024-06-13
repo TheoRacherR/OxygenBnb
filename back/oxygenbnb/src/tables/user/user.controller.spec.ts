@@ -36,7 +36,12 @@ describe('UserController', () => {
 
     const id_not_found = 0;
     it(`should return an error : { User ${id_not_found} not found }`, () => {
-      expect(controller.findOneById(id_not_found)).rejects.toThrow(new HttpException(`User ${id_not_found} not found`, HttpStatus.NOT_FOUND));
+      expect(controller.findOneById(id_not_found)).rejects.toThrow(
+        new HttpException(
+          `User ${id_not_found} not found`,
+          HttpStatus.NOT_FOUND,
+        ),
+      );
     });
   });
 
@@ -50,7 +55,12 @@ describe('UserController', () => {
 
     const id_not_found = 0;
     it(`should return an error : { User ${id_not_found} not found }`, () => {
-      expect(controller.update(id_not_found, userMock[0])).rejects.toThrow(new HttpException(`User ${id_not_found} not found`, HttpStatus.NOT_FOUND));
+      expect(controller.update(id_not_found, userMock[0])).rejects.toThrow(
+        new HttpException(
+          `User ${id_not_found} not found`,
+          HttpStatus.NOT_FOUND,
+        ),
+      );
     });
   });
 
@@ -64,7 +74,12 @@ describe('UserController', () => {
 
     const id_not_found = 0;
     it(`should return an error : { User ${id_not_found} not found }`, () => {
-      expect(controller.delete(id_not_found)).rejects.toThrow(new HttpException(`User ${id_not_found} not found`, HttpStatus.NOT_FOUND));
+      expect(controller.delete(id_not_found)).rejects.toThrow(
+        new HttpException(
+          `User ${id_not_found} not found`,
+          HttpStatus.NOT_FOUND,
+        ),
+      );
     });
   });
 });

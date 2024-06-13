@@ -6,10 +6,11 @@ require("dotenv").config();
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-  }));
-  console.log({ secret: process.env.jwt_secret });
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+    }),
+  );
 
   await app.listen(process.env.NEST_PORT);
 }

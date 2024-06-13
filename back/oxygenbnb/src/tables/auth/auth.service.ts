@@ -23,13 +23,34 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  async verifyToken(
+    TokenValidateDto: TokenValidateDto,
+  ): Promise<{ token: string }> {
+    if (!TokenValidateDto.token) {
+      throw new BadRequestException('Token is missing');
+    }
+    try {
+      const token = TokenValidateDto.token;
+      const result = this.jwtService.verify(token, {
+        secret: process.env.jwt_secret,
+      });
+      return result;
+    } catch (e) {
+      if (e instanceof JsonWebTokenError || e instanceof SyntaxError) {
+        throw new BadRequestException('Invalid token');
+      }
+    }
+  }
+
   async validateToken(TokenValidateDto: TokenValidateDto) {
     if (!TokenValidateDto.token) {
       throw new BadRequestException('Token is missing');
     }
 
     try {
-      const { id } = this.jwtService.verify(TokenValidateDto.token);
+      const { id } = this.jwtService.verify(TokenValidateDto.token, {
+        secret: process.env.jwt_secret,
+      });
       const user: User = await this.userService.findOneById(id);
       const detail: UserInfo = await this.userInfoService.findOneByUserId(id);
 
@@ -55,15 +76,15 @@ export class AuthService {
     }
   }
 
-  async login(LoginDto: LoginDto) {
-    const user = await this.userService.findOneByEmail(LoginDto.email);
+  async login(loginDto: LoginDto) {
+    const user = await this.userService.findOneByEmail(loginDto.email);
     if (!user) {
       throw new BadRequestException('Invalid email or password');
     }
-    const detail = await this.userInfoService.findOneByUserId(user.id);
+    // const detail = await this.userInfoService.findOneByUserId(user.id);
 
     const isValidPassword = await bcrypt.compare(
-      LoginDto.password,
+      loginDto.password,
       user.password,
     );
 
@@ -71,26 +92,13 @@ export class AuthService {
       throw new BadRequestException('Invalid email or password');
     }
 
-    const payload = {
-      id: user.id,
-    };
-
-    console.log("process.env.jwt_secret: " + process.env.jwt_secret)
-
-    const token = this.jwtService.sign(payload);
-
-    const userInfo = detail;
-
-    return {
-      isConnected: true,
-      token,
-      id: user.id,
-      role: user.role,
-      userInfo: userInfo,
-    };
+    const payload = { id: user.id, role: user.role };
+    const options = { secret: process.env.jwt_secret };
+    const token: string = this.jwtService.sign(payload, options);
+    return token;
   }
 
-  async register(registerDto: RegisterDto): Promise<{ message: string }>  {
+  async register(registerDto: RegisterDto): Promise<{ message: string }> {
     const userFound = await this.userService.findOneByEmail(registerDto.email);
     if (userFound)
       throw new HttpException('Email already exist', HttpStatus.CONFLICT);

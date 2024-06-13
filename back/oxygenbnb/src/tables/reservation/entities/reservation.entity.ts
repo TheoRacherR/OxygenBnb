@@ -1,6 +1,14 @@
 import { Rental } from '../../rental/entities/rental.entity';
 import { User } from '../../user/entities/user.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class Reservation {
@@ -14,15 +22,39 @@ export class Reservation {
   end_date: Date;
 
   @Column({ default: false })
-  canceled: Boolean;
+  canceled: boolean;
+
+  @Column({ default: 0 })
+  nb_adult: number;
+
+  @Column({ default: 0 })
+  nb_children: number;
+
+  @Column({ default: 0 })
+  price_per_night: number;
+
+  @Column({ default: 0 })
+  total_fees: number;
+
+  @Column({ default: 0 })
+  total_price: number;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
+
+  @Column({ default: 0 })
+  nb_night: number;
 
   // Relations
 
-  @ManyToOne(() => User, (client) => client.reservation)
+  @ManyToOne(() => User, (client) => client.reservation, { eager: true })
   @JoinColumn()
   client: User;
 
-  @ManyToOne(() => Rental, (rental) => rental.reservation)
+  @ManyToOne(() => Rental, (rental) => rental.reservation, { eager: true })
   @JoinColumn()
   rental: Rental;
 }

@@ -49,10 +49,9 @@ export class User {
   })
   role: userRole;
 
-
   // Relations
 
-  @OneToOne(() => UserInfo, (info) => info.user, { cascade: true })
+  @OneToOne(() => UserInfo, (info) => info.user, { cascade: true, eager: true })
   info: UserInfo;
 
   @OneToMany(() => Rental, (rent) => rent.owner)

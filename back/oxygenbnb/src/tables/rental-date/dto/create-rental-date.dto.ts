@@ -1,4 +1,4 @@
-import { IsDate, IsEnum, IsNotEmpty } from 'class-validator';
+import { IsDateString, IsEnum, IsNotEmpty } from 'class-validator';
 import { Rental } from '../../rental/entities/rental.entity';
 import { rentalDateType } from '../entities/rental-date.entity';
 
@@ -8,11 +8,11 @@ export class CreateRentalDateDto {
   type: rentalDateType;
 
   @IsNotEmpty()
-  @IsDate()
+  @IsDateString()
   start_date: Date;
 
   @IsNotEmpty()
-  @IsDate()
+  @IsDateString()
   end_date: Date;
 
   @IsNotEmpty()

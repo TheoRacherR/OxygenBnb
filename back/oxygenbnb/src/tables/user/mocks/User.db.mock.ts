@@ -1,11 +1,12 @@
-import { userMock } from "./user.mock";
+import { userMock } from './user.mock';
 
 export const UserDbMock = {
-  user : {
+  user: {
     findAll: jest.fn().mockResolvedValue(userMock),
     findOneById: jest.fn(),
+    findOneByEmail: jest.fn(),
     create: jest.fn(),
     update: jest.fn(),
     delete: jest.fn(),
-  }
-}
+  },
+};
