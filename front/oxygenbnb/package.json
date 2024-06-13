@@ -17,6 +17,7 @@
     "@mui/material": "^5.15.11",
     "@mui/x-date-pickers": "^6.19.6",
     "autosuggest-highlight": "^3.3.4",
+    "axios": "^1.7.2",
     "dayjs": "^1.11.10",
     "i18next": "^23.10.1",
     "leaflet": "^1.9.4",
