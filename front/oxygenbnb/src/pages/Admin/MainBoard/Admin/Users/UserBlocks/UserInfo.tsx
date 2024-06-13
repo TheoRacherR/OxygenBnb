@@ -8,18 +8,25 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PersonRoundedIcon from "@mui/icons-material/PersonRounded";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { User } from "../../../../../../../../../back/oxygenbnb/src/tables/user/entities/user.entity";
 
-const userData = {
-  frist_name: "Théo",
-  last_name: "RACHER RAULIN",
-  email: "theo@gmail.com",
-  role: "User",
-  created_at: "10-08-2022",
-  upated_at: "13-05-2024",
-};
 
-const UserInfo = ({ id }) => {
+const UserInfo = ({ id, userData }) => {
   const { t } = useTranslation(["admin"]);
+  // const [userData, setUserData] = useState<User>();
+
+  // const fetchUser = async () => {
+  //   const userRaw: { any; data: User } = await axios.get(
+  //     "http://localhost:3333" + "/user/" + id
+  //   );
+  //   setUserData(userRaw.data);
+  // };
+
+  // useEffect(() => {
+  //   fetchUser();
+  // }, []);
 
   return (
     <Accordion defaultExpanded sx={{ backgroundColor: "#0A0E0F" }}>
@@ -51,14 +58,14 @@ const UserInfo = ({ id }) => {
               label={t(
                 "admin:admin.users.user_blocks.user_info_tsx.list.firstname"
               )}
-              value={userData.frist_name}
+              value={userData?.firstname}
               disabled={true}
             />
             <InputComponent
               label={t(
                 "admin:admin.users.user_blocks.user_info_tsx.list.lastname"
               )}
-              value={userData.last_name}
+              value={userData?.lastname}
               disabled={true}
             />
           </div>
@@ -76,7 +83,7 @@ const UserInfo = ({ id }) => {
               label={t(
                 "admin:admin.users.user_blocks.user_info_tsx.list.email"
               )}
-              value={userData.email}
+              value={userData?.email}
               disabled={true}
             />
           </div>
@@ -84,7 +91,7 @@ const UserInfo = ({ id }) => {
           <div className={styles.item}>
             <InputComponent
               label={t("admin:admin.users.user_blocks.user_info_tsx.list.role")}
-              value={userData.role}
+              value={userData?.role}
               disabled={true}
             />
           </div>
@@ -94,14 +101,27 @@ const UserInfo = ({ id }) => {
               label={t(
                 "admin:admin.users.user_blocks.user_info_tsx.list.created_at"
               )}
-              value={userData.created_at}
+              value={userData?.created_at}
               disabled={true}
             />
             <InputComponent
               label={t(
-                "admin:admin.users.user_blocks.user_info_tsx.list.updated_at"
+                "admin:admin.users.user_blocks.user_info_tsx.list.gender"
               )}
-              value={userData.upated_at}
+              value={userData?.info?.gender}
+              disabled={true}
+            />
+            <InputComponent
+              label={t("admin:admin.users.user_blocks.user_info_tsx.list.birthdate")}
+              value={userData?.info?.birth_date}
+              disabled={true}
+            />
+          </div>
+
+          <div className={styles.item}>
+            <InputComponent
+              label={t("admin:admin.users.user_blocks.user_info_tsx.list.description")}
+              value={userData?.info?.desciption}
               disabled={true}
             />
           </div>

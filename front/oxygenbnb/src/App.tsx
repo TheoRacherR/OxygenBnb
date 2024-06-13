@@ -2,8 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 
 import Site from './pages/Site/Site'
-import Dashboard from './pages/Admin/Admin'
+import Admin from './pages/Admin/Admin'
 
+// axios.defaults.baseURL = process.env.NODE_ENV_DEV ? process.env.REACT_APP_URL_DEV : process.env.REACT_APP_URL_PROD;
+// axios.defaults.withCredentials = true;
 
 const App = () => {
 
@@ -13,7 +15,8 @@ const App = () => {
         <Routes>
 
           <Route path='/*' element={<Site/>}/>
-          <Route path='/admin/*' element={<Dashboard/>}/>
+          <Route path='/admin/*' element={<Admin/>}/>
+          <Route path='*' element={<Site/>}/>
 
         </Routes>
 

@@ -21,12 +21,12 @@ const MiddleExtended = () => {
   const { t } = useTranslation(["site"]);
   const {
     citySelected,
-    setCitySelected,
-    setNumberOfNightSelected,
+    updateCitySelected,
+    updateNumberOfNightSelected,
     numberOfPeopleSelected,
-    setNumberOfPeopleSelected,
+    updateNumberOfPeopleSelected,
     nightSelected,
-    setNightSelected,
+    updateNightSelected,
   } = useContext(SearchContext);
 
   const [anchorElements, setAnchorElements] = useState<{
@@ -54,29 +54,30 @@ const MiddleExtended = () => {
           dayjs(nightSelected.start),
           "day"
         );
-        setNumberOfNightSelected(date_diff);
+        updateNumberOfNightSelected(date_diff);
         // const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
         // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
-        // setNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
+        // updateNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
       }
     }
   }, [nightSelected.start, nightSelected.end]);
 
   const handleChangeDates = (type, date) => {
+    console.log(date)
     if (type === "start") {
       if (
         date > dayjs(nightSelected.end) ||
         nightSelected.end === date.toString()
       )
-        setNightSelected({
+        updateNightSelected({
           start: date.toString(),
           end: date.add(1, "day").toString(),
         });
-      else setNightSelected((prev) => ({ ...prev, start: date.toString() }));
+      else updateNightSelected({ ...nightSelected, start: date.toString() });
     } else {
       let dateEnd = date;
       if (nightSelected.start === date.toString()) dateEnd = date.add(1, "day");
-      setNightSelected((prev) => ({ ...prev, end: dateEnd.toString() }));
+      updateNightSelected({ ...nightSelected, end: dateEnd.toString() });
     }
   };
   return (
@@ -108,7 +109,7 @@ const MiddleExtended = () => {
       >
         <SearchLocalisation
           handleClose={handleClose}
-          handleReturnCitySelected={(item) => setCitySelected(item)}
+          handleReturnCitySelected={(item) => updateCitySelected(item)}
         />
       </Menu>
 
@@ -229,11 +230,12 @@ const MiddleExtended = () => {
           )}: `}
         </MenuItem>
         <Button
-          onClick={() =>
-            setNumberOfPeopleSelected((prev) => ({
-              ...prev,
-              adult: prev.adult - 1,
-            }))
+          onClick={() =>{
+            console.log("first"), //TODO prev marche pas
+            updateNumberOfPeopleSelected({ 
+              childen: numberOfPeopleSelected.childen,
+              adult: numberOfPeopleSelected.adult - 1,
+            })}
           }
           disabled={numberOfPeopleSelected.adult === 1}
         >
@@ -246,10 +248,10 @@ const MiddleExtended = () => {
         <Button disabled>{numberOfPeopleSelected.adult}</Button>
         <Button
           onClick={() =>
-            setNumberOfPeopleSelected((prev) => ({
-              ...prev,
-              adult: prev.adult + 1,
-            }))
+            updateNumberOfPeopleSelected({ 
+              childen: numberOfPeopleSelected.childen,
+              adult: numberOfPeopleSelected.adult + 1,
+            })
           }
         >
           <AddRoundedIcon sx={{ color: "#ed6c0280" }} />
@@ -258,9 +260,9 @@ const MiddleExtended = () => {
         {/* <MenuItem>
           How many children :
         </MenuItem>
-        <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children-1}))} disabled={numberOfPeopleSelected.children <= 0}><RemoveRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
+        <Button onClick={() => updateNumberOfPeopleSelected({...numberOfPeopleSelected, children: numberOfPeopleSelected.children-1})} disabled={numberOfPeopleSelected.children <= 0}><RemoveRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
         <Button disabled>{numberOfPeopleSelected.children}</Button>
-        <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children+1}))}><AddRoundedIcon sx={{color: "#ed6c0280"}}/></Button> */}
+        <Button onClick={() => updateNumberOfPeopleSelected({...numberOfPeopleSelected, children: numberOfPeopleSelected.children+1})}><AddRoundedIcon sx={{color: "#ed6c0280"}}/></Button> */}
       </Menu>
 
       {/* <Button

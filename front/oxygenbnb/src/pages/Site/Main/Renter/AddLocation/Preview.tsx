@@ -1,5 +1,5 @@
 import styles from "./Preview.module.scss";
-import { Menu, MenuItem } from "@mui/material";
+import { ButtonGroup, Button, Menu, MenuItem } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
@@ -8,17 +8,17 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useTranslation } from "react-i18next";
 import { FormAddLocationContext } from "../../../../../utils/Context/FormAddLocationContext";
-import { Button, ButtonGroup } from "@mui/joy";
+// import { ButtonGroup } from "@mui/joy";
 
-const Preview = () => {
+const Preview = ({handleCreateRental}) => {
   const { t } = useTranslation(["site"]);
   const fees = 13;
 
   const { setState, locationInformations } = useContext(FormAddLocationContext);
 
-  const [numberOfPeopleSelected, setNumberOfPeopleSelected] = useState(1);
-  const [numberOfNightSelected, setNumberOfNightSelected] = useState(0);
-  const [nightSelected, setNightSelected] = useState({
+  const [numberOfPeopleSelected, updateNumberOfPeopleSelected] = useState(1);
+  const numberOfNightSelected = 1;
+  const [nightSelected, updateNightSelected] = useState({
     start: dayjs(new Date()).toString(),
     end: dayjs(new Date()).add(1, "day").toString(),
   });
@@ -43,15 +43,15 @@ const Preview = () => {
         date > dayjs(nightSelected.end) ||
         nightSelected.end === date.toString()
       )
-        setNightSelected({
+        updateNightSelected({
           start: date.toString(),
           end: date.add(1, "day").toString(),
         });
-      else setNightSelected((prev) => ({ ...prev, start: date.toString() }));
+      else updateNightSelected({ ...nightSelected, start: date.toString() });
     } else {
       let dateEnd = date;
       if (nightSelected.start === date.toString()) dateEnd = date.add(1, "day");
-      setNightSelected((prev) => ({ ...prev, end: dateEnd.toString() }));
+      updateNightSelected({ ...nightSelected, end: dateEnd.toString() });
     }
   };
 
@@ -75,11 +75,11 @@ const Preview = () => {
           <h1>{locationInformations.title}</h1>
           <div>
             <ButtonGroup>
-              <Button variant="solid" color="success">
+              <Button variant="contained" color="success" onClick={handleCreateRental}>
                 {t("site:main.renter.add_location.preview_tsx.save")}
               </Button>
               <Button
-                variant="solid"
+                variant="contained"
                 color="warning"
                 onClick={() => setState("Form")}
               >
@@ -97,7 +97,7 @@ const Preview = () => {
             <div className={styles.description}>
               <p>
                 {t(`site:main.room.room_tsx.a_room_for`, {
-                  numberMaxOfPeople: numberMaxOfPeople,
+                  numberMaxOfPeople: locationInformations.nb_person,
                 })}
                 {locationInformations.nb_person > 1 ? "s" : ""}
               </p>
@@ -269,9 +269,7 @@ const Preview = () => {
                     </MenuItem>
                     <Button
                       onClick={() =>
-                        setNumberOfPeopleSelected(
-                          () => numberOfPeopleSelected - 1
-                        )
+                        updateNumberOfPeopleSelected(numberOfPeopleSelected - 1)
                       }
                       disabled={numberOfPeopleSelected <= 0}
                     >
@@ -280,9 +278,7 @@ const Preview = () => {
                     <Button disabled>{numberOfPeopleSelected}</Button>
                     <Button
                       onClick={() =>
-                        setNumberOfPeopleSelected(
-                          () => numberOfPeopleSelected + 1
-                        )
+                        updateNumberOfPeopleSelected(numberOfPeopleSelected + 1)
                       }
                     >
                       <AddRoundedIcon sx={{ color: "#ed6c0280" }} />
@@ -293,7 +289,7 @@ const Preview = () => {
 
               <div className={styles.submit_button}>
                 <Button
-                  variant="solid"
+                  variant="contained"
                   color="warning"
                   sx={{ width: "100%", margin: "20px 0" }}
                   disabled={errorMaxPeople}

@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import styles from "./AddLocation.module.scss";
 
 import Preview from "./AddLocation/Preview";
@@ -10,12 +10,17 @@ const AddLocation = () => {
     state
   } = useContext(FormAddLocationContext)
 
+  const handleCreateRental = () => {
+    console.log("created")
+    //todo set context empty
+  }
+
   return (
     <div className={styles.container}>
       {state === "Form" ? (
-        <Form />
+        <Form handleCreateRental={handleCreateRental}/>
       ) : (
-        <Preview />
+        <Preview handleCreateRental={handleCreateRental}/>
       )}
     </div>
   );

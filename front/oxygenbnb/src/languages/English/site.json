@@ -86,6 +86,8 @@
       "menu": {
         "auth": {
           "register_form_tsx": {
+            "firstname": "Firstname",
+            "lastname": "Lastname",
             "mail": {
               "placeholder": "Type your mail",
               "error": "This mail is already used, fill an other one or log in"
@@ -113,6 +115,7 @@
               "placeholder": "Type your password"
             },
             "error": "Wrong credentials",
+            "not_email": "Not the right mail format",
             "button_login": "Log in",
             "have_account": "Don't have an account ?",
             "click": "Click here"

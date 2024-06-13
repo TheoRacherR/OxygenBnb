@@ -1,9 +1,14 @@
 import dayjs from "dayjs";
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const SearchContext = createContext(undefined);
 
 export const SearchContextProvider = ({ children }) => {
+  try {JSON.parse(localStorage.getItem("citySelected"))} catch (e) {localStorage.setItem("citySelected", JSON.stringify({}))}
+  try {JSON.parse(localStorage.getItem("numberOfPeopleSelected"))} catch (e) {localStorage.setItem("numberOfPeopleSelected", JSON.stringify({adult: 1,children: 0}))} 
+  try {JSON.parse(localStorage.getItem("numberOfNightSelected"))} catch (e) {localStorage.setItem("numberOfNightSelected", JSON.stringify(1))}
+  try {JSON.parse(localStorage.getItem("nightSelected"))} catch (e) {localStorage.setItem("nightSelected", JSON.stringify({start: dayjs(new Date()).toString(),end: dayjs(new Date()).add(1, "day").toString()}))} 
+
   const [citySelected, setCitySelected] = useState(
     JSON.parse(localStorage.getItem("citySelected")) || {}
   );
@@ -46,9 +51,9 @@ export const SearchContextProvider = ({ children }) => {
       return false
   }
 
-  useEffect(() => {
-    compareItem(citySelected, "citySelected");
-    if(localStorage.getItem("citySelected") === JSON.stringify(citySelected)) {
+  const updateCitySelected = (element) => {
+    compareItem(element, "citySelected");
+    if(localStorage.getItem("citySelected") === JSON.stringify(element)) {
       if(checkIfOutdated("citySelected")){
         const obj = {}
         setCitySelected(obj)
@@ -56,11 +61,24 @@ export const SearchContextProvider = ({ children }) => {
         localStorage.setItem("citySelectedMaxDate", JSON.stringify(new Date()));
       }
     }
-  }, [citySelected]);
+  }
+
+  // useEffect(() => {
+  //   compareItem(citySelected, "citySelected");
+  //   if(localStorage.getItem("citySelected") === JSON.stringify(citySelected)) {
+  //     if(checkIfOutdated("citySelected")){
+  //       const obj = {}
+  //       setCitySelected(obj)
+  //       localStorage.setItem("citySelected", JSON.stringify(obj));
+  //       localStorage.setItem("citySelectedMaxDate", JSON.stringify(new Date()));
+  //     }
+  //   }
+  // }, [citySelected]);
   
-  useEffect(() => {
-    compareItem(numberOfPeopleSelected, "numberOfPeopleSelected");
-    if(localStorage.getItem("numberOfPeopleSelected") === JSON.stringify(numberOfPeopleSelected)) {
+  const updateNumberOfPeopleSelected = (element) => {
+    console.log(element)
+    compareItem(element, "numberOfPeopleSelected");
+    if(localStorage.getItem("numberOfPeopleSelected") === JSON.stringify(element)) {
       if(checkIfOutdated("numberOfPeopleSelected")){
         const obj = {
           adult: 1,
@@ -71,11 +89,25 @@ export const SearchContextProvider = ({ children }) => {
         localStorage.setItem("numberOfPeopleSelectedMaxDate", JSON.stringify(new Date()));
       }
     }
-  }, [numberOfPeopleSelected]);
+  }
+  // useEffect(() => {
+  //   compareItem(numberOfPeopleSelected, "numberOfPeopleSelected");
+  //   if(localStorage.getItem("numberOfPeopleSelected") === JSON.stringify(numberOfPeopleSelected)) {
+  //     if(checkIfOutdated("numberOfPeopleSelected")){
+  //       const obj = {
+  //         adult: 1,
+  //         children: 0,
+  //       }
+  //       setNumberOfPeopleSelected(obj)
+  //       localStorage.setItem("numberOfPeopleSelected", JSON.stringify(obj));
+  //       localStorage.setItem("numberOfPeopleSelectedMaxDate", JSON.stringify(new Date()));
+  //     }
+  //   }
+  // }, [numberOfPeopleSelected]);
 
-  useEffect(() => {
-    compareItem(numberOfNightSelected, "numberOfNightSelected");
-    if(localStorage.getItem("numberOfNightSelected") === JSON.stringify(numberOfNightSelected)) {
+  const updateNumberOfNightSelected = (element) => {
+    compareItem(element, "numberOfNightSelected");
+    if(localStorage.getItem("numberOfNightSelected") === JSON.stringify(element)) {
       if(checkIfOutdated("numberOfNightSelected")){
         const obj = 1
         setNumberOfNightSelected(obj)
@@ -83,11 +115,22 @@ export const SearchContextProvider = ({ children }) => {
         localStorage.setItem("numberOfNightSelectedMaxDate", JSON.stringify(new Date()));
       }
     }
-  }, [numberOfNightSelected]);
+  }
+  // useEffect(() => {
+  //   compareItem(numberOfNightSelected, "numberOfNightSelected");
+  //   if(localStorage.getItem("numberOfNightSelected") === JSON.stringify(numberOfNightSelected)) {
+  //     if(checkIfOutdated("numberOfNightSelected")){
+  //       const obj = 1
+  //       setNumberOfNightSelected(obj)
+  //       localStorage.setItem("numberOfNightSelected", JSON.stringify(obj));
+  //       localStorage.setItem("numberOfNightSelectedMaxDate", JSON.stringify(new Date()));
+  //     }
+  //   }
+  // }, [numberOfNightSelected]);
 
-  useEffect(() => {
-    compareItem(nightSelected, "nightSelected")
-    if(localStorage.getItem("nightSelected") === JSON.stringify(nightSelected)) {
+  const updateNightSelected = (element) => {
+    compareItem(element, "nightSelected")
+    if(localStorage.getItem("nightSelected") === JSON.stringify(element)) {
       if(checkIfOutdated("nightSelected")){
         const obj = {
           start: dayjs(new Date()).toString(),
@@ -98,19 +141,37 @@ export const SearchContextProvider = ({ children }) => {
         localStorage.setItem("nightSelectedMaxDate", JSON.stringify(new Date()));
       }
     }
-  }, [nightSelected]);
+  }
+  // useEffect(() => {
+  //   compareItem(nightSelected, "nightSelected")
+  //   if(localStorage.getItem("nightSelected") === JSON.stringify(nightSelected)) {
+  //     if(checkIfOutdated("nightSelected")){
+  //       const obj = {
+  //         start: dayjs(new Date()).toString(),
+  //         end: dayjs(new Date()).add(1, "day").toString(),
+  //       }
+  //       setNightSelected(obj)
+  //       localStorage.setItem("nightSelected", JSON.stringify(obj));
+  //       localStorage.setItem("nightSelectedMaxDate", JSON.stringify(new Date()));
+  //     }
+  //   }
+  // }, [nightSelected]);
 
   return (
     <SearchContext.Provider
       value={{
         citySelected,
-        setCitySelected,
+        // setCitySelected,
+        updateCitySelected,
         numberOfPeopleSelected,
-        setNumberOfPeopleSelected,
+        // setNumberOfPeopleSelected,
+        updateNumberOfPeopleSelected,
         numberOfNightSelected,
-        setNumberOfNightSelected,
+        // setNumberOfNightSelected,
+        updateNumberOfNightSelected,
         nightSelected,
-        setNightSelected,
+        // setNightSelected,
+        updateNightSelected,
       }}
     >
       {children}

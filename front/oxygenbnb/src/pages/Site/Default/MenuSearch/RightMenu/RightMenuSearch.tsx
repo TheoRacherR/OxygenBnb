@@ -5,7 +5,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 
 import styles from "./RightMenuSearch.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Fade from "@mui/material/Fade";
 
 import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
@@ -14,10 +14,12 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import { Divider, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { verifyIfLogged } from "../../../../../utils/utils";
 
 const RightMenuSearch = () => {
   const { t, i18n } = useTranslation(["site"]);
   const [anchorEl, setAnchorEl] = useState({ lang: null, settings: null });
+  const [logged, setLogged] = useState<boolean>(false);
   const handleClickSettings = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl({ lang: null, settings: event.currentTarget });
   };
@@ -26,6 +28,18 @@ const RightMenuSearch = () => {
   };
   const handleClose = () => {
     setAnchorEl({ lang: null, settings: null });
+  };
+
+  useEffect(() => {
+    setLogged(false);
+    if (verifyIfLogged()) setLogged(true);
+    console.log("first")
+  });
+
+  const handleLogout = () => {
+    localStorage.setItem("jwtToken", "");
+    console.log("change jwtToken")
+    handleClose();
   };
 
   const lang = [
@@ -102,25 +116,34 @@ const RightMenuSearch = () => {
           onClose={handleClose}
           TransitionComponent={Fade}
         >
-          <Link to="user" style={{ color: "black", textDecoration: "none" }}>
-            <MenuItem onClick={handleClose}>
-              <PersonOutlineRoundedIcon sx={{ marginRight: "15px" }} />
-              {t("site:default.menu.right_menu.right_menu_tsx.profil")}
-            </MenuItem>
-          </Link>
-          <Divider sx={{ my: 0.5 }} />
-          <Link to="login" style={{ color: "black", textDecoration: "none" }}>
-            <MenuItem onClick={handleClose}>
-              <LoginRoundedIcon sx={{ marginRight: "15px" }} color="success" />
-              {t("site:default.menu.right_menu.right_menu_tsx.login")}
-            </MenuItem>
-          </Link>
-          <Link to="logout" style={{ color: "black", textDecoration: "none" }}>
-            <MenuItem onClick={handleClose}>
-              <LogoutRoundedIcon sx={{ marginRight: "15px" }} color="error" />
-              {t("site:default.menu.right_menu.right_menu_tsx.logout")}
-            </MenuItem>
-          </Link>
+          {logged ? (
+            <>
+              <Link
+                to="user"
+                style={{ color: "black", textDecoration: "none" }}
+              >
+                <MenuItem onClick={handleClose}>
+                  <PersonOutlineRoundedIcon sx={{ marginRight: "15px" }} />
+                  {t("site:default.menu.right_menu.right_menu_tsx.profil")}
+                </MenuItem>
+              </Link>
+              <Divider sx={{ my: 0.5 }} />
+              <MenuItem onClick={handleLogout}>
+                <LogoutRoundedIcon sx={{ marginRight: "15px" }} color="error" />
+                {t("site:default.menu.right_menu.right_menu_tsx.logout")}
+              </MenuItem>
+            </>
+          ) : (
+            <Link to="login" style={{ color: "black", textDecoration: "none" }}>
+              <MenuItem onClick={handleClose}>
+                <LoginRoundedIcon
+                  sx={{ marginRight: "15px" }}
+                  color="success"
+                />
+                {t("site:default.menu.right_menu.right_menu_tsx.login")}
+              </MenuItem>
+            </Link>
+          )}
         </Menu>
       </div>
     </div>

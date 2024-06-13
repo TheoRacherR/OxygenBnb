@@ -18,7 +18,7 @@ import { useTranslation } from "react-i18next";
 
 const Home = () => {
   const { t } = useTranslation(["site"]);
-  const { setCitySelected } = useContext(SearchContext);
+  const { updateCitySelected } = useContext(SearchContext);
   const [listOfLocalisations, setListOfLocalisations] = useState([]);
   const [query, setQuery] = useState("");
   const [searchedBoolean, setSearchedBoolean] = useState(false);
@@ -49,7 +49,7 @@ const Home = () => {
   const navigate = useNavigate();
   const searching = async (city) => {
     if (Object.keys(city).length > 0) {
-      setCitySelected(city);
+      updateCitySelected(city);
       return navigate("/o/search");
     }
   };

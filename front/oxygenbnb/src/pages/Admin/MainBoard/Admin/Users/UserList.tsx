@@ -8,20 +8,8 @@ import styles from "./UserList.module.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import { userRole } from "../../../../../../../../back/oxygenbnb/src/tables/user/entities/user.entity"
 
-const enum userRole {
-  USER = "user",
-  RENTER = "renter",
-  ADMIN = "admin",
-}
-
-interface UserFormated {
-  id: number;
-  firstname: string;
-  lastname: string;
-  role: userRole;
-  created_at: Date;
-}
 
 interface UserRaw {
   id: number;
@@ -41,20 +29,12 @@ const UserList = () => {
     const usersRaw: { any; data: UserRaw[] } = await axios.get(
       "http://localhost:3333" + "/user"
     );
-    console.log(usersRaw.data);
-    // const userFormated: UserFormated[] = usersRaw.data.map((item) => ({
-    //   id: item.id,
-    //   firstname: item.firstname,
-    //   lastname: item.lastname,
-    //   role: item.role,
-    //   created_at: item.created_at
-    // }))
-    // console.log(userFormated);
     setUserData(usersRaw.data);
   };
 
   useEffect(() => {
     fetchUsers();
+    console.log("User fetched");
   }, []);
 
   return (
@@ -99,11 +79,11 @@ const UserList = () => {
                   <tr key={index}>
                     <td>{item.id}</td>
                     <td>
-                      {item.firstname} {item.lastname}
+                      {item?.firstname} {item?.lastname}
                     </td>
-                    <td>{item.role}</td>
+                    <td>{item?.role}</td>
                     <td>
-                      {dayjs(item.created_at).format(
+                      {dayjs(item?.created_at).format(
                         t("admin:admin.users.user_list_tsx.format")
                       )}
                     </td>

@@ -86,6 +86,8 @@
       "menu": {
         "auth": {
           "register_form_tsx": {
+            "firstname": "Prénom",
+            "lastname": "Nom",
             "mail": {
               "placeholder": "Renseigner un mail",
               "error": "Ce mail est déjà utilisé, renseignez en un autre ou connectez-vous"
@@ -113,6 +115,7 @@
               "placeholder": "Renseigner votre mot de passe"
             },
             "error": "Erreur du mail ou du mot de passe",
+            "not_email": "Il ne s'agit pas d'un mail",
             "button_login": "Connexion",
             "have_account": "Vous n'avez pas de compte",
             "click": "Cliquez ici"

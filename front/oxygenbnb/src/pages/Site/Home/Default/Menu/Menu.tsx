@@ -2,23 +2,22 @@ import styles from "./Menu.module.scss";
 import logo from "../../../../../assets/Logo OxygenBNB.png";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Drawer, IconButton, Menu, MenuItem } from "@mui/material";
-import Menu_extended from "./Extended/Menu_extended";
+import {
+  IconButton,
+  Menu,
+  MenuItem 
+} from "@mui/material";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import AccountBoxRoundedIcon from "@mui/icons-material/AccountBoxRounded";
 import Dialog from "@mui/material/Dialog";
 import AuthForm from "./AuthForm";
 import { useTranslation } from "react-i18next";
-import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
+// import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
 
 const MenuComponent = () => {
   const { t, i18n } = useTranslation(["site"]);
-  const [showMenuExtended, setShowMenuExtended] = useState<boolean>(false);
   const [openDialogAccount, setOpenDialogAccount] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState(null);
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setShowMenuExtended(newOpen);
-  };
 
   const handleClickLang = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -46,7 +45,9 @@ const MenuComponent = () => {
     <>
       <menu className={styles.container}>
         <div className={styles.menu_display_off_container}>
-          <div className={styles.burger_container} onClick={toggleDrawer(true)}>
+          <div
+            className={styles.burger_container}
+          >
             <MenuRoundedIcon sx={{ color: "#1E1E1E" }} fontSize="large" />
           </div>
 
@@ -111,15 +112,12 @@ const MenuComponent = () => {
           </div>
         </div>
       </menu>
-      <Drawer open={showMenuExtended} onClose={toggleDrawer(false)}>
-        <Menu_extended />
-      </Drawer>
       <Dialog
         sx={{ maxHeight: "unset" }}
         onClose={() => setOpenDialogAccount(false)}
         open={openDialogAccount}
       >
-        <AuthForm />
+        <AuthForm closeForm={() => setOpenDialogAccount(false)}/>
       </Dialog>
 
       {/* <Menu_extended show={showMenuExtended} setShow={setShowMenuExtended}/> */}

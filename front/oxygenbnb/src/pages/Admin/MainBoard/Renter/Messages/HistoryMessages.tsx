@@ -114,7 +114,6 @@ const HistoryMessages = () => {
   useEffect(() => {
     if (!discussionSelected) {
       if (data.length >= 1) {
-        // console.log("first");
         setDiscussionSelected(
           data.sort(
             (a, b) =>
@@ -122,11 +121,9 @@ const HistoryMessages = () => {
           )[0]
         );
       } else {
-        // console.log("null");
         setDiscussionSelected(null);
       }
     } else {
-      // console.log(discussionSelected);
       setDiscussionSelected(discussionSelected);
     }
   });

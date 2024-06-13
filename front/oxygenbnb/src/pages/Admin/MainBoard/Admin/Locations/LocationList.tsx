@@ -8,47 +8,25 @@ import styles from "./LocationList.module.scss";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import { red } from "@mui/material/colors";
-
-const dataTemp: {
-  title: string;
-  id: number;
-  price: number;
-  validated: boolean;
-}[] = [
-  {
-    title: "Frozen yoghurt",
-    id: 159,
-    price: 6,
-    validated: true,
-  },
-  {
-    title: "Ice cream sandwich",
-    id: 237,
-    price: 9,
-    validated: false,
-  },
-  {
-    title: "Eclair",
-    id: 262,
-    price: 16,
-    validated: true,
-  },
-  {
-    title: "Cupcake",
-    id: 305,
-    price: 3.7,
-    validated: true,
-  },
-  {
-    title: "Gingerbread",
-    id: 356,
-    price: 16,
-    validated: true,
-  },
-];
+import { useEffect, useState } from "react";
+import axios from "axios";
+// import { rentalType } from "../../../../../../../../back/oxygenbnb/src/tables/rental/entities/rental.entity";
+import { RentalFormated } from "../../../../../../../../back/oxygenbnb/src/tables/rental/rental.service";
 
 const LocationList = () => {
   const { t } = useTranslation(["admin"]);
+  const [locationListData, setLocationListData] = useState<RentalFormated[]>([]);
+
+  const fetchLocations = async () => {
+    const locationListRaw: { data: RentalFormated[] } = await axios.get(
+      "http://localhost:3333" + "/rental"
+    );
+    setLocationListData(locationListRaw.data);
+  };
+
+  useEffect(() => {
+    fetchLocations();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -72,7 +50,7 @@ const LocationList = () => {
             borderColor: "grey",
           }}
         >
-          {dataTemp.length === 0 ? (
+          {locationListData.length === 0 ? (
             <div style={{ color: "white" }}>
               {t("admin:admin.locations.location_list_tsx.no_location")}
             </div>
@@ -104,13 +82,13 @@ const LocationList = () => {
                 </tr>
               </thead>
               <tbody>
-                {dataTemp.map((item, index) => (
+                {locationListData.map((item, index) => (
                   <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>{item.title}</td>
-                    <td>{item.price}</td>
+                    <td>{item?.id}</td>
+                    <td>{item?.localisation_infos}</td>
+                    <td>{item?.default_price}</td>
                     <td>
-                      {item.validated ? (
+                      {item.isValid ? (
                         <CheckCircleOutlineRoundedIcon color="success" />
                       ) : (
                         <HighlightOffRoundedIcon sx={{ color: red[500] }} />
@@ -118,7 +96,7 @@ const LocationList = () => {
                     </td>
                     <td>
                       <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
-                        <Link to={`/admin/location/${item.id}`}>
+                        <Link to={`/admin/location/${item?.id}`}>
                           <Button color="primary">
                             <ArrowForwardIosRoundedIcon fontSize="small" />
                           </Button>

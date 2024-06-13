@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import styles from "./Room.module.scss";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { MouseEvent, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SearchContext } from "../../../../utils/Context/SearchContext";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
@@ -20,11 +20,11 @@ const Room = () => {
 
   const {
     numberOfPeopleSelected,
-    setNumberOfPeopleSelected,
+    updateNumberOfPeopleSelected,
     numberOfNightSelected,
     nightSelected,
-    setNightSelected,
-    setNumberOfNightSelected,
+    updateNightSelected,
+    updateNumberOfNightSelected,
   } = useContext(SearchContext);
   const [anchor, setAnchor] = useState<{
     date_start: null | HTMLElement;
@@ -46,15 +46,15 @@ const Room = () => {
         date > dayjs(nightSelected.end) ||
         nightSelected.end === date.toString()
       )
-        setNightSelected({
+        updateNightSelected({
           start: date.toString(),
           end: date.add(1, "day").toString(),
         });
-      else setNightSelected((prev) => ({ ...prev, start: date.toString() }));
+      else updateNightSelected({ ...nightSelected, start: date.toString()});
     } else {
       let dateEnd = date;
       if (nightSelected.start === date.toString()) dateEnd = date.add(1, "day");
-      setNightSelected((prev) => ({ ...prev, end: dateEnd.toString() }));
+      updateNightSelected({ ...nightSelected, end: dateEnd.toString()});
     }
   };
 
@@ -65,10 +65,10 @@ const Room = () => {
           dayjs(nightSelected.start),
           "day"
         );
-        setNumberOfNightSelected(date_diff);
+        updateNumberOfNightSelected(date_diff);
         // const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
         // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
-        // setNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
+        // updateNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
       }
     }
   }, [nightSelected.start, nightSelected.end]);
@@ -288,10 +288,7 @@ const Room = () => {
                     </MenuItem>
                     <Button
                       onClick={() =>
-                        setNumberOfPeopleSelected((prev) => ({
-                          ...prev,
-                          adult: prev.adult - 1,
-                        }))
+                        updateNumberOfPeopleSelected({...numberOfPeopleSelected, adult: numberOfPeopleSelected.adult - 1})
                       }
                       disabled={numberOfPeopleSelected.adult <= 0}
                     >
@@ -300,10 +297,7 @@ const Room = () => {
                     <Button disabled>{numberOfPeopleSelected.adult}</Button>
                     <Button
                       onClick={() =>
-                        setNumberOfPeopleSelected((prev) => ({
-                          ...prev,
-                          adult: prev.adult + 1,
-                        }))
+                        updateNumberOfPeopleSelected({...numberOfPeopleSelected ,adult: numberOfPeopleSelected.adult + 1})
                       }
                     >
                       <AddRoundedIcon sx={{ color: "#ed6c0280" }} />
@@ -312,9 +306,9 @@ const Room = () => {
                     {/* <MenuItem>
                       {t('site:main.room.room_tsx.how_many_children')}{" "}:
                     </MenuItem>
-                    <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children-1}))} disabled={numberOfPeopleSelected.children <= 0}><RemoveRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
+                    <Button onClick={() => updateNumberOfPeopleSelected(prev => ({...prev, children: prev.children-1}))} disabled={numberOfPeopleSelected.children <= 0}><RemoveRoundedIcon sx={{color: "#ed6c0280"}}/></Button>
                     <Button disabled>{numberOfPeopleSelected.children}</Button>
-                    <Button onClick={() => setNumberOfPeopleSelected(prev => ({...prev, children: prev.children+1}))}><AddRoundedIcon sx={{color: "#ed6c0280"}}/></Button> */}
+                    <Button onClick={() => updateNumberOfPeopleSelected(prev => ({...prev, children: prev.children+1}))}><AddRoundedIcon sx={{color: "#ed6c0280"}}/></Button> */}
                   </Menu>
                 </div>
               </div>

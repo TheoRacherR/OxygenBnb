@@ -11,53 +11,24 @@ import { Link } from "react-router-dom";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import { useTranslation } from "react-i18next";
 import dayjs from "dayjs";
+import axios from "axios";
+import { ReservationFormated } from "../../../../../../../../../back/oxygenbnb/src/tables/reservation/reservation.service";
+import { useEffect, useState } from "react";
 
-const dataTemp: {
-  reservation_id: number;
-  location_id: number;
-  location_name: string;
-  start_date: Date;
-  end_date: Date;
-}[] = [
-  {
-    reservation_id: 159,
-    location_id: 4,
-    location_name: "Frozen yoghurt",
-    start_date: new Date(),
-    end_date: new Date(),
-  },
-  {
-    reservation_id: 237,
-    location_id: 90,
-    location_name: "Ice cream sandwich",
-    start_date: new Date(),
-    end_date: new Date(),
-  },
-  {
-    reservation_id: 262,
-    location_id: 5,
-    location_name: "Eclair",
-    start_date: new Date(),
-    end_date: new Date(),
-  },
-  {
-    reservation_id: 305,
-    location_id: 12,
-    location_name: "Cupcake",
-    start_date: new Date(),
-    end_date: new Date(),
-  },
-  {
-    reservation_id: 356,
-    location_id: 4,
-    location_name: "Gingerbread",
-    start_date: new Date(),
-    end_date: new Date(),
-  },
-];
 
 const ReservationList = ({ user_id, location_id }) => {
   const { t } = useTranslation(["admin"]);
+  const [reservationListData, setReservationListData] = useState<ReservationFormated[]>([]);
+  const fetchReservation = async () => {
+    const reservationRaw: { data: ReservationFormated[] } = await axios.get(
+      "http://localhost:3333" + "/reservation/client/" + user_id
+    );
+    setReservationListData(reservationRaw.data);
+  };
+
+  useEffect(() => {
+    fetchReservation();
+  }, []);
 
   return (
     <Accordion sx={{ backgroundColor: "#0A0E0F" }}>
@@ -102,7 +73,7 @@ const ReservationList = ({ user_id, location_id }) => {
               borderColor: "grey",
             }}
           >
-            {dataTemp.length === 0 ? (
+            {reservationListData.length === 0 ? (
               <div style={{ color: "white" }}>
                 {t(
                   "admin:admin.users.user_blocks.reservation_list_tsx.no_reservation"
@@ -136,18 +107,18 @@ const ReservationList = ({ user_id, location_id }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {dataTemp.map((item, index) => (
+                  {reservationListData.map((item, index) => (
                     <tr key={index}>
-                      <td>{item.reservation_id}</td>
-                      <td>{item.location_name}</td>
-                      <td>{dayjs(item.start_date).format("DD/MM/YYYY")}</td>
-                      <td>{dayjs(item.end_date).format("DD/MM/YYYY")}</td>
+                      <td>{item.id}</td>
+                      <td>{item?.rental?.localisation_infos}</td>
+                      <td>{dayjs(item?.start_date).format("DD/MM/YYYY")}</td>
+                      <td>{dayjs(item?.end_date).format("DD/MM/YYYY")}</td>
                       <td>
                         <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
                           <Link
                             to={`/admin/location/${
-                              location_id === 0 ? item.location_id : location_id
-                            }/reservation/${item.reservation_id}`}
+                              location_id === 0 ? item?.rental?.id : location_id
+                            }/reservation/${item.id}`}
                           >
                             <Button color="primary">
                               <ArrowForwardIosRoundedIcon fontSize="small" />

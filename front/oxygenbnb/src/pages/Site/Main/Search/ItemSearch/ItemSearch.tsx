@@ -16,8 +16,7 @@ const ItemSearch = ({ item, numberOfNight }) =>
           <div
             className={styles.image}
             style={{
-              background:
-                "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)",
+              background: item.img,
             }}
           >
             <div className={styles.listOfImg}></div>

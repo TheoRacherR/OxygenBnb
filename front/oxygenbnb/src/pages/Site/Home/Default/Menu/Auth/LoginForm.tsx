@@ -4,18 +4,40 @@ import Key from "@mui/icons-material/Key";
 import { Stack, Button } from "@mui/material";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
-const LoginForm = ({ handleSwitchForm }) => {
+const LoginForm = ({ handleSwitchForm, closeForm }) => {
   const { t } = useTranslation(["site"]);
   const [valuesLogin, setValuesLogin] = useState<{
     mail: string;
     password: string;
   }>({ mail: "", password: "" });
-  const handleLogin = () => {
-    console.log(valuesLogin);
+
+  const handleLogin = async () => {
+    setError({credentials: false, not_email: false})
+
+    const mailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(mailRegex.test(valuesLogin.mail)){
+      try {
+        const res = await axios.post("http://localhost:3333" + "/auth/login/", {
+          email: valuesLogin.mail,
+          password: valuesLogin.password,
+        })
+        localStorage.setItem('jwtToken', res.data)
+        closeForm();
+      }
+      catch (e) {
+        setError({...error, credentials: true})
+        console.log(e.response)
+      }
+    }
+    else {
+      setError({...error, not_email: true})
+    }
   };
-  const [error, setError] = useState<{ credentials: boolean }>({
+  const [error, setError] = useState<{ credentials: boolean, not_email: boolean }>({
     credentials: false,
+    not_email: false,
   });
 
   return (
@@ -69,7 +91,13 @@ const LoginForm = ({ handleSwitchForm }) => {
           {t("site:home.default.menu.auth.login_form_tsx.error")}
         </div>
       ) : (
-        <></>
+        error.not_email ? (
+          <div style={{ color: "red" }}>
+            {t("site:home.default.menu.auth.login_form_tsx.not_email")} 
+          </div>
+        ) : (
+          <></>
+        )
       )}
       <div>
         {t("site:home.default.menu.auth.login_form_tsx.have_account")} ?{" "}

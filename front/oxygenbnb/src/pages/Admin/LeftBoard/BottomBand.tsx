@@ -1,7 +1,7 @@
 import ListItem from "@mui/joy/ListItem";
 import ListItemButton from "@mui/joy/ListItemButton";
 import { Divider } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import Avatar from "@mui/joy/Avatar";
 import styles from "./BottomBand.module.scss";
@@ -9,9 +9,34 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import List from "@mui/joy/List";
 import { useTranslation } from "react-i18next";
+import { getUserInfos } from "../../../utils/utils";
+import { useEffect, useState } from "react";
 
 const BottomBand = () => {
   const { t } = useTranslation(["admin"]);
+  const navigate = useNavigate();
+
+  const [userInfos, setUserInfos] = useState<{ id: number; firstname: string; lastname: string; email: string; role: string }>({
+    id: 0,
+    firstname: "",
+    lastname: "",
+    email: "",
+    role: ""
+  })
+  const getUsr = async () => {
+    const infos = await getUserInfos();
+    setUserInfos(infos);
+  }
+
+  const logout = () => {
+    localStorage.setItem('jwtToken', "")
+    return navigate("/")
+  }
+
+  useEffect(() => {
+    getUsr();
+  }, [])
+  
 
   return (
     <>
@@ -50,11 +75,12 @@ const BottomBand = () => {
       <div className={styles.avatar_container}>
         <Avatar />
         <div className={styles.infos}>
-          <div className={styles.itop}>mail@gmail.com</div>
-          <div className={styles.ibot}>Théo R.</div>
+          <div className={styles.itop}>{userInfos?.email}</div>
+          <div className={styles.ibot}>{userInfos?.firstname} {userInfos?.lastname?.substring(0,1)}</div>
         </div>
         <LogoutRoundedIcon
           sx={{ fontSize: 20, cursor: "pointer", margin: "auto 0" }}
+          onClick={logout}
         />
       </div>
     </>

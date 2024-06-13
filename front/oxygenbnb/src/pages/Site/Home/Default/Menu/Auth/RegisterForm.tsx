@@ -7,27 +7,78 @@ import LinearProgress from "@mui/joy/LinearProgress";
 import Typography from "@mui/joy/Typography";
 import Key from "@mui/icons-material/Key";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
-const RegisterForm = ({ handleSwitchForm }) => {
+const RegisterForm = ({ handleSwitchForm, closeForm }) => {
   const { t } = useTranslation(["site"]);
   const [valuesRegister, setValuesRegister] = useState<{
+    firstname: string;
+    lastname: string;
     mail: string;
     password: string;
     confirmPassword: string;
-  }>({ mail: "", password: "", confirmPassword: "" });
+  }>({ firstname: "", lastname: "", mail: "", password: "", confirmPassword: "" });
   const [error, setError] = useState<{
     passwordCooherence: boolean;
     emailAlreadyUsed: boolean;
   }>({ passwordCooherence: false, emailAlreadyUsed: false });
 
   const minLength: number = 12;
-  const handleRegister = () => {
+
+  const handleRegister = async () => {
     console.log(valuesRegister);
+    setError({passwordCooherence: false, emailAlreadyUsed: false})
+    try {
+      await axios.post("http://localhost:3333" + "/auth/register/", {
+        firstname: valuesRegister.firstname,
+        lastname: valuesRegister.lastname,
+        email: valuesRegister.mail,
+        password: valuesRegister.password,
+      })
+      closeForm();
+    }
+    catch(e){
+      if(e.response.status === 409) setError({passwordCooherence: false, emailAlreadyUsed: true})
+    }
   };
 
   return (
     <div>
       <div>
+        <Stack
+          spacing={0.5}
+          sx={{
+            marginTop: "25px",
+            marginBottom: "25px",
+            display: "flex",
+            flexDirection: "unset"
+          }}
+        >
+          <Input
+            type="text"
+            sx={{width: "50%", margin: 0}}
+            placeholder={t(
+              "site:home.default.menu.auth.register_form_tsx.firstname"
+            )}
+            // startDecorator={<EmailRoundedIcon />}
+            value={valuesRegister.firstname}
+            onChange={(e) =>
+              setValuesRegister((prev) => ({ ...prev, firstname: e.target.value }))
+            }
+          />
+          <Input
+            type="text"
+            sx={{width: "50%", margin: "0 !important"}}
+            placeholder={t(
+              "site:home.default.menu.auth.register_form_tsx.lastname"
+            )}
+            // startDecorator={<EmailRoundedIcon />}
+            value={valuesRegister.lastname}
+            onChange={(e) =>
+              setValuesRegister((prev) => ({ ...prev, lastname: e.target.value }))
+            }
+          />
+        </Stack>
         <Stack
           spacing={0.5}
           sx={{

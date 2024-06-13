@@ -42,7 +42,6 @@ const Settings = () => {
   const onClickLanguageChange = (item) => {
     if (item.param) {
       const language = item.param;
-      console.log(language);
       i18n.changeLanguage(language); //change the language
       localStorage.setItem("lng", language);
     }

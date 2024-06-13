@@ -6,28 +6,16 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InputComponent from "../../InputComponent";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { RentalFormated } from "../../../../../../../../../back/oxygenbnb/src/tables/rental/rental.service";
+import Input from "@mui/joy/Input";
+import { Button } from "@mui/joy";
 
-const enumCurrency = [
-  "€ (euro)",
-  "£ (pound)",
-  "$ (us dollar)",
-  "¥ (japan yen)",
-  "Ұ (china yuan)",
-  "₩ (south-korean won)",
-];
 
-const locationData = {
-  id: 1,
-  title: "",
-  price: 300,
-  default_currency: enumCurrency[0],
-  type: "Hostel",
-  isValid: true,
-  owner: "Théo RACHER RAULIN",
-  active: true,
-};
-
-const LocationInfos = ({ location_id }) => {
+const LocationInfos = ({ location_id, locationData, handleValidate }) => {
+  const { id } = useParams();
   const { t } = useTranslation(["admin"]);
 
   return (
@@ -70,7 +58,7 @@ const LocationInfos = ({ location_id }) => {
               label={t(
                 "admin:admin.locations.location_infos.location_infos_tsx.list.title"
               )}
-              value={locationData.title}
+              value={locationData?.localisation_infos}
               disabled={true}
             />
           </div>
@@ -81,8 +69,8 @@ const LocationInfos = ({ location_id }) => {
                 "admin:admin.locations.location_infos.location_infos_tsx.list.price"
               )}
               value={`${
-                locationData.price
-              } ${locationData.default_currency.substring(0, 1)}`}
+                locationData?.default_price
+              } ${locationData?.default_currency?.substring(0, 1) || "€"}`}
               disabled={true}
             />
           </div>
@@ -92,18 +80,15 @@ const LocationInfos = ({ location_id }) => {
               label={t(
                 "admin:admin.locations.location_infos.location_infos_tsx.list.type"
               )}
-              value={locationData.type}
+              value={locationData?.type}
               disabled={true}
             />
           </div>
 
           <div className={styles.item}>
             <InputComponent
-              label={t(
-                "admin:admin.locations.location_infos.location_infos_tsx.list.valid"
-              )}
               value={
-                locationData.isValid
+                locationData?.isValid
                   ? t(
                       "admin:admin.locations.location_infos.location_infos_tsx.list.true"
                     )
@@ -111,26 +96,36 @@ const LocationInfos = ({ location_id }) => {
                       "admin:admin.locations.location_infos.location_infos_tsx.list.false"
                     )
               }
+              label={t("admin:admin.locations.location_infos.location_infos_tsx.list.valid")}
               disabled={true}
             />
+            <Button variant="soft" color={locationData?.isValid ? "danger" : "success"} onClick={handleValidate}>{locationData?.isValid ? "Invalidate" : "Validate"}</Button>
           </div>
 
-          <div className={styles.item}>
+          {/* <div className={styles.item}>
             <InputComponent
               label={t(
                 "admin:admin.locations.location_infos.location_infos_tsx.list.owner"
               )}
-              value={locationData.owner}
+              value={locationData?.owner}
               disabled={true}
             />
-          </div>
+          </div> */}
 
           <div className={styles.item}>
             <InputComponent
               label={t(
                 "admin:admin.locations.location_infos.location_infos_tsx.list.active"
               )}
-              value={locationData.active ? "true" : "false"}
+              value={
+                locationData?.active
+                  ? t(
+                      "admin:admin.locations.location_infos.location_infos_tsx.list.true"
+                    )
+                  : t(
+                      "admin:admin.locations.location_infos.location_infos_tsx.list.false"
+                    )
+              }
               disabled={true}
             />
           </div>

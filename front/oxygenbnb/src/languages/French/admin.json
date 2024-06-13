@@ -32,7 +32,9 @@
             "owner": "Propriétaire",
             "active": "Actif",
             "true": "Oui",
-            "false": "Non"
+            "false": "Non",
+            "validate": "Valider",
+            "invalidate": "Invalider"
           }
         }
       },
@@ -96,7 +98,10 @@
             "email": "Email",
             "role": "Rôle",
             "created_at": "Créé le",
-            "updated_at": "Mise à jour le"
+            "updated_at": "Mise à jour le",
+            "gender": "Genre",
+            "description": "Description",
+            "birthdate": "Date de naissance"
           }
         }
       },

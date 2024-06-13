@@ -10,7 +10,7 @@ import Switch from "@mui/joy/Switch";
 import { FormAddLocationContext } from "../../../../../utils/Context/FormAddLocationContext";
 import { useTranslation } from "react-i18next";
 
-const Form = () => {
+const Form = ({handleCreateRental}) => {
   const { t } = useTranslation(["site"]);
   const {
     setState,
@@ -86,6 +86,7 @@ const Form = () => {
       default_currency: newValue,
     }));
   };
+
 
   return (
     <div className={styles.container}>
@@ -229,7 +230,7 @@ const Form = () => {
             style={{ display: "flex", flexDirection: "row-reverse" }}
           >
             <ButtonGroup>
-              <Button variant="solid" color="success">
+              <Button variant="solid" color="success" onClick={handleCreateRental}>
                 {t("site:main.renter.add_location.form_tsx.save")}
               </Button>
               <Button
