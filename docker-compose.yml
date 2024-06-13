@@ -10,7 +10,7 @@ services:
     ports:
       - 5173:5173
     environment:
-      - CHOKIDAR_USEPOLLING=${NODE_ENV_DEV}
+      - WATCHPACK_POLLING=${NODE_ENV_DEV}
     networks:
         - front
     restart: always
@@ -18,14 +18,13 @@ services:
     tty: true
     
   nestapp:
-    # user: node
+    container_name: nestapp-oxygen
     image: nestimg
     build:
       context: ./back/oxygenbnb
       dockerfile: Dockerfile
     ports:
-    #   - ${NEST_PORT}:${NEST_PORT}
-      - "3000:3000"
+      - ${NEST_PORT}:${NEST_PORT}
     environment:
       - DB_TYPE=${DB_TYPE}
       - PG_HOST=${PG_HOST} #doit matcher avec le container_name de la db
@@ -35,6 +34,8 @@ services:
       - PG_PORT=${PG_PORT}
       - NODE_ENV_DEV=${NODE_ENV_DEV}
     restart: always
+    depends_on:
+      - db
     # tty: true
     # stdin_open: true
     networks:
