@@ -55,15 +55,11 @@ const MiddleExtended = () => {
           "day"
         );
         updateNumberOfNightSelected(date_diff);
-        // const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
-        // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
-        // updateNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
       }
     }
   }, [nightSelected.start, nightSelected.end]);
 
   const handleChangeDates = (type, date) => {
-    console.log(date)
     if (type === "start") {
       if (
         date > dayjs(nightSelected.end) ||
@@ -230,12 +226,11 @@ const MiddleExtended = () => {
           )}: `}
         </MenuItem>
         <Button
-          onClick={() =>{
-            console.log("first"), //TODO prev marche pas
+          onClick={() =>
             updateNumberOfPeopleSelected({ 
-              childen: numberOfPeopleSelected.childen,
+              childen: 0,
               adult: numberOfPeopleSelected.adult - 1,
-            })}
+            })
           }
           disabled={numberOfPeopleSelected.adult === 1}
         >
@@ -247,9 +242,9 @@ const MiddleExtended = () => {
         </Button>
         <Button disabled>{numberOfPeopleSelected.adult}</Button>
         <Button
-          onClick={() =>
+          onClick={() => 
             updateNumberOfPeopleSelected({ 
-              childen: numberOfPeopleSelected.childen,
+              childen: 0,
               adult: numberOfPeopleSelected.adult + 1,
             })
           }

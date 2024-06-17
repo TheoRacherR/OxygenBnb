@@ -78,7 +78,6 @@ const Requests = ({ value }) => {
   const { t } = useTranslation(["admin"]);
 
   const handleGoToMessages = (item) => {
-    console.log(item);
     setDiscussionSelected(item);
     setRedirectionGotoMessage(true);
     return <Navigate to={"/admin/renter/messages"} />;

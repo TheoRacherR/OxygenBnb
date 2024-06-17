@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./Form.module.scss";
 import Input from "@mui/joy/Input";
 import { Button, ButtonGroup } from "@mui/joy";
@@ -6,19 +6,52 @@ import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import Textarea from "@mui/joy/Textarea";
 import Switch from "@mui/joy/Switch";
-
 import { FormAddLocationContext } from "../../../../../utils/Context/FormAddLocationContext";
 import { useTranslation } from "react-i18next";
+import SearchLocalisation from "./SearchLocalisation";
+import axios from "axios";
+import { getUserInfos } from "../../../../../utils/utils";
+import { useNavigate } from "react-router-dom";
 
-const Form = ({handleCreateRental}) => {
+const emptyErros = {
+  global: false,
+  titleEmpty: false,
+  descriptionEmpty: false,
+  priceEmpty: false,
+  priceNotANumber: false,
+  addressEmpty: false,
+  nbRoomEmpty: false,
+  nbPersonEmpty: false,
+  nbBedEmpty: false,
+}
+
+const Form = () => {
   const { t } = useTranslation(["site"]);
+  const navigate = useNavigate();
+  const [usrInfos,setUsrInfos] = useState<{id: number; firstname: string; lastname: string; email: string; role: string}>();
+  const [errors, setErros] = useState<{
+    global: boolean,
+    titleEmpty: boolean,
+    descriptionEmpty: boolean,
+    priceEmpty: boolean,
+    priceNotANumber: boolean,
+    addressEmpty: boolean,
+    nbRoomEmpty: boolean,
+    nbPersonEmpty: boolean,
+    nbBedEmpty: boolean,
+  }>(emptyErros)
   const {
     setState,
     locationInformations,
     setLocationInformations,
     enumCurrency,
     locationType,
+    resetData
   } = useContext(FormAddLocationContext);
+
+  useEffect(() => {
+    getUsrInfos();
+  }, [])
 
   const handleChangeLocType = (
     event: React.SyntheticEvent | null,
@@ -31,15 +64,17 @@ const Form = ({handleCreateRental}) => {
   };
 
   const handleChangePrice = (event: React.SyntheticEvent | null) => {
-    if (
-      event.target.value ===
-      ` ${locationInformations.default_currency.substring(0, 1)}`
-    ) {
-      setLocationInformations((prev) => ({ ...prev, price: 0 }));
-    } else {
+    const val = event.target.value;
+    if(!val.split("").map((i) => parseInt(i)).includes(NaN)){
       setLocationInformations((prev) => ({
         ...prev,
-        price: parseInt(event.target.value),
+        price: parseInt(val),
+      }));
+    }
+    else {
+      setLocationInformations((prev) => ({
+        ...prev,
+        price: val,
       }));
     }
   };
@@ -87,6 +122,63 @@ const Form = ({handleCreateRental}) => {
     }));
   };
 
+  const handleCreateRental = async () => {
+    setErros(emptyErros);
+    if(locationInformations.title === "") {
+      setErros(prev => ({...prev, titleEmpty: true, global: true}))
+    } 
+    if (locationInformations.description === ""){
+      setErros(prev => ({...prev, descriptionEmpty: true, global: true}))
+    }
+    if(locationInformations.price === "" || locationInformations.price < 1){
+      setErros(prev => ({...prev, priceEmpty: true, global: true}))
+    } 
+    if (locationInformations.localisation_infos === "") {
+      setErros(prev => ({...prev, addressEmpty: true, global: true}))
+    } 
+    if (locationInformations.nb_room < 1){
+      setErros(prev => ({...prev, nbRoomEmpty: true, global: true}))
+    } 
+    if (locationInformations.nb_person < 1){
+      setErros(prev => ({...prev, nbPersonEmpty: true, global: true}))
+    } 
+    if (locationInformations.nb_bed < 1){
+      setErros(prev => ({...prev, nbBedEmpty: true, global: true}))
+    }
+    if(!errors.global) {
+      if(usrInfos){
+        try {
+          const rental = await axios.post(
+            "http://localhost:3333" + "/rental", {
+              default_price: locationInformations.price,
+              default_currency: locationInformations.default_currency,
+              type: locationInformations.type,
+              description: locationInformations.description,
+              localisation_infos: locationInformations.localisation_infos,
+              owner: usrInfos.id,
+              active: locationInformations.active,
+              title: locationInformations.title,
+              nb_max_person: locationInformations.nb_person,
+              nb_max_bed: locationInformations.nb_bed,
+              nb_max_room: locationInformations.nb_room
+            }
+          )
+          console.log("rental created: ");
+          resetData();
+          // return navigate("/o/user");
+        }
+        catch (e) {
+          console.log(e)
+          return navigate("")
+        }
+      }
+    }
+  }
+
+  const getUsrInfos = async () => {
+    setUsrInfos(await getUserInfos());
+  }
+
 
   return (
     <div className={styles.container}>
@@ -98,6 +190,8 @@ const Form = ({handleCreateRental}) => {
           <div className={styles.item}>
             <Input
               variant="outlined"
+              error={errors.titleEmpty}
+              value={locationInformations.title}
               startDecorator={
                 <label>
                   {t("site:main.renter.add_location.form_tsx.name")}
@@ -115,6 +209,8 @@ const Form = ({handleCreateRental}) => {
           <div className={styles.item}>
             <Textarea
               variant="outlined"
+              error={errors.descriptionEmpty}
+              value={locationInformations.description}
               startDecorator={
                 <label>
                   {t("site:main.renter.add_location.form_tsx.description")}
@@ -132,11 +228,9 @@ const Form = ({handleCreateRental}) => {
           <div className={styles.item}>
             <Input
               variant="outlined"
-              value={
-                locationInformations.price +
-                " " +
-                locationInformations.default_currency.substring(0, 1)
-              }
+              error={errors.priceEmpty || errors.priceNotANumber}
+              type="number"
+              value={locationInformations.price}
               onChange={handleChangePrice}
               startDecorator={
                 <label>
@@ -158,9 +252,14 @@ const Form = ({handleCreateRental}) => {
             />
           </div>
 
+          <div className={styles.item}>
+            <SearchLocalisation error={errors.addressEmpty}/>
+          </div>
+
           <div className={styles.item_flex}>
             <Input
               variant="outlined"
+              error={errors.nbRoomEmpty}
               value={locationInformations.nb_room}
               onChange={handleChangeRoom}
               startDecorator={
@@ -171,6 +270,7 @@ const Form = ({handleCreateRental}) => {
             />
             <Input
               variant="outlined"
+              error={errors.nbBedEmpty}
               value={locationInformations.nb_bed}
               onChange={handleChangeBed}
               startDecorator={
@@ -179,6 +279,7 @@ const Form = ({handleCreateRental}) => {
             />
             <Input
               variant="outlined"
+              error={errors.nbPersonEmpty}
               value={locationInformations.nb_person}
               onChange={handleChangePerson}
               startDecorator={
@@ -195,8 +296,8 @@ const Form = ({handleCreateRental}) => {
               onChange={handleChangeLocType}
             >
               {locationType.map((item, index) => (
-                <Option key={index} value={item}>
-                  {item}
+                <Option key={index} value={item.value}>
+                  {item.name}
                 </Option>
               ))}
             </Select>
@@ -204,6 +305,7 @@ const Form = ({handleCreateRental}) => {
           <div className={styles.item}>
             <Input
               variant="outlined"
+              value={locationInformations.active}
               startDecorator={
                 <label>
                   {locationInformations.active

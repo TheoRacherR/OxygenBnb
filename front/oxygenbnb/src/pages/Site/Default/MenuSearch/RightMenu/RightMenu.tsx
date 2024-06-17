@@ -11,14 +11,18 @@ import Fade from "@mui/material/Fade";
 import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+import AddLocationRoundedIcon from '@mui/icons-material/AddLocationRounded';
+
 import { Divider, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { verifyIfLogged } from "../../../../../utils/utils";
+import { verifyRole } from "../../../../../utils/utils";
 
 const RightMenu = () => {
   const { t, i18n } = useTranslation(["site"]);
   const [anchorEl, setAnchorEl] = useState({ lang: null, settings: null });
+  const [roleStr, setRoleStr] = useState("not logged");
   const [logged, setLogged] = useState<boolean>(false);
   const handleClickSettings = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl({ lang: null, settings: event.currentTarget });
@@ -30,14 +34,20 @@ const RightMenu = () => {
     setAnchorEl({ lang: null, settings: null });
   };
 
+  const getLogInfos = async () => {
+    const role = await verifyRole();
+    setLogged(role !== "not logged");
+    setRoleStr(role);
+  };
+
   useEffect(() => {
-    setLogged(false);
-    if (verifyIfLogged()) setLogged(true);
-  });
+    getLogInfos();
+  }, []);
 
   const handleLogout = () => {
     localStorage.setItem("jwtToken", "");
-    console.log("change jwtToken")
+    console.log("update jwt");
+    setLogged(false);
     handleClose();
   };
 
@@ -52,7 +62,6 @@ const RightMenu = () => {
   ) => {
     handleClose();
     const language = value;
-    console.log(language);
     i18n.changeLanguage(language); //change the language
     localStorage.setItem("lng", language);
   };
@@ -116,9 +125,9 @@ const RightMenu = () => {
           TransitionComponent={Fade}
         >
           {logged ? (
-            <>
+            <div>
               <Link
-                to="user"
+                to="/o/user"
                 style={{ color: "black", textDecoration: "none" }}
               >
                 <MenuItem onClick={handleClose}>
@@ -126,14 +135,41 @@ const RightMenu = () => {
                   {t("site:default.menu.right_menu.right_menu_tsx.profil")}
                 </MenuItem>
               </Link>
+              {roleStr === "renter" ? (
+                <Link
+                  to="renter/add-location"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <AddLocationRoundedIcon
+                      sx={{ marginRight: "15px" }}
+                    />
+                    {t("site:default.menu.right_menu.right_menu_tsx.add_rental")}
+                  </MenuItem>
+                </Link>
+              ) : roleStr === "admin" ? (
+                <Link
+                  to="admin"
+                  style={{ color: "black", textDecoration: "none" }}
+                >
+                  <MenuItem onClick={handleClose}>
+                    <DashboardRoundedIcon
+                      sx={{ marginRight: "15px" }}
+                    />
+                    {t("site:default.menu.right_menu.right_menu_tsx.dashboard")}
+                  </MenuItem>
+                </Link>
+              ) : (
+                <></>
+              )}
               <Divider sx={{ my: 0.5 }} />
               <MenuItem onClick={handleLogout}>
                 <LogoutRoundedIcon sx={{ marginRight: "15px" }} color="error" />
                 {t("site:default.menu.right_menu.right_menu_tsx.logout")}
               </MenuItem>
-            </>
+            </div>
           ) : (
-            <Link to="login" style={{ color: "black", textDecoration: "none" }}>
+            <Link to="auth" style={{ color: "black", textDecoration: "none" }}>
               <MenuItem onClick={handleClose}>
                 <LoginRoundedIcon
                   sx={{ marginRight: "15px" }}

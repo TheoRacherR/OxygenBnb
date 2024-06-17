@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./Room.module.scss";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
@@ -10,13 +10,43 @@ import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useTranslation } from "react-i18next";
 import "dayjs/locale/fr";
+import axios from "axios";
+import { Rental } from "../../../../../../../back/oxygenbnb/src/tables/rental/entities/rental.entity";
 
 const Room = () => {
   const { t } = useTranslation(["site"]);
   const { id } = useParams();
-  const thisPrice = 35;
   const fees = 13;
-  const numberMaxOfPeople = 4;
+
+  const navigate = useNavigate();
+  const [locationData, setLocationData] = useState<Rental>();
+  const fetchLocation = async () => {
+    if (
+      !id
+        .split("")
+        .map((i) => parseInt(i))
+        .includes(NaN)
+    ) {
+      try {
+        const locationRaw: { data: Rental } = await axios.get(
+          "http://localhost:3333" + "/rental/" + id
+        );
+        setLocationData(locationRaw.data);
+        if(!locationRaw.data.active) return navigate("/o/404")
+        setCalcPrices({
+          totalPriceXPeople:
+            locationRaw.data.default_price * numberOfNightSelected,
+          total: locationRaw.data.default_price * numberOfNightSelected + fees,
+        });
+      } catch (e) {
+        if (e.response.status === 404) return navigate("/o/404");
+      }
+    } else return navigate("/o/404");
+  };
+
+  useEffect(() => {
+    fetchLocation();
+  });
 
   const {
     numberOfPeopleSelected,
@@ -26,17 +56,19 @@ const Room = () => {
     updateNightSelected,
     updateNumberOfNightSelected,
   } = useContext(SearchContext);
+
   const [anchor, setAnchor] = useState<{
     date_start: null | HTMLElement;
     date_end: null | HTMLElement;
     people: null | HTMLElement;
   }>({ date_start: null, date_end: null, people: null });
+
   const [calcPrices, setCalcPrices] = useState<{
     totalPriceXPeople: number;
     total: number;
   }>({
-    totalPriceXPeople: thisPrice * numberOfNightSelected,
-    total: thisPrice * numberOfNightSelected + fees,
+    totalPriceXPeople: locationData?.default_price * numberOfNightSelected,
+    total: locationData?.default_price * numberOfNightSelected + fees,
   });
   const [errorMaxPeople, setErrorMaxPeople] = useState(false);
 
@@ -50,11 +82,11 @@ const Room = () => {
           start: date.toString(),
           end: date.add(1, "day").toString(),
         });
-      else updateNightSelected({ ...nightSelected, start: date.toString()});
+      else updateNightSelected({ ...nightSelected, start: date.toString() });
     } else {
       let dateEnd = date;
       if (nightSelected.start === date.toString()) dateEnd = date.add(1, "day");
-      updateNightSelected({ ...nightSelected, end: dateEnd.toString()});
+      updateNightSelected({ ...nightSelected, end: dateEnd.toString() });
     }
   };
 
@@ -66,24 +98,23 @@ const Room = () => {
           "day"
         );
         updateNumberOfNightSelected(date_diff);
-        // const diffTime = Math.abs(new Date(nightSelected.end).valueOf() - new Date(nightSelected.start).valueOf());
-        // console.log(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
-        // updateNumberOfNightSelected(Math.ceil( diffTime / (1000 * 60 * 60 * 24) ))
       }
     }
   }, [nightSelected.start, nightSelected.end]);
 
   useEffect(() => {
-    setCalcPrices({
-      totalPriceXPeople: thisPrice * numberOfNightSelected,
-      total: thisPrice * numberOfNightSelected + fees,
-    });
-  }, [thisPrice, numberOfNightSelected, fees]);
+    if (locationData) {
+      setCalcPrices({
+        totalPriceXPeople: locationData?.default_price * numberOfNightSelected,
+        total: locationData?.default_price * numberOfNightSelected + fees,
+      });
+    }
+  }, [numberOfNightSelected, fees]);
 
   useEffect(() => {
     if (
       numberOfPeopleSelected.adult + numberOfPeopleSelected.children >
-      numberMaxOfPeople
+      locationData?.nb_max_person
     )
       setErrorMaxPeople(true);
     else setErrorMaxPeople(false);
@@ -93,7 +124,7 @@ const Room = () => {
     <div className={styles.container}>
       <div className={styles.content}>
         <h1>
-          {t("site:main.room.room_tsx.room")} {id}
+          {t("site:main.room.room_tsx.location")} "{locationData?.title}" {id}
         </h1>
         <div className={styles.box}>
           <div className={styles.left}>
@@ -103,17 +134,16 @@ const Room = () => {
             />
             <div className={styles.description}>
               <p>
-                {t(`site:main.room.room_tsx.a_room_for`, {
-                  numberMaxOfPeople: numberMaxOfPeople,
+                {t(`site:main.room.room_tsx.a_location_for`, {
+                  numberMaxOfPeople: locationData?.nb_max_person,
                 })}
-                {numberMaxOfPeople > 1 ? "s" : ""}
+                {locationData?.nb_max_person > 1 ? "s" : ""}{" "}
+                {locationData?.nb_max_room} {t("site:main.room.room_tsx.room")}
+                {locationData?.nb_max_room > 1 ? "s" : ""},{" "}
+                {locationData?.nb_max_bed} {t("site:main.room.room_tsx.bed")}
+                {locationData?.nb_max_bed > 1 ? "s" : ""}
               </p>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui
-                nulla impedit harum est neque minima quaerat eos dolore deserunt
-                natus tempora omnis inventore illum totam modi, quisquam
-                praesentium, veniam perspiciatis.
-              </p>
+              <p>{locationData?.description}</p>
             </div>
           </div>
 
@@ -121,7 +151,8 @@ const Room = () => {
             <div className={styles.sector_top}>
               <div className={styles.price}>
                 <span style={{ fontSize: 30 }}>
-                  {thisPrice} {t("site:main.room.room_tsx.euro")}
+                  {locationData?.default_price}{" "}
+                  {t("site:main.room.room_tsx.euro")}
                 </span>
                 /{t("site:main.room.room_tsx.night")}
               </div>
@@ -288,7 +319,10 @@ const Room = () => {
                     </MenuItem>
                     <Button
                       onClick={() =>
-                        updateNumberOfPeopleSelected({...numberOfPeopleSelected, adult: numberOfPeopleSelected.adult - 1})
+                        updateNumberOfPeopleSelected({
+                          ...numberOfPeopleSelected,
+                          adult: numberOfPeopleSelected.adult - 1,
+                        })
                       }
                       disabled={numberOfPeopleSelected.adult <= 0}
                     >
@@ -297,7 +331,10 @@ const Room = () => {
                     <Button disabled>{numberOfPeopleSelected.adult}</Button>
                     <Button
                       onClick={() =>
-                        updateNumberOfPeopleSelected({...numberOfPeopleSelected ,adult: numberOfPeopleSelected.adult + 1})
+                        updateNumberOfPeopleSelected({
+                          ...numberOfPeopleSelected,
+                          adult: numberOfPeopleSelected.adult + 1,
+                        })
                       }
                     >
                       <AddRoundedIcon sx={{ color: "#ed6c0280" }} />
@@ -328,8 +365,8 @@ const Room = () => {
               {errorMaxPeople ? (
                 <p style={{ color: "red" }}>
                   {t(`site:main.room.room_tsx.max_people`, {
-                    numberMaxOfPeople: numberMaxOfPeople,
-                    people: numberMaxOfPeople > 1 ? "s" : "",
+                    numberMaxOfPeople: locationData?.nb_max_person,
+                    people: locationData?.nb_max_person > 1 ? "s" : "",
                   })}
                 </p>
               ) : (
@@ -342,7 +379,8 @@ const Room = () => {
                 <div className={styles.listing}>
                   <div className={styles.litem}>
                     <div className={styles.linfos}>
-                      {thisPrice} {t("site:main.room.room_tsx.euro")} x{" "}
+                      {locationData?.default_price}{" "}
+                      {t("site:main.room.room_tsx.euro")} x{" "}
                       {numberOfNightSelected}{" "}
                       {t("site:main.room.room_tsx.night")}s
                     </div>

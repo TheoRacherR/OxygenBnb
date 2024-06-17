@@ -35,7 +35,6 @@ const UserComponent = () => {
 
   useEffect(() => {
     fetchUser();
-    console.log("user");
   }, []);
 
   return (

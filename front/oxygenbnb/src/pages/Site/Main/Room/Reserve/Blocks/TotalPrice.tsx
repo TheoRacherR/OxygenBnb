@@ -47,13 +47,13 @@ const TotalPrice = ({
         <div className={styles.line}>
           <div className={styles.title}>
             {details.price_per_night}
-            {details.currency.substring(0, 1)} x {details.nb_night}{" "}
+            {details.currency?.substring(0, 1)} x {details.nb_night}{" "}
             {t("site:main.room.reserve.blocks.total_price_tsx.night")}
             {details.nb_night > 1 ? "s" : ""}
           </div>
           <div className={styles.price}>
             {details.price_per_night * details.nb_night}
-            {details.currency.substring(0, 1)}
+            {details.currency?.substring(0, 1)}
           </div>
         </div>
         {priceDetails.map((item, index) => (
@@ -65,7 +65,7 @@ const TotalPrice = ({
                 <div className={styles.title}>{item.title}</div>
                 <div className={styles.price}>
                   {item.price}
-                  {details.currency.substring(0, 1)}
+                  {details.currency?.substring(0, 1)}
                 </div>
               </div>
             )}
@@ -82,7 +82,7 @@ const TotalPrice = ({
             (+priceDetails[0].price +
               priceDetails[1].price +
               priceDetails[2].price)}
-          {details.currency.substring(0, 1)}
+          {details.currency?.substring(0, 1)}
         </div>
       </div>
 

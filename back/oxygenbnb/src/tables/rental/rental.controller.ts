@@ -13,7 +13,7 @@ import {
 import { RentalService, RentalFormated } from './rental.service';
 import { CreateRentalDto } from './dto/create-rental.dto';
 import { UpdateRentalDto } from './dto/update-rental.dto';
-import { rentalType } from './entities/rental.entity';
+import { Rental, rentalType } from './entities/rental.entity';
 
 @Controller('rental')
 export class RentalController {
@@ -25,25 +25,9 @@ export class RentalController {
   }
 
   @Get(':id')
-  async findOne(
-    @Param('id', ParseIntPipe) id: number,
-  ): Promise<RentalFormated> {
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Rental> {
     const rental = await this.rentalService.findOne(id);
-    if (rental)
-      return {
-        id: rental.id,
-        default_currency: rental.default_currency,
-        default_price: rental.default_price,
-        isValid: rental.isValid,
-        active: rental.active,
-        localisation_infos: rental.localisation_infos,
-        type: rental.type,
-        owner: {
-          id: rental.owner.id,
-          firstname: rental.owner.firstname,
-          lastname: rental.owner.lastname,
-        },
-      };
+    if (rental) return rental;
     else
       throw new HttpException(
         `No Rental for id ${id} where found`,

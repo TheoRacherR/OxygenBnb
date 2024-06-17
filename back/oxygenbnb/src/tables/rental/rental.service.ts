@@ -11,8 +11,10 @@ export interface RentalFormated {
   default_price: number;
   isValid: boolean;
   active: boolean;
-  localisation_infos: string;
+  // localisation_infos: string;
+  // description: string;
   type: rentalType;
+  title: string;
   owner: {
     id: number;
     firstname: string;
@@ -35,7 +37,9 @@ export class RentalService {
       default_price: item.default_price,
       isValid: item.isValid,
       active: item.active,
-      localisation_infos: item.localisation_infos,
+      // localisation_infos: item.localisation_infos,
+      // description: item.description,
+      title: item.title,
       type: item.type,
       owner: {
         id: item.owner.id,
@@ -67,7 +71,9 @@ export class RentalService {
       default_price: item.default_price,
       isValid: item.isValid,
       active: item.active,
-      localisation_infos: item.localisation_infos,
+      // localisation_infos: item.localisation_infos,
+      // description: item.description,
+      title: item.title,
       type: item.type,
       owner: {
         id: item.owner.id,
@@ -90,7 +96,9 @@ export class RentalService {
       default_price: item.default_price,
       isValid: item.isValid,
       active: item.active,
-      localisation_infos: item.localisation_infos,
+      // localisation_infos: item.localisation_infos,
+      // description: item.description,
+      title: item.title,
       type: item.type,
       owner: {
         id: item.owner.id,

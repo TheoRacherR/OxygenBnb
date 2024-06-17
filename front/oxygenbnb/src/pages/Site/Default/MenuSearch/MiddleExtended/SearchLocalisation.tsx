@@ -42,7 +42,7 @@ const SearchLocalisation = ({ handleClose, handleReturnCitySelected }) => {
     <>
       <div style={{ padding: " 5px" }}>
         <TextField
-          label="Localisations"
+          label="Localisations" //todo
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
@@ -56,14 +56,15 @@ const SearchLocalisation = ({ handleClose, handleReturnCitySelected }) => {
           ) : (
             listOfLocalisations.map((item, index) => (
               <MenuItem key={index} onClick={() => handleSelectCity(item)}>
-                {item.address.city ||
+                {/* {item.address.city ||
                   item.address.town ||
                   item.address.village ||
                   item.address.state}
                 {item.address.postcode ? ` (${item.address.postcode})` : ""},{" "}
                 {item.address.country === "États-Unis d'Amérique"
                   ? "USA"
-                  : item.address.country}
+                  : item.address.country} */}
+                  {item.display_name}
               </MenuItem>
             ))
           )

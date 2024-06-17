@@ -62,9 +62,11 @@
       },
       "right_menu": {
         "right_menu_tsx": {
-          "profil": "Compte",
+          "profil": "Mon Compte",
           "settings": "Paramètres",
           "language": "Langues",
+          "dashboard": "Dashboard",
+          "add_rental": "Ajouter une location",
           "login": "Se connecter",
           "logout": "Se déconnecter"
         }
@@ -169,7 +171,9 @@
               "owner": "Propriétaire",
               "active": "Actif",
               "true": "Oui",
-              "false": "Non"
+              "false": "Non",
+              "activate": "Activer",
+              "desactivate": "Désactiver"
             }
           },
           "reservation_list_tsx": {
@@ -217,8 +221,10 @@
     },
     "room": {
       "room_tsx": {
-        "room": "Location",
-        "a_room_for": "Une location pour {{numberMaxOfPeople}} personnes",
+        "location": "Location",
+        "a_location_for": "Une location pour {{numberMaxOfPeople}} personnes",
+        "bed": "lit",
+        "room": "chambre",
         "euro": "€",
         "night": "nuit",
         "start_date": "Date de départ",
@@ -303,7 +309,12 @@
           "activated": "Activé",
           "desactivated": "Desactivé",
           "save": "Sauvegarder",
-          "preview": "Prévision"
+          "preview": "Prévision",
+          "locationType": {
+            "house": "Gîte",
+            "pool": "Piscine",
+            "exotic": "Exotique"
+          }
         },
         "preview_tsx": {
           "save": "Sauvegarder",

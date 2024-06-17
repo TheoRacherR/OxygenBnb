@@ -26,6 +26,10 @@ export class UpdateRentalDto extends PartialType(CreateRentalDto) {
   @IsString()
   localisation_infos?: string;
 
+  @IsOptional()
+  @IsString()
+  description?: string;
+
   @IsBoolean()
   @IsOptional()
   isValid?: boolean;
@@ -33,4 +37,20 @@ export class UpdateRentalDto extends PartialType(CreateRentalDto) {
   @IsBoolean()
   @IsOptional()
   active?: boolean;
+
+  @IsOptional()
+  @IsString()
+  title?: string;
+
+  @IsNumber()
+  @IsOptional()
+  nb_max_person?: number;
+
+  @IsNumber()
+  @IsOptional()
+  nb_max_bed?: number;
+
+  @IsNumber()
+  @IsOptional()
+  nb_max_room?: number;
 }

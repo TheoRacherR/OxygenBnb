@@ -104,7 +104,7 @@ const LocationList = ({ id }) => {
                 {locationListData.map((item, index) => (
                   <tr key={index}>
                     <td>{item.id}</td>
-                    <td>{item?.localisation_infos}</td>
+                    <td>{item?.title}</td>
                     <td>{item?.default_price}</td>
                     <td>
                       {item.isValid ? (

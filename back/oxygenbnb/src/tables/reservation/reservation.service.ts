@@ -30,7 +30,8 @@ export interface ReservationFormated {
     default_price: number;
     default_currency: currency;
     type: rentalType;
-    localisation_infos: string;
+    title: string;
+    description: string;
     isValid: boolean;
     active: boolean;
   };
@@ -70,7 +71,8 @@ export class ReservationService {
           default_price: item.rental.default_price,
           default_currency: item.rental.default_currency,
           type: item.rental.type,
-          localisation_infos: item.rental.localisation_infos,
+          title: item.rental.title,
+          description: item.rental.description,
           isValid: item.rental.isValid,
           active: item.rental.active,
         },
@@ -118,7 +120,8 @@ export class ReservationService {
           default_price: item.rental.default_price,
           default_currency: item.rental.default_currency,
           type: item.rental.type,
-          localisation_infos: item.rental.localisation_infos,
+          title: item.rental.title,
+          description: item.rental.description,
           isValid: item.rental.isValid,
           active: item.rental.active,
         },
@@ -157,7 +160,8 @@ export class ReservationService {
           default_price: item.rental.default_price,
           default_currency: item.rental.default_currency,
           type: item.rental.type,
-          localisation_infos: item.rental.localisation_infos,
+          title: item.rental.title,
+          description: item.rental.description,
           isValid: item.rental.isValid,
           active: item.rental.active,
         },

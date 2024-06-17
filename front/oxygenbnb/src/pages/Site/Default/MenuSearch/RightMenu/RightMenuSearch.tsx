@@ -30,11 +30,14 @@ const RightMenuSearch = () => {
     setAnchorEl({ lang: null, settings: null });
   };
 
+  const getLogInfos = async () => {
+    const status = await verifyIfLogged();
+    setLogged(status);
+  }
+
   useEffect(() => {
-    setLogged(false);
-    if (verifyIfLogged()) setLogged(true);
-    console.log("first")
-  });
+    getLogInfos();
+  }, []);
 
   const handleLogout = () => {
     localStorage.setItem("jwtToken", "");
@@ -53,7 +56,6 @@ const RightMenuSearch = () => {
   ) => {
     handleClose();
     const language = value;
-    console.log(language);
     i18n.changeLanguage(language); //change the language
     localStorage.setItem("lng", language);
   };
@@ -119,7 +121,7 @@ const RightMenuSearch = () => {
           {logged ? (
             <>
               <Link
-                to="user"
+                to="/o/user"
                 style={{ color: "black", textDecoration: "none" }}
               >
                 <MenuItem onClick={handleClose}>

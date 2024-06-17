@@ -109,11 +109,12 @@ const ResetCenterView = ({ selectPosition }): any => {
 
   useEffect(() => {
     if (selectPosition) {
-      if (selectPosition?.boundingbox)
+      if (selectPosition?.boundingbox){
         map.fitBounds([
           [selectPosition?.boundingbox[0], selectPosition?.boundingbox[2]],
           [selectPosition?.boundingbox[1], selectPosition?.boundingbox[3]],
-        ]);
+        ])
+      }
       else
         map.fitBounds([
           [48.8155755, 2.224122],
@@ -158,6 +159,11 @@ const Search = () => {
     setPoisitionToView(citySelected);
   }, [citySelected]);
 
+  const mapOnMove = (item) => {
+    setMapBounds(item)
+  }
+
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -193,7 +199,7 @@ const Search = () => {
           zoom={5}
           style={{ width: "inherit", height: "100%" }}
         >
-          <ComponentOnMove setMapBounds={(e) => setMapBounds(e)} />
+          <ComponentOnMove setMapBounds={(e) => mapOnMove(e)} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

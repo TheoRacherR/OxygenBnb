@@ -1,6 +1,5 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import styles from "./Styles.module.scss";
-import Input from "@mui/joy/Input";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -15,47 +14,38 @@ import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlin
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import { red } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
+import { RentalFormated } from "../../../../../../../../../back/oxygenbnb/src/tables/rental/rental.service";
+import axios from "axios";
 
-const dataTemp: {
-  title: string;
-  id: number;
-  price: number;
-  validated: boolean;
-}[] = [
-  {
-    title: "Frozen yoghurt",
-    id: 159,
-    price: 6,
-    validated: true,
-  },
-  {
-    title: "Ice cream sandwich",
-    id: 237,
-    price: 9,
-    validated: false,
-  },
-  {
-    title: "Eclair",
-    id: 262,
-    price: 16,
-    validated: true,
-  },
-  {
-    title: "Cupcake",
-    id: 305,
-    price: 3.7,
-    validated: true,
-  },
-  {
-    title: "Gingerbread",
-    id: 356,
-    price: 16,
-    validated: true,
-  },
-];
-
-const LocationList = () => {
+const LocationList = ({ user_id }) => {
   const { t } = useTranslation(["site"]);
+  const [locationListData, setLocationListData] = useState<RentalFormated[]>([]);
+
+  const fetchLocations = async () => {
+    const locationListRaw: { data: RentalFormated[] } = await axios.get(
+      "http://localhost:3333" + "/rental/owner/" + user_id
+    );
+    setLocationListData(locationListRaw.data);
+  };
+
+  useEffect(() => {
+    fetchLocations();
+  }, []);
+
+  const patchActiveLocation = async (bool: boolean, rental_id: number) => {
+    try {
+      await axios.patch(
+        "http://localhost:3333" + "/rental/" + rental_id, {
+          active: bool
+        }
+      )
+      fetchLocations();
+    }
+    catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <Accordion sx={{ backgroundColor: "#f0f0f0" }}>
       <AccordionSummary
@@ -93,7 +83,7 @@ const LocationList = () => {
               // borderColor: "grey",
             }}
           >
-            {dataTemp.length === 0 ? (
+            {locationListData.length === 0 ? (
               <div style={{ color: "black" }}>
                 {t(
                   "site:main.profil.users.user_blocks.location_list_tsx.no_location"
@@ -123,25 +113,37 @@ const LocationList = () => {
                         "site:main.profil.users.user_blocks.location_list_tsx.list.valid"
                       )}
                     </th>
+                    <th>
+                      {t(
+                        "site:main.profil.users.user_blocks.location_list_tsx.list.active"
+                      )}
+                    </th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {dataTemp.map((item, index) => (
+                  {locationListData.map((item, index) => (
                     <tr key={index}>
-                      <td>{item.id}</td>
-                      <td>{item.title}</td>
-                      <td>{item.price}</td>
+                      <td>{item?.id}</td>
+                      <td>{item?.title}</td>
+                      <td>{item?.default_price}</td>
                       <td>
-                        {item.validated ? (
+                        {item.isValid ? (
                           <CheckCircleOutlineRoundedIcon color="success" />
                         ) : (
                           <HighlightOffRoundedIcon sx={{ color: red[500] }} />
                         )}
                       </td>
                       <td>
+                        {item.active ? (
+                          <Button color="danger" onClick={() => patchActiveLocation(false, item.id)}>{t("site:main.profil.users.user_blocks.location_list_tsx.list.desactivate")}</Button>
+                        ) : (
+                          <Button color="success" onClick={() => patchActiveLocation(true, item.id)}>{t("site:main.profil.users.user_blocks.location_list_tsx.list.activate")}</Button>
+                        )}
+                      </td>
+                      <td>
                         <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
-                          <Link to={`/o/room/${item.id}`}>
+                          <Link to={`/o/room/${item?.id}`}>
                             <Button color="primary">
                               <ArrowForwardIosRoundedIcon fontSize="small" />
                             </Button>

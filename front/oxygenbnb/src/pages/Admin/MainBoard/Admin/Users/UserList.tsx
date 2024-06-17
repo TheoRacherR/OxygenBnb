@@ -34,7 +34,6 @@ const UserList = () => {
 
   useEffect(() => {
     fetchUsers();
-    console.log("User fetched");
   }, []);
 
   return (

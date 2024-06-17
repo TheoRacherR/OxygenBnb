@@ -1,12 +1,9 @@
 import styles from "./AuthForm.module.scss"
 import { Tab, Tabs } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import LoginForm from "./Auth/LoginForm";
 import RegisterForm from "./Auth/RegisterForm";
-import { verifyIfLogged } from "../../../../../utils/utils";
-import { useNavigate } from "react-router-dom";
-
-const AuthForm = ({closeForm}) => {
+const AuthForm = () => {
   const [value, setValue] = useState<number>(0)
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
@@ -16,12 +13,6 @@ const AuthForm = ({closeForm}) => {
   const handleSwitchForm = (id: number) => {
     setValue(id)
   }
-
-  const navigate = useNavigate();
-  useEffect(() => {
-    if(verifyIfLogged()) return navigate('/');
-  })
-
 
   return (
     <div className={styles.container}>
@@ -38,11 +29,11 @@ const AuthForm = ({closeForm}) => {
         {
           value === 0 ?
 
-          <LoginForm handleSwitchForm={handleSwitchForm} closeForm={closeForm}/>
+          <LoginForm handleSwitchForm={handleSwitchForm}/>
 
           :
 
-          <RegisterForm handleSwitchForm={handleSwitchForm} closeForm={closeForm}/>
+          <RegisterForm handleSwitchForm={handleSwitchForm}/>
 
         }
 

@@ -65,6 +65,8 @@
           "profil": "Profile",
           "settings": "Settings",
           "language": "Languages",
+          "dashboard": "Dashboard",
+          "add_rental": "Add a location",
           "login": "Login",
           "logout": "Logout"
         }
@@ -169,7 +171,9 @@
               "owner": "Owner",
               "active": "Active",
               "true": "True",
-              "false": "False"
+              "false": "False",
+              "activate": "Activate",
+              "desactivate": "Desactivate"
             }
           },
           "reservation_list_tsx": {
@@ -217,8 +221,10 @@
     },
     "room": {
       "room_tsx": {
-        "room": "Room",
-        "a_room_for": "A room for {{numberMaxOfPeople}} people",
+        "location": "Location",
+        "a_location_for": "A location for {{numberMaxOfPeople}} people",
+        "bed": "bed",
+        "room": "room",
         "euro": "€",
         "night": "night",
         "start_date": "Start date",
@@ -303,7 +309,12 @@
           "activated": "Activated",
           "desactivated": "Desactivated",
           "save": "Save",
-          "preview": "Preview"
+          "preview": "Preview",
+          "locationType": {
+            "house": "House",
+            "pool": "Pool",
+            "exotic": "Exotic"
+          }
         },
         "preview_tsx": {
           "save": "Save",
@@ -311,5 +322,8 @@
         }
       }
     }
+  },
+  "error": {
+    "notfound": "404 Not found"
   }
 }

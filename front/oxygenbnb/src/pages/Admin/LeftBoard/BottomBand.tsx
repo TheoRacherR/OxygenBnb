@@ -30,6 +30,7 @@ const BottomBand = () => {
 
   const logout = () => {
     localStorage.setItem('jwtToken', "")
+    console.log("update jwt")
     return navigate("/")
   }
 

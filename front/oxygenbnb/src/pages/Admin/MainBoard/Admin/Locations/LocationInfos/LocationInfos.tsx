@@ -6,11 +6,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InputComponent from "../../InputComponent";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import axios from "axios";
-import { RentalFormated } from "../../../../../../../../../back/oxygenbnb/src/tables/rental/rental.service";
-import Input from "@mui/joy/Input";
 import { Button } from "@mui/joy";
 
 
@@ -58,7 +55,7 @@ const LocationInfos = ({ location_id, locationData, handleValidate }) => {
               label={t(
                 "admin:admin.locations.location_infos.location_infos_tsx.list.title"
               )}
-              value={locationData?.localisation_infos}
+              value={locationData?.title}
               disabled={true}
             />
           </div>

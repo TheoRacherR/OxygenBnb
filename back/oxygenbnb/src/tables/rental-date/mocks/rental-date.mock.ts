@@ -13,6 +13,7 @@ export const rentalDateMock = [
       default_price: 0,
       default_currency: null,
       localisation_infos: 'string',
+      description: 'string',
       isValid: false,
       type: rentalType.HOUSE,
       owner: User,

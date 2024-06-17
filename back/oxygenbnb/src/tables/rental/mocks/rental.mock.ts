@@ -9,6 +9,7 @@ export const rentalMock = [
     default_price: 0,
     default_currency: null,
     localisation_infos: 'string',
+    description: 'string',
     isValid: false,
     active: false,
     type: rentalType.HOUSE,
@@ -28,6 +29,7 @@ export const rentalMockCreate = {
   default_currency: currency.EUR,
   type: rentalType.HOUSE,
   localisation_infos: 'string',
+  description: 'string',
   owner: {
     id: 1,
     firstname: 'string',
@@ -42,6 +44,7 @@ export const rentalMockUpdate: UpdateRentalDto = {
   default_currency: currency.EUR,
   type: rentalType.HOUSE,
   localisation_infos: 'string',
+  description: 'string',
   isValid: false,
   active: false,
 };

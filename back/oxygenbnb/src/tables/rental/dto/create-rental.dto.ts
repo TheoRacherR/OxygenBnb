@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsEnum,
   IsNotEmpty,
   IsNumber,
@@ -23,8 +24,31 @@ export class CreateRentalDto {
 
   @IsNotEmpty()
   @IsString()
+  description: string;
+
+  @IsNotEmpty()
+  @IsString()
   localisation_infos: string;
 
   @IsNotEmpty()
   owner: User;
+
+  @IsBoolean()
+  active: boolean;
+
+  @IsNotEmpty()
+  @IsString()
+  title: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  nb_max_person: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  nb_max_bed: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  nb_max_room: number;
 }

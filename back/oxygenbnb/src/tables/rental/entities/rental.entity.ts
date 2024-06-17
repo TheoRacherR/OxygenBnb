@@ -49,6 +49,9 @@ export class Rental {
   })
   type: rentalType;
 
+  @Column({ default: '' })
+  description: string;
+
   @Column()
   localisation_infos: string;
 
@@ -57,6 +60,18 @@ export class Rental {
 
   @Column({ default: false })
   active: boolean;
+
+  @Column({ default: '' })
+  title: string;
+
+  @Column({ default: 1 })
+  nb_max_person: number;
+
+  @Column({ default: 1 })
+  nb_max_bed: number;
+
+  @Column({ default: 1 })
+  nb_max_room: number;
 
   // Relations
 

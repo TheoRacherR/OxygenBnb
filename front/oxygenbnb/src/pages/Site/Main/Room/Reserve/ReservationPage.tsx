@@ -7,15 +7,15 @@ import styles from "./ReservationPage.module.scss";
 import Divider from "./Divider";
 import dayjs from "dayjs";
 import { SearchContext } from "../../../../../utils/Context/SearchContext";
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import { Rental } from "../../../../../../../../back/oxygenbnb/src/tables/rental/entities/rental.entity";
 
 const room_details = {
-  price_per_night: 300,
   cleaning_fees: 0,
   service_fees: 12.99,
   taxes: 0,
-  currency: "€ (euro)",
 };
 
 const ReservationPage = () => {
@@ -24,6 +24,29 @@ const ReservationPage = () => {
     useContext(SearchContext);
   const url = useParams()["*"];
   const idRoom = url.substring(8, url.length - 12);
+  const navigate = useNavigate();
+  const [locationData, setLocationData] = useState<Rental>();
+  const fetchLocation = async () => {
+    if (
+      !idRoom
+        .split("")
+        .map((i) => parseInt(i))
+        .includes(NaN)
+    ) {
+      try {
+        const locationRaw: { data: Rental } = await axios.get(
+          "http://localhost:3333" + "/rental/" + idRoom
+        );
+        setLocationData(locationRaw.data);
+      } catch (e) {
+        if (e.response.status === 404) return navigate("/o/404");
+      }
+    } else return navigate("/o/404");
+  };
+
+  useEffect(() => {
+    fetchLocation();
+  });
 
   return (
     <div className={styles.container}>
@@ -44,10 +67,10 @@ const ReservationPage = () => {
           <div className={styles.right}>
             <TotalPrice
               details={{
-                title: "Grande maison bien bien hein",
-                currency: room_details.currency,
+                title: locationData?.title,
+                currency: locationData?.default_currency,
                 nb_night: numberOfNightSelected,
-                price_per_night: room_details.price_per_night,
+                price_per_night: locationData?.default_price,
                 cleaning_fees: room_details.cleaning_fees,
                 service_fees: room_details.service_fees,
                 taxes: room_details.taxes,

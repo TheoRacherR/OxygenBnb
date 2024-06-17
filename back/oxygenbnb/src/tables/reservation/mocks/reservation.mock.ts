@@ -13,6 +13,7 @@ export const reservationMock = [
       default_currency: null,
       type: null,
       localisation_infos: 'string',
+      description: 'string',
       isValid: false,
       owner: User,
     },

@@ -5,9 +5,12 @@ import { Stack, Button } from "@mui/material";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const LoginForm = ({ handleSwitchForm, closeForm }) => {
+const LoginForm = ({ handleSwitchForm }) => {
   const { t } = useTranslation(["site"]);
+  const navigate = useNavigate();
+
   const [valuesLogin, setValuesLogin] = useState<{
     mail: string;
     password: string;
@@ -24,7 +27,8 @@ const LoginForm = ({ handleSwitchForm, closeForm }) => {
           password: valuesLogin.password,
         })
         localStorage.setItem('jwtToken', res.data)
-        closeForm();
+        console.log("update jwt")
+        return navigate("/")
       }
       catch (e) {
         setError({...error, credentials: true})

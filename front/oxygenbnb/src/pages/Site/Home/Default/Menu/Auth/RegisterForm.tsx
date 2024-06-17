@@ -8,9 +8,11 @@ import Typography from "@mui/joy/Typography";
 import Key from "@mui/icons-material/Key";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
-const RegisterForm = ({ handleSwitchForm, closeForm }) => {
+const RegisterForm = ({ handleSwitchForm }) => {
   const { t } = useTranslation(["site"]);
+  const navigate = useNavigate();
   const [valuesRegister, setValuesRegister] = useState<{
     firstname: string;
     lastname: string;
@@ -26,7 +28,6 @@ const RegisterForm = ({ handleSwitchForm, closeForm }) => {
   const minLength: number = 12;
 
   const handleRegister = async () => {
-    console.log(valuesRegister);
     setError({passwordCooherence: false, emailAlreadyUsed: false})
     try {
       await axios.post("http://localhost:3333" + "/auth/register/", {
@@ -35,7 +36,7 @@ const RegisterForm = ({ handleSwitchForm, closeForm }) => {
         email: valuesRegister.mail,
         password: valuesRegister.password,
       })
-      closeForm();
+      return navigate("/")
     }
     catch(e){
       if(e.response.status === 409) setError({passwordCooherence: false, emailAlreadyUsed: true})

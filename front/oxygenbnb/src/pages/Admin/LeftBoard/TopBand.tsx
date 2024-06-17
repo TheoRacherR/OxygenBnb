@@ -12,15 +12,16 @@ import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import ForumRoundedIcon from "@mui/icons-material/ForumRounded";
 import PeopleAltRoundedIcon from "@mui/icons-material/PeopleAltRounded";
 import { verifyRole } from "../../../utils/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const TopBand = ({ location }) => {
   const { t } = useTranslation(["admin"]);
-  let role = "";
+  const [role, setRole] = useState("not logged")
   const checkRole = async () => {
     const result = await verifyRole();
-    if (result === "renter" || result === "admin")
-      role = result;
+    if (result === "renter" || result === "admin"){
+      setRole(result);
+    }
   };
   useEffect(() => {
     checkRole();

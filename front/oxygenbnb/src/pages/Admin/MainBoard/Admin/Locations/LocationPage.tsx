@@ -4,7 +4,7 @@ import LocationInfos from "./LocationInfos/LocationInfos";
 import styles from "./LocationPage.module.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { RentalFormated } from "../../../../../../../../back/oxygenbnb/src/tables/rental/rental.service";
+import { Rental } from "../../../../../../../../back/oxygenbnb/src/tables/rental/entities/rental.entity";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -13,15 +13,14 @@ const LocationPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [locationData, setLocationData] = useState<RentalFormated>();
+  const [locationData, setLocationData] = useState<Rental>();
   const fetchLocation = async () => {
     if(!id.split("").map(i => parseInt(i)).includes(NaN)){
       try {
-        const locationRaw: { data: RentalFormated } = await axios.get(
+        const locationRaw: { data: Rental } = await axios.get(
           "http://localhost:3333" + "/rental/" + id
         );
         setLocationData(locationRaw.data);
-        console.log("first")
       }
       catch (e) {
         if(e.response.status === 404 ) return navigate("/admin/404")
@@ -32,7 +31,6 @@ const LocationPage = () => {
 
   const handleValidate = async () => {
     await axios.patch("http://localhost:3333" + "/rental/" + id, { isValid: !locationData.isValid })
-    console.log("update");
     fetchLocation();
 
   }

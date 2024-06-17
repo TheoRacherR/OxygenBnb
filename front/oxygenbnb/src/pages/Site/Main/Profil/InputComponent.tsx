@@ -1,7 +1,7 @@
 import React from 'react'
 import Input from "@mui/joy/Input";
 
-const InputComponent = ({label, value, disabled}) => {
+const InputComponent = ({label, value, disabled, onChange}) => {
   return (
     <Input
       variant="outlined"
@@ -9,6 +9,7 @@ const InputComponent = ({label, value, disabled}) => {
       startDecorator={<label>{label}</label>}
       sx={{width: "100%"}}
       disabled={disabled}
+      onChange={onChange}
     />
   )
 }
