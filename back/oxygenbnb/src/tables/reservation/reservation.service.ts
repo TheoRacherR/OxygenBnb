@@ -169,6 +169,23 @@ export class ReservationService {
     return reservationDataFormated;
   }
 
+  async getNumberOfResaOfMyRentals(
+    user_id: number,
+  ): Promise<{ total: number; unique: number }> {
+    const myReservationOfMyRentals = await this.reservationRepository.find({
+      where: { client: { id: user_id } },
+    });
+    const uniqueArray = [];
+    for (let i = 0; i < myReservationOfMyRentals.length; i++) {
+      const element = myReservationOfMyRentals[i];
+      if (!uniqueArray.includes(element.client.id)) uniqueArray.push(element);
+    }
+    return {
+      total: myReservationOfMyRentals.length,
+      unique: uniqueArray.length,
+    };
+  }
+
   async create(
     reservation: CreateReservationDto,
   ): Promise<{ message: string }> {

@@ -14,7 +14,7 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import { Divider, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { verifyIfLogged } from "../../../../../utils/utils";
+import { verifyIfLogged } from "@utils/utils";
 
 const RightMenuSearch = () => {
   const { t, i18n } = useTranslation(["site"]);

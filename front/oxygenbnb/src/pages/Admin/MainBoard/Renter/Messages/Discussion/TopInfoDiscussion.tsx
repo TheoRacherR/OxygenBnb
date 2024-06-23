@@ -2,7 +2,7 @@ import styles from "./TopInfoDiscussion.module.scss";
 import { Avatar, Button } from "@mui/joy";
 import StatusComponent from "../StatusComponent";
 import { useContext } from "react";
-import { MessageContext } from "../../../../../../utils/Context/MessageContext";
+import { MessageContext } from "@utils/Context/MessageContext";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 

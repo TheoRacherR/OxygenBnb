@@ -9,7 +9,7 @@ import ListItemDecorator from "@mui/joy/ListItemDecorator";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import List from "@mui/joy/List";
 import { useTranslation } from "react-i18next";
-import { getUserInfos } from "../../../utils/utils";
+import { getUserInfos } from "@utils/utils";
 import { useEffect, useState } from "react";
 
 const BottomBand = () => {

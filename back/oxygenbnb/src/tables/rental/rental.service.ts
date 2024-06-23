@@ -31,22 +31,24 @@ export class RentalService {
 
   async findAll(): Promise<RentalFormated[]> {
     const rentalDataRaw = await this.rentalRepository.find();
-    const rentalDataFormated: RentalFormated[] = rentalDataRaw.map((item) => ({
-      id: item.id,
-      default_currency: item.default_currency,
-      default_price: item.default_price,
-      isValid: item.isValid,
-      active: item.active,
-      // localisation_infos: item.localisation_infos,
-      // description: item.description,
-      title: item.title,
-      type: item.type,
-      owner: {
-        id: item.owner.id,
-        firstname: item.owner.firstname,
-        lastname: item.owner.lastname,
-      },
-    }));
+    const rentalDataFormated: RentalFormated[] = rentalDataRaw
+      .sort((a, b) => a.id - b.id)
+      .map((item) => ({
+        id: item.id,
+        default_currency: item.default_currency,
+        default_price: item.default_price,
+        isValid: item.isValid,
+        active: item.active,
+        // localisation_infos: item.localisation_infos,
+        // description: item.description,
+        title: item.title,
+        type: item.type,
+        owner: {
+          id: item.owner.id,
+          firstname: item.owner.firstname,
+          lastname: item.owner.lastname,
+        },
+      }));
     return rentalDataFormated;
   }
 
@@ -65,22 +67,24 @@ export class RentalService {
         type: type,
       },
     });
-    const rentalDataFormated: RentalFormated[] = rentalDataRaw.map((item) => ({
-      id: item.id,
-      default_currency: item.default_currency,
-      default_price: item.default_price,
-      isValid: item.isValid,
-      active: item.active,
-      // localisation_infos: item.localisation_infos,
-      // description: item.description,
-      title: item.title,
-      type: item.type,
-      owner: {
-        id: item.owner.id,
-        firstname: item.owner.firstname,
-        lastname: item.owner.lastname,
-      },
-    }));
+    const rentalDataFormated: RentalFormated[] = rentalDataRaw
+      .sort((a, b) => a.id - b.id)
+      .map((item) => ({
+        id: item.id,
+        default_currency: item.default_currency,
+        default_price: item.default_price,
+        isValid: item.isValid,
+        active: item.active,
+        // localisation_infos: item.localisation_infos,
+        // description: item.description,
+        title: item.title,
+        type: item.type,
+        owner: {
+          id: item.owner.id,
+          firstname: item.owner.firstname,
+          lastname: item.owner.lastname,
+        },
+      }));
     return rentalDataFormated;
   }
 
@@ -90,23 +94,32 @@ export class RentalService {
         owner: { id: user_id },
       },
     });
-    const rentalDataFormated: RentalFormated[] = rentalDataRaw.map((item) => ({
-      id: item.id,
-      default_currency: item.default_currency,
-      default_price: item.default_price,
-      isValid: item.isValid,
-      active: item.active,
-      // localisation_infos: item.localisation_infos,
-      // description: item.description,
-      title: item.title,
-      type: item.type,
-      owner: {
-        id: item.owner.id,
-        firstname: item.owner.firstname,
-        lastname: item.owner.lastname,
-      },
-    }));
+    const rentalDataFormated: RentalFormated[] = rentalDataRaw
+      .sort((a, b) => a.id - b.id)
+      .map((item) => ({
+        id: item.id,
+        default_currency: item.default_currency,
+        default_price: item.default_price,
+        isValid: item.isValid,
+        active: item.active,
+        // localisation_infos: item.localisation_infos,
+        // description: item.description,
+        title: item.title,
+        type: item.type,
+        owner: {
+          id: item.owner.id,
+          firstname: item.owner.firstname,
+          lastname: item.owner.lastname,
+        },
+      }));
     return rentalDataFormated;
+  }
+
+  async getDataFromMyRentals(user_id: number): Promise<number> {
+    const myRentalsLength = await this.rentalRepository.find({
+      where: { owner: { id: user_id } },
+    });
+    return myRentalsLength.length;
   }
 
   async create(rentalInfos: CreateRentalDto): Promise<{ message: string }> {

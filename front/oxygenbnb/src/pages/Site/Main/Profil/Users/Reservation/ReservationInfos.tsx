@@ -17,9 +17,7 @@ const ReservationInfos = ({ reservation_id }) => {
 
   const [reservationData, setReservationData] = useState<ReservationFormated>();
   const fetchReservation = async () => {
-    const reservationRaw: { any; data: ReservationFormated } = await axios.get(
-      "http://localhost:3333" + "/reservation/" + reservation_id
-    );
+    const reservationRaw: { any; data: ReservationFormated } = await axios.get(`/reservation/${reservation_id}`);
     setReservationData(reservationRaw.data);
   };
 
@@ -60,7 +58,7 @@ const ReservationInfos = ({ reservation_id }) => {
               )}
               value={reservation_id}
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
           </div>
           <div className={styles.item}>
@@ -70,7 +68,7 @@ const ReservationInfos = ({ reservation_id }) => {
               )}
               value={reservationData?.nb_night}
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
           </div>
           <div className={styles.item}>
@@ -78,11 +76,9 @@ const ReservationInfos = ({ reservation_id }) => {
               label={t(
                 "site:main.profil.users.reservation.reservation_infos_tsx.list.reservation_date"
               )}
-              value={dayjs(reservationData?.created_at).format(
-                "DD/MM/YYYY"
-              )}
+              value={dayjs(reservationData?.created_at).format("DD/MM/YYYY")}
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
           </div>
           <div className={styles.item}>
@@ -92,7 +88,7 @@ const ReservationInfos = ({ reservation_id }) => {
               )}
               value={dayjs(reservationData?.start_date).format("DD/MM/YYYY")}
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
           </div>
           <div className={styles.item}>
@@ -102,7 +98,7 @@ const ReservationInfos = ({ reservation_id }) => {
               )}
               value={dayjs(reservationData?.end_date).format("DD/MM/YYYY")}
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
           </div>
           <div className={styles.item}>
@@ -111,13 +107,12 @@ const ReservationInfos = ({ reservation_id }) => {
                 "site:main.profil.users.reservation.reservation_infos_tsx.list.total_price"
               )}
               value={
-                reservationData?.price_per_night *
-                  reservationData?.nb_night +
+                reservationData?.price_per_night * reservationData?.nb_night +
                 " " +
                 reservationData?.rental?.default_currency.substring(0, 1)
               }
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
           </div>
 
@@ -128,7 +123,7 @@ const ReservationInfos = ({ reservation_id }) => {
               )}
               value={reservationData?.nb_adult}
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
             {/* <InputComponent
               label={t(
@@ -149,7 +144,7 @@ const ReservationInfos = ({ reservation_id }) => {
                 reservationData?.rental?.default_currency.substring(0, 1)
               }
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
             <InputComponent
               label={t(
@@ -161,7 +156,7 @@ const ReservationInfos = ({ reservation_id }) => {
                 reservationData?.rental?.default_currency.substring(0, 1)
               }
               disabled={true}
-              onChange={() => setReservationData(prev => ({...prev}))}
+              onChange={() => setReservationData((prev) => ({ ...prev }))}
             />
           </div>
         </div>

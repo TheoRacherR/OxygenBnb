@@ -12,7 +12,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import SearchLocalisation from "./SearchLocalisation";
-import { SearchContext } from "../../../../../utils/Context/SearchContext";
+import { SearchContext } from "@utils/Context/SearchContext";
 import { useTranslation } from "react-i18next";
 import "dayjs/locale/fr";
 import "dayjs/locale/en-gb";

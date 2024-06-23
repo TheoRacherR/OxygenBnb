@@ -10,17 +10,16 @@ import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import { red } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { rentalType } from "../../../../../../../../back/oxygenbnb/src/tables/rental/entities/rental.entity";
 import { RentalFormated } from "../../../../../../../../back/oxygenbnb/src/tables/rental/rental.service";
 
 const LocationList = () => {
   const { t } = useTranslation(["admin"]);
-  const [locationListData, setLocationListData] = useState<RentalFormated[]>([]);
+  const [locationListData, setLocationListData] = useState<RentalFormated[]>(
+    []
+  );
 
   const fetchLocations = async () => {
-    const locationListRaw: { data: RentalFormated[] } = await axios.get(
-      "http://localhost:3333" + "/rental"
-    );
+    const locationListRaw: { data: RentalFormated[] } = await axios.get("/rental");
     setLocationListData(locationListRaw.data);
   };
 

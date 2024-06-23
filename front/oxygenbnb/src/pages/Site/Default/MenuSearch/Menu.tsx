@@ -1,5 +1,5 @@
 import styles from "./Menu.module.scss";
-import logo from "../../../../assets/Logo OxBNB Menu ob Honr.png";
+import logo from "@assets/Logo OxBNB Menu ob Honr.png";
 import { Link } from "react-router-dom";
 import RightMenu from "../MenuSearch/RightMenu/RightMenu";
 import { useTranslation } from "react-i18next";

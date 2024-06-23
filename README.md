@@ -33,7 +33,9 @@ PG_PORT=
 PG_PORT_E2E=
 NEST_PORT=
 jwt_secret=
-NODE_ENV_DEV=true or false
+VITE_NODE_ENV_DEV=true or false
+VITE_URL_NEST_PROD=
+VITE_URL_NEST_DEV=
 ```
 
 ### 3. Finally, Build the project

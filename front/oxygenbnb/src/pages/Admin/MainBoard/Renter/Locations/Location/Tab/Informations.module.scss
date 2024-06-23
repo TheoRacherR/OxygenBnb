@@ -16,9 +16,13 @@
     padding: 20px;
     border-top: 1px solid #32383e;
 
-    .item {
-      padding: 15px 0;
+    .item_flex {
+      display: flex;
+      gap: 8px;
+    }
 
+    .item, .item_flex {
+      padding: 15px 0;
 
       > div {
         border-radius: 5px;

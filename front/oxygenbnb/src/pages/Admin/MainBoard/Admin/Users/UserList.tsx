@@ -8,8 +8,7 @@ import styles from "./UserList.module.scss";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dayjs from "dayjs";
-import { userRole } from "../../../../../../../../back/oxygenbnb/src/tables/user/entities/user.entity"
-
+import { userRole } from "../../../../../../../../back/oxygenbnb/src/tables/user/entities/user.entity";
 
 interface UserRaw {
   id: number;
@@ -26,9 +25,7 @@ const UserList = () => {
   const [userData, setUserData] = useState<UserRaw[]>([]);
 
   const fetchUsers = async () => {
-    const usersRaw: { any; data: UserRaw[] } = await axios.get(
-      "http://localhost:3333" + "/user"
-    );
+    const usersRaw: { any; data: UserRaw[] } = await axios.get("/user");
     setUserData(usersRaw.data);
   };
 

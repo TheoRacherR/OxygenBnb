@@ -6,7 +6,7 @@ import TotalPrice from "./Blocks/TotalPrice";
 import styles from "./ReservationPage.module.scss";
 import Divider from "./Divider";
 import dayjs from "dayjs";
-import { SearchContext } from "../../../../../utils/Context/SearchContext";
+import { SearchContext } from "@utils/Context/SearchContext";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -34,9 +34,7 @@ const ReservationPage = () => {
         .includes(NaN)
     ) {
       try {
-        const locationRaw: { data: Rental } = await axios.get(
-          "http://localhost:3333" + "/rental/" + idRoom
-        );
+        const locationRaw: { data: Rental } = await axios.get(`/rental/${idRoom}`);
         setLocationData(locationRaw.data);
       } catch (e) {
         if (e.response.status === 404) return navigate("/o/404");

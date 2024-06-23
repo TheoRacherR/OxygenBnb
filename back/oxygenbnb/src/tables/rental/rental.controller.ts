@@ -61,6 +61,13 @@ export class RentalController {
       );
   }
 
+  @Get('data/:user_id')
+  async getDataFromMyRentals(
+    @Param('user_id', ParseIntPipe) user_id: number,
+  ): Promise<number> {
+    return await this.rentalService.getDataFromMyRentals(user_id);
+  }
+
   @Post()
   async create(@Body() rental: CreateRentalDto): Promise<{ message: string }> {
     return this.rentalService.create(rental);

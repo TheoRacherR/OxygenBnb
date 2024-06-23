@@ -11,8 +11,8 @@ import Footer from "./Default/Footer";
 import { Box, MenuItem, Paper } from "@mui/material";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { endQuery, NOMINATIM_BASE_URL } from "../../../utils/utils";
-import { SearchContext } from "./../../../utils/Context/SearchContext";
+import { endQuery, NOMINATIM_BASE_URL } from "@utils/utils";
+import { SearchContext } from "@utils/Context/SearchContext";
 
 import { useTranslation } from "react-i18next";
 

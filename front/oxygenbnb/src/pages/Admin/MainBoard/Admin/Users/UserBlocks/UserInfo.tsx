@@ -12,21 +12,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { User } from "../../../../../../../../../back/oxygenbnb/src/tables/user/entities/user.entity";
 
-
 const UserInfo = ({ id, userData }) => {
   const { t } = useTranslation(["admin"]);
-  // const [userData, setUserData] = useState<User>();
-
-  // const fetchUser = async () => {
-  //   const userRaw: { any; data: User } = await axios.get(
-  //     "http://localhost:3333" + "/user/" + id
-  //   );
-  //   setUserData(userRaw.data);
-  // };
-
-  // useEffect(() => {
-  //   fetchUser();
-  // }, []);
 
   return (
     <Accordion defaultExpanded sx={{ backgroundColor: "#0A0E0F" }}>
@@ -112,7 +99,9 @@ const UserInfo = ({ id, userData }) => {
               disabled={true}
             />
             <InputComponent
-              label={t("admin:admin.users.user_blocks.user_info_tsx.list.birthdate")}
+              label={t(
+                "admin:admin.users.user_blocks.user_info_tsx.list.birthdate"
+              )}
               value={userData?.info?.birth_date}
               disabled={true}
             />
@@ -120,7 +109,9 @@ const UserInfo = ({ id, userData }) => {
 
           <div className={styles.item}>
             <InputComponent
-              label={t("admin:admin.users.user_blocks.user_info_tsx.list.description")}
+              label={t(
+                "admin:admin.users.user_blocks.user_info_tsx.list.description"
+              )}
               value={userData?.info?.desciption}
               disabled={true}
             />

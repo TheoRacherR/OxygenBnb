@@ -15,14 +15,13 @@ import axios from "axios";
 import { ReservationFormated } from "../../../../../../../../../back/oxygenbnb/src/tables/reservation/reservation.service";
 import { useEffect, useState } from "react";
 
-
 const ReservationList = ({ user_id, location_id }) => {
   const { t } = useTranslation(["admin"]);
-  const [reservationListData, setReservationListData] = useState<ReservationFormated[]>([]);
+  const [reservationListData, setReservationListData] = useState<
+    ReservationFormated[]
+  >([]);
   const fetchReservation = async () => {
-    const reservationRaw: { data: ReservationFormated[] } = await axios.get(
-      "http://localhost:3333" + "/reservation/client/" + user_id
-    );
+    const reservationRaw: { data: ReservationFormated[] } = await axios.get(`/reservation/client/${user_id}`);
     setReservationListData(reservationRaw.data);
   };
 
@@ -111,8 +110,16 @@ const ReservationList = ({ user_id, location_id }) => {
                     <tr key={index}>
                       <td>{item.id}</td>
                       <td>{item?.rental?.title}</td>
-                      <td>{dayjs(item?.start_date).format(t('admin:admin.users.user_list_tsx.format'))}</td>
-                      <td>{dayjs(item?.end_date).format(t('admin:admin.users.user_list_tsx.format'))}</td>
+                      <td>
+                        {dayjs(item?.start_date).format(
+                          t("admin:admin.users.user_list_tsx.format")
+                        )}
+                      </td>
+                      <td>
+                        {dayjs(item?.end_date).format(
+                          t("admin:admin.users.user_list_tsx.format")
+                        )}
+                      </td>
                       <td>
                         <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
                           <Link

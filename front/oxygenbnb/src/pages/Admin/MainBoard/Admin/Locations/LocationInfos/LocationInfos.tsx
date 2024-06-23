@@ -6,13 +6,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import InputComponent from "../../InputComponent";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { Button } from "@mui/joy";
 
 
 const LocationInfos = ({ location_id, locationData, handleValidate }) => {
-  const { id } = useParams();
   const { t } = useTranslation(["admin"]);
 
   return (

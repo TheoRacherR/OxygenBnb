@@ -19,12 +19,12 @@ import axios from "axios";
 
 const LocationList = ({ id }) => {
   const { t } = useTranslation(["admin"]);
-  const [locationListData, setLocationListData] = useState<RentalFormated[]>([]);
+  const [locationListData, setLocationListData] = useState<RentalFormated[]>(
+    []
+  );
 
   const fetchLocations = async () => {
-    const locationListRaw: { data: RentalFormated[] } = await axios.get(
-      "http://localhost:3333" + "/rental/owner/" + id
-    );
+    const locationListRaw: { data: RentalFormated[] } = await axios.get(`/rental/owner/${id}`);
     setLocationListData(locationListRaw.data);
   };
 
@@ -57,78 +57,78 @@ const LocationList = ({ id }) => {
         }}
       >
         <div className={styles.main_list}>
-        <Sheet
-          variant="outlined"
-          sx={{
-            borderRadius: "10px",
-            padding: "10px",
-            maxWidth: "100%",
-            overflow: "auto",
-            maxHeight: "100%",
-            backgroundColor: "#0A0E0F",
-            borderColor: "grey",
-          }}
-        >
-          {locationListData.length === 0 ? (
-            <div style={{ color: "white" }}>
-              {t("admin:admin.locations.location_list_tsx.no_location")}
-            </div>
-          ) : (
-            <Table sx={{ borderRadius: 20, color: "#fff" }}>
-              <thead>
-                <tr>
-                  <th>
-                    {t(
-                      "admin:admin.locations.location_infos.location_infos_tsx.list.id"
-                    )}
-                  </th>
-                  <th>
-                    {t(
-                      "admin:admin.locations.location_infos.location_infos_tsx.list.title"
-                    )}
-                  </th>
-                  <th>
-                    {t(
-                      "admin:admin.locations.location_infos.location_infos_tsx.list.price"
-                    )}
-                  </th>
-                  <th>
-                    {t(
-                      "admin:admin.locations.location_infos.location_infos_tsx.list.valid"
-                    )}
-                  </th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {locationListData.map((item, index) => (
-                  <tr key={index}>
-                    <td>{item.id}</td>
-                    <td>{item?.title}</td>
-                    <td>{item?.default_price}</td>
-                    <td>
-                      {item.isValid ? (
-                        <CheckCircleOutlineRoundedIcon color="success" />
-                      ) : (
-                        <HighlightOffRoundedIcon sx={{ color: red[500] }} />
+          <Sheet
+            variant="outlined"
+            sx={{
+              borderRadius: "10px",
+              padding: "10px",
+              maxWidth: "100%",
+              overflow: "auto",
+              maxHeight: "100%",
+              backgroundColor: "#0A0E0F",
+              borderColor: "grey",
+            }}
+          >
+            {locationListData.length === 0 ? (
+              <div style={{ color: "white" }}>
+                {t("admin:admin.locations.location_list_tsx.no_location")}
+              </div>
+            ) : (
+              <Table sx={{ borderRadius: 20, color: "#fff" }}>
+                <thead>
+                  <tr>
+                    <th>
+                      {t(
+                        "admin:admin.locations.location_infos.location_infos_tsx.list.id"
                       )}
-                    </td>
-                    <td>
-                      <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
-                        <Link to={`/admin/location/${item.id}`}>
-                          <Button color="primary">
-                            <ArrowForwardIosRoundedIcon fontSize="small" />
-                          </Button>
-                        </Link>
-                      </ButtonGroup>
-                    </td>
+                    </th>
+                    <th>
+                      {t(
+                        "admin:admin.locations.location_infos.location_infos_tsx.list.title"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "admin:admin.locations.location_infos.location_infos_tsx.list.price"
+                      )}
+                    </th>
+                    <th>
+                      {t(
+                        "admin:admin.locations.location_infos.location_infos_tsx.list.valid"
+                      )}
+                    </th>
+                    <th></th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-          )}
-        </Sheet>
-      </div>
+                </thead>
+                <tbody>
+                  {locationListData.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.id}</td>
+                      <td>{item?.title}</td>
+                      <td>{item?.default_price}</td>
+                      <td>
+                        {item.isValid ? (
+                          <CheckCircleOutlineRoundedIcon color="success" />
+                        ) : (
+                          <HighlightOffRoundedIcon sx={{ color: red[500] }} />
+                        )}
+                      </td>
+                      <td>
+                        <ButtonGroup sx={{ borderRadius: 6 }} variant="solid">
+                          <Link to={`/admin/location/${item.id}`}>
+                            <Button color="primary">
+                              <ArrowForwardIosRoundedIcon fontSize="small" />
+                            </Button>
+                          </Link>
+                        </ButtonGroup>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            )}
+          </Sheet>
+        </div>
       </AccordionDetails>
     </Accordion>
   );

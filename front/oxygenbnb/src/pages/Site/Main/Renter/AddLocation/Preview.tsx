@@ -7,8 +7,7 @@ import dayjs from "dayjs";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useTranslation } from "react-i18next";
-import { FormAddLocationContext } from "../../../../../utils/Context/FormAddLocationContext";
-// import { ButtonGroup } from "@mui/joy";
+import { FormAddLocationContext } from "@utils/Context/FormAddLocationContext";
 
 const Preview = () =>
   // {handleCreateRental}

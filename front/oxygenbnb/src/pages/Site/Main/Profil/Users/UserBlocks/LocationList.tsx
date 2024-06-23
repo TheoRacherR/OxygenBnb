@@ -15,16 +15,17 @@ import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import { red } from "@mui/material/colors";
 import { useTranslation } from "react-i18next";
 import { RentalFormated } from "../../../../../../../../../back/oxygenbnb/src/tables/rental/rental.service";
+// import { RentalFormated } from "@back/oxygenbnb/src/tables/rental/rental.service";
 import axios from "axios";
 
 const LocationList = ({ user_id }) => {
   const { t } = useTranslation(["site"]);
-  const [locationListData, setLocationListData] = useState<RentalFormated[]>([]);
+  const [locationListData, setLocationListData] = useState<RentalFormated[]>(
+    []
+  );
 
   const fetchLocations = async () => {
-    const locationListRaw: { data: RentalFormated[] } = await axios.get(
-      "http://localhost:3333" + "/rental/owner/" + user_id
-    );
+    const locationListRaw: { data: RentalFormated[] } = await axios.get(`/rental/owner/${user_id}`);
     setLocationListData(locationListRaw.data);
   };
 
@@ -34,17 +35,14 @@ const LocationList = ({ user_id }) => {
 
   const patchActiveLocation = async (bool: boolean, rental_id: number) => {
     try {
-      await axios.patch(
-        "http://localhost:3333" + "/rental/" + rental_id, {
-          active: bool
-        }
-      )
+      await axios.patch(`/rental/${rental_id}`, {
+        active: bool,
+      });
       fetchLocations();
+    } catch (e) {
+      console.log(e);
     }
-    catch (e) {
-      console.log(e)
-    }
-  }
+  };
 
   return (
     <Accordion sx={{ backgroundColor: "#f0f0f0" }}>
@@ -136,9 +134,23 @@ const LocationList = ({ user_id }) => {
                       </td>
                       <td>
                         {item.active ? (
-                          <Button color="danger" onClick={() => patchActiveLocation(false, item.id)}>{t("site:main.profil.users.user_blocks.location_list_tsx.list.desactivate")}</Button>
+                          <Button
+                            color="danger"
+                            onClick={() => patchActiveLocation(false, item.id)}
+                          >
+                            {t(
+                              "site:main.profil.users.user_blocks.location_list_tsx.list.desactivate"
+                            )}
+                          </Button>
                         ) : (
-                          <Button color="success" onClick={() => patchActiveLocation(true, item.id)}>{t("site:main.profil.users.user_blocks.location_list_tsx.list.activate")}</Button>
+                          <Button
+                            color="success"
+                            onClick={() => patchActiveLocation(true, item.id)}
+                          >
+                            {t(
+                              "site:main.profil.users.user_blocks.location_list_tsx.list.activate"
+                            )}
+                          </Button>
                         )}
                       </td>
                       <td>

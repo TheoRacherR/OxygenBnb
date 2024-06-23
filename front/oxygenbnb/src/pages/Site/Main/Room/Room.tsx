@@ -2,7 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./Room.module.scss";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../../../../utils/Context/SearchContext";
+import { SearchContext } from "@utils/Context/SearchContext";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import RemoveRoundedIcon from "@mui/icons-material/RemoveRounded";
 import dayjs from "dayjs";
@@ -28,11 +28,9 @@ const Room = () => {
         .includes(NaN)
     ) {
       try {
-        const locationRaw: { data: Rental } = await axios.get(
-          "http://localhost:3333" + "/rental/" + id
-        );
+        const locationRaw: { data: Rental } = await axios.get(`/rental/${id}`);
         setLocationData(locationRaw.data);
-        if(!locationRaw.data.active) return navigate("/o/404")
+        if (!locationRaw.data.active) return navigate("/o/404");
         setCalcPrices({
           totalPriceXPeople:
             locationRaw.data.default_price * numberOfNightSelected,

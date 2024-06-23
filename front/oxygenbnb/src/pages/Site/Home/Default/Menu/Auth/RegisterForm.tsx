@@ -19,7 +19,13 @@ const RegisterForm = ({ handleSwitchForm }) => {
     mail: string;
     password: string;
     confirmPassword: string;
-  }>({ firstname: "", lastname: "", mail: "", password: "", confirmPassword: "" });
+  }>({
+    firstname: "",
+    lastname: "",
+    mail: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [error, setError] = useState<{
     passwordCooherence: boolean;
     emailAlreadyUsed: boolean;
@@ -28,18 +34,18 @@ const RegisterForm = ({ handleSwitchForm }) => {
   const minLength: number = 12;
 
   const handleRegister = async () => {
-    setError({passwordCooherence: false, emailAlreadyUsed: false})
+    setError({ passwordCooherence: false, emailAlreadyUsed: false });
     try {
-      await axios.post("http://localhost:3333" + "/auth/register/", {
+      await axios.post("/auth/register/", {
         firstname: valuesRegister.firstname,
         lastname: valuesRegister.lastname,
         email: valuesRegister.mail,
         password: valuesRegister.password,
-      })
-      return navigate("/")
-    }
-    catch(e){
-      if(e.response.status === 409) setError({passwordCooherence: false, emailAlreadyUsed: true})
+      });
+      return navigate("/");
+    } catch (e) {
+      if (e.response.status === 409)
+        setError({ passwordCooherence: false, emailAlreadyUsed: true });
     }
   };
 
@@ -52,31 +58,37 @@ const RegisterForm = ({ handleSwitchForm }) => {
             marginTop: "25px",
             marginBottom: "25px",
             display: "flex",
-            flexDirection: "unset"
+            flexDirection: "unset",
           }}
         >
           <Input
             type="text"
-            sx={{width: "50%", margin: 0}}
+            sx={{ width: "50%", margin: 0 }}
             placeholder={t(
               "site:home.default.menu.auth.register_form_tsx.firstname"
             )}
             // startDecorator={<EmailRoundedIcon />}
             value={valuesRegister.firstname}
             onChange={(e) =>
-              setValuesRegister((prev) => ({ ...prev, firstname: e.target.value }))
+              setValuesRegister((prev) => ({
+                ...prev,
+                firstname: e.target.value,
+              }))
             }
           />
           <Input
             type="text"
-            sx={{width: "50%", margin: "0 !important"}}
+            sx={{ width: "50%", margin: "0 !important" }}
             placeholder={t(
               "site:home.default.menu.auth.register_form_tsx.lastname"
             )}
             // startDecorator={<EmailRoundedIcon />}
             value={valuesRegister.lastname}
             onChange={(e) =>
-              setValuesRegister((prev) => ({ ...prev, lastname: e.target.value }))
+              setValuesRegister((prev) => ({
+                ...prev,
+                lastname: e.target.value,
+              }))
             }
           />
         </Stack>
@@ -245,7 +257,7 @@ const RegisterForm = ({ handleSwitchForm }) => {
         </Button>
       </div>
       <div>
-        {t("site:home.default.menu.auth.register_form_tsx.have_account")} ?{" "}
+        {t("site:home.default.menu.auth.register_form_tsx.have_account")}{" "}
         <span
           style={{ color: "#ed6c0280", cursor: "pointer" }}
           onClick={() => handleSwitchForm(0)}

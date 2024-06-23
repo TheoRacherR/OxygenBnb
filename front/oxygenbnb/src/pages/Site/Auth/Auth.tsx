@@ -1,5 +1,5 @@
 // import { useEffect } from "react";
-import { verifyIfLogged } from "../../../utils/utils";
+import { verifyIfLogged } from "@utils/utils";
 import AuthForm from "../Home/Default/Menu/AuthForm";
 import styles from "./Auth.module.scss";
 import { useNavigate } from "react-router-dom";

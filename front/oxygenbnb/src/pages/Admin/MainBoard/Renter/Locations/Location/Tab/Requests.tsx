@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 import TabPanel from "@mui/joy/TabPanel";
 import { useContext, useState } from "react";
-import { MessageContext } from "../../../../../../../utils/Context/MessageContext";
+import { MessageContext } from "@utils/Context/MessageContext";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import { useTranslation } from "react-i18next";
 

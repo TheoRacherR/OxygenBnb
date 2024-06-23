@@ -1,10 +1,10 @@
 import styles from "./Menu.module.scss";
-import logo from "../../../../../assets/Logo OxygenBNB.png";
+import logo from "@assets/Logo OxygenBNB.png";
 import { Link } from "react-router-dom";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import { useTranslation } from "react-i18next";
 
-import RightMenu from "../../../Default/MenuSearch/RightMenu/RightMenu";
+import RightMenu from "@pages/Site/Default/MenuSearch/RightMenu/RightMenu";
 
 const MenuComponent = () => {
   const { t } = useTranslation(["site"]);

@@ -3,48 +3,43 @@ import styles from "./AddLocation.module.scss";
 
 import Preview from "./AddLocation/Preview";
 import Form from "./AddLocation/Form";
-import { FormAddLocationContext, FormAddLocationContextProvider } from "../../../../utils/Context/FormAddLocationContext";
+import {
+  FormAddLocationContext,
+  FormAddLocationContextProvider,
+} from "@utils/Context/FormAddLocationContext";
 import { useNavigate } from "react-router-dom";
-import { verifyRole } from "../../../../utils/utils";
+import { verifyRole } from "@utils/utils";
 
 const AddLocation = () => {
-  const {
-    state
-  } = useContext(FormAddLocationContext)
+  const { state } = useContext(FormAddLocationContext);
 
   const navigate = useNavigate();
   const checkRole = async () => {
     const role = await verifyRole();
-    if (role !== "renter"){
-      console.log("Not renter, redirect")
+    if (role !== "renter") {
+      console.log("Not renter, redirect");
       return navigate("/");
     }
   };
 
   useEffect(() => {
     checkRole();
+    console.log("first")
   });
-
 
   return (
     <div className={styles.container}>
-      {state === "Form" ? (
-        <Form/>
-      ) : (
-        <Preview/>
-      )}
+      {state === "Form" ? <Form /> : <Preview />}
     </div>
   );
 };
 
-
-
 const Main = () => {
   return (
     <FormAddLocationContextProvider>
-      <AddLocation/>
+      <AddLocation />
     </FormAddLocationContextProvider>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;

@@ -15,25 +15,25 @@ const LocationPage = () => {
 
   const [locationData, setLocationData] = useState<Rental>();
   const fetchLocation = async () => {
-    if(!id.split("").map(i => parseInt(i)).includes(NaN)){
+    if (
+      !id
+        .split("")
+        .map((i) => parseInt(i))
+        .includes(NaN)
+    ) {
       try {
-        const locationRaw: { data: Rental } = await axios.get(
-          "http://localhost:3333" + "/rental/" + id
-        );
+        const locationRaw: { data: Rental } = await axios.get(`/rental/${id}`);
         setLocationData(locationRaw.data);
+      } catch (e) {
+        if (e.response.status === 404) return navigate("/admin/404");
       }
-      catch (e) {
-        if(e.response.status === 404 ) return navigate("/admin/404")
-      }
-    }
-    else return navigate("/admin/404")
+    } else return navigate("/admin/404");
   };
 
   const handleValidate = async () => {
-    await axios.patch("http://localhost:3333" + "/rental/" + id, { isValid: !locationData.isValid })
+    await axios.patch(`/rental/${id}`, { isValid: !locationData.isValid });
     fetchLocation();
-
-  }
+  };
 
   useEffect(() => {
     fetchLocation();
@@ -54,7 +54,11 @@ const LocationPage = () => {
         ]}
       />
       <div className={styles.main_list}>
-        <LocationInfos location_id={id} locationData={locationData} handleValidate={handleValidate}/>
+        <LocationInfos
+          location_id={id}
+          locationData={locationData}
+          handleValidate={handleValidate}
+        />
         <ReservationList user_id={0} location_id={id} />
       </div>
     </div>

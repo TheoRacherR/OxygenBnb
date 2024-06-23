@@ -1,6 +1,5 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Styles.module.scss";
-import { SearchContext } from "../../../../../../utils/Context/SearchContext";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 import "dayjs/locale/fr";

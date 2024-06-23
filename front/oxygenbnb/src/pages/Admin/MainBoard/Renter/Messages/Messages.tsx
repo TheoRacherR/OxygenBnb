@@ -5,7 +5,7 @@ import HistoryMessages from "./HistoryMessages";
 import { useTranslation } from "react-i18next";
 import Discussion from "./Discussion/Discussion";
 import { useContext } from "react";
-import { MessageContext } from "../../../../../utils/Context/MessageContext";
+import { MessageContext } from "@utils/Context/MessageContext";
 
 const Messages = () => {
   const { t } = useTranslation(["admin"]);

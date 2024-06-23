@@ -1,5 +1,5 @@
 import styles from "./MenuSearch.module.scss";
-import logo from "../../../../assets/Logo OxBNB Menu ow Honr.png";
+import logo from "@assets/Logo OxBNB Menu ow Honr.png";
 import { Link } from "react-router-dom";
 import RightMenuSearch from "./RightMenu/RightMenuSearch";
 

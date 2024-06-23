@@ -1,8 +1,7 @@
 import { MenuItem, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-
-const NOMINATIM_BASE_URL = "https://nominatim.openstreetmap.org/search?";
+import { NOMINATIM_BASE_URL } from "@utils/utils";
 
 const SearchLocalisation = ({ handleClose, handleReturnCitySelected }) => {
   const [listOfLocalisations, setListOfLocalisations] = useState([]);

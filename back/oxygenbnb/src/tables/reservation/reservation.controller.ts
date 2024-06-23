@@ -95,6 +95,13 @@ export class ReservationController {
       );
   }
 
+  @Get('data/:user_id')
+  async getNumberOfResaOfMyRentals(
+    @Param('user_id', ParseIntPipe) user_id: number,
+  ): Promise<{ total: number; unique: number }> {
+    return await this.reservationService.getNumberOfResaOfMyRentals(user_id);
+  }
+
   @Post()
   async create(
     @Body() reservation: CreateReservationDto,

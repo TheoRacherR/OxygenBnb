@@ -22,41 +22,35 @@ const UserInfo = ({ userInfos }) => {
 
   const fetchUser = async () => {
     try {
-      if(userInfos.id > 0) {
-        const userRaw: { any; data: User } = await axios.get(
-          "http://localhost:3333" + "/user/" + userInfos.id
-        );
+      if (userInfos.id > 0) {
+        const userRaw: { any; data: User } = await axios.get(`/user/${userInfos.id}`);
         setUserData(userRaw.data);
       }
     } catch (e) {
       if (e.response.status === 404) {
-        localStorage.setItem("jwtToken", "")
-        console.log("update jwt")
+        localStorage.setItem("jwtToken", "");
+        console.log("update jwt");
       }
-      return navigate("/")
+      return navigate("/");
     }
   };
 
   const handleEditUser = async () => {
     try {
-      await axios.patch(
-        "http://localhost:3333" + "/user/" + userInfos.id,
-        {
-          firstname: userData.firstname,
-          lastname: userData.lastname,
-          email: userData.email
-        }
-      )
+      await axios.patch(`/user/${userInfos.id}`, {
+        firstname: userData.firstname,
+        lastname: userData.lastname,
+        email: userData.email,
+      });
+    } catch (e) {
+      console.log(e);
     }
-    catch (e) {
-      console.log(e)
-    }
-  }
+  };
 
   useEffect(() => {
     window.scroll(0, 0);
     fetchUser();
-    console.log("url" + process.env.REACT_APP_URL_NEST_DEV)
+    console.log("url" + process.env.REACT_APP_URL_NEST_DEV);
   }, []);
 
   return (
@@ -90,7 +84,9 @@ const UserInfo = ({ userInfos }) => {
                 "site:main.profil.users.user_blocks.user_info_tsx.list.firstname"
               )}
               value={userData?.firstname}
-              onChange={(e) => setUserData(prev => ({...prev, firstname: e.target.value}))}
+              onChange={(e) =>
+                setUserData((prev) => ({ ...prev, firstname: e.target.value }))
+              }
               disabled={false}
             />
             <InputComponent
@@ -99,7 +95,9 @@ const UserInfo = ({ userInfos }) => {
               )}
               value={userData?.lastname}
               disabled={false}
-              onChange={(e) => setUserData(prev => ({...prev, lastname: e.target.value}))}
+              onChange={(e) =>
+                setUserData((prev) => ({ ...prev, lastname: e.target.value }))
+              }
             />
           </div>
 
@@ -121,7 +119,9 @@ const UserInfo = ({ userInfos }) => {
               )}
               value={userData?.email}
               disabled={false}
-              onChange={(e) => setUserData(prev => ({...prev, email: e.target.value}))}
+              onChange={(e) =>
+                setUserData((prev) => ({ ...prev, email: e.target.value }))
+              }
             />
           </div>
 
@@ -141,7 +141,9 @@ const UserInfo = ({ userInfos }) => {
               label={t(
                 "site:main.profil.users.user_blocks.user_info_tsx.list.created_at"
               )}
-              value={dayjs(userData?.created_at).format(t('site:main.room.room_tsx.date_picker_format'))}
+              value={dayjs(userData?.created_at).format(
+                t("site:main.room.room_tsx.date_picker_format")
+              )}
               disabled={true}
               onChange={<></>}
             />
@@ -149,7 +151,9 @@ const UserInfo = ({ userInfos }) => {
               label={t(
                 "site:main.profil.users.user_blocks.user_info_tsx.list.updated_at"
               )}
-              value={dayjs(userData?.updated_at).format(t('site:main.room.room_tsx.date_picker_format'))}
+              value={dayjs(userData?.updated_at).format(
+                t("site:main.room.room_tsx.date_picker_format")
+              )}
               disabled={true}
               onChange={<></>}
             />
@@ -158,7 +162,11 @@ const UserInfo = ({ userInfos }) => {
             className={styles.item}
             style={{ display: "flex", flexDirection: "row-reverse" }}
           >
-            <Button sx={{ borderRadius: "6px" }} color="success" onClick={handleEditUser}>
+            <Button
+              sx={{ borderRadius: "6px" }}
+              color="success"
+              onClick={handleEditUser}
+            >
               {t("site:main.profil.users.user_blocks.user_info_tsx.list.save")}
             </Button>
           </div>

@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home/Home";
 import Main from "./Main/Main";
-import { SearchContextProvider } from "../../utils/Context/SearchContext";
+import { SearchContextProvider } from "@utils/Context/SearchContext";
 import { useEffect } from "react";
 import Auth from "./Auth/Auth";
 

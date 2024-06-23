@@ -1,15 +1,9 @@
 import styles from "./Search.module.scss";
-import {
-  MapContainer,
-  Marker,
-  Popup,
-  TileLayer,
-  useMap,
-} from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, useMap } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../../../../utils/Context/SearchContext";
+import { SearchContext } from "@utils/Context/SearchContext";
 import ItemSearch from "./ItemSearch/ItemSearch";
 import { Pagination } from "@mui/material";
 import { ComponentOnMove } from "./ComponentOnMove";
@@ -36,7 +30,7 @@ const data = [
     pricePerNight: 100,
     numberOfPeopleMax: 5,
     owner: "Franck B.",
-    img: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)"
+    img: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)",
   },
   {
     id: 2,
@@ -57,7 +51,7 @@ const data = [
     pricePerNight: 110,
     numberOfPeopleMax: 2,
     owner: "Lucy L.",
-    img: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)"
+    img: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)",
   },
   {
     id: 3,
@@ -78,7 +72,7 @@ const data = [
     pricePerNight: 100,
     numberOfPeopleMax: 12,
     owner: "Léo L.",
-    img: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)"
+    img: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)",
   },
   {
     id: 4,
@@ -100,7 +94,7 @@ const data = [
     pricePerNight: 80,
     numberOfPeopleMax: 8,
     owner: "Bernard",
-    img: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)"
+    img: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)",
   },
 ];
 
@@ -109,13 +103,12 @@ const ResetCenterView = ({ selectPosition }): any => {
 
   useEffect(() => {
     if (selectPosition) {
-      if (selectPosition?.boundingbox){
+      if (selectPosition?.boundingbox) {
         map.fitBounds([
           [selectPosition?.boundingbox[0], selectPosition?.boundingbox[2]],
           [selectPosition?.boundingbox[1], selectPosition?.boundingbox[3]],
-        ])
-      }
-      else
+        ]);
+      } else
         map.fitBounds([
           [48.8155755, 2.224122],
           [48.902156, 2.4697602],
@@ -160,9 +153,8 @@ const Search = () => {
   }, [citySelected]);
 
   const mapOnMove = (item) => {
-    setMapBounds(item)
-  }
-
+    setMapBounds(item);
+  };
 
   return (
     <div className={styles.container}>

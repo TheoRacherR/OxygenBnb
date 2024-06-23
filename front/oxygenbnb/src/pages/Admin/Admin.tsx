@@ -5,11 +5,11 @@ import TopBand from "./LeftBoard/TopBand";
 import BottomBand from "./LeftBoard/BottomBand";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import DashboardRenter from "./MainBoard/Renter/Dashboard/DashboardRenter";
-import { MessageContextProvider } from "../../utils/Context/MessageContext";
+import { MessageContextProvider } from "@utils/Context/MessageContext";
 import NotFound from "./Errors/404";
 import Unauthorized from "./Errors/403";
 import { useEffect, useState } from "react";
-import { verifyRole } from "../../utils/utils";
+import { verifyRole } from "@utils/utils";
 
 // admin
 import UserList from "./MainBoard/Admin/Users/UserList";

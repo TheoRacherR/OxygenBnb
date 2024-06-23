@@ -17,7 +17,7 @@ import AddLocationRoundedIcon from '@mui/icons-material/AddLocationRounded';
 import { Divider, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { verifyRole } from "../../../../../utils/utils";
+import { verifyRole } from "@utils/utils";
 
 const RightMenu = () => {
   const { t, i18n } = useTranslation(["site"]);
@@ -136,20 +136,33 @@ const RightMenu = () => {
                 </MenuItem>
               </Link>
               {roleStr === "renter" ? (
-                <Link
-                  to="renter/add-location"
+                <>
+                  <Link
+                    to="/o/renter/add-location"
+                    style={{ color: "black", textDecoration: "none" }}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <AddLocationRoundedIcon
+                        sx={{ marginRight: "15px" }}
+                      />
+                      {t("site:default.menu.right_menu.right_menu_tsx.add_rental")}
+                    </MenuItem>
+                  </Link>
+                  <Link
+                  to="/admin"
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   <MenuItem onClick={handleClose}>
-                    <AddLocationRoundedIcon
+                    <DashboardRoundedIcon
                       sx={{ marginRight: "15px" }}
                     />
-                    {t("site:default.menu.right_menu.right_menu_tsx.add_rental")}
+                    {t("site:default.menu.right_menu.right_menu_tsx.dashboard")}
                   </MenuItem>
                 </Link>
+                </>
               ) : roleStr === "admin" ? (
                 <Link
-                  to="admin"
+                  to="/admin"
                   style={{ color: "black", textDecoration: "none" }}
                 >
                   <MenuItem onClick={handleClose}>

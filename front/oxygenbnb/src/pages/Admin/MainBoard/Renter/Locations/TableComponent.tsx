@@ -43,6 +43,11 @@ const TableComponent = ({ data }) => {
               </th>
               <th style={{ color: "#fff" }}>
                 {t(
+                  "admin:renter.locations.table_component_tsx.thead.activated"
+                )}
+              </th>
+              <th style={{ color: "#fff" }}>
+                {t(
                   "admin:renter.locations.table_component_tsx.thead.validated"
                 )}
               </th>
@@ -54,9 +59,16 @@ const TableComponent = ({ data }) => {
               <tr key={index}>
                 <td>{item.id}</td>
                 <td>{item.title}</td>
-                <td>{item.price}</td>
+                <td>{item.default_price}</td>
                 <td>
-                  {item.validated ? (
+                  {item.active ? (
+                    <CheckCircleOutlineRoundedIcon color="success" />
+                  ) : (
+                    <HighlightOffRoundedIcon sx={{ color: red[500] }} />
+                  )}
+                </td>
+                <td>
+                  {item.isValid ? (
                     <CheckCircleOutlineRoundedIcon color="success" />
                   ) : (
                     <HighlightOffRoundedIcon sx={{ color: red[500] }} />

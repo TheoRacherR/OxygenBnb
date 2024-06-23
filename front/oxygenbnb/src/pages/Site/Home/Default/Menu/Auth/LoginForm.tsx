@@ -17,29 +17,30 @@ const LoginForm = ({ handleSwitchForm }) => {
   }>({ mail: "", password: "" });
 
   const handleLogin = async () => {
-    setError({credentials: false, not_email: false})
+    setError({ credentials: false, not_email: false });
 
     const mailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if(mailRegex.test(valuesLogin.mail)){
+    if (mailRegex.test(valuesLogin.mail)) {
       try {
-        const res = await axios.post("http://localhost:3333" + "/auth/login/", {
+        const res = await axios.post("/auth/login/", {
           email: valuesLogin.mail,
           password: valuesLogin.password,
-        })
-        localStorage.setItem('jwtToken', res.data)
-        console.log("update jwt")
-        return navigate("/")
+        });
+        localStorage.setItem("jwtToken", res.data);
+        console.log("update jwt");
+        return navigate("/");
+      } catch (e) {
+        setError({ ...error, credentials: true });
+        console.log(e.response);
       }
-      catch (e) {
-        setError({...error, credentials: true})
-        console.log(e.response)
-      }
-    }
-    else {
-      setError({...error, not_email: true})
+    } else {
+      setError({ ...error, not_email: true });
     }
   };
-  const [error, setError] = useState<{ credentials: boolean, not_email: boolean }>({
+  const [error, setError] = useState<{
+    credentials: boolean;
+    not_email: boolean;
+  }>({
     credentials: false,
     not_email: false,
   });
@@ -94,17 +95,15 @@ const LoginForm = ({ handleSwitchForm }) => {
         <div style={{ color: "red" }}>
           {t("site:home.default.menu.auth.login_form_tsx.error")}
         </div>
+      ) : error.not_email ? (
+        <div style={{ color: "red" }}>
+          {t("site:home.default.menu.auth.login_form_tsx.not_email")}
+        </div>
       ) : (
-        error.not_email ? (
-          <div style={{ color: "red" }}>
-            {t("site:home.default.menu.auth.login_form_tsx.not_email")} 
-          </div>
-        ) : (
-          <></>
-        )
+        <></>
       )}
       <div>
-        {t("site:home.default.menu.auth.login_form_tsx.have_account")} ?{" "}
+        {t("site:home.default.menu.auth.login_form_tsx.have_account")}{" "}
         <span
           style={{ color: "#ed6c0280", cursor: "pointer" }}
           onClick={() => handleSwitchForm(1)}

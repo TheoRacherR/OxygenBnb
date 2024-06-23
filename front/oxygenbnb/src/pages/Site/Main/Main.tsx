@@ -11,7 +11,7 @@ import AddLocation from "./Renter/AddLocation";
 import ReservationPage from "./Room/Reserve/ReservationPage";
 import { useEffect } from "react";
 import Search from "./Search/Search";
-import { verifyIfLogged } from "../../../utils/utils";
+import { verifyIfLogged } from "@utils/utils";
 import NotFound from "../Errors/404/NotFound";
 
 const Main = () => {

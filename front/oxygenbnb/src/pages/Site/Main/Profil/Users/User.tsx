@@ -3,7 +3,7 @@ import styles from "./User.module.scss";
 import UserInfo from "./UserBlocks/UserInfo";
 import LocationList from "./UserBlocks/LocationList";
 import ReservationList from "./UserBlocks/ReservationList";
-import { getUserInfos } from "../../../../../utils/utils";
+import { getUserInfos } from "@utils/utils";
 import { useEffect, useState } from "react";
 
 const User = () => {

@@ -23,9 +23,7 @@ const UserComponent = () => {
         .includes(NaN)
     ) {
       try {
-        const userRaw: { any; data: User } = await axios.get(
-          "http://localhost:3333" + "/user/" + id
-        );
+        const userRaw: { any; data: User } = await axios.get(`/user/${id}`);
         setUserData(userRaw.data);
       } catch (e) {
         if (e.response.status === 404) return navigate("/admin/404");

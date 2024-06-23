@@ -173,7 +173,8 @@
           "id": "ID",
           "title": "Nom",
           "price": "Prix",
-          "validated": "Validé"
+          "validated": "Validé",
+          "activated": "Activé"
         }
       },
       "locations_tsx": {
@@ -203,7 +204,11 @@
             "desactivate": "Désactivez",
             "validated": "Validé",
             "owner": "Propriétaire",
-            "save": "Sauvegarder"
+            "save": "Sauvegarder",
+            "description": "Description",
+            "nb_max_person": "Personnes max",
+            "nb_max_bed": "Lits max",
+            "nb_max_room": "Chambres max"
           }
         },
         "manage_tsx": {},
