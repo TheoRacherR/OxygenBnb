@@ -9,11 +9,14 @@ import {
   ParseIntPipe,
   HttpException,
   HttpStatus,
+  Headers,
+  ParseFloatPipe,
 } from '@nestjs/common';
-import { RentalService, RentalFormated } from './rental.service';
+import { RentalService, RentalFormated, RentalFormatedWithLocalisations } from './rental.service';
 import { CreateRentalDto } from './dto/create-rental.dto';
 import { UpdateRentalDto } from './dto/update-rental.dto';
 import { Rental, rentalType } from './entities/rental.entity';
+import { SearchRentalDto } from './dto/search-rental.dto';
 
 @Controller('rental')
 export class RentalController {
@@ -26,6 +29,7 @@ export class RentalController {
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Rental> {
+    console.log('first');
     const rental = await this.rentalService.findOne(id);
     if (rental) return rental;
     else
@@ -66,6 +70,27 @@ export class RentalController {
     @Param('user_id', ParseIntPipe) user_id: number,
   ): Promise<number> {
     return await this.rentalService.getDataFromMyRentals(user_id);
+  }
+
+  @Get('search/:swlng/:nelng/:swlat/:nelat')
+  async findAllByLocalisations(
+    // @Headers() searchRentalDto: SearchRentalDto
+    @Param('swlng', ParseFloatPipe) swlng: number,
+    @Param('nelng', ParseFloatPipe) nelng: number,
+    @Param('swlat', ParseFloatPipe) swlat: number,
+    @Param('nelat', ParseFloatPipe) nelat: number,
+  ): Promise<RentalFormatedWithLocalisations[]> {
+    // const northEastLat = searchRentalDto.northEastLat;
+    // const northEastLng = searchRentalDto.northEastLng;
+    // const southWestLat = searchRentalDto.southWestLat;
+    // const southWestLng = searchRentalDto.southWestLng;
+
+    return await this.rentalService.findAllByLocalisations(
+      swlng,
+      nelng,
+      swlat,
+      nelat,
+    );
   }
 
   @Post()

@@ -1,14 +1,20 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./Styles.module.scss";
 import Button from "@mui/joy/Button";
 import { useTranslation } from "react-i18next";
 import Divider from "../Divider";
 import DividerNoMargin from "../DividerNoMargin";
+import axios from "axios";
+import { getUserInfos } from "@utils/utils";
+import { UserDataInterface } from "@pages/Admin/MainBoard/Renter/Messages/Discussion/Discussion";
+import { useNavigate } from "react-router-dom";
 
 const TotalPrice = ({
   details,
+  renter_id
 }: {
   details: {
+    id: number;
     title: string;
     currency: string;
     nb_night: number;
@@ -16,9 +22,11 @@ const TotalPrice = ({
     cleaning_fees: number;
     service_fees: number;
     taxes: number;
-  };
+  },
+  renter_id: number
 }) => {
   const { t } = useTranslation(["site"]);
+  const navigate = useNavigate();
   const priceDetails = [
     {
       title: t("site:main.room.reserve.blocks.total_price_tsx.cleaning_fees"),
@@ -33,6 +41,29 @@ const TotalPrice = ({
       price: details.taxes,
     },
   ];
+  const [userInfos, setUserInfos] = useState<UserDataInterface>()
+
+
+  const usr = async () => {
+    const infos = await getUserInfos();
+    setUserInfos(infos);
+  }
+
+  const handleCreateConversation = async () => {
+    const new_conv = await axios.post(`/conversation`, {
+      client: userInfos.id,
+      renter: renter_id,
+      rental: details.id,
+    })
+    if(new_conv.status === 201) {
+      console.log(new_conv)
+      return navigate(`/o/room/${details.id}/conversation/${new_conv.data.id}`)
+    }
+  }
+
+  useEffect(() => {
+    usr();
+  }, [])
 
   return (
     <div className={styles.container_total_price}>
@@ -88,8 +119,8 @@ const TotalPrice = ({
 
       <Divider />
 
-      <Button color="success" variant="solid">
-        {t("site:main.room.reserve.blocks.total_price_tsx.submit")}
+      <Button color="success" variant="solid" onClick={handleCreateConversation}>
+        {t("site:main.room.reserve.blocks.total_price_tsx.contact_renter")}
       </Button>
     </div>
   );

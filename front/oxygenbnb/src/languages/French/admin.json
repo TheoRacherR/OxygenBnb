@@ -143,7 +143,9 @@
         "day": "{{time}} jour{{plural}}",
         "hour": "{{time}} heure{{plural}}",
         "minute": "{{time}} minute{{plural}}",
-        "second": "{{time}} seconde{{plural}}"
+        "second": "{{time}} seconde{{plural}}",
+        "no_conversation": "Aucune conversation",
+        "you": "Vous: "
       },
       "discussion": {
         "top_info_discussion_tsx": {
@@ -208,13 +210,15 @@
             "description": "Description",
             "nb_max_person": "Personnes max",
             "nb_max_bed": "Lits max",
-            "nb_max_room": "Chambres max"
+            "nb_max_room": "Chambres max",
+            "location_page": "Page"
           }
         },
         "manage_tsx": {},
         "requests_tsx": {
           "no_location": "Aucune location disponible",
           "thead": {
+            "id": "ID",
             "name": "Nom",
             "last_message": "Dernier message",
             "user": "Utilisateur"

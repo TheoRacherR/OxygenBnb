@@ -1,0 +1,87 @@
+.main_container_info {
+  display: flex;
+  flex-direction: column;
+  // height: fit-content;
+  flex: auto;
+
+  height: calc(100vh - 63px);
+  
+  .messages {
+    // background-color: lemonchiffon;
+    background-color: rgb(24, 26, 28);
+    width: auto;
+    padding: 24px 16px;
+    flex: auto;
+    // height: calc(100% - );
+    overflow-y: auto;
+    height: 643px;
+
+    .message_list_container {
+      // displayex;
+      // flex-direct: flion: column-reverse;
+      .title_month_year {
+        color: white;
+        text-align: center;
+      }
+    
+      .message{
+        .time_this_user {
+          color: rgb(159, 166, 173);
+          font-size: small;
+          text-align: end;
+        }
+    
+        .time_not_this_user {
+          color: rgb(159, 166, 173);
+          font-size: small;
+          text-align: start;
+        }
+    
+        .message_this_user, .message_not_this_user {
+          padding: 10px;
+          border-radius: 12px;
+          color: white;
+          max-width: 30%;
+          width: fit-content;
+          overflow-wrap: break-word;
+    
+        }
+    
+        .message_this_user {
+          background-color: rgb(0, 119, 255);
+          border-top-right-radius: 0;
+          margin: 0 0 10px auto;
+        }
+    
+        .message_not_this_user {
+          background-color: rgb(127, 127, 127);
+          border-top-left-radius: 0;
+          margin: 0 auto 10px 0;
+        }
+      
+      }
+    }
+
+  }
+
+  .form_messages {
+    // flex: 1;
+    // background-color: lightcoral;
+    background-color: rgb(24, 26, 28);
+    padding: 0 16px 24px 16px;
+    // min-height: 130px;
+    .textarea {
+      width: 100%;
+  
+    }
+    .buttons {
+      display: flex;
+      background-color: rgb(11, 13, 14);
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      padding: 8px;
+    }
+  }
+}

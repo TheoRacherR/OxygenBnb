@@ -24,7 +24,6 @@ const AddLocation = () => {
 
   useEffect(() => {
     checkRole();
-    console.log("first")
   });
 
   return (

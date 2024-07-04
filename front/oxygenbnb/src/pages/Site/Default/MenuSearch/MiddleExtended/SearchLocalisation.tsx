@@ -1,7 +1,7 @@
 import { MenuItem, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { NOMINATIM_BASE_URL } from "@utils/utils";
+import { endQuery, NOMINATIM_BASE_URL } from "@utils/utils";
 
 const SearchLocalisation = ({ handleClose, handleReturnCitySelected }) => {
   const [listOfLocalisations, setListOfLocalisations] = useState([]);
@@ -21,7 +21,7 @@ const SearchLocalisation = ({ handleClose, handleReturnCitySelected }) => {
   useEffect(() => {
     const timeOutId = setTimeout(() => {
       if (query.length > 0) {
-        const queryString = `q=${query}&format=json&addressdetails=1&polygon_geojson=0&limit=20`;
+        const queryString = `search?q=${query}${endQuery}`;
         fetch(`${NOMINATIM_BASE_URL}${queryString}`, {
           method: "GET",
           redirect: "follow",

@@ -1,9 +1,9 @@
+import { Conversation } from '../../conversation/entities/conversation.entity';
+import { Messages } from '../../messages/entities/messages.entity';
 import { Rental } from '../../rental/entities/rental.entity';
 import { Reservation } from '../../reservation/entities/reservation.entity';
 import { UserInfo } from '../../user-info/entities/user-info.entity';
-import * as bcrypt from 'bcrypt';
 import {
-  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -59,4 +59,13 @@ export class User {
 
   @OneToMany(() => Reservation, (reservation) => reservation.client)
   reservation: Reservation;
+
+  @OneToMany(() => Conversation, (conversation) => conversation.client)
+  conversation_client: Conversation;
+
+  @OneToMany(() => Conversation, (conversation) => conversation.renter)
+  conversation_renter: Conversation;
+
+  @OneToMany(() => Messages, (messages) => messages.owner)
+  messages: Messages;
 }

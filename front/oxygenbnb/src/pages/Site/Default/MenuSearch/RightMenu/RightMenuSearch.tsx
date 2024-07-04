@@ -14,11 +14,12 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import { Divider, IconButton } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { verifyIfLogged } from "@utils/utils";
+import { verifyIfLogged, verifyRole } from "@utils/utils";
 
 const RightMenuSearch = () => {
   const { t, i18n } = useTranslation(["site"]);
   const [anchorEl, setAnchorEl] = useState({ lang: null, settings: null });
+  const [roleStr, setRoleStr] = useState("not logged");
   const [logged, setLogged] = useState<boolean>(false);
   const handleClickSettings = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl({ lang: null, settings: event.currentTarget });
@@ -31,8 +32,9 @@ const RightMenuSearch = () => {
   };
 
   const getLogInfos = async () => {
-    const status = await verifyIfLogged();
-    setLogged(status);
+    const role = await verifyRole();
+    setLogged(role !== "not logged");
+    setRoleStr(role);
   }
 
   useEffect(() => {
@@ -42,6 +44,7 @@ const RightMenuSearch = () => {
   const handleLogout = () => {
     localStorage.setItem("jwtToken", "");
     console.log("change jwtToken")
+    setLogged(false);
     handleClose();
   };
 
@@ -106,8 +109,8 @@ const RightMenuSearch = () => {
 
       <div className={styles.right_button}>
         <div className={styles.right_container} onClick={handleClickSettings}>
-          <MenuRoundedIcon />
-          <AccountCircleRoundedIcon />
+          <MenuRoundedIcon sx={{ color: "black" }} />
+          <AccountCircleRoundedIcon sx={{ color: "black" }} />
         </div>
         <Menu
           MenuListProps={{

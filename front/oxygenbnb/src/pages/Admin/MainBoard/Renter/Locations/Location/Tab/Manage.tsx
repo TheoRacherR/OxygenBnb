@@ -11,7 +11,6 @@ import "dayjs/locale/fr";
 
 const Manage = ({ value }) => {
   const handleChangeDates = (type, date) => {
-    console.log(type + " " + date);
   };
   return (
     <TabPanel value={value}>

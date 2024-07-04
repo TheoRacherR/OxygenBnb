@@ -6,12 +6,12 @@ import { useEffect } from "react";
 import Auth from "./Auth/Auth";
 
 const Site = () => {
-  useEffect(() => {
-    localStorage.getItem("discussionSelected") === null ||
-    localStorage.getItem("discussionSelected") === "{}"
-      ? ""
-      : localStorage.setItem("discussionSelected", "{}");
-  });
+  // useEffect(() => {
+  //   localStorage.getItem("discussionSelected") === null ||
+  //   localStorage.getItem("discussionSelected") === "{}"
+  //     ? ""
+  //     : localStorage.setItem("discussionSelected", "{}");
+  // });
   return (
     <>
       <SearchContextProvider>

@@ -3,20 +3,20 @@ import styles from "./ListMessages.module.scss";
 import dayjs from "dayjs";
 import { useTranslation } from "react-i18next";
 
-const ListMessages = ({ listOfMessages }) => {
+const ListMessages = ({ listOfMessages, userData }) => {
   const { t } = useTranslation(["admin"]);
   const formatDate = t(
     "admin:renter.messages.discussion.list_messages.list_messages_tsx.format"
   );
   const messageEl = useRef(null);
   const listOfMessagesGrouped = listOfMessages.map((m) =>
-    dayjs(m.date).format(formatDate)
+    dayjs(m.created_at).format(formatDate)
   );
   const listOfDates = [...new Set(listOfMessagesGrouped)];
 
   useEffect(() => {
     document.getElementById("anchor")?.scrollIntoView();
-  });
+  }, []);
 
   return (
     <div
@@ -24,8 +24,9 @@ const ListMessages = ({ listOfMessages }) => {
       id="message_list_container"
       ref={messageEl}
     >
-      {listOfDates.map((dateItem: string, dateIndex: number) => (
-        <div key={dateIndex}>
+      {listOfDates.map((dateItem: string, index: number) => (
+        <div key={index}>
+          {index}
           <div className={styles.title_month_year}>
             {dateItem === dayjs(new Date()).format(formatDate)
               ? t(
@@ -41,8 +42,9 @@ const ListMessages = ({ listOfMessages }) => {
               : dateItem}
           </div>
 
-          {listOfMessages.map((item, index) =>
-            dateItem === dayjs(item.date).format(formatDate) ? (
+          {listOfMessages.map((item, index) => (
+            dateItem === dayjs(item.created_at).format(formatDate) ? (
+              // <div>{item.length}</div>
               <div
                 key={index}
                 className={styles.message}
@@ -53,12 +55,12 @@ const ListMessages = ({ listOfMessages }) => {
                 <div
                   key={index}
                   className={
-                    item.ownerOfThisMessage
+                    item.owner.id === userData.id
                       ? styles.time_this_user
                       : styles.time_not_this_user
                   }
                 >
-                  {dayjs(item.date).format(
+                  {dayjs(item.created_at).format(
                     `${t(
                       "admin:renter.messages.discussion.list_messages.list_messages_tsx.format"
                     )} hh:mm`
@@ -66,18 +68,18 @@ const ListMessages = ({ listOfMessages }) => {
                 </div>
                 <div
                   className={
-                    item.ownerOfThisMessage
+                    item.owner.id === userData.id
                       ? styles.message_this_user
                       : styles.message_not_this_user
                   }
                 >
-                  {item.message}
+                  {item.text}
                 </div>
               </div>
             ) : (
-              <></>
+              ""
             )
-          )}
+          ))}
         </div>
       ))}
     </div>

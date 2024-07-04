@@ -50,7 +50,6 @@ const UserInfo = ({ userInfos }) => {
   useEffect(() => {
     window.scroll(0, 0);
     fetchUser();
-    console.log("url" + process.env.REACT_APP_URL_NEST_DEV);
   }, []);
 
   return (

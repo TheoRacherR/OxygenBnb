@@ -26,11 +26,6 @@ const DashboardRenter = () => {
       nbResa: reservationData?.data?.total,
       nbRentalResa: reservationData?.data?.unique,
     })
-    console.log({
-      nbRental: rentalsData,
-      nbResa: reservationData?.data?.total,
-      nbRentalResa: reservationData?.data?.unique,
-    })
   };
 
   const fetchUserId = async () => {

@@ -4,12 +4,22 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import HistoryMessages from "./HistoryMessages";
 import { useTranslation } from "react-i18next";
 import Discussion from "./Discussion/Discussion";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { MessageContext } from "@utils/Context/MessageContext";
+import io, { Socket } from "socket.io-client";
 
 const Messages = () => {
   const { t } = useTranslation(["admin"]);
   const { discussionSelected } = useContext(MessageContext);
+  const [socket, setSocket] = useState<Socket>()
+
+
+  useEffect(() => {
+    const newSocket = io(import.meta.env.VITE_NODE_ENV_DEV
+      ? import.meta.env.VITE_URL_NEST_DEV
+      : import.meta.env.VITE_URL_NEST_PROD)
+      setSocket(newSocket)
+  }, [setSocket]);
 
   return (
     <div className={styles.container}>
@@ -24,11 +34,11 @@ const Messages = () => {
             sx={{ width: "100%", borderRadius: "6px" }}
           />
         </div>
-        <HistoryMessages />
+        <HistoryMessages socket={socket}/>
       </div>
 
       {discussionSelected ? (
-        <Discussion />
+        <Discussion socket={socket}/>
       ) : (
         <>{t("admin:renter.messages.messages_tsx.no_message")}</>
       )}

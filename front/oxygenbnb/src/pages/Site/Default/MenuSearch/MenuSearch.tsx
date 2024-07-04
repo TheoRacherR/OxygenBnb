@@ -5,6 +5,7 @@ import RightMenuSearch from "./RightMenu/RightMenuSearch";
 
 import { useTranslation } from "react-i18next";
 import MiddleExtended from "./MiddleExtended/MiddleExtended";
+import RightMenu from "./RightMenu/RightMenu";
 
 const MenuComponent = () => {
   const { t } = useTranslation(["site"]);
@@ -21,7 +22,8 @@ const MenuComponent = () => {
           </Link>
         </div>
         <MiddleExtended />
-        <RightMenuSearch />
+        {/* <RightMenuSearch /> */}
+        <RightMenu />
       </menu>
     </>
   );

@@ -16,6 +16,12 @@ export interface UsersFormated {
   updated_at: Date;
   role: userRole;
 }
+
+export interface UserLimited {
+  id: number;
+  firstname: string;
+  lastname: string;
+}
 @Injectable()
 export class UserService {
   constructor(

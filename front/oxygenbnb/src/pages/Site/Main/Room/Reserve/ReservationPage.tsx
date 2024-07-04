@@ -11,6 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Rental } from "../../../../../../../../back/oxygenbnb/src/tables/rental/entities/rental.entity";
+import { getUserInfos } from "@utils/utils";
 
 const room_details = {
   cleaning_fees: 0,
@@ -23,8 +24,9 @@ const ReservationPage = () => {
   const { nightSelected, numberOfNightSelected, numberOfPeopleSelected } =
     useContext(SearchContext);
   const url = useParams()["*"];
-  const idRoom = url.substring(8, url.length - 12);
+  const idRoom = url.substring("room/".length, url.length - "/reservation".length);
   const navigate = useNavigate();
+  const [userData, setUserData] = useState<{id: number, firstname: string, lastname: string, email: string, role: stirng}>()
   const [locationData, setLocationData] = useState<Rental>();
   const fetchLocation = async () => {
     if (
@@ -36,15 +38,29 @@ const ReservationPage = () => {
       try {
         const locationRaw: { data: Rental } = await axios.get(`/rental/${idRoom}`);
         setLocationData(locationRaw.data);
+        if (!locationRaw.data.active && userData.id !== locationRaw.data.owner.id) return navigate("/o/404");
       } catch (e) {
-        if (e.response.status === 404) return navigate("/o/404");
+        if (e.response.status === 404) {
+          console.log("error")
+          return navigate("/o/404");
+        }
       }
-    } else return navigate("/o/404");
+    } else {
+      console.log("error")
+      return navigate("/o/404");
+    }
   };
 
+  const fetchUserData = async () => {
+    const usr = await getUserInfos();
+    if(usr)
+      setUserData(usr)
+  }
+
   useEffect(() => {
-    fetchLocation();
-  });
+    if(userData) fetchLocation();
+    else fetchUserData();
+  }, [userData]);
 
   return (
     <div className={styles.container}>
@@ -63,17 +79,24 @@ const ReservationPage = () => {
             <Login />
           </div>
           <div className={styles.right}>
-            <TotalPrice
-              details={{
-                title: locationData?.title,
-                currency: locationData?.default_currency,
-                nb_night: numberOfNightSelected,
-                price_per_night: locationData?.default_price,
-                cleaning_fees: room_details.cleaning_fees,
-                service_fees: room_details.service_fees,
-                taxes: room_details.taxes,
-              }}
-            />
+            {
+              locationData ?
+                <TotalPrice
+                  details={{
+                    id: locationData.id,
+                    title: locationData.title,
+                    currency: locationData.default_currency,
+                    nb_night: numberOfNightSelected,
+                    price_per_night: locationData.default_price,
+                    cleaning_fees: room_details.cleaning_fees,
+                    service_fees: room_details.service_fees,
+                    taxes: room_details.taxes,
+                  }}
+                  renter_id={locationData.owner.id}
+                />
+              :
+              <></>
+            }
           </div>
         </div>
       </div>

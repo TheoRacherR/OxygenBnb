@@ -1,3 +1,4 @@
+import { Conversation } from 'src/tables/conversation/entities/conversation.entity';
 import { RentalDate } from '../../rental-date/entities/rental-date.entity';
 import { Reservation } from '../../reservation/entities/reservation.entity';
 import { User } from '../../user/entities/user.entity';
@@ -84,4 +85,7 @@ export class Rental {
 
   @OneToMany(() => RentalDate, (date) => date.rental)
   date: RentalDate;
+
+  @OneToMany(() => Conversation, (conversation) => conversation.rental)
+  conversation: Conversation;
 }

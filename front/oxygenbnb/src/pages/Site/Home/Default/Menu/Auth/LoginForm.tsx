@@ -31,7 +31,6 @@ const LoginForm = ({ handleSwitchForm }) => {
         return navigate("/");
       } catch (e) {
         setError({ ...error, credentials: true });
-        console.log(e.response);
       }
     } else {
       setError({ ...error, not_email: true });

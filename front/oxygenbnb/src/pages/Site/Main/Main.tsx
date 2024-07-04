@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import Search from "./Search/Search";
 import { verifyIfLogged } from "@utils/utils";
 import NotFound from "../Errors/404/NotFound";
+import DiscussionClient from "./Room/Reserve/DiscussionClient";
 
 const Main = () => {
   const location = useLocation();
@@ -32,12 +33,18 @@ const Main = () => {
   return (
     <div>
       {location.pathname === "/o/search" ? <MenuSearch /> : <Menu />}
-      <div className={styles.main}>
+      <div 
+        className={styles.main}
+        id="msg" 
+        // style={{ height: `calc(100vh-${document.getElementsByTagName("menu")[0].offsetHeight}px)`}}
+      >
+
         <Routes>
           <Route path="/search" element={<Search />} />
           {/* room */}
           <Route path="/room/:id" element={<Room />} />
           <Route path="/room/:id/reservation" element={<ReservationPage />} />
+          <Route path="/room/:rental_id/conversation/:conversation_id" element={<DiscussionClient />} />
 
           <Route path="/about-us" element={<AboutUs />} />
 

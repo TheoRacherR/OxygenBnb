@@ -1,18 +1,14 @@
 import { useEffect, useState } from "react";
-import TabPanel from "@mui/joy/TabPanel";
 import styles from "./Informations.module.scss";
-import Input from "@mui/joy/Input";
-import Button from "@mui/joy/Button";
+import { TabPanel, Input, Button, Select, Option, ButtonGroup } from "@mui/joy";
 
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
 import { red } from "@mui/material/colors";
-import Select from "@mui/joy/Select";
-import Option from "@mui/joy/Option";
 import { useTranslation } from "react-i18next";
 import axios from "axios";
 import { getUserInfos } from "@utils/utils";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Rental } from "../../../../../../../../../../back/oxygenbnb/src/tables/rental/entities/rental.entity";
 import SearchLocation from "./SearchLocation";
 
@@ -47,7 +43,6 @@ const Informations = ({ value }) => {
     const locationListRaw: { data: Rental } = await axios.get(
       `/rental/${id}`
     );
-    console.log(locationListRaw.data);
     setLocationInformations(locationListRaw.data);
   };
 
@@ -129,7 +124,6 @@ const Informations = ({ value }) => {
       nb_max_bed: locationInformations.nb_max_bed,
       nb_max_room: locationInformations.nb_max_room,
     });
-    console.log("ok");
   };
 
   return (
@@ -262,9 +256,16 @@ const Informations = ({ value }) => {
 
           {/* ---------SUBMIT BUTTON--------- */}
           <div className={styles.item} style={{ display: "flex", flexDirection: "row-reverse" }}>
+          <ButtonGroup sx={{height: 'fit-content'}} variant="solid">
+            <Link to={`/o/room/${id}`}>
+              <Button color="warning">
+                {t("admin:renter.locations.location.informations_tsx.list.location_page")}
+              </Button>
+            </Link>
             <Button sx={{ borderRadius: "6px" }} color="success" onClick={handleSubmitValues}>
               {t("admin:renter.locations.location.informations_tsx.list.save")}
             </Button>
+          </ButtonGroup>
           </div>
 
         </div>

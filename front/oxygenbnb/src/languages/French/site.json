@@ -241,7 +241,10 @@
         "max_people": "Cette réservation est pour {{numberMaxOfPeople}} personnes{{people}} max, sélectionnez une autre location",
         "linfos_night": "€ x {{numberOfNightSelected}} nuits",
         "fees": "Frais d'OxygenBNB",
-        "total": "Prix total"
+        "total": "Prix total",
+        "activate": "Activer",
+        "desactivate": "Désactiver",
+        "edit": "Modifier"
       },
       "reserve": {
         "reservation_page_tsx": {
@@ -275,7 +278,8 @@
             "title": "Détails des prix",
             "night": "nuit",
             "total": "Total",
-            "submit": "Envoyer"
+            "submit": "Envoyer",
+            "contact_renter": "Contacter le propriétaire"
           }
         }
       }

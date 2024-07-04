@@ -7,6 +7,9 @@ import { RentalDateModule } from './tables/rental-date/rental-date.module';
 import { ReservationModule } from './tables/reservation/reservation.module';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './tables/auth/auth.module';
+import { ConversationModule } from './tables/conversation/conversation.module';
+import { MessagesModule } from './tables/messages/messages.module';
+import { ChatModule } from './chat/chat.module';
 
 @Module({
   imports: [
@@ -17,9 +20,10 @@ import { AuthModule } from './tables/auth/auth.module';
     RentalModule,
     RentalDateModule,
     ReservationModule,
-    AuthModule
+    AuthModule,
+    ConversationModule,
+    MessagesModule,
+    ChatModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
