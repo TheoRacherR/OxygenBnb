@@ -94,10 +94,10 @@ const Preview = () =>
           </div>
           <div className={styles.box}>
             <div className={styles.left}>
-              <img
+              {/* <img
                 src="https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720"
                 alt=""
-              />
+              /> */}
               <div className={styles.description}>
                 <p>
                   {t(`site:main.room.room_tsx.a_location_for`, {

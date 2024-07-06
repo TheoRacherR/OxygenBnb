@@ -2,6 +2,9 @@ import styles from "./ItemSearch.module.scss";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { RentalFormatedWithLocalisations } from "../../../../../../../../back/oxygenbnb/src/tables/rental/rental.service";
+// import { pathToUpload } from "" 
+// import pathToUpload from "../../../../../../../../back/oxygenbnb/src/uploads/"
+
 
 const ItemSearch = ({ item, numberOfNight }: { item: RentalFormatedWithLocalisations, numberOfNight: number}) => {
   const { t } = useTranslation(["site"]);
@@ -11,14 +14,15 @@ const ItemSearch = ({ item, numberOfNight }: { item: RentalFormatedWithLocalisat
         to={`/o/room/${item.id}`}
         style={{ textDecoration: "none", color: "black" }}
       >
-        <div
+        {/* <div
           className={styles.image}
           style={{
             background: "url(https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720)"              ,
+            // background: `url(${pathToUpload}${item.img_name})`             ,
           }}
         >
           <div className={styles.listOfImg}></div>
-        </div>
+        </div> */}
         <div className={styles.desc}>{item.title}</div>
         <div className={styles.beds}>
           {item.nb_max_person}{" "}

@@ -9,14 +9,28 @@ import {
   ParseIntPipe,
   HttpException,
   HttpStatus,
-  Headers,
   ParseFloatPipe,
+  // UseInterceptors,
+  // UploadedFile,
+  // ParseFilePipe,
+  // FileTypeValidator,
 } from '@nestjs/common';
-import { RentalService, RentalFormated, RentalFormatedWithLocalisations } from './rental.service';
+import {
+  RentalService,
+  RentalFormated,
+  RentalFormatedWithLocalisations,
+} from './rental.service';
 import { CreateRentalDto } from './dto/create-rental.dto';
 import { UpdateRentalDto } from './dto/update-rental.dto';
 import { Rental, rentalType } from './entities/rental.entity';
-import { SearchRentalDto } from './dto/search-rental.dto';
+// import { FileInterceptor } from '@nestjs/platform-express';
+// import { diskStorage } from 'multer';
+
+// const storage = {
+//   storage: diskStorage({
+//     destination: 'src/uploads',
+//   }),
+// };
 
 @Controller('rental')
 export class RentalController {
@@ -29,7 +43,7 @@ export class RentalController {
 
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<Rental> {
-    console.log('first');
+    // console.log('first');
     const rental = await this.rentalService.findOne(id);
     if (rental) return rental;
     else
@@ -80,11 +94,6 @@ export class RentalController {
     @Param('swlat', ParseFloatPipe) swlat: number,
     @Param('nelat', ParseFloatPipe) nelat: number,
   ): Promise<RentalFormatedWithLocalisations[]> {
-    // const northEastLat = searchRentalDto.northEastLat;
-    // const northEastLng = searchRentalDto.northEastLng;
-    // const southWestLat = searchRentalDto.southWestLat;
-    // const southWestLng = searchRentalDto.southWestLng;
-
     return await this.rentalService.findAllByLocalisations(
       swlng,
       nelng,
@@ -97,6 +106,23 @@ export class RentalController {
   async create(@Body() rental: CreateRentalDto): Promise<{ message: string }> {
     return this.rentalService.create(rental);
   }
+
+  // @Post('upload')
+  // @UseInterceptors(FileInterceptor('file', storage))
+  // uploadFile(
+  //   @UploadedFile(
+  //     new ParseFilePipe({
+  //       validators: [new FileTypeValidator({ fileType: '.(png|jpeg|jpg)' })],
+  //     }),
+  //   )
+  //   file: Express.Multer.File,
+  // ) {
+  //   if (!file) {
+  //     throw new Error('No file uploaded');
+  //   } else {
+  //     return file;
+  //   }
+  // }
 
   @Patch(':id')
   async update(

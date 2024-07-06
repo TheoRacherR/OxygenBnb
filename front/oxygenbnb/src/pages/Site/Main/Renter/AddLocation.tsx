@@ -24,7 +24,7 @@ const AddLocation = () => {
 
   useEffect(() => {
     checkRole();
-  });
+  }, []);
 
   return (
     <div className={styles.container}>

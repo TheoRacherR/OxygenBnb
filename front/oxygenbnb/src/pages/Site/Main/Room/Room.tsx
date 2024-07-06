@@ -14,13 +14,21 @@ import axios from "axios";
 import { Rental } from "../../../../../../../back/oxygenbnb/src/tables/rental/entities/rental.entity";
 import { getUserInfos } from "@utils/utils";
 
+// import path from "../../../../../../../back/oxygenbnb/src/uploads/634cdbdfb0d76388af892001ac5a98fc"
+
 const Room = () => {
   const { t } = useTranslation(["site"]);
   const { id } = useParams();
   const fees = 13;
 
   const navigate = useNavigate();
-  const [userData, setUserData] = useState<{id: number, firstname: string, lastname: string, email: string, role: stirng}>()
+  const [userData, setUserData] = useState<{
+    id: number;
+    firstname: string;
+    lastname: string;
+    email: string;
+    role: stirng;
+  }>();
   const [locationData, setLocationData] = useState<Rental>();
   const fetchLocation = async () => {
     if (
@@ -32,7 +40,11 @@ const Room = () => {
       try {
         const locationRaw: { data: Rental } = await axios.get(`/rental/${id}`);
         setLocationData(locationRaw.data);
-        if (!locationRaw.data.active && userData.id !== locationRaw.data.owner.id) return navigate("/o/404");
+        if (
+          !locationRaw.data.active &&
+          userData.id !== locationRaw.data.owner.id
+        )
+          return navigate("/o/404");
         setCalcPrices({
           totalPriceXPeople:
             locationRaw.data.default_price * numberOfNightSelected,
@@ -46,12 +58,11 @@ const Room = () => {
 
   const fetchUserData = async () => {
     const usr = await getUserInfos();
-    if(usr)
-      setUserData(usr)
-  }
+    if (usr) setUserData(usr);
+  };
 
   useEffect(() => {
-    if(userData) fetchLocation();
+    if (userData) fetchLocation();
     else fetchUserData();
   }, [userData]);
 
@@ -129,11 +140,11 @@ const Room = () => {
 
   const activateRental = async () => {
     const patch = await axios.patch(`/rental/${id}`, {
-      active: !locationData.active 
+      active: !locationData.active,
     });
-    if(patch.status === 200)
-      setLocationData({...locationData, active: !locationData.active})
-  }
+    if (patch.status === 200)
+      setLocationData({ ...locationData, active: !locationData.active });
+  };
 
   return (
     <div className={styles.container}>
@@ -142,31 +153,34 @@ const Room = () => {
           <h1>
             {t("site:main.room.room_tsx.location")} '{locationData?.title}' {id}
           </h1>
-          {
-            locationData?.owner?.id === userData?.id ?
-              <ButtonGroup sx={{height: 'fit-content'}}>
-                <Button variant="contained" color={locationData?.active ? 'error' : 'success'} onClick={activateRental}>
-                  {locationData?.active ? t("site:main.room.room_tsx.desactivate") : t("site:main.room.room_tsx.activate")}
+          {locationData?.owner?.id === userData?.id ? (
+            <ButtonGroup sx={{ height: "fit-content" }}>
+              <Button
+                variant="contained"
+                color={locationData?.active ? "error" : "success"}
+                onClick={activateRental}
+              >
+                {locationData?.active
+                  ? t("site:main.room.room_tsx.desactivate")
+                  : t("site:main.room.room_tsx.activate")}
+              </Button>
+              <Link to={`/admin/renter/location/${locationData?.id}`}>
+                <Button variant="contained" color="warning">
+                  {t("site:main.room.room_tsx.edit")}
                 </Button>
-                <Link to={`/admin/renter/location/${locationData?.id}`}>
-                  <Button
-                    variant="contained"
-                    color="warning"
-                  >
-                    {t("site:main.room.room_tsx.edit")}
-                  </Button>
-                </Link>
-              </ButtonGroup>
-            :
-              <></>
-          }
+              </Link>
+            </ButtonGroup>
+          ) : (
+            <></>
+          )}
         </div>
         <div className={styles.box}>
           <div className={styles.left}>
-            <img
+            {/* <img
+              // src={path}
               src="https://a0.muscache.com/im/pictures/hosting/Hosting-1091406064401555181/original/2a267761-110c-4aba-862b-c38d988feb58.jpeg?im_w=720"
               alt=""
-            />
+            /> */}
             <div className={styles.description}>
               <p>
                 {t(`site:main.room.room_tsx.a_location_for`, {
@@ -386,12 +400,22 @@ const Room = () => {
               </div>
 
               <div className={styles.submit_button}>
-                <Link to="reservation" style={{ pointerEvents: locationData?.owner?.id === userData?.id ? 'none' : 'auto'}}>
+                <Link
+                  to="reservation"
+                  style={{
+                    pointerEvents:
+                      locationData?.owner?.id === userData?.id
+                        ? "none"
+                        : "auto",
+                  }}
+                >
                   <Button
                     variant="contained"
                     color="warning"
                     sx={{ width: "100%", margin: "20px 0" }}
-                    disabled={errorMaxPeople || locationData?.owner?.id === userData?.id}
+                    disabled={
+                      errorMaxPeople || locationData?.owner?.id === userData?.id
+                    }
                   >
                     {t("site:main.room.room_tsx.people_submit")}
                   </Button>

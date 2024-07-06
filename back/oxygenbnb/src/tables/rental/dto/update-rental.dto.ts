@@ -53,4 +53,8 @@ export class UpdateRentalDto extends PartialType(CreateRentalDto) {
   @IsNumber()
   @IsOptional()
   nb_max_room?: number;
+
+  // @IsString()
+  // @IsOptional()
+  // img_name?: string;
 }

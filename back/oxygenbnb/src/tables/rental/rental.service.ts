@@ -20,6 +20,7 @@ export interface RentalFormated {
     firstname: string;
     lastname: string;
   };
+  // img_name: string;
 }
 
 export interface RentalFormatedWithLocalisations {
@@ -40,6 +41,7 @@ export interface RentalFormatedWithLocalisations {
   nb_max_person: number;
   nb_max_room: number;
   nb_max_bed: number;
+  // img_name: string;
 }
 
 @Injectable()
@@ -66,6 +68,7 @@ export class RentalService {
           firstname: item.owner.firstname,
           lastname: item.owner.lastname,
         },
+        // img_name: item.img_name,
       }));
     return rentalDataFormated;
   }
@@ -102,6 +105,7 @@ export class RentalService {
           firstname: item.owner.firstname,
           lastname: item.owner.lastname,
         },
+        // img_name: item.img_name,
       }));
     return rentalDataFormated;
   }
@@ -129,6 +133,7 @@ export class RentalService {
           firstname: item.owner.firstname,
           lastname: item.owner.lastname,
         },
+        // img_name: item.img_name,
       }));
     return rentalDataFormated;
   }
@@ -187,6 +192,7 @@ export class RentalService {
         nb_max_bed: item.nb_max_bed,
         nb_max_room: item.nb_max_room,
         nb_max_person: item.nb_max_person,
+        // img_name: item.img_name,
       }));
     // console.log(rentalDataFormated.length);
     return rentalDataFormated;

@@ -51,4 +51,8 @@ export class CreateRentalDto {
   @IsNumber()
   @IsNotEmpty()
   nb_max_room: number;
+
+  // @IsString()
+  // @IsOptional()
+  // img_name?: string;
 }

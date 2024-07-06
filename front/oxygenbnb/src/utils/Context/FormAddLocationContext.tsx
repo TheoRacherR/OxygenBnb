@@ -33,6 +33,7 @@ export const FormAddLocationContextProvider = ({ children }) => {
     title: string;
     description: string;
     price: number;
+    // img: File;
     type: string;
     default_currency: string;
     localisation_infos: string;
@@ -46,6 +47,7 @@ export const FormAddLocationContextProvider = ({ children }) => {
     title: "",
     description: "",
     price: 0,
+    // img: {} as File,
     type: locationType[0].value,
     default_currency: enumCurrency[0],
     localisation_infos: "{}",

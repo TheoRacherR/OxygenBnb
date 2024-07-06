@@ -15,7 +15,7 @@ import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import AddLocationRoundedIcon from '@mui/icons-material/AddLocationRounded';
 
 import { Divider, IconButton } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { verifyRole } from "@utils/utils";
 
@@ -24,6 +24,7 @@ const RightMenu = () => {
   const [anchorEl, setAnchorEl] = useState({ lang: null, settings: null });
   const [roleStr, setRoleStr] = useState("not logged");
   const [logged, setLogged] = useState<boolean>(false);
+  const navigate = useNavigate();
   const handleClickSettings = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl({ lang: null, settings: event.currentTarget });
   };
@@ -38,6 +39,7 @@ const RightMenu = () => {
     const role = await verifyRole();
     setLogged(role !== "not logged");
     setRoleStr(role);
+    console.log(role);
   };
 
   useEffect(() => {
@@ -49,6 +51,7 @@ const RightMenu = () => {
     console.log("update jwt");
     setLogged(false);
     handleClose();
+    return navigate('/');
   };
 
   const lang = [

@@ -4,7 +4,7 @@ import Button from "@mui/joy/Button";
 import { MenuItem } from "@mui/material";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 
-import { NOMINATIM_BASE_URL } from "@utils/utils";
+import { endQuery, NOMINATIM_BASE_URL } from "@utils/utils";
 import { useTranslation } from "react-i18next";
 
 
@@ -30,7 +30,7 @@ const SearchLocation = ({localisation_infos, setLocationInformations}) => {
 
   const searchForQuery = () => {
     if (query.length > 0) {
-      const queryString = `q=${query}&format=json&addressdetails=1&polygon_geojson=0&limit=20&layer=address`;
+      const queryString = `search?q=${query}${endQuery}`;
       fetch(`${NOMINATIM_BASE_URL}${queryString}`, {
         method: "GET",
         redirect: "follow",

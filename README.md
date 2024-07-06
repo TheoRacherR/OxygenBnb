@@ -22,20 +22,36 @@ cd ../../front/oxygenbnb
 cd npm install
 ```
 
-### 2. Create a .env file with those variables (that you have to fill)
+### 2.1 Create a .env file on root folder with those variables (that you have to fill) here's an exemple:
 ```
-DB_TYPE=
-PG_HOST=
-PG_USER=
-PG_PASSWORD=
-PG_DB=
-PG_PORT=
-PG_PORT_E2E=
-NEST_PORT=
-jwt_secret=
-VITE_NODE_ENV_DEV=true or false
-VITE_URL_NEST_PROD=
-VITE_URL_NEST_DEV=
+DB_TYPE=postgres
+PG_HOST=db
+PG_USER=postgres
+PG_PASSWORD=postgres
+PG_DB=postgres
+PG_PORT=5432
+NEST_PORT=3333
+NODE_ENV_DEV=true
+```
+
+### 2.2 Create a .env file on front/oxygenbnb/ folder with those variables (that you have to fill) here's an exemple:
+```
+VITE_NODE_ENV_DEV=true
+VITE_URL_NEST_PROD=https://google.fr/
+VITE_URL_NEST_DEV=http://localhost:3333/
+```
+
+
+### 2.3 Create a .env file on back/oxygenbnb/ folder with those variables (that you have to fill) here's an exemple:
+```
+PG_HOST=db
+PG_USER=postgres
+PG_PASSWORD=postgres
+PG_DB=postgres
+PG_PORT=5432
+NEST_PORT=3333
+jwt_secret=8$hTMXK$hbbBc6qSmcPESofDL6Kd
+NODE_ENV_DEV=true
 ```
 
 ### 3. Finally, Build the project

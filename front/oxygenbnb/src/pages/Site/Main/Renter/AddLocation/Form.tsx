@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import styles from "./Form.module.scss";
 import Input from "@mui/joy/Input";
 import { Button, ButtonGroup } from "@mui/joy";
@@ -19,6 +19,7 @@ const emptyErros = {
   descriptionEmpty: false,
   priceEmpty: false,
   priceNotANumber: false,
+  // imgEmpty: false,
   addressEmpty: false,
   nbRoomEmpty: false,
   nbPersonEmpty: false,
@@ -41,6 +42,7 @@ const Form = () => {
     descriptionEmpty: boolean;
     priceEmpty: boolean;
     priceNotANumber: boolean;
+    // imgEmpty: boolean;
     addressEmpty: boolean;
     nbRoomEmpty: boolean;
     nbPersonEmpty: boolean;
@@ -122,6 +124,12 @@ const Form = () => {
     }
   };
 
+  // const handleChangeImg = (file: ChangeEvent) => {
+  //   const { files } = file.target as HTMLInputElement;
+  //   if (files && files.length !== 0)
+  //     setLocationInformations({...locationInformations, img: files[0] });
+  // };
+
   const handleChangeCurrency = (
     event: React.SyntheticEvent | null,
     newValue: string | null
@@ -146,6 +154,9 @@ const Form = () => {
     if (locationInformations.localisation_infos === "") {
       setErros((prev) => ({ ...prev, addressEmpty: true, global: true }));
     }
+    // if (Object.keys(locationInformations.img).length === 0) {
+    //   setErros((prev) => ({ ...prev, imgEmpty: true, global: true }));
+    // }
     if (locationInformations.nb_room < 1) {
       setErros((prev) => ({ ...prev, nbRoomEmpty: true, global: true }));
     }
@@ -158,22 +169,35 @@ const Form = () => {
     if (!errors.global) {
       if (usrInfos) {
         try {
-          await axios.post("/rental", {
-            default_price: locationInformations.price,
-            default_currency: locationInformations.default_currency,
-            type: locationInformations.type,
-            description: locationInformations.description,
-            localisation_infos: locationInformations.localisation_infos,
-            owner: usrInfos.id,
-            active: locationInformations.active,
-            title: locationInformations.title,
-            nb_max_person: locationInformations.nb_person,
-            nb_max_bed: locationInformations.nb_bed,
-            nb_max_room: locationInformations.nb_room,
-          });
-          console.log("rental created: ");
-          resetData();
-          // return navigate("/o/user");
+          // if(Object.keys(locationInformations.img).length === 0) {
+            // const formData = new FormData();
+            // formData.append('file', locationInformations.img);
+            // const uploadImg = await axios.post('/rental/upload', { data: formData });
+            // const uploadImg = await axios({
+            //   url: '/rental/upload',
+            //   method: 'post',
+            //   data: formData,
+            // });
+            // if(uploadImg.status === 201) {
+              await axios.post("/rental", {
+                default_price: locationInformations.price,
+                default_currency: locationInformations.default_currency,
+                type: locationInformations.type,
+                description: locationInformations.description,
+                localisation_infos: locationInformations.localisation_infos,
+                // img_name: uploadImg.data.filename,
+                owner: usrInfos.id,
+                active: locationInformations.active,
+                title: locationInformations.title,
+                nb_max_person: locationInformations.nb_person,
+                nb_max_bed: locationInformations.nb_bed,
+                nb_max_room: locationInformations.nb_room,
+              });
+              console.log("rental created: ");
+              resetData();
+              // return navigate("/o/user");
+            // }
+          // }
         } catch (e) {
           console.log(e);
           return navigate("");
@@ -193,6 +217,8 @@ const Form = () => {
           {t("site:main.renter.add_location.form_tsx.title")}
         </div>
         <div className={styles.list_container}>
+
+          {/* ************ Title ************ */}
           <div className={styles.item}>
             <Input
               variant="outlined"
@@ -212,6 +238,7 @@ const Form = () => {
             />
           </div>
 
+          {/* ************ Description ************ */}
           <div className={styles.item}>
             <Textarea
               variant="outlined"
@@ -231,6 +258,7 @@ const Form = () => {
             />
           </div>
 
+          {/* ************ Price per night ************ */}
           <div className={styles.item}>
             <Input
               variant="outlined"
@@ -258,10 +286,21 @@ const Form = () => {
             />
           </div>
 
+          {/* ************ Image ************ */}
+          {/* <div className={styles.item}>
+            <input
+              onChange={handleChangeImg}
+              type="file"
+              accept='.jpeg, .jpg, .png'
+            />
+            <p style={{marginBottom: 0}}>{locationInformations.img?.name}</p>
+          </div> */}
+
           <div className={styles.item}>
             <SearchLocalisation error={errors.addressEmpty} />
           </div>
 
+          {/* ************Bed / Room / Person************ */}
           <div className={styles.item_flex}>
             <Input
               variant="outlined"
@@ -296,6 +335,7 @@ const Form = () => {
             />
           </div>
 
+          {/* ************ Rental type ************ */}
           <div className={styles.item}>
             <Select
               value={locationInformations.type}
@@ -308,15 +348,18 @@ const Form = () => {
               ))}
             </Select>
           </div>
+
+          {/* ************ Active ************ */}
           <div className={styles.item}>
             <Input
               variant="outlined"
-              value={locationInformations.active}
+              value={locationInformations.active ? 'True' : 'False'}
               startDecorator={
                 <label>
-                  {locationInformations.active
+                  {t("site:main.renter.add_location.form_tsx.activated")}
+                  {/* {locationInformations.active
                     ? t("site:main.renter.add_location.form_tsx.activated")
-                    : t("site:main.renter.add_location.form_tsx.desactivated")}
+                    : t("site:main.renter.add_location.form_tsx.desactivated")} */}
                 </label>
               }
               endDecorator={

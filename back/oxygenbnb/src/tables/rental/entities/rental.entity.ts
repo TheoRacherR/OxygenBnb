@@ -74,6 +74,9 @@ export class Rental {
   @Column({ default: 1 })
   nb_max_room: number;
 
+  // @Column({ default: null })
+  // img_name: string;
+
   // Relations
 
   @ManyToOne(() => User, (owner) => owner.rent, { eager: true })
