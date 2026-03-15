@@ -1,0 +1,7 @@
+entity: RentalDate
+items:
+  rentaldate{1...5}:
+    type: '{{helpers.arrayElement(["rented","blocked"])}}'
+    start_date: '{{date.past}}'
+    end_date: '{{date.past}}'
+    rental: 'rental($current)'

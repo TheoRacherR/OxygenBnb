@@ -1,0 +1,9 @@
+entity: Rental
+items:
+  rental{1..5}:
+    default_price: "{{random.numeric(3)}}"
+    default_currency: '{{helpers.arrayElement(["€ (euro)","£ (pound)","$ (us dollar)","¥ (japan yen)","Ұ (china yuan)","₩ (south-korean won)"])}}'
+    type: '{{helpers.arrayElement(["House","Pool","Exotic"])}}'
+    localisation_infos: "{{lorem.words(3)}}"
+    isValid: '{{helpers.arrayElement([true,false])}}'
+    user: '@user{1..4}'

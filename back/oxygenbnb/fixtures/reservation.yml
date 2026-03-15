@@ -1,0 +1,8 @@
+entity: Reservation
+items:
+  reservation{1..10}:
+    start_date: '{{date.past}}'
+    end_date: '{{date.past}}'
+    canceled: '{{helpers.arrayElement([true,false])}}'
+    client: '@user{1..4}'
+    rental: '@rental{1..5}'

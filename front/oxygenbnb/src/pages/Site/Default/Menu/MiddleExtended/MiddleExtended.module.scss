@@ -1,0 +1,23 @@
+.middle{
+  display: flex;
+  justify-content: space-between;
+  gap: 35px;
+  border: 1px solid #ed6c0280;
+  border-radius: 10px;
+  height: 34.5px;
+  margin: auto;
+  button {
+    color: white;
+    margin: auto 0;
+    text-transform: none;
+  }
+}
+
+.middle {
+  cursor: pointer;
+  box-shadow: 0.2s cubic-bezier(0.2,0,0,1)
+}
+
+.middle:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.18);
+}

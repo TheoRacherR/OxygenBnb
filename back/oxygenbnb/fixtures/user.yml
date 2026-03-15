@@ -1,0 +1,8 @@
+entity: User
+items:
+  user{1..4}:
+    firstName: '{{name.firstName}}'
+    lastName: '{{name.lastName}}'
+    email: '{{internet.email}}'
+    role: '{{helpers.arrayElement(["user","renter","admin"])}}'
+    password: 'root'

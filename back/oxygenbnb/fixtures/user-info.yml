@@ -1,0 +1,7 @@
+entity: UserInfo
+items:
+  info{1..4}:
+    gender: '{{helpers.arrayElement(["man","woman","other"])}}'
+    birth_date: "{{date.past(30, '1960-01-01T00:00:00.000Z')}}"
+    description: '{{lorem.paragraphs}}'
+    user: '@user($current)'
